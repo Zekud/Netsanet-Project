@@ -1,0 +1,66 @@
+/* Netsanet — Global styles and Tailwind v4 design system */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ─── Design Tokens (CSS Custom Properties) ─────────────────── */
+
+@theme {
+  /* Brand — teal is the soul of this product */
+  --color-teal-50:  #E8F5F3;
+  --color-teal-100: #B2DDD8;
+  --color-teal-500: #1A7A6E;
+  --color-teal-700: #145F56;
+  --color-teal-900: #0D3D38;
+
+  /* Neutrals */
+  --color-dark:     #1A2332;
+  --color-gray-700: #374151;
+  --color-gray-500: #6B7280;
+  --color-gray-200: #E5E7EB;
+  --color-gray-100: #F3F4F6;
+  --color-surface:  #F8FAFB;
+
+  /* Urgency — must be immediately readable at a glance */
+  --color-critical: #DC2626;
+  --color-high:     #EA580C;
+  --color-medium:   #D97706;
+  --color-low:      #6B7280;
+
+  /* Functional */
+  --color-exit-red: #EF4444;
+
+  /* Typography */
+  --font-serif: 'DM Serif Display', serif;
+  --font-sans:  'DM Sans', sans-serif;
+  --font-mono:  'JetBrains Mono', monospace;
+}
+
+/* ─── Base Layer ────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-surface);
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  /* Remove default focus outlines and add accessible custom ones */
+  *:focus-visible {
+    outline: 2px solid var(--color-teal-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,193 @@
+// InstitutionsPage — system_admin manages all institutions.
+// Route: /dashboard/institutions
+
+import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import api from '../../lib/api';
+
+interface Institution {
+  id: string;
+  name: string;
+  type: string;
+  description: string | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+const TYPE_LABELS: Record<string, string> = {
+  mowsa: 'MoWSA', ewla: 'EWLA', medical: 'Medical', shelter: 'Shelter', ngo: 'NGO',
+};
+
+function InstitutionModal({
+  onClose, onSave,
+}: {
+  onClose: () => void;
+  onSave: (data: { name: string; type: string; description: string }) => void;
+}) {
+  const [form, setForm] = useState({ name: '', type: 'mowsa', description: '' });
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+        <h3 className="font-serif text-lg text-dark mb-4">Add Institution</h3>
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Name *</label>
+            <input
+              value={form.name}
+              onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              placeholder="Ministry of Women & Social Affairs"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Type *</label>
+            <select
+              value={form.type}
+              onChange={(e) => setForm((p) => ({ ...p, type: e.target.value }))}
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+            >
+              {Object.entries(TYPE_LABELS).map(([v, l]) => (
+                <option key={v} value={v}>{l}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Description</label>
+            <textarea
+              value={form.description}
+              onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
+              rows={2}
+              className="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+            />
+          </div>
+        </div>
+        <div className="flex gap-3 mt-5">
+          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">Cancel</button>
+          <button
+            onClick={() => { if (form.name) onSave(form); }}
+            disabled={!form.name}
+            className="flex-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function InstitutionsPage() {
+  const queryClient = useQueryClient();
+  const [showModal, setShowModal] = useState(false);
+
+  const { data, isLoading } = useQuery<{ data: Institution[] }>({
+    queryKey: ['institutions-admin'],
+    queryFn: async () => {
+      const res = await api.get('/institutions');
+      return res.data;
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: async (payload: { name: string; type: string; description: string }) => {
+      await api.post('/institutions', payload);
+    },
+    onSuccess: () => {
+      setShowModal(false);
+      queryClient.invalidateQueries({ queryKey: ['institutions-admin'] });
+    },
+  });
+
+  const toggleMutation = useMutation({
+    mutationFn: async ({ id, is_active }: { id: string; is_active: boolean }) => {
+      await api.patch(`/institutions/${id}`, { is_active });
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['institutions-admin'] }),
+  });
+
+  const institutions = data?.data ?? [];
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="font-serif text-2xl text-dark">Institutions</h1>
+          <p className="text-sm text-gray-500 mt-0.5">Manage and approve partner institutions</p>
+        </div>
+        <button
+          onClick={() => setShowModal(true)}
+          className="rounded-xl bg-teal-500 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors"
+        >
+          + Add Institution
+        </button>
+      </div>
+
+      {/* Table */}
+      {isLoading ? (
+        <div className="flex justify-center py-16"><div className="h-8 w-8 animate-spin rounded-full border-2 border-teal-500 border-t-transparent" /></div>
+      ) : (
+        <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-100 bg-gray-50 text-left">
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Name</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Type</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {institutions.length === 0 ? (
+                <tr><td colSpan={4} className="px-4 py-10 text-center text-sm text-gray-400">No institutions yet</td></tr>
+              ) : institutions.map((inst) => (
+                <tr key={inst.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-4 py-3">
+                    <p className="font-medium text-dark">{inst.name}</p>
+                    {inst.description && <p className="text-xs text-gray-400 mt-0.5 truncate max-w-xs">{inst.description}</p>}
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
+                      {TYPE_LABELS[inst.type] ?? inst.type}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    {inst.is_active ? (
+                      <span className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
+                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" /> Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
+                        <span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> Pending
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    <button
+                      onClick={() => toggleMutation.mutate({ id: inst.id, is_active: !inst.is_active })}
+                      disabled={toggleMutation.isPending}
+                      className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                        inst.is_active
+                          ? 'border border-red-200 text-red-500 hover:bg-red-50'
+                          : 'bg-teal-500 text-white hover:bg-teal-700'
+                      }`}
+                    >
+                      {inst.is_active ? 'Deactivate' : 'Approve'}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {showModal && (
+        <InstitutionModal
+          onClose={() => setShowModal(false)}
+          onSave={(data) => createMutation.mutate(data)}
+        />
+      )}
+    </div>
+  );
+}
