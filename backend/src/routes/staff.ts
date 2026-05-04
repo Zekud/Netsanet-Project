@@ -92,7 +92,7 @@ router.post(
       }
 
       const user = req.user!;
-      const { email, phone, display_name, role } = req.body;
+      const { email, phone, display_name, role, institution_id: bodyInstitutionId } = req.body;
       console.log('[staff] POST body:', { email, phone: phone ? '***' : undefined, display_name, role });
       console.log('[staff] POST user institution_id:', user.institution_id, 'role:', user.role);
 
@@ -102,10 +102,14 @@ router.post(
         return;
       }
 
-      const institutionId = user.institution_id;
+      // system_admin passes institution_id in the body; institution_admin uses their own
+      const institutionId = user.role === 'system_admin'
+        ? bodyInstitutionId
+        : user.institution_id;
+
       if (!institutionId) {
-        console.log('[staff] POST → no institution_id on user');
-        res.status(400).json({ success: false, error: { code: 'NO_INSTITUTION', message: 'You are not linked to an institution' } });
+        console.log('[staff] POST → no institution_id');
+        res.status(400).json({ success: false, error: { code: 'NO_INSTITUTION', message: 'institution_id is required' } });
         return;
       }
 

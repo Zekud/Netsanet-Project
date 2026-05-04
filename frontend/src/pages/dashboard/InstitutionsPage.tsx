@@ -18,6 +18,8 @@ const TYPE_LABELS: Record<string, string> = {
   mowsa: 'MoWSA', ewla: 'EWLA', medical: 'Medical', shelter: 'Shelter', ngo: 'NGO',
 };
 
+// ─── Add Institution Modal ─────────────────────────────────────
+
 function InstitutionModal({
   onClose, onSave,
 }: {
@@ -76,9 +78,78 @@ function InstitutionModal({
   );
 }
 
+// ─── Add Admin Modal ───────────────────────────────────────────
+
+function AddAdminModal({
+  institution,
+  onClose,
+  onSave,
+  isLoading,
+  error,
+}: {
+  institution: Institution;
+  onClose: () => void;
+  onSave: (data: { email: string; display_name: string }) => void;
+  isLoading: boolean;
+  error: string | null;
+}) {
+  const [form, setForm] = useState({ email: '', display_name: '' });
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+        <div className="mb-4">
+          <h3 className="font-serif text-lg text-dark">Add Institution Admin</h3>
+          <p className="text-xs text-gray-500 mt-0.5">for <span className="font-medium text-teal-700">{institution.name}</span></p>
+        </div>
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Full Name *</label>
+            <input
+              value={form.display_name}
+              onChange={(e) => setForm((p) => ({ ...p, display_name: e.target.value }))}
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              placeholder="Almaz Tadesse"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Email *</label>
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              placeholder="admin@institution.gov.et"
+            />
+          </div>
+          {error && (
+            <p className="rounded-lg bg-red-50 px-3 py-2 text-xs text-red-600">{error}</p>
+          )}
+          <p className="text-xs text-gray-400">
+            The admin will receive an email OTP to log in for the first time.
+          </p>
+        </div>
+        <div className="flex gap-3 mt-5">
+          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">Cancel</button>
+          <button
+            onClick={() => { if (form.email && form.display_name) onSave(form); }}
+            disabled={!form.email || !form.display_name || isLoading}
+            className="flex-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50"
+          >
+            {isLoading ? 'Creating...' : 'Create Admin'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Page ─────────────────────────────────────────────────
+
 export default function InstitutionsPage() {
   const queryClient = useQueryClient();
   const [showModal, setShowModal] = useState(false);
+  const [adminTarget, setAdminTarget] = useState<Institution | null>(null);
+  const [adminError, setAdminError] = useState<string | null>(null);
 
   const { data, isLoading } = useQuery<{ data: Institution[] }>({
     queryKey: ['institutions-admin'],
@@ -103,6 +174,34 @@ export default function InstitutionsPage() {
       await api.patch(`/institutions/${id}`, { is_active });
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['institutions-admin'] }),
+  });
+
+  const addAdminMutation = useMutation({
+    mutationFn: async ({
+      email,
+      display_name,
+      institution_id,
+    }: {
+      email: string;
+      display_name: string;
+      institution_id: string;
+    }) => {
+      await api.post('/staff', {
+        email,
+        display_name,
+        role: 'institution_admin',
+        institution_id,
+      });
+    },
+    onSuccess: () => {
+      setAdminTarget(null);
+      setAdminError(null);
+    },
+    onError: (err: { response?: { data?: { error?: { message?: string } } } }) => {
+      setAdminError(
+        err.response?.data?.error?.message || 'Failed to create admin. They may already exist.'
+      );
+    },
   });
 
   const institutions = data?.data ?? [];
@@ -163,17 +262,25 @@ export default function InstitutionsPage() {
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <button
-                      onClick={() => toggleMutation.mutate({ id: inst.id, is_active: !inst.is_active })}
-                      disabled={toggleMutation.isPending}
-                      className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
-                        inst.is_active
-                          ? 'border border-red-200 text-red-500 hover:bg-red-50'
-                          : 'bg-teal-500 text-white hover:bg-teal-700'
-                      }`}
-                    >
-                      {inst.is_active ? 'Deactivate' : 'Approve'}
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => { setAdminError(null); setAdminTarget(inst); }}
+                        className="rounded-lg border border-teal-200 px-3 py-1.5 text-xs font-medium text-teal-600 hover:bg-teal-50 transition-colors"
+                      >
+                        + Add Admin
+                      </button>
+                      <button
+                        onClick={() => toggleMutation.mutate({ id: inst.id, is_active: !inst.is_active })}
+                        disabled={toggleMutation.isPending}
+                        className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                          inst.is_active
+                            ? 'border border-red-200 text-red-500 hover:bg-red-50'
+                            : 'bg-teal-500 text-white hover:bg-teal-700'
+                        }`}
+                      >
+                        {inst.is_active ? 'Deactivate' : 'Approve'}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -182,10 +289,24 @@ export default function InstitutionsPage() {
         </div>
       )}
 
+      {/* Add Institution Modal */}
       {showModal && (
         <InstitutionModal
           onClose={() => setShowModal(false)}
           onSave={(data) => createMutation.mutate(data)}
+        />
+      )}
+
+      {/* Add Admin Modal */}
+      {adminTarget && (
+        <AddAdminModal
+          institution={adminTarget}
+          onClose={() => { setAdminTarget(null); setAdminError(null); }}
+          onSave={({ email, display_name }) =>
+            addAdminMutation.mutate({ email, display_name, institution_id: adminTarget.id })
+          }
+          isLoading={addAdminMutation.isPending}
+          error={adminError}
         />
       )}
     </div>
