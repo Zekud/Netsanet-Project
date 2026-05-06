@@ -1,10 +1,12 @@
 // ReportCasePage — survivor submits an incident report.
 // Uses React Hook Form, calls POST /api/v1/cases, shows confirmation with case number.
+// Fully localized: en + am via reportCase namespace.
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import api from '../../lib/api';
 import QuickExitButton from '../../components/ui/QuickExitButton';
 
@@ -29,19 +31,10 @@ interface CreatedCase {
   ai_summary: string;
 }
 
-// ─── Category options (human-friendly wording) ────────────────
-
-const categoryHints = [
-  { value: 'legal', label: 'Legal Help' },
-  { value: 'medical', label: 'Medical Support' },
-  { value: 'shelter', label: 'A Safe Place to Stay' },
-  { value: 'counseling', label: 'Someone to Talk To' },
-  { value: 'other', label: 'Not Sure' },
-];
-
 // ─── Component ────────────────────────────────────────────────
 
 export default function ReportCasePage() {
+  const { t } = useTranslation('reportCase');
   const [createdCase, setCreatedCase] = useState<CreatedCase | null>(null);
 
   const {
@@ -50,12 +43,19 @@ export default function ReportCasePage() {
     formState: { errors },
     watch,
   } = useForm<ReportFormData>({
-    defaultValues: {
-      is_anonymous: false,
-    },
+    defaultValues: { is_anonymous: false },
   });
 
   const isAnonymous = watch('is_anonymous');
+
+  // Category options — localized labels
+  const categoryHints = [
+    { value: 'legal',      label: t('form.category.legal') },
+    { value: 'medical',    label: t('form.category.medical') },
+    { value: 'shelter',    label: t('form.category.shelter') },
+    { value: 'counseling', label: t('form.category.counseling') },
+    { value: 'other',      label: t('form.category.other') },
+  ];
 
   const submitMutation = useMutation({
     mutationFn: async (data: ReportFormData) => {
@@ -69,15 +69,11 @@ export default function ReportCasePage() {
       return response.data;
     },
     onSuccess: (response) => {
-      if (response.success) {
-        setCreatedCase(response.data as CreatedCase);
-      }
+      if (response.success) setCreatedCase(response.data as CreatedCase);
     },
   });
 
-  const onSubmit = (data: ReportFormData) => {
-    submitMutation.mutate(data);
-  };
+  const onSubmit = (data: ReportFormData) => submitMutation.mutate(data);
 
   // ─── Confirmation Screen ──────────────────────────────────
 
@@ -85,66 +81,42 @@ export default function ReportCasePage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
         <QuickExitButton />
-
-        {/* Success icon */}
         <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-teal-50">
           <svg className="h-7 w-7 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-
-        <h2 className="font-serif text-2xl text-dark mb-2">
-          Your report has been received
-        </h2>
-        <p className="text-gray-500 max-w-md mb-6 leading-relaxed">
-          A case manager will review your report and reach out to help.
-          You can track the status of your case at any time.
-        </p>
-
-        {/* Case number */}
+        <h2 className="font-serif text-2xl text-dark mb-2">{t('confirmation.title')}</h2>
+        <p className="text-gray-500 max-w-md mb-6 leading-relaxed">{t('confirmation.body')}</p>
         <div className="mb-6 rounded-xl border border-gray-200 bg-white px-6 py-4 shadow-sm">
-          <p className="text-xs text-gray-500 mb-1">Your Case Number</p>
-          <p className="font-mono text-xl font-medium text-teal-700">
-            {createdCase.case_number}
-          </p>
+          <p className="text-xs text-gray-500 mb-1">{t('confirmation.caseNumberLabel')}</p>
+          <p className="font-mono text-xl font-medium text-teal-700">{createdCase.case_number}</p>
         </div>
-
-        {/* AI Summary */}
         {createdCase.ai_summary && (
           <div className="mb-6 max-w-md rounded-lg bg-teal-50 px-4 py-3 text-left">
-            <p className="text-xs font-medium text-teal-700 mb-1">What we noted</p>
+            <p className="text-xs font-medium text-teal-700 mb-1">{t('confirmation.aiNoted')}</p>
             <p className="text-sm text-teal-900 leading-relaxed">{createdCase.ai_summary}</p>
           </div>
         )}
-
-        {/* Actions */}
         <div className="flex gap-3">
-          <Link
-            to="/safe-space/home"
-            className="rounded-lg bg-teal-500 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700"
-          >
-            Go to Home
+          <Link to="/safe-space/home" className="rounded-lg bg-teal-500 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700">
+            {t('confirmation.goHome')}
           </Link>
-          <Link
-            to="/safe-space/cases"
-            className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-dark transition-colors duration-150 hover:bg-gray-100"
-          >
-            View My Cases
+          <Link to="/safe-space/cases" className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-dark transition-colors duration-150 hover:bg-gray-100">
+            {t('confirmation.viewCases')}
           </Link>
         </div>
       </div>
     );
   }
 
-  // ─── Submission Loading State ─────────────────────────────
+  // ─── Loading State ────────────────────────────────────────
 
   if (submitMutation.isPending) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
         <QuickExitButton />
-
         <div className="mb-5">
-          {/* Calm animated circles */}
           <div className="relative h-16 w-16">
             <div className="absolute inset-0 animate-ping rounded-full bg-teal-100 opacity-40" />
             <div className="absolute inset-2 animate-pulse rounded-full bg-teal-50" />
@@ -153,13 +125,8 @@ export default function ReportCasePage() {
             </div>
           </div>
         </div>
-
-        <h2 className="font-serif text-xl text-dark mb-2">
-          We're reviewing your case securely...
-        </h2>
-        <p className="text-sm text-gray-500 max-w-sm leading-relaxed">
-          This takes just a moment. Your information is encrypted and private.
-        </p>
+        <h2 className="font-serif text-xl text-dark mb-2">{t('loading.title')}</h2>
+        <p className="text-sm text-gray-500 max-w-sm leading-relaxed">{t('loading.subtitle')}</p>
       </div>
     );
   }
@@ -170,15 +137,9 @@ export default function ReportCasePage() {
     <div className="mx-auto max-w-2xl">
       <QuickExitButton />
 
-      {/* Header */}
       <div className="mb-8">
-        <h1 className="font-serif text-2xl text-dark sm:text-3xl mb-2">
-          Tell us what happened
-        </h1>
-        <p className="text-gray-500 leading-relaxed">
-          Share as much or as little as you're comfortable with.
-          Everything you write here is confidential.
-        </p>
+        <h1 className="font-serif text-2xl text-dark sm:text-3xl mb-2">{t('header.title')}</h1>
+        <p className="text-gray-500 leading-relaxed">{t('header.subtitle')}</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -191,13 +152,9 @@ export default function ReportCasePage() {
               className="mt-0.5 h-4 w-4 rounded border-gray-200 text-teal-500 focus:ring-teal-500"
             />
             <div>
-              <p className="text-sm font-medium text-dark">
-                Stay anonymous
-              </p>
+              <p className="text-sm font-medium text-dark">{t('form.anonymous.label')}</p>
               <p className="text-xs text-gray-500 mt-0.5">
-                {isAnonymous
-                  ? 'Your identity will be hidden from case workers reviewing your report.'
-                  : 'Your name may be visible to the case worker assigned to help you.'}
+                {isAnonymous ? t('form.anonymous.on') : t('form.anonymous.off')}
               </p>
             </div>
           </label>
@@ -206,68 +163,48 @@ export default function ReportCasePage() {
         {/* Title */}
         <div>
           <label htmlFor="case-title" className="mb-1.5 block text-sm font-medium text-dark">
-            Brief title for your case
+            {t('form.title.label')}
           </label>
           <input
             id="case-title"
             type="text"
-            placeholder="e.g. I need legal protection from my partner"
+            placeholder={t('form.title.placeholder')}
             {...register('title', {
-              required: 'A brief title helps us understand your situation',
-              minLength: { value: 3, message: 'Title must be at least 3 characters' },
-              maxLength: { value: 200, message: 'Title must be under 200 characters' },
+              required: t('form.title.required'),
+              minLength: { value: 3, message: t('form.title.minLength') },
+              maxLength: { value: 200, message: t('form.title.maxLength') },
             })}
-            className={`w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 ${
-              errors.title ? 'border-critical' : 'border-gray-200'
-            }`}
+            className={`w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 ${errors.title ? 'border-critical' : 'border-gray-200'}`}
           />
-          {errors.title && (
-            <p className="mt-1 text-xs text-critical">{errors.title.message}</p>
-          )}
+          {errors.title && <p className="mt-1 text-xs text-critical">{errors.title.message}</p>}
         </div>
 
         {/* Description */}
         <div>
           <label htmlFor="case-description" className="mb-1.5 block text-sm font-medium text-dark">
-            What happened?
+            {t('form.description.label')}
           </label>
           <textarea
             id="case-description"
             rows={6}
-            placeholder="Describe what happened in your own words. Take your time — there's no rush and no word limit."
+            placeholder={t('form.description.placeholder')}
             {...register('description', {
-              required: 'Please describe your situation so we can help',
-              minLength: { value: 10, message: 'Please provide at least a few sentences' },
+              required: t('form.description.required'),
+              minLength: { value: 10, message: t('form.description.minLength') },
             })}
-            className={`w-full resize-y rounded-lg border bg-white px-3.5 py-2.5 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 ${
-              errors.description ? 'border-critical' : 'border-gray-200'
-            }`}
+            className={`w-full resize-y rounded-lg border bg-white px-3.5 py-2.5 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 ${errors.description ? 'border-critical' : 'border-gray-200'}`}
           />
-          {errors.description && (
-            <p className="mt-1 text-xs text-critical">{errors.description.message}</p>
-          )}
+          {errors.description && <p className="mt-1 text-xs text-critical">{errors.description.message}</p>}
         </div>
 
         {/* Category Hint */}
         <div>
-          <p className="mb-2 text-sm font-medium text-dark">
-            What kind of help do you need most?
-          </p>
-          <p className="mb-3 text-xs text-gray-500">
-            This is optional — our team will assess your needs regardless.
-          </p>
+          <p className="mb-2 text-sm font-medium text-dark">{t('form.category.heading')}</p>
+          <p className="mb-3 text-xs text-gray-500">{t('form.category.hint')}</p>
           <div className="flex flex-wrap gap-2">
             {categoryHints.map((hint) => (
-              <label
-                key={hint.value}
-                className="cursor-pointer"
-              >
-                <input
-                  type="radio"
-                  value={hint.value}
-                  {...register('category_hint')}
-                  className="peer sr-only"
-                />
+              <label key={hint.value} className="cursor-pointer">
+                <input type="radio" value={hint.value} {...register('category_hint')} className="peer sr-only" />
                 <span className="inline-block rounded-lg border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-500 transition-colors duration-150 peer-checked:border-teal-500 peer-checked:bg-teal-50 peer-checked:text-teal-700 hover:bg-gray-100">
                   {hint.label}
                 </span>
@@ -276,12 +213,11 @@ export default function ReportCasePage() {
           </div>
         </div>
 
-        {/* Optional: incident date + location */}
+        {/* Date + Location */}
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="incident-date" className="mb-1.5 block text-sm font-medium text-dark">
-              When did this happen?
-              <span className="ml-1 text-xs font-normal text-gray-500">(optional)</span>
+              {t('form.date.label')} <span className="ml-1 text-xs font-normal text-gray-500">{t('form.date.optional')}</span>
             </label>
             <input
               id="incident-date"
@@ -292,39 +228,32 @@ export default function ReportCasePage() {
           </div>
           <div>
             <label htmlFor="location" className="mb-1.5 block text-sm font-medium text-dark">
-              Where did this happen?
-              <span className="ml-1 text-xs font-normal text-gray-500">(optional)</span>
+              {t('form.location.label')} <span className="ml-1 text-xs font-normal text-gray-500">{t('form.location.optional')}</span>
             </label>
             <input
               id="location"
               type="text"
-              placeholder="e.g. Addis Ababa, Bole"
+              placeholder={t('form.location.placeholder')}
               {...register('location_text')}
               className="w-full rounded-lg border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>
 
-        {/* Error state */}
         {submitMutation.isError && (
-          <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-critical">
-            Something went wrong while submitting your report. Please try again.
-          </div>
+          <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-critical">{t('form.error')}</div>
         )}
 
-        {/* Submit */}
         <button
           type="submit"
           disabled={submitMutation.isPending}
           className="w-full rounded-lg bg-teal-500 px-5 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
-          Send My Report Securely
+          {t('form.submit')}
         </button>
 
-        {/* Reassurance */}
         <p className="text-xs text-gray-500 leading-relaxed">
-          Your report is encrypted end-to-end. Only assigned case workers will see your information
-          {isAnonymous ? ', and your identity will remain hidden.' : '.'}
+          {isAnonymous ? t('form.reassurance.anon') : t('form.reassurance.named')}
         </p>
       </form>
     </div>

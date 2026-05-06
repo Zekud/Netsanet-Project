@@ -1,0 +1,16 @@
+{
+  "heading": "Dhimmoota Koo",
+  "newReport": "+ Gabaasa Haaraa",
+  "error": "Dhimmoota kee fe'uu hin dandeenye. Maaloo fuula haaromsi.",
+  "empty": {
+    "title": "Dhimmi hin jiru",
+    "body": "Gabaasonni ati dhiheessitu as mul'atu, sadarkaa isaanii hordofuuf.",
+    "cta": "Dhimma jalqabaa gabaasi"
+  },
+  "urgency": { "critical": "ARIIFAATAA" },
+  "dates": {
+    "today": "Har'a",
+    "yesterday": "Kaleessa",
+    "daysAgo": "Guyyaa {{count}} dura"
+  }
+}

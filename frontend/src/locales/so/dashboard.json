@@ -1,0 +1,293 @@
+{
+  "directory": {
+    "title": "Kiisaska",
+    "subtitle": "{{total}} wadar ahaan kiisaska",
+    "searchPlaceholder": "Ku raadi cinwaan ama sharaxaad...",
+    "filterStatus": "Heerka:",
+    "filterUrgency": "Degdeg ah:",
+    "loading": "Soo raraya kiisaska...",
+    "error": "Waa lagu guuldareystay in la soo raro kiisaska. Fadlan isku day markale.",
+    "emptyTitle": "Kiisas lama helin",
+    "emptyFiltered": "Iskuday in aad hagaajiso miirayaashaada ama weydiimaha raadinta.",
+    "emptyNew": "Kiisaska cusub waxay halkan ka soo muuqan doonaan marka dadka badbaaday ay soo gudbiyaan warbixinno.",
+    "table": {
+      "caseNum": "Kiis #",
+      "urgency": "Degdeg ah",
+      "category": "Qeybta",
+      "status": "Heerka",
+      "title": "Cinwaanka",
+      "submitted": "La gudbiyay"
+    },
+    "anonymous": "Magac la'aan",
+    "pagination": {
+      "info": "Bogga {{page}} ee {{totalPages}}",
+      "prev": "Hore",
+      "next": "Xiga"
+    }
+  },
+  "assessment": {
+    "breadcrumb": "Kiisaska",
+    "back": "← Dib",
+    "submittedOn": "La gudbiyay {{date}}",
+    "anonymous": {
+      "title": "Badbaadaha aan la aqoonsan",
+      "desc": "Aqoonsiga wuu qarsoon yahay codsiga badbaadaha awgiis"
+    },
+    "survivorId": "Aqoonsiga Badbaadaha:",
+    "aiSummary": {
+      "title": "Soo Koobida Falanqaynta AI",
+      "reasoning": "Sababta AI"
+    },
+    "incident": {
+      "title": "Faahfaahinta Dhacdada",
+      "date": "Taariikhda Dhacdada",
+      "location": "Goobta"
+    },
+    "evidence": {
+      "title": "Faylasha Caddaynta",
+      "empty": "Wali wax caddayn ah oo uu soo geliyay badbaaduhu ma jiraan.",
+      "view": "Eeg"
+    },
+    "activity": {
+      "title": "Diiwaanka Dhaqdhaqaaqa",
+      "loading": "Soo dejinta dhaqdhaqaaqyada...",
+      "empty": "Wali wax dhaqdhaqaaq ah ma jiro."
+    },
+    "messages": "Farriimaha",
+    "updateStatus": {
+      "title": "Cusbooneysii Heerka",
+      "placeholder": "Dooro heer cusub...",
+      "button": "Cusbooneysii Heerka",
+      "error": "Waa lagu guuldareystay in la cusbooneysiiyo heerka."
+    },
+    "assignWorker": {
+      "title": "U Qoondee Shaqaalaha Kiiska",
+      "currentlyAssigned": "Hadda loo qoondeeyay:",
+      "placeholder": "Dooro shaqaale...",
+      "button": "Qoondee Shaqaale",
+      "error": "Waa lagu guuldareystay in la qoondeeyo shaqaalaha."
+    },
+    "referCase": {
+      "title": "Gudbi Kiiska",
+      "desc": "U wareeji kiiskan hay'ad kale si loo helo taageero gaar ah.",
+      "button": "🔀 U Gudbi Hay'ad"
+    },
+    "addNote": {
+      "title": "Ku Dar Xusuusin",
+      "placeholder": "Qor xusuusin ku saabsan kiiskan...",
+      "button": "Ku Dar Xusuusin"
+    },
+    "quickInfo": {
+      "caseId": "Aqoonsiga Kiiska",
+      "created": "La sameeyay",
+      "updated": "Waqtigii Ugu Dambeeyay Ee La Cusboonaysiiyay",
+      "anonymous": "Magac la'aan",
+      "yes": "Haa",
+      "no": "Maya"
+    },
+    "notFound": {
+      "title": "Kiiska lama helin",
+      "desc": "Kiiskan waa laga yaabaa in laga saaray ama aadan marin u lahayn.",
+      "back": "Dib Ugu Noqo Kiisaska"
+    }
+  },
+  "analytics": {
+    "title": "Falanqaynta",
+    "subtitle": "Guudmarka waxqabadka maareynta kiiska",
+    "kpi": {
+      "totalCases": "Wadarta Kiisaska",
+      "openCases": "Kiisaska Furan",
+      "criticalCases": "Kiisaska Halista ah",
+      "needsAttention": "waxay u baahan tahay fiiro",
+      "avgResolution": "Celceliska Xallinta",
+      "resolvedCases": "kiisaska la xaliyay"
+    },
+    "charts": {
+      "byStatus": "Kiisaska Sida Loo Kala Saarayo",
+      "byCategory": "Kiisaska Qeyb ahaan",
+      "overTime": "Kiisaska Muddo Kadib",
+      "noData": "Wali xog ma jirto",
+      "tooltipCases": "{{value}} kiis",
+      "tooltipDate": "Taariikhda: {{label}}"
+    },
+    "periods": {
+      "7d": "7 maalmood",
+      "30d": "30 maalmood",
+      "90d": "90 maalmood"
+    }
+  },
+  "shared": {
+    "status": {
+      "all": "Dhammaan",
+      "new": "Cusub",
+      "under_review": "Dib U Eegis Ku Socoto",
+      "referred": "Loo Gudbiyay",
+      "active": "Firfircoon",
+      "resolved": "La Xaliyay",
+      "closed": "La Xidhay"
+    },
+    "urgency": {
+      "all": "Dhammaan",
+      "critical": "Haljoog",
+      "high": "Sare",
+      "medium": "Dhexdhexaad",
+      "low": "Hoose"
+    },
+    "category": {
+      "legal": "Sharci",
+      "medical": "Caafimaad",
+      "shelter": "Habaad",
+      "counseling": "La-talin",
+      "other": "Kale"
+    }
+  },
+  "layout": {
+    "nav": {
+      "overview": "Guudmar",
+      "cases": "Kiisas",
+      "referrals": "Gudbin",
+      "notifications": "Ogeysiisyo",
+      "staff": "Shaqaale",
+      "analytics": "Falanqeyn",
+      "institutions": "Hay'ado"
+    },
+    "badge": "Shaqaale",
+    "fallbackName": "Xubin Shaqaale",
+    "signOut": "Ka Bax"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Subax wanaagsan",
+      "afternoon": "Galab wanaagsan",
+      "evening": "Habeen wanaagsan"
+    },
+    "title": "Guudmar",
+    "subtitle": "Waa kan waxa dhacaya maanta.",
+    "kpi": {
+      "needsAttention": "Fiiro Gaar ah U Baahan",
+      "assignedToMe": "Ley Qoondeeyay",
+      "openCases": "Kiisaska Furan",
+      "resolved": "La Xaliyay"
+    },
+    "recentCases": {
+      "title": "Kiisaskii U Dambeeyay",
+      "emptyTitle": "Kiisas cusub lama helin.",
+      "emptyDesc": "Gudbinta cusub ayaa halkan ka muuqan doona."
+    }
+  },
+  "notifications": {
+    "title": "Ogeysiisyo",
+    "subtitle": "Wararka ku saabsan kiisaska lagu qoondeeyay iyo sheegashooyinka.",
+    "markAllRead": "Dhammaan ka dhig kuwa la akhriyay",
+    "loading": "Soo raraya ogeysiisyada...",
+    "emptyTitle": "Wali wax ogeysiis ah ma jiro.",
+    "emptyDesc": "Dhammaan waad la socotaa!"
+  },
+  "staff": {
+    "title": "Liiska Shaqaalaha",
+    "subtitle": "Maamul isticmaalayaasha hay'addaada",
+    "addStaff": "Ku Dar Shaqaale",
+    "roles": {
+      "case_worker": "Shaqaale Kiis",
+      "institution_admin": "Maamule",
+      "system_admin": "Maamulaha Nidaamka"
+    },
+    "modal": {
+      "title": "Ku Dar Xubin Shaqaale",
+      "desc": "Waxay ku heli doonaan isku xirka soo gelista iimaylkooda ama taleefankooda.",
+      "fullName": "Magaca Buuxa *",
+      "email": "Iimayl",
+      "phone": "Telefoon",
+      "role": "Doorka",
+      "cancel": "Jooji",
+      "submit": "Dir Casuumaad"
+    },
+    "searchPlaceholder": "Raadi shaqaale...",
+    "table": {
+      "name": "Magac",
+      "role": "Door",
+      "cases": "Kiisas",
+      "status": "Heerka",
+      "joined": "Ku biiray",
+      "actions": "Tallaabooyin"
+    },
+    "status": {
+      "active": "Firfircoon",
+      "suspended": "Hakad La Galiyay"
+    },
+    "actions": {
+      "suspend": "Haki",
+      "activate": "Firfircooni"
+    },
+    "loading": "Soo raraya shaqaalaha...",
+    "empty": "Shaqaale lama helin."
+  },
+  "referrals": {
+    "title": "Gudbinta",
+    "subtitle": "Kiisaska la isugu wareejiyay hay'adaha.",
+    "tabs": {
+      "incoming": "Soo socda",
+      "outgoing": "Baxaya"
+    },
+    "searchPlaceholder": "Ku raadi kiis # ama hay'ad...",
+    "filterStatus": "Dhammaan Xaaladaha",
+    "status": {
+      "pending": "Sugan",
+      "accepted": "La Aqbalay",
+      "rejected": "La Diiday"
+    },
+    "table": {
+      "caseNum": "Kiis #",
+      "institution": "Hay'ad",
+      "priority": "Muhiimada",
+      "status": "Heerka",
+      "date": "Taariikh",
+      "action": "Tallaabo"
+    },
+    "direction": {
+      "from": "Laga bilaabo:",
+      "to": "Ku socota:"
+    },
+    "actions": {
+      "review": "Dib U Eeg",
+      "view": "Eeg"
+    },
+    "loading": "Soo dejinta gudbinta...",
+    "error": "Lagu guuldareystay soo dejinta gudbinta.",
+    "emptyTitle": "Gudbin lama helin",
+    "emptyIncoming": "Ma haysatid wax gudbin ah oo kuu imaanaya waqtigan.",
+    "emptyOutgoing": "Wali wax gudbin ah ma dirin."
+  },
+  "institutions": {
+    "title": "Hay'ado",
+    "subtitle": "Maamul hay'adaha ka qayb qaadanaya iyo marin galkooda.",
+    "addInstitution": "Ku Dar Hay'ad",
+    "searchPlaceholder": "Raadi hay'ado...",
+    "filterType": "Dhammaan Noocyada",
+    "modal": {
+      "title": "Diiwaangeli Hay'ad",
+      "desc": "Ku dar urur cusub oo ka qayb qaadanaya.",
+      "name": "Magaca Hay'adda *",
+      "namePlaceholder": "tus., Safe Haven Addis",
+      "email": "Iimayl *",
+      "phone": "Telefoon",
+      "city": "Magaalada",
+      "services": "Noocyada Adeegga",
+      "cancel": "Jooji",
+      "submit": "Diiwaangeli"
+    },
+    "table": {
+      "institution": "Hay'ad",
+      "location": "Goobta",
+      "services": "Adeegyo",
+      "staff": "Shaqaale",
+      "status": "Heerka",
+      "actions": "Tallaabooyin"
+    },
+    "actions": {
+      "edit": "Wax ka beddel"
+    },
+    "loading": "Soo raraya hay'adaha...",
+    "empty": "Wax hay'ado ah lama helin"
+  }
+}

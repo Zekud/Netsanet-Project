@@ -1,0 +1,40 @@
+{
+  "backLink": "← Dhimmoota koo",
+  "notFound": { "message": "Dhimmi hin argamne", "back": "← Dhimmoota kootti deebi'i" },
+  "timeline": {
+    "heading": "Guddina Dhimmaa",
+    "steps": { "new": "Fuudhatame", "under_review": "Sakatta'amaa jira", "active": "Hojjatamaa jira", "resolved": "Xumurame" },
+    "referred": "ℹ️ Dhimmi kee garee addaatti dabarsameera, gargaarsa caalaa akka argatu.",
+    "closed": "Dhimmi kun amma cufameera. Gargaarsi dabalataa yoo barbaachise gabaasa haaraa dhiheessuu dandeessa."
+  },
+  "aiSummary": { "heading": "Sirni keenya maal hubate" },
+  "incidents": { "heading": "Maal akka gabaaste" },
+  "messaging": {
+    "heading": "To'ataa dhimmaa kee ergii",
+    "panelTitle": "To'ataa dhimmaa kee ergii",
+    "noWorker": {
+      "title": "To'ataan dhimmaa ammaaf hin ramadamne",
+      "body": "To'ataan dhimmaa yoo ramadame, asitti kallattiidhaan isaan erguu dandeessa."
+    },
+    "empty": "Ammaaf ergaan hin jiru. To'ataa dhimmaa keetti ergi.",
+    "placeholder": "Ergaa barreessi...",
+    "send": "Ergi"
+  },
+  "activities": {
+    "heading": "Haaromsa Dhimmaa",
+    "case_created": "Gabaasni kee fuudhatamee nagaan eegameera.",
+    "status_change": "Sadarkaan dhimmaa kee haaromfameera.",
+    "assigned": "To'ataan dhimmaa dhimma kee irratti ramadameera.",
+    "referral_sent": "Dhimmi kee garee addaatti ergameera.",
+    "referral_accepted": "Gareen deeggarsa haaraan dhimma kee fudhateera.",
+    "referral_rejected": "Dabarsuun haaromfameera — gareen jalqabaa itti fufee jira.",
+    "evidence_added": "Ragaan dhimma kee irratti dabalameera.",
+    "evidence_removed": "Faayilii ragaa haqameera.",
+    "note": "Yaadannoon garee dhimmaa keetiin dabalameera.",
+    "default": "Dhimmi kee haaromfameera."
+  },
+  "evidence": {
+    "title": "Kuusaa Ragaa",
+    "body": "Fakkii, viidiyoo, sanadoota, ykn sagalee olkaa'i"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "heading": "Khaanadda Caddaynta",
+  "subtitle": "Kullim dambi kinnih. Gaba cadda taamah.",
+  "backLink": "← Taama gex",
+  "dropzone": {
+    "idle": "Fayl haysa, am wagita",
+    "over": "Fayl haysa",
+    "hint": "Sawir, vid, maqla, PDF · 50 MB"
+  },
+  "queue": {
+    "ready_one": "{{count}} fayl",
+    "ready_other": "{{count}} fayl",
+    "uploadBtn_one": "Haysa {{count}} fayl",
+    "uploadBtn_other": "Haysa {{count}} fayl",
+    "uploading": "Hayta...",
+    "error": "Macaaba yekke. Culul."
+  },
+  "empty": {
+    "title": "Caddayn maay",
+    "body": "Sawir, vid, maqla haysa."
+  },
+  "files": { "view": "Wagita", "delete": "Meceh" },
+  "deleteModal": {
+    "title": "Fayl meceh?",
+    "body": "Tah maay.",
+    "cancel": "Maay",
+    "confirm": "Meceh",
+    "deleting": "Mecta..."
+  },
+  "viewer": { "download": "Gex", "close": "Xir ✕" },
+  "retrieveError": "Fayl mali. Culul."
+}

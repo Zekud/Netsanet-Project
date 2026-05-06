@@ -5,6 +5,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../../lib/supabase';
 import { useToast } from './ToastProvider';
 import api from '../../lib/api';
@@ -23,15 +24,15 @@ interface Notification {
 
 // ─── Helpers ──────────────────────────────────────────────────
 
-function relativeTime(dateStr: string): string {
+function relativeTime(dateStr: string, t: any): string {
   const diff = Date.now() - new Date(dateStr).getTime();
   const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return 'just now';
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 1) return t('dashboard:notifications.time.justNow', 'just now');
+  if (minutes < 60) return t('dashboard:notifications.time.minutes', '{{count}}m ago', { count: minutes });
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return t('dashboard:notifications.time.hours', '{{count}}h ago', { count: hours });
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return t('dashboard:notifications.time.days', '{{count}}d ago', { count: days });
 }
 
 const typeColors: Record<string, string> = {
@@ -55,6 +56,7 @@ export default function NotificationBell({ userId, userRole }: NotificationBellP
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { showToast } = useToast();
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -205,14 +207,14 @@ export default function NotificationBell({ userId, userRole }: NotificationBellP
         <div className="absolute right-0 top-11 z-40 w-80 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
-            <h3 className="text-sm font-medium text-dark">Notifications</h3>
+            <h3 className="text-sm font-medium text-dark">{t('dashboard:notifications.title', 'Notifications')}</h3>
             {unreadCount > 0 && (
               <button
                 onClick={() => markAllMutation.mutate()}
                 disabled={markAllMutation.isPending}
                 className="text-xs font-medium text-teal-600 hover:text-teal-800 transition-colors"
               >
-                Mark all read
+                {t('dashboard:notifications.markAllRead', 'Mark all read')}
               </button>
             )}
           </div>
@@ -222,20 +224,21 @@ export default function NotificationBell({ userId, userRole }: NotificationBellP
             {notifications.length === 0 ? (
               <div className="flex flex-col items-center py-8 text-center">
                 <span className="mb-2 text-2xl">🔔</span>
-                <p className="text-sm text-gray-500">No notifications yet</p>
+                <p className="text-sm text-gray-500">{t('dashboard:notifications.emptyTitle', 'No notifications yet')}</p>
               </div>
             ) : (
               <>
                 {todayItems.length > 0 && (
                   <div>
                     <p className="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 bg-gray-100">
-                      Today
+                      {t('dashboard:notifications.today', 'Today')}
                     </p>
                     {todayItems.map((n) => (
                       <NotificationItem
                         key={n.id}
                         notification={n}
                         onClick={() => handleNotificationClick(n)}
+                        t={t}
                       />
                     ))}
                   </div>
@@ -243,13 +246,14 @@ export default function NotificationBell({ userId, userRole }: NotificationBellP
                 {earlierItems.length > 0 && (
                   <div>
                     <p className="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 bg-gray-100">
-                      Earlier
+                      {t('dashboard:notifications.earlier', 'Earlier')}
                     </p>
                     {earlierItems.map((n) => (
                       <NotificationItem
                         key={n.id}
                         notification={n}
                         onClick={() => handleNotificationClick(n)}
+                        t={t}
                       />
                     ))}
                   </div>
@@ -268,9 +272,11 @@ export default function NotificationBell({ userId, userRole }: NotificationBellP
 function NotificationItem({
   notification: n,
   onClick,
+  t,
 }: {
   notification: Notification;
   onClick: () => void;
+  t: any;
 }) {
   const colorClass = typeColors[n.type] || typeColors.default;
 
@@ -289,7 +295,7 @@ function NotificationItem({
         <p className="text-xs text-gray-500 mt-0.5 line-clamp-2 leading-relaxed">
           {n.body}
         </p>
-        <p className="mt-1 text-[10px] text-gray-500">{relativeTime(n.created_at)}</p>
+        <p className="mt-1 text-[10px] text-gray-500">{relativeTime(n.created_at, t)}</p>
       </div>
       {!n.is_read && (
         <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-teal-500" />

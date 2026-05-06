@@ -1,0 +1,16 @@
+{
+  "heading": "My Cases",
+  "newReport": "+ New Report",
+  "error": "Failed to load your cases. Please refresh the page.",
+  "empty": {
+    "title": "No cases yet",
+    "body": "Cases you report will appear here so you can track their progress.",
+    "cta": "Report your first case"
+  },
+  "urgency": { "critical": "CRITICAL" },
+  "dates": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgo": "{{count}} days ago"
+  }
+}

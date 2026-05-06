@@ -1,0 +1,10 @@
+{
+  "nav": {
+    "home": "Home",
+    "report": "Report",
+    "myCases": "My Cases",
+    "legalGuide": "Legal Guide"
+  },
+  "signOut": "Sign Out",
+  "footer": "Your privacy is protected. All data is encrypted and confidential."
+}

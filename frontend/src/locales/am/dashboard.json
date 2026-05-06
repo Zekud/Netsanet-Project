@@ -1,0 +1,293 @@
+{
+  "directory": {
+    "title": "ጉዳዮች",
+    "subtitle": "{{total}} ጠቅላላ ጉዳዮች",
+    "searchPlaceholder": "በስም ወይም በመግለጫ ይፈልጉ...",
+    "filterStatus": "ሁኔታ:",
+    "filterUrgency": "አስቸኳይነት:",
+    "loading": "ጉዳዮችን በመጫን ላይ...",
+    "error": "ጉዳዮችን መጫን አልተቻለም። እባክዎ እንደገና ይሞክሩ።",
+    "emptyTitle": "ምንም ጉዳይ አልተገኘም",
+    "emptyFiltered": "ማጣሪያዎችዎን ወይም የፍለጋ ቃልዎን ለማስተካከል ይሞክሩ።",
+    "emptyNew": "ተጠቃሚዎች ሪፖርት ሲያቀርቡ አዲስ ጉዳዮች እዚህ ይታያሉ።",
+    "table": {
+      "caseNum": "የጉዳይ ቁጥር",
+      "urgency": "አስቸኳይነት",
+      "category": "ምድብ",
+      "status": "ሁኔታ",
+      "title": "ርዕስ",
+      "submitted": "የቀረበበት"
+    },
+    "anonymous": "ያልታወቀ",
+    "pagination": {
+      "info": "ገጽ {{page}} ከ {{totalPages}}",
+      "prev": "ቀዳሚ",
+      "next": "ቀጣይ"
+    }
+  },
+  "assessment": {
+    "breadcrumb": "ጉዳዮች",
+    "back": "← ተመለስ",
+    "submittedOn": "የቀረበው በ {{date}}",
+    "anonymous": {
+      "title": "ያልታወቀ አቅራቢ",
+      "desc": "በአቅራቢው ጥያቄ መሰረት ማንነቱ ተደብቋል"
+    },
+    "survivorId": "የአቅራቢ መለያ:",
+    "aiSummary": {
+      "title": "የ AI ግምገማ ማጠቃለያ",
+      "reasoning": "የ AI ምክንያት"
+    },
+    "incident": {
+      "title": "የክስተት ዝርዝሮች",
+      "date": "የክስተት ቀን",
+      "location": "ቦታ"
+    },
+    "evidence": {
+      "title": "የማስረጃ ፋይሎች",
+      "empty": "እስካሁን ምንም ማስረጃ አልተጫነም።",
+      "view": "ይመልከቱ"
+    },
+    "activity": {
+      "title": "የእንቅስቃሴ መዝገብ",
+      "loading": "እንቅስቃሴዎችን በመጫን ላይ...",
+      "empty": "እስካሁን ምንም እንቅስቃሴ የለም።"
+    },
+    "messages": "መልእክቶች",
+    "updateStatus": {
+      "title": "ሁኔታን አዘምን",
+      "placeholder": "አዲስ ሁኔታ ይምረጡ...",
+      "button": "ሁኔታን አዘምን",
+      "error": "ሁኔታ ማዘመን አልተቻለም።"
+    },
+    "assignWorker": {
+      "title": "የጉዳይ ሠራተኛ መድብ",
+      "currentlyAssigned": "በአሁኑ ጊዜ የተመደበ:",
+      "placeholder": "ሠራተኛ ይምረጡ...",
+      "button": "ሠራተኛ መድብ",
+      "error": "ሠራተኛ መመደብ አልተቻለም።"
+    },
+    "referCase": {
+      "title": "ጉዳይን ያስተላልፉ",
+      "desc": "ለልዩ ድጋፍ ይህን ጉዳይ ወደ ሌላ ተቋም ያስተላልፉ።",
+      "button": "🔀 ወደ ተቋም ያስተላልፉ"
+    },
+    "addNote": {
+      "title": "ማስታወሻ ያክሉ",
+      "placeholder": "ስለዚህ ጉዳይ ማስታወሻ ይጻፉ...",
+      "button": "ማስታወሻ ያክሉ"
+    },
+    "quickInfo": {
+      "caseId": "የጉዳይ መለያ",
+      "created": "የተፈጠረበት",
+      "updated": "የመጨረሻ ዝመና",
+      "anonymous": "ያልታወቀ",
+      "yes": "አዎ",
+      "no": "አይ"
+    },
+    "notFound": {
+      "title": "ጉዳዩ አልተገኘም",
+      "desc": "ይህ ጉዳይ ተሰርዞ ሊሆን ይችላል ወይም መዳረሻ የለዎትም።",
+      "back": "ወደ ጉዳዮች ተመለስ"
+    }
+  },
+  "analytics": {
+    "title": "ትንታኔ",
+    "subtitle": "የጉዳይ አስተዳደር አፈጻጸም አጠቃላይ እይታ",
+    "kpi": {
+      "totalCases": "ጠቅላላ ጉዳዮች",
+      "openCases": "ክፍት ጉዳዮች",
+      "criticalCases": "አስቸኳይ ጉዳዮች",
+      "needsAttention": "ትኩረት ያስፈልገዋል",
+      "avgResolution": "አማካይ የመፍቻ ጊዜ",
+      "resolvedCases": "የተፈቱ ጉዳዮች"
+    },
+    "charts": {
+      "byStatus": "ጉዳዮች በሁኔታ",
+      "byCategory": "ጉዳዮች በምድብ",
+      "overTime": "ጉዳዮች በጊዜ ሂደት",
+      "noData": "እስካሁን ምንም መረጃ የለም",
+      "tooltipCases": "{{value}} ጉዳዮች",
+      "tooltipDate": "ቀን: {{label}}"
+    },
+    "periods": {
+      "7d": "7 ቀናት",
+      "30d": "30 ቀናት",
+      "90d": "90 ቀናት"
+    }
+  },
+  "shared": {
+    "status": {
+      "all": "ሁሉም",
+      "new": "አዲስ",
+      "under_review": "በግምገማ ላይ",
+      "referred": "የተላለፈ",
+      "active": "ንቁ",
+      "resolved": "የተፈታ",
+      "closed": "የተዘጋ"
+    },
+    "urgency": {
+      "all": "ሁሉም",
+      "critical": "አስቸኳይ",
+      "high": "ከፍተኛ",
+      "medium": "መካከለኛ",
+      "low": "ዝቅተኛ"
+    },
+    "category": {
+      "legal": "ሕጋዊ",
+      "medical": "ሕክምና",
+      "shelter": "መጠለያ",
+      "counseling": "ምክር",
+      "other": "ሌላ"
+    }
+  },
+  "layout": {
+    "nav": {
+      "overview": "አጠቃላይ እይታ",
+      "cases": "ጉዳዮች",
+      "referrals": "ማስተላለፎች",
+      "notifications": "ማሳወቂያዎች",
+      "staff": "ሠራተኞች",
+      "analytics": "ትንታኔ",
+      "institutions": "ተቋማት"
+    },
+    "badge": "ሠራተኛ",
+    "fallbackName": "ሠራተኛ አባል",
+    "signOut": "ውጣ"
+  },
+  "home": {
+    "greeting": {
+      "morning": "እንደምን አደሩ",
+      "afternoon": "እንደሚን ዋሉ",
+      "evening": "እንደምን አመሹ"
+    },
+    "title": "አጠቃላይ እይታ",
+    "subtitle": "ዛሬ ምን እየተከናወነ እንዳለ እነሆ።",
+    "kpi": {
+      "needsAttention": "ትኩረት ያስፈልገዋል",
+      "assignedToMe": "ለእኔ የተመደበ",
+      "openCases": "ክፍት ጉዳዮች",
+      "resolved": "የተፈቱ"
+    },
+    "recentCases": {
+      "title": "የቅርብ ጊዜ ጉዳዮች",
+      "emptyTitle": "ምንም የቅርብ ጊዜ ጉዳዮች አልተገኙም።",
+      "emptyDesc": "አዲስ ጥያቄዎች እዚህ ይታያሉ።"
+    }
+  },
+  "notifications": {
+    "title": "ማሳወቂያዎች",
+    "subtitle": "በተመደቡልዎት ጉዳዮች እና መጠቀሶች ላይ ማሻሻያዎች።",
+    "markAllRead": "ሁሉንም እንደተነበቡ ምልክት አድርግ",
+    "loading": "ማሳወቂያዎችን በመጫን ላይ...",
+    "emptyTitle": "እስካሁን ምንም ማሳወቂያዎች የሉም።",
+    "emptyDesc": "ሁሉንም አንብበዋል!"
+  },
+  "staff": {
+    "title": "የሠራተኞች ዝርዝር",
+    "subtitle": "ለተቋምዎ ተጠቃሚዎችን ያስተዳድሩ",
+    "addStaff": "ሠራተኛ ያክሉ",
+    "roles": {
+      "case_worker": "የጉዳይ ሠራተኛ",
+      "institution_admin": "አስተዳዳሪ",
+      "system_admin": "የስርዓት አስተዳዳሪ"
+    },
+    "modal": {
+      "title": "የሠራተኛ አባል ያክሉ",
+      "desc": "የመግቢያ አገናኝ በኢሜል ወይም በስልክ ይቀበላሉ።",
+      "fullName": "ሙሉ ስም *",
+      "email": "ኢሜል",
+      "phone": "ስልክ",
+      "role": "ሚና",
+      "cancel": "ሰርዝ",
+      "submit": "ግብዣ ላክ"
+    },
+    "searchPlaceholder": "ሠራተኞችን ይፈልጉ...",
+    "table": {
+      "name": "ስም",
+      "role": "ሚና",
+      "cases": "ጉዳዮች",
+      "status": "ሁኔታ",
+      "joined": "የተቀላቀለበት",
+      "actions": "እርምጃዎች"
+    },
+    "status": {
+      "active": "ንቁ",
+      "suspended": "ታግዷል"
+    },
+    "actions": {
+      "suspend": "አግድ",
+      "activate": "አንቃ"
+    },
+    "loading": "ሠራተኞችን በመጫን ላይ...",
+    "empty": "ምንም ሠራተኛ አልተገኘም።"
+  },
+  "referrals": {
+    "title": "ማስተላለፎች",
+    "subtitle": "በተቋማት መካከል የተላለፉ ጉዳዮች።",
+    "tabs": {
+      "incoming": "ገቢ",
+      "outgoing": "ወጪ"
+    },
+    "searchPlaceholder": "በጉዳይ ቁጥር ወይም በተቋም ይፈልጉ...",
+    "filterStatus": "ሁሉም ሁኔታዎች",
+    "status": {
+      "pending": "በመጠባበቅ ላይ",
+      "accepted": "ተቀባይነት አግኝቷል",
+      "rejected": "ተቀባይነት አላገኘም"
+    },
+    "table": {
+      "caseNum": "የጉዳይ ቁጥር",
+      "institution": "ተቋም",
+      "priority": "ቅድሚያ የሚሰጠው",
+      "status": "ሁኔታ",
+      "date": "ቀን",
+      "action": "እርምጃ"
+    },
+    "direction": {
+      "from": "ከ:",
+      "to": "ወደ:"
+    },
+    "actions": {
+      "review": "ገምግም",
+      "view": "ይመልከቱ"
+    },
+    "loading": "ማስተላለፎችን በመጫን ላይ...",
+    "error": "ማስተላለፎችን መጫን አልተቻለም።",
+    "emptyTitle": "ምንም ማስተላለፎች አልተገኙም",
+    "emptyIncoming": "በአሁኑ ጊዜ ምንም ገቢ ማስተላለፎች የሉዎትም።",
+    "emptyOutgoing": "ምንም ማስተላለፎች አልላኩም።"
+  },
+  "institutions": {
+    "title": "ተቋማት",
+    "subtitle": "አጋር ተቋማትን እና መዳረሻቸውን ያስተዳድሩ።",
+    "addInstitution": "ተቋም ያክሉ",
+    "searchPlaceholder": "ተቋማትን ይፈልጉ...",
+    "filterType": "ሁሉም ዓይነቶች",
+    "modal": {
+      "title": "ተቋም ይመዝገቡ",
+      "desc": "አዲስ አጋር ድርጅት ያክሉ።",
+      "name": "የተቋሙ ስም *",
+      "namePlaceholder": "ለምሳሌ፣ Safe Haven Addis",
+      "email": "ኢሜል *",
+      "phone": "ስልክ",
+      "city": "ከተማ",
+      "services": "የአገልግሎት ዓይነቶች",
+      "cancel": "ሰርዝ",
+      "submit": "ይመዝገቡ"
+    },
+    "table": {
+      "institution": "ተቋም",
+      "location": "ቦታ",
+      "services": "አገልግሎቶች",
+      "staff": "ሠራተኞች",
+      "status": "ሁኔታ",
+      "actions": "እርምጃዎች"
+    },
+    "actions": {
+      "edit": "አርትዕ"
+    },
+    "loading": "ተቋማትን በመጫን ላይ...",
+    "empty": "ምንም ተቋማት አልተገኙም"
+  }
+}

@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import api from '../../lib/api';
 import { PageHeader, UrgencyBadge, StatusBadge, EmptyState, Spinner } from '../../components/ui';
 
@@ -33,43 +34,43 @@ interface CasesResponse {
   };
 }
 
-// ─── Filter Options ──────────────────────────────────────────
-
-const statusOptions = [
-  { value: '', label: 'All' },
-  { value: 'new', label: 'New' },
-  { value: 'under_review', label: 'Under Review' },
-  { value: 'referred', label: 'Referred' },
-  { value: 'active', label: 'Active' },
-  { value: 'resolved', label: 'Resolved' },
-  { value: 'closed', label: 'Closed' },
-];
-
-const urgencyOptions = [
-  { value: '', label: 'All' },
-  { value: 'critical', label: 'Critical' },
-  { value: 'high', label: 'High' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'low', label: 'Low' },
-];
-
-const categoryLabels: Record<string, string> = {
-  legal: 'Legal',
-  medical: 'Medical',
-  shelter: 'Shelter',
-  counseling: 'Counseling',
-  other: 'Other',
-};
-
 // ─── Component ────────────────────────────────────────────────
 
 export default function CaseDirectoryPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation('dashboard');
   const [statusFilter, setStatusFilter] = useState('');
   const [urgencyFilter, setUrgencyFilter] = useState('');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const limit = 15;
+
+  // Option lists generated using translation keys
+  const statusOptions = [
+    { value: '', label: t('shared.status.all') },
+    { value: 'new', label: t('shared.status.new') },
+    { value: 'under_review', label: t('shared.status.under_review') },
+    { value: 'referred', label: t('shared.status.referred') },
+    { value: 'active', label: t('shared.status.active') },
+    { value: 'resolved', label: t('shared.status.resolved') },
+    { value: 'closed', label: t('shared.status.closed') },
+  ];
+
+  const urgencyOptions = [
+    { value: '', label: t('shared.urgency.all') },
+    { value: 'critical', label: t('shared.urgency.critical') },
+    { value: 'high', label: t('shared.urgency.high') },
+    { value: 'medium', label: t('shared.urgency.medium') },
+    { value: 'low', label: t('shared.urgency.low') },
+  ];
+
+  const categoryLabels: Record<string, string> = {
+    legal: t('shared.category.legal'),
+    medical: t('shared.category.medical'),
+    shelter: t('shared.category.shelter'),
+    counseling: t('shared.category.counseling'),
+    other: t('shared.category.other'),
+  };
 
   const queryParams = new URLSearchParams();
   queryParams.set('page', String(page));
@@ -96,8 +97,8 @@ export default function CaseDirectoryPage() {
   return (
     <div>
       <PageHeader
-        title="Cases"
-        subtitle={pagination ? `${pagination.total} total cases` : undefined}
+        title={t('directory.title')}
+        subtitle={pagination ? t('directory.subtitle', { total: pagination.total }) : undefined}
       />
 
       {/* Filters Bar */}
@@ -115,7 +116,7 @@ export default function CaseDirectoryPage() {
           </svg>
           <input
             type="text"
-            placeholder="Search by title or description..."
+            placeholder={t('directory.searchPlaceholder')}
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -127,7 +128,7 @@ export default function CaseDirectoryPage() {
 
         {/* Status chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-gray-500 mr-1">Status:</span>
+          <span className="text-xs font-medium text-gray-500 mr-1">{t('directory.filterStatus')}</span>
           {statusOptions.map((opt) => (
             <button
               key={opt.value}
@@ -148,7 +149,7 @@ export default function CaseDirectoryPage() {
 
         {/* Urgency chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-gray-500 mr-1">Urgency:</span>
+          <span className="text-xs font-medium text-gray-500 mr-1">{t('directory.filterUrgency')}</span>
           {urgencyOptions.map((opt) => (
             <button
               key={opt.value}
@@ -171,20 +172,20 @@ export default function CaseDirectoryPage() {
       {/* Table / Content */}
       {isLoading ? (
         <div className="flex justify-center py-16">
-          <Spinner size="lg" label="Loading cases..." />
+          <Spinner size="lg" label={t('directory.loading')} />
         </div>
       ) : isError ? (
         <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-critical">
-          Failed to load cases. Please try again.
+          {t('directory.error')}
         </div>
       ) : cases.length === 0 ? (
         <EmptyState
           icon={<span>📋</span>}
-          title="No cases found"
+          title={t('directory.emptyTitle')}
           description={
             search || statusFilter || urgencyFilter
-              ? 'Try adjusting your filters or search query.'
-              : 'New cases will appear here when survivors submit reports.'
+              ? t('directory.emptyFiltered')
+              : t('directory.emptyNew')
           }
         />
       ) : (
@@ -194,12 +195,12 @@ export default function CaseDirectoryPage() {
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-100">
-                  <th className="px-4 py-3 font-medium text-gray-500">Case #</th>
-                  <th className="px-4 py-3 font-medium text-gray-500">Urgency</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 hidden sm:table-cell">Category</th>
-                  <th className="px-4 py-3 font-medium text-gray-500">Status</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 hidden lg:table-cell">Title</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 hidden md:table-cell">Submitted</th>
+                  <th className="px-4 py-3 font-medium text-gray-500">{t('directory.table.caseNum')}</th>
+                  <th className="px-4 py-3 font-medium text-gray-500">{t('directory.table.urgency')}</th>
+                  <th className="px-4 py-3 font-medium text-gray-500 hidden sm:table-cell">{t('directory.table.category')}</th>
+                  <th className="px-4 py-3 font-medium text-gray-500">{t('directory.table.status')}</th>
+                  <th className="px-4 py-3 font-medium text-gray-500 hidden lg:table-cell">{t('directory.table.title')}</th>
+                  <th className="px-4 py-3 font-medium text-gray-500 hidden md:table-cell">{t('directory.table.submitted')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -228,7 +229,7 @@ export default function CaseDirectoryPage() {
                     <td className="px-4 py-3 hidden lg:table-cell">
                       <p className="max-w-xs truncate text-dark">{c.title}</p>
                       {c.is_anonymous && (
-                        <span className="text-[10px] text-gray-500">Anonymous</span>
+                        <span className="text-[10px] text-gray-500">{t('directory.anonymous')}</span>
                       )}
                     </td>
                     <td className="px-4 py-3 hidden md:table-cell">
@@ -250,7 +251,7 @@ export default function CaseDirectoryPage() {
           {pagination && pagination.totalPages > 1 && (
             <div className="mt-4 flex items-center justify-between">
               <p className="text-xs text-gray-500">
-                Page {pagination.page} of {pagination.totalPages}
+                {t('directory.pagination.info', { page: pagination.page, totalPages: pagination.totalPages })}
               </p>
               <div className="flex gap-2">
                 <button
@@ -258,14 +259,14 @@ export default function CaseDirectoryPage() {
                   disabled={page <= 1}
                   className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-500 transition-colors duration-150 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  Previous
+                  {t('directory.pagination.prev')}
                 </button>
                 <button
                   onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}
                   disabled={page >= pagination.totalPages}
                   className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-500 transition-colors duration-150 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  Next
+                  {t('directory.pagination.next')}
                 </button>
               </div>
             </div>

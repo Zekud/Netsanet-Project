@@ -1,0 +1,32 @@
+{
+  "heading": "Evidence Locker",
+  "subtitle": "All files are encrypted and stored securely. Only you and your assigned case manager can access them.",
+  "backLink": "← Back to case",
+  "dropzone": {
+    "idle": "Drag files here, or click to browse",
+    "over": "Drop files here",
+    "hint": "Photos, videos, audio recordings, PDFs · Max 50 MB each"
+  },
+  "queue": {
+    "ready_one": "{{count}} file ready to upload",
+    "ready_other": "{{count}} files ready to upload",
+    "uploadBtn_one": "Upload {{count}} file",
+    "uploadBtn_other": "Upload {{count}} files",
+    "uploading": "Uploading...",
+    "error": "Upload failed. Please try again."
+  },
+  "empty": {
+    "title": "No evidence uploaded yet",
+    "body": "Add photos, videos, audio recordings, or documents to support your case."
+  },
+  "files": { "view": "View", "delete": "Delete" },
+  "deleteModal": {
+    "title": "Delete this file?",
+    "body": "This action cannot be undone. The file will be permanently removed from your case.",
+    "cancel": "Cancel",
+    "confirm": "Delete",
+    "deleting": "Deleting..."
+  },
+  "viewer": { "download": "Download", "close": "Close ✕" },
+  "retrieveError": "Could not retrieve the file. Please try again."
+}

@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import api from '../../lib/api';
 
 interface Institution {
@@ -21,28 +22,29 @@ const TYPE_LABELS: Record<string, string> = {
 // ─── Add Institution Modal ─────────────────────────────────────
 
 function InstitutionModal({
-  onClose, onSave,
+  onClose, onSave, t
 }: {
   onClose: () => void;
   onSave: (data: { name: string; type: string; description: string }) => void;
+  t: any;
 }) {
   const [form, setForm] = useState({ name: '', type: 'mowsa', description: '' });
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-        <h3 className="font-serif text-lg text-dark mb-4">Add Institution</h3>
+        <h3 className="font-serif text-lg text-dark mb-4">{t('institutions.addInstitution')}</h3>
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Name *</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">{t('institutions.modal.name')}</label>
             <input
               value={form.name}
               onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
               className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
-              placeholder="Ministry of Women & Social Affairs"
+              placeholder={t('institutions.modal.namePlaceholder')}
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Type *</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">{t('institutions.modal.services')} *</label>
             <select
               value={form.type}
               onChange={(e) => setForm((p) => ({ ...p, type: e.target.value }))}
@@ -64,13 +66,13 @@ function InstitutionModal({
           </div>
         </div>
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">Cancel</button>
+          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">{t('institutions.modal.cancel')}</button>
           <button
             onClick={() => { if (form.name) onSave(form); }}
             disabled={!form.name}
             className="flex-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50"
           >
-            Create
+            {t('institutions.modal.submit')}
           </button>
         </div>
       </div>
@@ -86,12 +88,14 @@ function AddAdminModal({
   onSave,
   isLoading,
   error,
+  t
 }: {
   institution: Institution;
   onClose: () => void;
   onSave: (data: { email: string; display_name: string }) => void;
   isLoading: boolean;
   error: string | null;
+  t: any;
 }) {
   const [form, setForm] = useState({ email: '', display_name: '' });
   return (
@@ -112,7 +116,7 @@ function AddAdminModal({
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Email *</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">{t('institutions.modal.email')}</label>
             <input
               type="email"
               value={form.email}
@@ -129,7 +133,7 @@ function AddAdminModal({
           </p>
         </div>
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">Cancel</button>
+          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">{t('institutions.modal.cancel')}</button>
           <button
             onClick={() => { if (form.email && form.display_name) onSave(form); }}
             disabled={!form.email || !form.display_name || isLoading}
@@ -147,6 +151,7 @@ function AddAdminModal({
 
 export default function InstitutionsPage() {
   const queryClient = useQueryClient();
+  const { t } = useTranslation('dashboard');
   const [showModal, setShowModal] = useState(false);
   const [adminTarget, setAdminTarget] = useState<Institution | null>(null);
   const [adminError, setAdminError] = useState<string | null>(null);
@@ -211,14 +216,14 @@ export default function InstitutionsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-2xl text-dark">Institutions</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Manage and approve partner institutions</p>
+          <h1 className="font-serif text-2xl text-dark">{t('institutions.title')}</h1>
+          <p className="text-sm text-gray-500 mt-0.5">{t('institutions.subtitle')}</p>
         </div>
         <button
           onClick={() => setShowModal(true)}
           className="rounded-xl bg-teal-500 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors"
         >
-          + Add Institution
+          + {t('institutions.addInstitution')}
         </button>
       </div>
 
@@ -230,15 +235,15 @@ export default function InstitutionsPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50 text-left">
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Name</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Type</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Actions</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.institution')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.services')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.status')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.actions')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
               {institutions.length === 0 ? (
-                <tr><td colSpan={4} className="px-4 py-10 text-center text-sm text-gray-400">No institutions yet</td></tr>
+                <tr><td colSpan={4} className="px-4 py-10 text-center text-sm text-gray-400">{t('institutions.empty')}</td></tr>
               ) : institutions.map((inst) => (
                 <tr key={inst.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3">
@@ -253,7 +258,7 @@ export default function InstitutionsPage() {
                   <td className="px-4 py-3">
                     {inst.is_active ? (
                       <span className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" /> Active
+                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" /> {t('shared.status.active')}
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
@@ -294,6 +299,7 @@ export default function InstitutionsPage() {
         <InstitutionModal
           onClose={() => setShowModal(false)}
           onSave={(data) => createMutation.mutate(data)}
+          t={t}
         />
       )}
 
@@ -307,6 +313,7 @@ export default function InstitutionsPage() {
           }
           isLoading={addAdminMutation.isPending}
           error={adminError}
+          t={t}
         />
       )}
     </div>

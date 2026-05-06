@@ -1,0 +1,37 @@
+{
+  "sidebar": {
+    "heading": "Wadahadalada",
+    "newBtn": "+ Cusub",
+    "empty": "Wali wax wadahadal ah ma jiro. Weydii su'aashaada koowaad!",
+    "untitled": "Cinwaan la'aan"
+  },
+  "topBar": {
+    "title": "Hagaha Sharciga AI",
+    "subtitle": "Waxaa taageeraya dukumentiyada sharciga ee Itoobiya",
+    "deleteChat": "Tirtir wadahadalka"
+  },
+  "disclaimer": "⚠️ AI-gani waxa uu bixiyaa macluumaad sharci oo kaliya, ma aha talo sharci. Tallaabo sharci oo gaar ah, mar walba la tasho qareen aqoon leh.",
+  "welcome": {
+    "title": "Hagahaaga Sharciga AI",
+    "subtitle": "I weydii wax kasta oo ku saabsan xuquuqdaada sharciga ah, amarrada ilaalinta, furiinka, xanaanada, iyo in ka badan sharciga Itoobiya."
+  },
+  "starters": {
+    "protection": "Waa maxay amarka ilaalintu?",
+    "divorce": "Sideen furiin uga heli karaa Itoobiya?",
+    "custody": "Waa maxay xuquuqdayda xanaanada?",
+    "anonymous": "Ma soo sheegi karaa xadgudub anigoo qarsoon?"
+  },
+  "sources": {
+    "hide": "Qari",
+    "view": "Eeg",
+    "count_one": "{{count}} xigasho sharci",
+    "count_other": "{{count}} xigashooyin sharci",
+    "article": "Qodobka"
+  },
+  "thinking": "Falanqaynta khayraadka sharciga...",
+  "input": {
+    "placeholder": "Weydii xuquuqdaada sharciga ah...",
+    "hint": "Gali si aad u dirto · Shift+Gali xariiq cusub"
+  },
+  "error": "Cillad ayaa dhacday. Fadlan mar kale isku day."
+}

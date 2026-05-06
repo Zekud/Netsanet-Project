@@ -1,0 +1,40 @@
+{
+  "backLink": "← My cases",
+  "notFound": { "message": "Case not found", "back": "← Back to my cases" },
+  "timeline": {
+    "heading": "Case Progress",
+    "steps": { "new": "Received", "under_review": "Under Review", "active": "In Progress", "resolved": "Resolved" },
+    "referred": "ℹ️ Your case has been referred to a specialist team who can better support your needs.",
+    "closed": "This case is now closed. If you need further help, you can submit a new report."
+  },
+  "aiSummary": { "heading": "What our system noted" },
+  "incidents": { "heading": "What you reported" },
+  "messaging": {
+    "heading": "Message your case manager",
+    "panelTitle": "Message your case manager",
+    "noWorker": {
+      "title": "No case manager assigned yet",
+      "body": "Once a case manager is assigned to your case, you'll be able to message them directly here."
+    },
+    "empty": "No messages yet. Send a message to your case manager.",
+    "placeholder": "Type a message…",
+    "send": "Send"
+  },
+  "activities": {
+    "heading": "Case Updates",
+    "case_created": "Your report was received and secured.",
+    "status_change": "Your case status was updated.",
+    "assigned": "A case manager was assigned to your case.",
+    "referral_sent": "Your case was referred to a specialist team.",
+    "referral_accepted": "A new support team accepted your case.",
+    "referral_rejected": "The referral was updated — your original team continues.",
+    "evidence_added": "Evidence was added to your case.",
+    "evidence_removed": "An evidence file was removed.",
+    "note": "A note was added by your case team.",
+    "default": "Your case was updated."
+  },
+  "evidence": {
+    "title": "Evidence Locker",
+    "body": "Upload photos, videos, documents, or audio recordings"
+  }
+}

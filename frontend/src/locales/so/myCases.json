@@ -1,0 +1,16 @@
+{
+  "heading": "Kiisaskayga",
+  "newReport": "+ Warbixin Cusub",
+  "error": "Waa lagu guuldareystay in la soo raro kiisaskaaga. Fadlan dib u cusbooneysii bogga.",
+  "empty": {
+    "title": "Wali wax kiis ah ma jiro",
+    "body": "Kiisaska aad soo sheegto ayaa halkan ka muuqan doona si aad ula socoto horumarkooda.",
+    "cta": "Soo sheeg kiiskaaga koowaad"
+  },
+  "urgency": { "critical": "XASAASI" },
+  "dates": {
+    "today": "Maanta",
+    "yesterday": "Shalay",
+    "daysAgo": "{{count}} maalmood ka hor"
+  }
+}

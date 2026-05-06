@@ -1,0 +1,32 @@
+{
+  "heading": "Khaanadda Caddaynta",
+  "subtitle": "Dhammaan faylalka waa la sirteeyay oo si ammaan ah ayaa loo kaydiyay. Adiga iyo maareeyaha kiiskaaga ayaa kaliya geli kara.",
+  "backLink": "← Ku noqo kiiska",
+  "dropzone": {
+    "idle": "Halkan soo jiid faylalka, ama guji si aad u baadho",
+    "over": "Ku rid faylalka halkan",
+    "hint": "Sawiro, fiidyowyo, maqal, PDF · Ugu badnaan 50 MB midkiiba"
+  },
+  "queue": {
+    "ready_one": "{{count}} fayl oo diyaar u ah gelinta",
+    "ready_other": "{{count}} faylal oo diyaar u ah gelinta",
+    "uploadBtn_one": "Geli {{count}} fayl",
+    "uploadBtn_other": "Geli {{count}} faylal",
+    "uploading": "Gelinta...",
+    "error": "Gelinta ayaa fashilantay. Fadlan mar kale isku day."
+  },
+  "empty": {
+    "title": "Caddayn wali lama gelin",
+    "body": "Ku dar sawirro, fiidiyowyo, maqal, ama dukumentiyo si aad u taageerto kiiskaaga."
+  },
+  "files": { "view": "Eeg", "delete": "Tirtir" },
+  "deleteModal": {
+    "title": "Tirtir faylkan?",
+    "body": "Falkani dib looma celin karo. Faylka ayaa si joogto ah looga saari doonaa kiiskaaga.",
+    "cancel": "Jooji",
+    "confirm": "Tirtir",
+    "deleting": "Tirtiridda..."
+  },
+  "viewer": { "download": "Soo deji", "close": "Xir ✕" },
+  "retrieveError": "Lama heli karo faylka. Fadlan mar kale isku day."
+}

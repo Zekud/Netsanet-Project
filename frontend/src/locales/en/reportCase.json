@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Tell us what happened",
+    "subtitle": "Share as much or as little as you're comfortable with. Everything you write here is confidential."
+  },
+  "confirmation": {
+    "title": "Your report has been received",
+    "body": "A case manager will review your report and reach out to help. You can track the status of your case at any time.",
+    "caseNumberLabel": "Your Case Number",
+    "aiNoted": "What we noted",
+    "goHome": "Go to Home",
+    "viewCases": "View My Cases"
+  },
+  "loading": {
+    "title": "We're reviewing your case securely...",
+    "subtitle": "This takes just a moment. Your information is encrypted and private."
+  },
+  "form": {
+    "anonymous": {
+      "label": "Stay anonymous",
+      "on": "Your identity will be hidden from case workers reviewing your report.",
+      "off": "Your name may be visible to the case worker assigned to help you."
+    },
+    "title": {
+      "label": "Brief title for your case",
+      "placeholder": "e.g. I need legal protection from my partner",
+      "required": "A brief title helps us understand your situation",
+      "minLength": "Title must be at least 3 characters",
+      "maxLength": "Title must be under 200 characters"
+    },
+    "description": {
+      "label": "What happened?",
+      "placeholder": "Describe what happened in your own words. Take your time — there's no rush and no word limit.",
+      "required": "Please describe your situation so we can help",
+      "minLength": "Please provide at least a few sentences"
+    },
+    "category": {
+      "heading": "What kind of help do you need most?",
+      "hint": "This is optional — our team will assess your needs regardless.",
+      "legal": "Legal Help",
+      "medical": "Medical Support",
+      "shelter": "A Safe Place to Stay",
+      "counseling": "Someone to Talk To",
+      "other": "Not Sure"
+    },
+    "date": { "label": "When did this happen?", "optional": "(optional)" },
+    "location": {
+      "label": "Where did this happen?",
+      "placeholder": "e.g. Addis Ababa, Bole",
+      "optional": "(optional)"
+    },
+    "error": "Something went wrong while submitting your report. Please try again.",
+    "submit": "Send My Report Securely",
+    "reassurance": {
+      "named": "Your report is encrypted end-to-end. Only assigned case workers will see your information.",
+      "anon": "Your report is encrypted end-to-end. Only assigned case workers will see your information, and your identity will remain hidden."
+    }
+  }
+}

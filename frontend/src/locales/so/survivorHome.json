@@ -1,0 +1,48 @@
+{
+  "greeting": {
+    "withName": "Waxaad ku sugan tahay meel ammaan ah, {{name}}.",
+    "noName": "Waxaad ku sugan tahay meel ammaan ah.",
+    "subtitle": "Wax walba halkan waa gaar iyo sir. Waqtigaaga qaado."
+  },
+  "actions": {
+    "report": {
+      "title": "Soo Sheeg Dhacdo",
+      "description": "Noo sheeg waxa dhacay si ammaan ah oo sir ah. Kooxdeena ayaa halkan u joogta inay ku caawiyaan.",
+      "cta": "Bilow →"
+    },
+    "chat": {
+      "title": "La Hadal Hagaha Sharciga AI",
+      "description": "Weydii su'aalo ku saabsan xuquuqdaada, amarrada ilaalinta, iyo tillaabooyinka sharciga ah ee aad heli karto.",
+      "cta": "Fur →"
+    }
+  },
+  "cases": {
+    "heading": "Kiisaskaaga",
+    "seeAll": "Eeg dhammaan →",
+    "loading": "Soo raraya kiisaskaaga...",
+    "empty": {
+      "icon": "📋",
+      "message": "Wali wax kiisas ah ma aadan soo gudbin.",
+      "cta": "Soo sheeg kiiskaaga koowaad →"
+    }
+  },
+  "resources": {
+    "heading": "Khayraadka",
+    "legalRights": {
+      "title": "Xuquuqdaada Sharciga",
+      "body": "Baro xuquuqdaada sharciga Itoobiya — amarrada ilaalinta, furiinka, xanaanada, iyo in ka badan."
+    },
+    "emergency": {
+      "title": "Xiriirada Degdega ah",
+      "body": "Booliiska: 911 · MoWSA Khadka tooska ah: 8335 · Khadka Degdega GBV: 0800 720 060 (bilaash)"
+    },
+    "localSupport": {
+      "title": "Xarumaha Taageerada Maxalliga",
+      "body": "Wasaaradda Haweenka & Arrimaha Bulshada — Addis Ababa: +251 11 155 0077. Furan Isniin–Jimce 8 subaxnimo–5 galabnimo."
+    },
+    "ewla": {
+      "title": "Gargaarka Sharciga EWLA",
+      "body": "Ururka Qareenada Haweenka Itoobiya waxay bixiyaan matalaad sharci oo bilaash ah. Xiriir: +251 11 551 7790."
+    }
+  }
+}

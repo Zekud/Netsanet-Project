@@ -1,0 +1,37 @@
+{
+  "sidebar": {
+    "heading": "Walalo",
+    "newBtn": "+ Cusuba",
+    "empty": "Walal maay. Essero ixxa!",
+    "untitled": "Magaaq maleh"
+  },
+  "topBar": {
+    "title": "AI Qaanuunuk Cadda",
+    "subtitle": "Qaanuun Xoggaagak Ethiopia luk yabta",
+    "deleteChat": "Walal meceh"
+  },
+  "disclaimer": "⚠️ Tahak AI Qaanuun yab maca. Madqa takko abtaah abaanam. Kullim qareenluk geyta.",
+  "welcome": {
+    "title": "AI Qaanuunuk Cadda",
+    "subtitle": "Maxco iyyi qaanuun akkaluk, buxah amru, furriy, yab abtina."
+  },
+  "starters": {
+    "protection": "Amri yab maca?",
+    "divorce": "Ethiopial furriy maxco akko?",
+    "custody": "Xanaan akkaluk maxco ixxaa?",
+    "anonymous": "Yab ixxaa qarsoon am?"
+  },
+  "sources": {
+    "hide": "Qaar",
+    "view": "Wagita",
+    "count_one": "{{count}} xoggaaga",
+    "count_other": "{{count}} xoggaaga",
+    "article": "Yab"
+  },
+  "thinking": "Qaanuun walal...",
+  "input": {
+    "placeholder": "Qaanuun akkaluk esserooy...",
+    "hint": "Ecen rubtuh · Shift+Ecen cusuba"
+  },
+  "error": "Macaaba yekke. Culul."
+}

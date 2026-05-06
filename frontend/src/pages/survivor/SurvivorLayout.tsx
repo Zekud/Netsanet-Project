@@ -1,14 +1,17 @@
 // SurvivorLayout — shell layout for all survivor-facing pages.
-// Includes the QuickExitButton and a calm, safe navigation.
+// Includes the QuickExitButton, a calm navigation, and the LanguageSwitcher.
 
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import QuickExitButton from '../../components/ui/QuickExitButton';
 import NotificationBell from '../../components/ui/NotificationBell';
+import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
 
 export default function SurvivorLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation('survivorLayout');
 
   const handleLogout = async () => {
     await logout();
@@ -16,10 +19,10 @@ export default function SurvivorLayout() {
   };
 
   const navItems = [
-    { to: '/safe-space/home', label: 'Home' },
-    { to: '/safe-space/report', label: 'Report' },
-    { to: '/safe-space/cases', label: 'My Cases' },
-    { to: '/safe-space/chat', label: 'Legal Guide' },
+    { to: '/safe-space/home',   label: t('nav.home') },
+    { to: '/safe-space/report', label: t('nav.report') },
+    { to: '/safe-space/cases',  label: t('nav.myCases') },
+    { to: '/safe-space/chat',   label: t('nav.legalGuide') },
   ];
 
   return (
@@ -47,13 +50,14 @@ export default function SurvivorLayout() {
               </NavLink>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
+            <LanguageSwitcher />
             {user?.id && <NotificationBell userId={user.id} userRole={user.role} />}
             <button
               onClick={handleLogout}
               className="rounded-lg px-3 py-1.5 text-sm text-gray-500 transition-colors duration-150 hover:bg-gray-100 hover:text-dark"
             >
-              Sign Out
+              {t('signOut')}
             </button>
           </div>
         </div>
@@ -85,9 +89,7 @@ export default function SurvivorLayout() {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 bg-white px-4 py-4 text-center">
-        <p className="text-xs text-gray-500">
-          Your privacy is protected. All data is encrypted and confidential.
-        </p>
+        <p className="text-xs text-gray-500">{t('footer')}</p>
       </footer>
     </div>
   );

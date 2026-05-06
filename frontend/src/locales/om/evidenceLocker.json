@@ -1,0 +1,32 @@
+{
+  "heading": "Kuusaa Ragaa",
+  "subtitle": "Faayiloonni hundi iccitiidhan eegamanii kuufamaniiru. Ati fi to'ataa dhimmaa kee qofa argachuu dandeessu.",
+  "backLink": "← Dhimmaatti deebi'i",
+  "dropzone": {
+    "idle": "Faayiloota asitti harkisi, ykn cuqaasi barbaaduu",
+    "over": "Faayiloota asitti buusi",
+    "hint": "Fakkii, viidiyoo, sagalee, PDF · Tokko tokkoon hamma 50 MB"
+  },
+  "queue": {
+    "ready_one": "Faayilii {{count}} fe'uuf qophaa'e",
+    "ready_other": "Faayiloonni {{count}} fe'uuf qophaa'an",
+    "uploadBtn_one": "Faayilii {{count}} fe'i",
+    "uploadBtn_other": "Faayiloota {{count}} fe'i",
+    "uploading": "Fe'amaa jira...",
+    "error": "Fe'uun kufaa ta'e. Maaloo irra deebi'ii yaali."
+  },
+  "empty": {
+    "title": "Ammaaf ragaan fe'ame hin jiru",
+    "body": "Fakkii, viidiyoo, sagalee, ykn sanadoota dhimma keef gargaaran dabalaa."
+  },
+  "files": { "view": "Ilaali", "delete": "Haqi" },
+  "deleteModal": {
+    "title": "Faayilii kana haqi?",
+    "body": "Tarkaanfiin kun deebi'uu hin danda'u. Faayiliin dhaabbataan dhimma kee irraa ni haqu.",
+    "cancel": "Dhiisi",
+    "confirm": "Haqi",
+    "deleting": "Haqamaa jira..."
+  },
+  "viewer": { "download": "Buusi", "close": "Cufi ✕" },
+  "retrieveError": "Faayilii argachuu hin dandeenye. Maaloo irra deebi'ii yaali."
+}

@@ -1,0 +1,293 @@
+{
+  "directory": {
+    "title": "ጉዳያት",
+    "subtitle": "{{total}} ጠቕላላ ጉዳያት",
+    "searchPlaceholder": "ብኣርእስቲ ወይ መግለጺ ድለ...",
+    "filterStatus": "ኩነታት:",
+    "filterUrgency": "ህጹጽነት:",
+    "loading": "ጉዳያት ይጽዕን ኣሎ...",
+    "error": "ጉዳያት ምጽዓን ኣይተኻእለን። በጃኹም እንደገና ፈትኑ።",
+    "emptyTitle": "ጉዳይ ኣይተረኽበን",
+    "emptyFiltered": "ናይ ምድላይ ቃላት ወይ መጻረዪ ቀይርዎ።",
+    "emptyNew": "ሓደሽቲ ጉዳያት ኣብዚ ክረኣዩ እዮም።",
+    "table": {
+      "caseNum": "ጉዳይ #",
+      "urgency": "ህጹጽነት",
+      "category": "ዓይነት",
+      "status": "ኩነታት",
+      "title": "ኣርእስቲ",
+      "submitted": "ዝቐረበሉ ዕለት"
+    },
+    "anonymous": "ስም ዘይብሉ",
+    "pagination": {
+      "info": "ገጽ {{page}} ካብ {{totalPages}}",
+      "prev": "ቅድሚት",
+      "next": "ድሕሪት"
+    }
+  },
+  "assessment": {
+    "breadcrumb": "ጉዳያት",
+    "back": "← ተመለስ",
+    "submittedOn": "ኣብ {{date}} ዝቐረበ",
+    "anonymous": {
+      "title": "ስም ዘይብሉ ግዳይ",
+      "desc": "ብሕቶ እቲ ግዳይ መንነት ተሓቢኡ ኣሎ"
+    },
+    "survivorId": "መፍለዪ ግዳይ:",
+    "aiSummary": {
+      "title": "AI ናይ ምፍላይ ጽማቕ",
+      "reasoning": "AI ምኽንያት"
+    },
+    "incident": {
+      "title": "ዝርዝር ኣጋጣሚ",
+      "date": "ዕለት ኣጋጣሚ",
+      "location": "ቦታ"
+    },
+    "evidence": {
+      "title": "ፋይላት መረጋገጺ",
+      "empty": "ዛጊት ብእቲ ግዳይ ዝተሰቕለ መረጋገጺ የለን።",
+      "view": "ርአ"
+    },
+    "activity": {
+      "title": "ናይ ንጥፈት መዝገብ",
+      "loading": "ንጥፈታት ይጽዕን ኣሎ...",
+      "empty": "ዛጊት ንጥፈት የለን።"
+    },
+    "messages": "መልእኽትታት",
+    "updateStatus": {
+      "title": "ኩነታት ኣሓድስ",
+      "placeholder": "ሓድሽ ኩነታት ምረጽ...",
+      "button": "ኩነታት ኣሓድስ",
+      "error": "ኩነታት ምሕዳስ ኣይተኻእለን።"
+    },
+    "assignWorker": {
+      "title": "ኣካያዲ ጉዳይ መዝዝ",
+      "currentlyAssigned": "ኣብዚ ሕጂ እዋን ዝተመዘዘ:",
+      "placeholder": "ሰራሕተኛ ምረጽ...",
+      "button": "ሰራሕተኛ መዝዝ",
+      "error": "ሰራሕተኛ ምምዛዝ ኣይተኻእለን።"
+    },
+    "referCase": {
+      "title": "ጉዳይ ኣመሓላልፍ",
+      "desc": "ነዚ ጉዳይ ናብ ካልእ ትካል ንፍሉይ ሓገዝ ኣመሓላልፍ።",
+      "button": "🔀 ናብ ትካል ኣመሓላልፍ"
+    },
+    "addNote": {
+      "title": "መወከሲ ወስኽ",
+      "placeholder": "ብዛዕባ እዚ ጉዳይ መወከሲ ጸሓፍ...",
+      "button": "መወከሲ ወስኽ"
+    },
+    "quickInfo": {
+      "caseId": "መፍለዪ ጉዳይ",
+      "created": "ዝተፈጥረሉ",
+      "updated": "ዝተሓደሰሉ",
+      "anonymous": "ስም ዘይብሉ",
+      "yes": "እወ",
+      "no": "ኣይፋል"
+    },
+    "notFound": {
+      "title": "ጉዳይ ኣይተረኽበን",
+      "desc": "እዚ ጉዳይ ተኣልዩ ወይ ድማ ናይ ምርኣይ መሰል የብልኩምን።",
+      "back": "ናብ ጉዳያት ተመለስ"
+    }
+  },
+  "analytics": {
+    "title": "ትንታነታት",
+    "subtitle": "ኣፈጻጽማ ምሕደራ ጉዳይ",
+    "kpi": {
+      "totalCases": "ጠቕላላ ጉዳያት",
+      "openCases": "ክፉት ጉዳያት",
+      "criticalCases": "ህጹጽ ጉዳያት",
+      "needsAttention": "ቆላሕታ የድልዮ",
+      "avgResolution": "ገምጋም ፍታሕ",
+      "resolvedCases": "ዝተፈትሑ ጉዳያት"
+    },
+    "charts": {
+      "byStatus": "ጉዳያት ብኩነታት",
+      "byCategory": "ጉዳያት ብዓይነት",
+      "overTime": "ጉዳያት ብግዜ",
+      "noData": "ዛጊት ዳታ የለን",
+      "tooltipCases": "{{value}} ጉዳያት",
+      "tooltipDate": "ዕለት: {{label}}"
+    },
+    "periods": {
+      "7d": "7 መዓልታት",
+      "30d": "30 መዓልታት",
+      "90d": "90 መዓልታት"
+    }
+  },
+  "shared": {
+    "status": {
+      "all": "ኩሉ",
+      "new": "ሓድሽ",
+      "under_review": "ኣብ ምግምጋም",
+      "referred": "ዝተመሓላለፈ",
+      "active": "ንጡፍ",
+      "resolved": "ዝተፈትሐ",
+      "closed": "ዝተዓጽወ"
+    },
+    "urgency": {
+      "all": "ኩሉ",
+      "critical": "ኣዝዩ ህጹጽ",
+      "high": "ልዑል",
+      "medium": "ማእከላይ",
+      "low": "ትሑት"
+    },
+    "category": {
+      "legal": "ሕጋዊ",
+      "medical": "ሕክምናዊ",
+      "shelter": "መዕቆቢ",
+      "counseling": "ምኽሪ",
+      "other": "ካልእ"
+    }
+  },
+  "layout": {
+    "nav": {
+      "overview": "ሓፈሻዊ ትሕዝቶ",
+      "cases": "ጉዳያት",
+      "referrals": "መወከሲታት",
+      "notifications": "መፍለጢታት",
+      "staff": "ሰራሕተኛታት",
+      "analytics": "ትንታነታት",
+      "institutions": "ትካላት"
+    },
+    "badge": "ሰራሕተኛ",
+    "fallbackName": "ኣባል ሰራሕተኛ",
+    "signOut": "ውጻእ"
+  },
+  "home": {
+    "greeting": {
+      "morning": "ደሓንዶ ሓዲርኩም",
+      "afternoon": "ደሓንዶ ውዒልኩም",
+      "evening": "ደሓንዶ ኣምሲኹም"
+    },
+    "title": "ሓፈሻዊ ትሕዝቶ",
+    "subtitle": "ሎሚ ዘሎ ሓበሬታ እዚ ይመስል።",
+    "kpi": {
+      "needsAttention": "ቆላሕታ የድልዮ",
+      "assignedToMe": "ንዓይ ዝተመዘዘ",
+      "openCases": "ክፉት ጉዳያት",
+      "resolved": "ዝተፈትሐ"
+    },
+    "recentCases": {
+      "title": "ቀረባ እዋን ጉዳያት",
+      "emptyTitle": "ቀረባ እዋን ጉዳያት ኣይተረኽበን።",
+      "emptyDesc": "ሓደሽቲ ዝቐረቡ ኣብዚ ክረኣዩ እዮም።"
+    }
+  },
+  "notifications": {
+    "title": "መፍለጢታት",
+    "subtitle": "ብዛዕባ ዝተመዘዘልኩም ጉዳያትን ዝተጠቕሰኩምን ሓበሬታ።",
+    "markAllRead": "ኩሉ ከምዝተነበበ ግበር",
+    "loading": "መፍለጢታት ይጽዕን ኣሎ...",
+    "emptyTitle": "ዛጊት መፍለጢ የለን።",
+    "emptyDesc": "ኩሉ ተኸታቲልኩም ኣለኹም!"
+  },
+  "staff": {
+    "title": "ስም ዝርዝር ሰራሕተኛታት",
+    "subtitle": "ተጠቀምቲ ትካልኩም ኣመሓድሩ",
+    "addStaff": "ሰራሕተኛ ወስኽ",
+    "roles": {
+      "case_worker": "ኣካያዲ ጉዳይ",
+      "institution_admin": "ኣማሓዳሪ ትካል",
+      "system_admin": "ኣማሓዳሪ ስርዓት"
+    },
+    "modal": {
+      "title": "ኣባል ሰራሕተኛ ወስኽ",
+      "desc": "ናብ ኢሜይሎም ወይ ስልኮም ናይ መእተዊ ሊንክ ክስደደሎም እዩ።",
+      "fullName": "ምሉእ ስም *",
+      "email": "ኢሜይል",
+      "phone": "ስልኪ",
+      "role": "ተራ",
+      "cancel": "ሰርዝ",
+      "submit": "ዕድመ ስደድ"
+    },
+    "searchPlaceholder": "ሰራሕተኛ ድለ...",
+    "table": {
+      "name": "ስም",
+      "role": "ተራ",
+      "cases": "ጉዳያት",
+      "status": "ኩነታት",
+      "joined": "ዝተጸምበረሉ",
+      "actions": "ስጉምትታት"
+    },
+    "status": {
+      "active": "ንጡፍ",
+      "suspended": "ግዝያዊ ደው ዝበለ"
+    },
+    "actions": {
+      "suspend": "ግዝያዊ ደው ኣቢልካ",
+      "activate": "ኣንጥፍ"
+    },
+    "loading": "ሰራሕተኛታት ይጽዕን ኣሎ...",
+    "empty": "ሰራሕተኛ ኣይተረኽበን።"
+  },
+  "referrals": {
+    "title": "መወከሲታት",
+    "subtitle": "ኣብ መንጎ ትካላት ዝተመሓላለፉ ጉዳያት።",
+    "tabs": {
+      "incoming": "ኣትዩ",
+      "outgoing": "ወጺኡ"
+    },
+    "searchPlaceholder": "ብጉዳይ # ወይ ትካል ድለ...",
+    "filterStatus": "ኩሉ ኩነታት",
+    "status": {
+      "pending": "ዝጽበ",
+      "accepted": "ተቐቢሉ",
+      "rejected": "ተነጺጉ"
+    },
+    "table": {
+      "caseNum": "ጉዳይ #",
+      "institution": "ትካል",
+      "priority": "ቀዳምነት",
+      "status": "ኩነታት",
+      "date": "ዕለት",
+      "action": "ስጉምቲ"
+    },
+    "direction": {
+      "from": "ካብ:",
+      "to": "ናብ:"
+    },
+    "actions": {
+      "review": "ገምግም",
+      "view": "ርአ"
+    },
+    "loading": "መወከሲታት ይጽዕን ኣሎ...",
+    "error": "መወከሲታት ምጽዓን ኣይተኻእለን።",
+    "emptyTitle": "መወከሲ ኣይተረኽበን",
+    "emptyIncoming": "ኣብዚ እዋን ናብኩም ዝመጸ መወከሲ የለን።",
+    "emptyOutgoing": "ዝኾነ መወከሲ ኣይሰደድኩምን።"
+  },
+  "institutions": {
+    "title": "ትካላት",
+    "subtitle": "ተሳተፍቲ ትካላትን መሰሎምን ኣመሓድሩ።",
+    "addInstitution": "ትካል ወስኽ",
+    "searchPlaceholder": "ትካላት ድለ...",
+    "filterType": "ኩሉ ዓይነታት",
+    "modal": {
+      "title": "ትካል መዝግብ",
+      "desc": "ሓድሽ ዝሳተፍ ውድብ ወስኽ።",
+      "name": "ስም ትካል *",
+      "namePlaceholder": "ንኣብነት፣ Safe Haven ኣዲስ",
+      "email": "ኢሜይል *",
+      "phone": "ስልኪ",
+      "city": "ከተማ",
+      "services": "ዓይነት ኣገልግሎት",
+      "cancel": "ሰርዝ",
+      "submit": "መዝግብ"
+    },
+    "table": {
+      "institution": "ትካል",
+      "location": "ቦታ",
+      "services": "ኣገልግሎታት",
+      "staff": "ሰራሕተኛ",
+      "status": "ኩነታት",
+      "actions": "ስጉምትታት"
+    },
+    "actions": {
+      "edit": "ኣርም"
+    },
+    "loading": "ትካላት ይጽዕን ኣሎ...",
+    "empty": "ትካላት ኣይተረኽበን"
+  }
+}

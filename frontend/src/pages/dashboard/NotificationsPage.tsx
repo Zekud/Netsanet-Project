@@ -2,6 +2,7 @@
 // Route: /dashboard/notifications
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import api from '../../lib/api';
 
 interface Notification {
@@ -36,6 +37,7 @@ const TYPE_COLORS: Record<string, string> = {
 
 export default function NotificationsPage() {
   const queryClient = useQueryClient();
+  const { t } = useTranslation('dashboard');
 
   const { data, isLoading } = useQuery<{ data: Notification[]; unread_count: number }>({
     queryKey: ['notifications'],
@@ -60,9 +62,9 @@ export default function NotificationsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-2xl text-dark">Notifications</h1>
+          <h1 className="font-serif text-2xl text-dark">{t('notifications.title')}</h1>
           <p className="text-sm text-gray-500 mt-0.5">
-            {unread > 0 ? `${unread} unread` : 'All caught up'}
+            {unread > 0 ? `${unread} unread` : t('notifications.emptyDesc')}
           </p>
         </div>
         {unread > 0 && (
@@ -71,7 +73,7 @@ export default function NotificationsPage() {
             disabled={markAllMutation.isPending}
             className="rounded-xl border border-teal-200 px-4 py-2 text-sm font-medium text-teal-600 hover:bg-teal-50 transition-colors disabled:opacity-50"
           >
-            Mark all read
+            {t('notifications.markAllRead')}
           </button>
         )}
       </div>
@@ -84,8 +86,8 @@ export default function NotificationsPage() {
       ) : notifications.length === 0 ? (
         <div className="rounded-2xl border border-gray-100 bg-white p-10 text-center shadow-sm">
           <p className="text-4xl mb-3">🔔</p>
-          <p className="font-medium text-dark mb-1">No notifications yet</p>
-          <p className="text-sm text-gray-500">Updates on your cases and referrals will appear here.</p>
+          <p className="font-medium text-dark mb-1">{t('notifications.emptyTitle')}</p>
+          <p className="text-sm text-gray-500">{t('notifications.subtitle')}</p>
         </div>
       ) : (
         <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden divide-y divide-gray-50">
