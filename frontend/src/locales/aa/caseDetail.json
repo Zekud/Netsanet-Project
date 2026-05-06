@@ -1,0 +1,40 @@
+{
+  "backLink": "← Taamooma",
+  "notFound": { "message": "Taama mali", "back": "← Taamooma gex" },
+  "timeline": {
+    "heading": "Taama",
+    "steps": { "new": "Yable", "under_review": "Wagita", "active": "Taama", "resolved": "Meqe" },
+    "referred": "ℹ️ Taama gex.",
+    "closed": "Taama meceh."
+  },
+  "aiSummary": { "heading": "Yab yable" },
+  "incidents": { "heading": "Warisa" },
+  "messaging": {
+    "heading": "Gaba cadda yabta",
+    "panelTitle": "Gaba cadda yabta",
+    "noWorker": {
+      "title": "Gaba cadda mali",
+      "body": "Gaba cadda yable, halkan yabta."
+    },
+    "empty": "Walal mali.",
+    "placeholder": "Yab...",
+    "send": "Rubta"
+  },
+  "activities": {
+    "heading": "Taamooma",
+    "case_created": "Warisa yable.",
+    "status_change": "Taama meceh.",
+    "assigned": "Gaba cadda yable.",
+    "referral_sent": "Taama gex.",
+    "referral_accepted": "Taama yable.",
+    "referral_rejected": "Taama meceh.",
+    "evidence_added": "Caddayn haysa.",
+    "evidence_removed": "Caddayn meceh.",
+    "note": "Yab haysa.",
+    "default": "Taama meceh."
+  },
+  "evidence": {
+    "title": "Caddayn",
+    "body": "Sawir, vid, maqla haysa"
+  }
+}

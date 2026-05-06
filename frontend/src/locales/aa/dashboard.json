@@ -1,0 +1,293 @@
+{
+  "directory": {
+    "title": "Taamooma",
+    "subtitle": "{{total}} taamooma",
+    "searchPlaceholder": "Magaaq wagita...",
+    "filterStatus": "Kullim:",
+    "filterUrgency": "Qasir:",
+    "loading": "Taamooma hayta...",
+    "error": "Macaaba yekke. Culul.",
+    "emptyTitle": "Taama mali",
+    "emptyFiltered": "Magaaq wagita.",
+    "emptyNew": "Taamooma cusuba.",
+    "table": {
+      "caseNum": "Taama #",
+      "urgency": "Qasir",
+      "category": "Qeybti",
+      "status": "Kullim",
+      "title": "Magaaq",
+      "submitted": "Yable"
+    },
+    "anonymous": "Magaaq maleh",
+    "pagination": {
+      "info": "Bogga {{page}} - {{totalPages}}",
+      "prev": "Hore",
+      "next": "Xiga"
+    }
+  },
+  "assessment": {
+    "breadcrumb": "Taamooma",
+    "back": "← Gex",
+    "submittedOn": "{{date}} yable",
+    "anonymous": {
+      "title": "Magaaq maleh",
+      "desc": "Magaaq mali"
+    },
+    "survivorId": "Kood:",
+    "aiSummary": {
+      "title": "AI Yab",
+      "reasoning": "AI Yab"
+    },
+    "incident": {
+      "title": "Warisa",
+      "date": "Wakhti",
+      "location": "Arac"
+    },
+    "evidence": {
+      "title": "Caddayn",
+      "empty": "Caddayn mali.",
+      "view": "Wagita"
+    },
+    "activity": {
+      "title": "Taamooma",
+      "loading": "Taamooma hayta...",
+      "empty": "Taama mali."
+    },
+    "messages": "Walal",
+    "updateStatus": {
+      "title": "Meqe",
+      "placeholder": "Meqe...",
+      "button": "Meqe",
+      "error": "Macaaba yekke."
+    },
+    "assignWorker": {
+      "title": "Gaba cadda",
+      "currentlyAssigned": "Yable:",
+      "placeholder": "Gaba cadda...",
+      "button": "Gaba cadda",
+      "error": "Macaaba yekke."
+    },
+    "referCase": {
+      "title": "Taama gex",
+      "desc": "Taama gex.",
+      "button": "🔀 Gex"
+    },
+    "addNote": {
+      "title": "Yab haysa",
+      "placeholder": "Yab...",
+      "button": "Yab"
+    },
+    "quickInfo": {
+      "caseId": "Kood",
+      "created": "Yable",
+      "updated": "Meqe",
+      "anonymous": "Magaaq maleh",
+      "yes": "Ye",
+      "no": "Maay"
+    },
+    "notFound": {
+      "title": "Taama mali",
+      "desc": "Taama mali.",
+      "back": "Gex"
+    }
+  },
+  "analytics": {
+    "title": "Falanqeyn",
+    "subtitle": "Taamooma yable",
+    "kpi": {
+      "totalCases": "Taamooma",
+      "openCases": "Taamooma",
+      "criticalCases": "Qasir",
+      "needsAttention": "Yab",
+      "avgResolution": "Meqe",
+      "resolvedCases": "Meqe"
+    },
+    "charts": {
+      "byStatus": "Taamooma",
+      "byCategory": "Taamooma",
+      "overTime": "Taamooma",
+      "noData": "Maay",
+      "tooltipCases": "{{value}} taamooma",
+      "tooltipDate": "Wakhti: {{label}}"
+    },
+    "periods": {
+      "7d": "7 ayró",
+      "30d": "30 ayró",
+      "90d": "90 ayró"
+    }
+  },
+  "shared": {
+    "status": {
+      "all": "Kullim",
+      "new": "Cusuba",
+      "under_review": "Wagita",
+      "referred": "Gex",
+      "active": "Taama",
+      "resolved": "Meqe",
+      "closed": "Meceh"
+    },
+    "urgency": {
+      "all": "Kullim",
+      "critical": "Qasir",
+      "high": "Sare",
+      "medium": "Dhexe",
+      "low": "Hoose"
+    },
+    "category": {
+      "legal": "Qaanuun",
+      "medical": "Caafimaad",
+      "shelter": "Buxa",
+      "counseling": "Walal",
+      "other": "Kala"
+    }
+  },
+  "layout": {
+    "nav": {
+      "overview": "Guudmar",
+      "cases": "Taamooma",
+      "referrals": "Gex",
+      "notifications": "Yab",
+      "staff": "Gaba cadda",
+      "analytics": "Falanqeyn",
+      "institutions": "Buxa"
+    },
+    "badge": "Gaba",
+    "fallbackName": "Gaba",
+    "signOut": "Gex"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Subax",
+      "afternoon": "Galab",
+      "evening": "Habeen"
+    },
+    "title": "Guudmar",
+    "subtitle": "Kullim meqe.",
+    "kpi": {
+      "needsAttention": "Yab",
+      "assignedToMe": "Yable",
+      "openCases": "Taamooma",
+      "resolved": "Meqe"
+    },
+    "recentCases": {
+      "title": "Taamooma",
+      "emptyTitle": "Taama mali.",
+      "emptyDesc": "Taamooma cusuba."
+    }
+  },
+  "notifications": {
+    "title": "Yab",
+    "subtitle": "Kullim meqe.",
+    "markAllRead": "Kullim",
+    "loading": "Yab hayta...",
+    "emptyTitle": "Yab mali.",
+    "emptyDesc": "Meqe!"
+  },
+  "staff": {
+    "title": "Gaba cadda",
+    "subtitle": "Gaba",
+    "addStaff": "Gaba haysa",
+    "roles": {
+      "case_worker": "Gaba",
+      "institution_admin": "Maamul",
+      "system_admin": "Maamul"
+    },
+    "modal": {
+      "title": "Gaba haysa",
+      "desc": "Kood rubta.",
+      "fullName": "Magaaq *",
+      "email": "Iimayl",
+      "phone": "Telefoon",
+      "role": "Taama",
+      "cancel": "Maay",
+      "submit": "Rubta"
+    },
+    "searchPlaceholder": "Gaba wagita...",
+    "table": {
+      "name": "Magaaq",
+      "role": "Taama",
+      "cases": "Taamooma",
+      "status": "Kullim",
+      "joined": "Yable",
+      "actions": "Taama"
+    },
+    "status": {
+      "active": "Taama",
+      "suspended": "Maay"
+    },
+    "actions": {
+      "suspend": "Maay",
+      "activate": "Taama"
+    },
+    "loading": "Gaba hayta...",
+    "empty": "Gaba mali."
+  },
+  "referrals": {
+    "title": "Gex",
+    "subtitle": "Taamooma gex.",
+    "tabs": {
+      "incoming": "Yable",
+      "outgoing": "Gex"
+    },
+    "searchPlaceholder": "Taama wagita...",
+    "filterStatus": "Kullim",
+    "status": {
+      "pending": "Wagita",
+      "accepted": "Yable",
+      "rejected": "Maay"
+    },
+    "table": {
+      "caseNum": "Taama #",
+      "institution": "Buxa",
+      "priority": "Qasir",
+      "status": "Kullim",
+      "date": "Wakhti",
+      "action": "Taama"
+    },
+    "direction": {
+      "from": "Kala:",
+      "to": "Gex:"
+    },
+    "actions": {
+      "review": "Wagita",
+      "view": "Wagita"
+    },
+    "loading": "Gex hayta...",
+    "error": "Macaaba yekke.",
+    "emptyTitle": "Gex mali",
+    "emptyIncoming": "Gex mali.",
+    "emptyOutgoing": "Gex mali."
+  },
+  "institutions": {
+    "title": "Buxa",
+    "subtitle": "Buxa wagita.",
+    "addInstitution": "Buxa haysa",
+    "searchPlaceholder": "Buxa wagita...",
+    "filterType": "Kullim",
+    "modal": {
+      "title": "Buxa haysa",
+      "desc": "Buxa haysa.",
+      "name": "Magaaq *",
+      "namePlaceholder": "Buxa...",
+      "email": "Iimayl *",
+      "phone": "Telefoon",
+      "city": "Magaala",
+      "services": "Taama",
+      "cancel": "Maay",
+      "submit": "Haysa"
+    },
+    "table": {
+      "institution": "Buxa",
+      "location": "Arac",
+      "services": "Taama",
+      "staff": "Gaba",
+      "status": "Kullim",
+      "actions": "Taama"
+    },
+    "actions": {
+      "edit": "Meqe"
+    },
+    "loading": "Buxa hayta...",
+    "empty": "Buxa mali"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "greeting": {
+    "withName": "Atu meqe aracal tan, {{name}}.",
+    "noName": "Atu meqe aracal tan.",
+    "subtitle": "Kullim dambi kinnih. Wakhti baahta."
+  },
+  "actions": {
+    "report": {
+      "title": "Taama warisa",
+      "description": "Maxca yekke warisa. Gaba cadda taamah.",
+      "cta": "Eregga →"
+    },
+    "chat": {
+      "title": "AI Qaanuunuk Cadda",
+      "description": "Maxco iyyi qaanuun akkaluk, buxah amru, furriy, yab abtina.",
+      "cta": "Fakka →"
+    }
+  },
+  "cases": {
+    "heading": "Taamooma",
+    "seeAll": "Kullim wagita →",
+    "loading": "Taamooma hayta...",
+    "empty": {
+      "icon": "📋",
+      "message": "Taama maay.",
+      "cta": "Taama warisa →"
+    }
+  },
+  "resources": {
+    "heading": "Qadda",
+    "legalRights": {
+      "title": "Qaanuun akkaluk",
+      "body": "Ethiopial qaanuun yabta — buxah amru, furriy, yab."
+    },
+    "emergency": {
+      "title": "Qasir yab",
+      "body": "Police: 911 · MoWSA: 8335 · GBV: 0800 720 060"
+    },
+    "localSupport": {
+      "title": "Magaal qadda",
+      "body": "Wasaaradda Haweenka — Addis Ababa: +251 11 155 0077."
+    },
+    "ewla": {
+      "title": "EWLA Qaanuun",
+      "body": "EWLA taama yable. Xiriir: +251 11 551 7790."
+    }
+  }
+}

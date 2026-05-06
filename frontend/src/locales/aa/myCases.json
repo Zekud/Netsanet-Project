@@ -1,0 +1,16 @@
+{
+  "heading": "Taamooma",
+  "newReport": "+ Taama cusuba",
+  "error": "Taamooma maay. Culul.",
+  "empty": {
+    "title": "Taama maay",
+    "body": "Taamooma halkan yable.",
+    "cta": "Taama warisa"
+  },
+  "urgency": { "critical": "QASIR" },
+  "dates": {
+    "today": "Akkan",
+    "yesterday": "Kalu",
+    "daysAgo": "{{count}} ayró lakal"
+  }
+}

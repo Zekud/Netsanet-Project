@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Maxca yekke warisa",
+    "subtitle": "Kullim dambi kinnih. Wakhti baahta."
+  },
+  "confirmation": {
+    "title": "Warisa yable",
+    "body": "Gaba cadda taamah. Taamooma wagita.",
+    "caseNumberLabel": "Taama Kood",
+    "aiNoted": "Yab yable",
+    "goHome": "Buxa gex",
+    "viewCases": "Taamooma wagita"
+  },
+  "loading": {
+    "title": "Taama wagita...",
+    "subtitle": "Wakhti baahta. Dambi kinnih."
+  },
+  "form": {
+    "anonymous": {
+      "label": "Magaaq maleh",
+      "on": "Magaaq maay.",
+      "off": "Magaaq yable."
+    },
+    "title": {
+      "label": "Magaaq",
+      "placeholder": "Qaanuun farma",
+      "required": "Magaaq farma",
+      "minLength": "Magaaq 3 xaqqab",
+      "maxLength": "Magaaq 200 xaqqab"
+    },
+    "description": {
+      "label": "Maxca yekke?",
+      "placeholder": "Maxca yekke warisa. Wakhti baahta.",
+      "required": "Yab farma",
+      "minLength": "Yab farma"
+    },
+    "category": {
+      "heading": "Maca farma?",
+      "hint": "Kullim meqe.",
+      "legal": "Qaanuun",
+      "medical": "Caafimaad",
+      "shelter": "Buxa",
+      "counseling": "Walal",
+      "other": "Kala"
+    },
+    "date": { "label": "Wakhti?", "optional": "(mali)" },
+    "location": {
+      "label": "Arac?",
+      "placeholder": "Addis Ababa, Bole",
+      "optional": "(mali)"
+    },
+    "error": "Macaaba yekke. Culul.",
+    "submit": "Warisa rubta",
+    "reassurance": {
+      "named": "Kullim dambi kinnih.",
+      "anon": "Kullim dambi kinnih. Magaaq maleh."
+    }
+  }
+}

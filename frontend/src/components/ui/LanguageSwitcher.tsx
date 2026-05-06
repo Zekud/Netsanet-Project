@@ -1,4 +1,4 @@
-// LanguageSwitcher.tsx — Dropdown to select between English, Amharic, Tigrinya, Afaan Oromoo, and Somali.
+// LanguageSwitcher.tsx — Dropdown to select between English, Amharic, Tigrinya, Afaan Oromoo, Somali, and Afar.
 // Uses custom SVG flags to ensure consistent rendering across all OS (Windows fix).
 // Features a premium dropdown UI with smooth transitions and teal branding.
 
@@ -54,6 +54,15 @@ const SomaliFlag = () => (
   </svg>
 );
 
+const AfarFlag = () => (
+  <svg viewBox="0 0 1200 600" className="h-3.5 w-5 shrink-0 rounded-[1px] shadow-sm" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="200" fill="#009A44" />
+    <rect width="1200" height="200" y="200" fill="#FFFFFF" />
+    <rect width="1200" height="200" y="400" fill="#00A3E0" />
+    <polygon points="0,0 600,300 0,600" fill="#D21034" />
+  </svg>
+);
+
 // ─── Main Component ───────────────────────────────────────────
 
 export default function LanguageSwitcher() {
@@ -68,7 +77,8 @@ export default function LanguageSwitcher() {
     { code: 'am', label: 'አማርኛ', flag: <EthiopiaFlag /> },
     { code: 'ti', label: 'ትግርኛ', flag: <TigrayFlag /> },
     { code: 'om', label: 'Afaan Oromoo', flag: <OromiaFlag /> },
-    { code: 'so', label: 'Soomaali', flag: <SomaliFlag /> }
+    { code: 'so', label: 'Soomaali', flag: <SomaliFlag /> },
+    { code: 'aa', label: 'Afar', flag: <AfarFlag /> }
   ];
 
   const handleLanguageChange = (code: string) => {
