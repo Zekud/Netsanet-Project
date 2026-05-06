@@ -1,0 +1,40 @@
+{
+  "backLink": "← Kiisaskayga",
+  "notFound": { "message": "Kiiska lama helin", "back": "← Ku noqo kiisaskayga" },
+  "timeline": {
+    "heading": "Horumarka Kiiska",
+    "steps": { "new": "La helay", "under_review": "Dib loo eegayaa", "active": "Socda", "resolved": "La xaliyay" },
+    "referred": "ℹ️ Kiiskaaga waxaa loo gudbiyay koox takhasus leh si ay kuu taageeraan.",
+    "closed": "Kiiskan hadda waa xiran yahay. Haddii aad u baahan tahay caawimo dheeraad ah, warbixin cusub ayaad soo gudbin kartaa."
+  },
+  "aiSummary": { "heading": "Waxa nidaamkayagu xusay" },
+  "incidents": { "heading": "Waxa aad soo sheegtay" },
+  "messaging": {
+    "heading": "U qor maareeyaha kiiskaaga",
+    "panelTitle": "U qor maareeyaha kiiskaaga",
+    "noWorker": {
+      "title": "Maareeyaha kiiska wali lama qoondeyn",
+      "body": "Marka maareeyaha kiiska la qoondeeyo, halkan ayaad toos ula hadli doontaa."
+    },
+    "empty": "Wali farriimo ma jiraan. U dir farriin maareeyaha kiiskaaga.",
+    "placeholder": "Qor farriin…",
+    "send": "Dir"
+  },
+  "activities": {
+    "heading": "Warbixinada Kiiska",
+    "case_created": "Warbixintaada waa la helay oo la xaqiijiyay.",
+    "status_change": "Heerka kiiskaaga waa la cusbooneysiiyay.",
+    "assigned": "Maareeyaha kiiska ayaa loo qoondeeyay kiiskaaga.",
+    "referral_sent": "Kiiskaaga waxaa loo gudbiyay koox takhasus leh.",
+    "referral_accepted": "Koox cusub ayaa aqbashay kiiskaaga.",
+    "referral_rejected": "Gudbinta waa la cusbooneysiiyay — kooxdaadii hore ayaa sii socota.",
+    "evidence_added": "Caddayn ayaa lagu daray kiiskaaga.",
+    "evidence_removed": "Fayl caddayn ah ayaa laga saaray.",
+    "note": "Xusuusin ayaa lagu daray kooxdaada kiiska.",
+    "default": "Kiiskaaga waa la cusbooneysiiyay."
+  },
+  "evidence": {
+    "title": "Khaanadda Caddaynta",
+    "body": "Soo rar sawiro, fiidyowyo, dukumentiyo, ama maqal"
+  }
+}

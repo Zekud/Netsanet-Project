@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Noo sheeg waxa dhacay",
+    "subtitle": "La wadaag in badan ama in yar oo aad ku qanacsan tahay. Wax kasta oo aad halkan ku qorto waa sir."
+  },
+  "confirmation": {
+    "title": "Warbixintaada waa la helay",
+    "body": "Maareeyaha kiiska ayaa dib u eegi doona warbixintaada wuxuuna kula soo xiriiri doonaa si uu kuu caawiyo. Waxaad la socon kartaa heerka kiiskaaga wakhti kasta.",
+    "caseNumberLabel": "Nambarka Kiiskaaga",
+    "aiNoted": "Waxa aan xusnay",
+    "goHome": "Aad Hoyga",
+    "viewCases": "Eeg Kiisaskayga"
+  },
+  "loading": {
+    "title": "Waxaan u eegaynaa kiiskaaga si ammaan ah...",
+    "subtitle": "Tani waxay qaadanaysaa daqiiqad. Xogtaadu waa sir."
+  },
+  "form": {
+    "anonymous": {
+      "label": "Ahow qof qarsoon",
+      "on": "Aqoonsigaaga ayaa laga qarin doonaa shaqaalaha kiiska ee dib u eegaya warbixintaada.",
+      "off": "Magacaaga ayaa u muuqan kara shaqaalaha kiiska loo qoondeeyay inuu ku caawiyo."
+    },
+    "title": {
+      "label": "Cinwaan kooban ee kiiskaaga",
+      "placeholder": "tusaale. Waxaan uga baahanahay ilaalin sharci lammaanahayga",
+      "required": "Cinwaan kooban ayaa naga caawinaya inaan fahamno xaaladaada",
+      "minLength": "Cinwaanku waa inuu ahaadaa ugu yaraan 3 xaraf",
+      "maxLength": "Cinwaanku waa inuu ahaadaa in ka yar 200 xaraf"
+    },
+    "description": {
+      "label": "Maxaa dhacay?",
+      "placeholder": "Ku qeex waxa dhacay erayadaada. Waqtigaaga qaado — ma jirto degdeg iyo xaddid ereyada.",
+      "required": "Fadlan qeex xaaladdaada si aan kuu caawino",
+      "minLength": "Fadlan bixi ugu yaraan dhowr jumlado"
+    },
+    "category": {
+      "heading": "Cawinaad noocee ah ayaad ugu baahan tahay?",
+      "hint": "Kani waa ikhtiyaari — kooxdeena ayaa qiimeyn doonta baahiyahaaga iyadoo aan loo eegin.",
+      "legal": "Caawinta Sharciga",
+      "medical": "Taageerada Caafimaadka",
+      "shelter": "Meel Ammaan ah oo La Joogo",
+      "counseling": "Qof Aan La Hadlo",
+      "other": "Ma hubo"
+    },
+    "date": { "label": "Goormay tani dhacday?", "optional": "(ikhtiyaari)" },
+    "location": {
+      "label": "Halkee tani ka dhacday?",
+      "placeholder": "tusaale. Addis Ababa, Bole",
+      "optional": "(ikhtiyaari)"
+    },
+    "error": "Cillad ayaa dhacday markii la dirayay warbixintaada. Fadlan mar kale isku day.",
+    "submit": "U Dir Warbixintayda Si Ammaan Ah",
+    "reassurance": {
+      "named": "Warbixintaadu waa la sirteeyay. Kaliya shaqaalaha kiiska ayaa arki doona macluumaadkaaga.",
+      "anon": "Warbixintaadu waa la sirteeyay. Kaliya shaqaalaha kiiska ayaa arki doona macluumaadkaaga, aqoonsigaagana waa la qarin doonaa."
+    }
+  }
+}
