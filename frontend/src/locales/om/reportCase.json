@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "Maal akka ta'e nutti himi",
+    "subtitle": "Miira kee ni beekna. Waan guutummaatti ykn xiqqaan barbaadde qoodi. Asitti barreessitu hundi icciitii dha."
+  },
+  "confirmation": {
+    "title": "Gabaasni kee fuudhatameera",
+    "body": "To'ataan dhimmaa gabaasa kee sakatta'ee gargaaruuf si quunnamuu danda'a. Sadarkaa dhimmaa kee yeroo hundumaa hordofuu dandeessa.",
+    "caseNumberLabel": "Lakkoofsa Dhimmaa Kee",
+    "aiNoted": "Maal akka hubanne",
+    "goHome": "Manatti deemi",
+    "viewCases": "Dhimmoota Koo Ilaali"
+  },
+  "loading": {
+    "title": "Dhimma kee nageenyaan sakatta'aa jirra...",
+    "subtitle": "Yeroo gabaabaa fudhata. Odeeffannoon kee iccitiidhan eegameera."
+  },
+  "form": {
+    "anonymous": {
+      "label": "Maqaa dhoksuu",
+      "on": "Eenyummaan kee to'ataawwan dhimmaa irraa dhokataa ta'a.",
+      "off": "Maqaan kee to'ataa dhimmaa si gargaaruuf ramadame ilaalu danda'a."
+    },
+    "title": {
+      "label": "Mata duree gabaabaa dhimma keetif",
+      "placeholder": "fkn. Michuu koo irraa eegumsa seeraa barbaada",
+      "required": "Mata dureen gabaabaan haala kee akka hubannuuf gargaara",
+      "minLength": "Mata dureen qubee 3 ol ta'uu qaba",
+      "maxLength": "Mata dureen qubee 200 gadi ta'uu qaba"
+    },
+    "description": {
+      "label": "Maal ta'e?",
+      "placeholder": "Jecha keetiin maal akka ta'e ibsi. Yeroo fudhattaa — ariifannaa hin jiru, lakkoofsa jechaas hin qabdu.",
+      "required": "Haala kee gargaaruuf ibsi",
+      "minLength": "Maaloo gaalee muraasa kennaa"
+    },
+    "category": {
+      "heading": "Gargaarsa kamtu si barbaachisa caalaa?",
+      "hint": "Doorii dha — gareen keenya fedhii kee haalli ilaala.",
+      "legal": "Gargaarsa Seeraa",
+      "medical": "Deeggarsa Fayyaa",
+      "shelter": "Bakka Nageenyaa",
+      "counseling": "Nama waliigaluuf",
+      "other": "Hin Beeku"
+    },
+    "date": { "label": "Yoom ta'e?", "optional": "(doorii)" },
+    "location": {
+      "label": "Eessa ta'e?",
+      "placeholder": "fkn. Finfinnee, Boolee",
+      "optional": "(doorii)"
+    },
+    "error": "Gabaasa dhiheessuu keessatti wanti dogoggore. Maaloo irra deebi'ii yaali.",
+    "submit": "Gabaasa Koo Nageenyaan Ergi",
+    "reassurance": {
+      "named": "Gabaasni kee tokkoo tokkotti iccitiidhan eegameera. To'ataawwan dhimmaa ramadaman qofa odeeffannoo kee arguu danda'u.",
+      "anon": "Gabaasni kee tokkoo tokkotti iccitiidhan eegameera. To'ataawwan dhimmaa ramadaman qofa odeeffannoo kee arguu danda'u, eenyummaan kee dhokataa ta'a."
+    }
+  }
+}

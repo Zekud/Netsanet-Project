@@ -1,0 +1,293 @@
+{
+  "directory": {
+    "title": "Dhimmoota",
+    "subtitle": "Waliigala dhimmoota {{total}}",
+    "searchPlaceholder": "Mata duree ykn ibsaan barbaadi...",
+    "filterStatus": "Sadarkaa:",
+    "filterUrgency": "Hatatama:",
+    "loading": "Dhimmoota fe'aa jira...",
+    "error": "Dhimmoota fe'uu hin dandeenye. Maaloo irra deebi'ii yaali.",
+    "emptyTitle": "Dhimmi hin argamne",
+    "emptyFiltered": "Calaltuu ykn gaaffii barbaacha kee sirreessi.",
+    "emptyNew": "Dhimmoonni haaraan asitti mul'atu yeroo gabaasni dhihaatu.",
+    "table": {
+      "caseNum": "Dhimma #",
+      "urgency": "Hatatama",
+      "category": "Ramaddii",
+      "status": "Sadarkaa",
+      "title": "Mata duree",
+      "submitted": "Guyyaa Galmeeffame"
+    },
+    "anonymous": "Dhokataa",
+    "pagination": {
+      "info": "Fuula {{page}} keessaa {{totalPages}}",
+      "prev": "Dura",
+      "next": "Itti aanaa"
+    }
+  },
+  "assessment": {
+    "breadcrumb": "Dhimmoota",
+    "back": "← Deebi'i",
+    "submittedOn": "{{date}} irratti galmeeffame",
+    "anonymous": {
+      "title": "Miidhamaa Dhokataa",
+      "desc": "Gaaffii miidhamaatiin eenyummaan dhokateera"
+    },
+    "survivorId": "Eenyummeessaa Miidhamaa:",
+    "aiSummary": {
+      "title": "Guduunfaa Qulqullina AI",
+      "reasoning": "Sababa AI"
+    },
+    "incident": {
+      "title": "Bal'ina Taatee",
+      "date": "Guyyaa Taatee",
+      "location": "Bakka"
+    },
+    "evidence": {
+      "title": "Faayiloota Ragaa",
+      "empty": "Ammaaf ragaan miidhamaadhan fe'ame hin jiru.",
+      "view": "Ilaali"
+    },
+    "activity": {
+      "title": "Galmee Sochii",
+      "loading": "Sochii fe'aa jira...",
+      "empty": "Ammaaf sochiin hin jiru."
+    },
+    "messages": "Ergaawwan",
+    "updateStatus": {
+      "title": "Sadarkaa Haaromsi",
+      "placeholder": "Sadarkaa haaraa filadhu...",
+      "button": "Sadarkaa Haaromsi",
+      "error": "Sadarkaa haaromsuu hin dandeenye."
+    },
+    "assignWorker": {
+      "title": "Hojjetaa Dhimmaa Ramadi",
+      "currentlyAssigned": "Amma kan ramadame:",
+      "placeholder": "Hojjetaa filadhu...",
+      "button": "Hojjetaa Ramadi",
+      "error": "Hojjetaa ramaduu hin dandeenye."
+    },
+    "referCase": {
+      "title": "Dhimma Dabarsi",
+      "desc": "Deeggarsa addaatiif dhimma kana dhaabbata birootti dabarsi.",
+      "button": "🔀 Dhaabbatatti Dabarsi"
+    },
+    "addNote": {
+      "title": "Yaadannoo Dabali",
+      "placeholder": "Dhimma kana ilaalchisee yaadannoo barreessi...",
+      "button": "Yaadannoo Dabali"
+    },
+    "quickInfo": {
+      "caseId": "Eenyummeessaa Dhimmaa",
+      "created": "Uumameera",
+      "updated": "Yeroo dhumaa haaromfame",
+      "anonymous": "Dhokataa",
+      "yes": "Eeyyee",
+      "no": "Lakki"
+    },
+    "notFound": {
+      "title": "Dhimmi hin argamne",
+      "desc": "Dhimmi kun haqameera ykn hayyama itti seenuu hin qabdu.",
+      "back": "Gara Dhimmootaatti Deebi'i"
+    }
+  },
+  "analytics": {
+    "title": "Xiinxala",
+    "subtitle": "Ilaalcha raawwii bulchiinsa dhimmaa",
+    "kpi": {
+      "totalCases": "Waliigala Dhimmootaa",
+      "openCases": "Dhimmoota Banaa",
+      "criticalCases": "Dhimmoota Yaaddessaa",
+      "needsAttention": "xiyyeeffannoo barbaada",
+      "avgResolution": "Giddugaleessa Furmaataa",
+      "resolvedCases": "dhimmoota furaman"
+    },
+    "charts": {
+      "byStatus": "Dhimmoota Sadarkaadhan",
+      "byCategory": "Dhimmoota Ramaddiidhan",
+      "overTime": "Dhimmoota Yeroo Keessatti",
+      "noData": "Ammaaf ragaan hin jiru",
+      "tooltipCases": "Dhimmoota {{value}}",
+      "tooltipDate": "Guyyaa: {{label}}"
+    },
+    "periods": {
+      "7d": "Guyyoota 7",
+      "30d": "Guyyoota 30",
+      "90d": "Guyyoota 90"
+    }
+  },
+  "shared": {
+    "status": {
+      "all": "Hundaa",
+      "new": "Haaraa",
+      "under_review": "Sakatta'amaa jira",
+      "referred": "Darbera",
+      "active": "Sosocho'aa",
+      "resolved": "Xumurameera",
+      "closed": "Cufameera"
+    },
+    "urgency": {
+      "all": "Hundaa",
+      "critical": "Baay'ee Yaaddessaa",
+      "high": "Olaanaa",
+      "medium": "Giddugaleessa",
+      "low": "Gadi aanaa"
+    },
+    "category": {
+      "legal": "Seeraa",
+      "medical": "Fayyaa",
+      "shelter": "Dawoo",
+      "counseling": "Gorsa",
+      "other": "Kan biroo"
+    }
+  },
+  "layout": {
+    "nav": {
+      "overview": "Waliigala",
+      "cases": "Dhimmoota",
+      "referrals": "Dabarsuu",
+      "notifications": "Beeksisoota",
+      "staff": "Hojjattoota",
+      "analytics": "Xiinxala",
+      "institutions": "Dhaabbilee"
+    },
+    "badge": "Hojjetaa",
+    "fallbackName": "Miseensa Hojjetaa",
+    "signOut": "Ba'i"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Akkam bultan",
+      "afternoon": "Akkam ooltan",
+      "evening": "Akkam dhiibdan"
+    },
+    "title": "Waliigala",
+    "subtitle": "Wanti har'a ta'aa jiru kana.",
+    "kpi": {
+      "needsAttention": "Xiyyeeffannoo Barbaada",
+      "assignedToMe": "Kan Naaf Ramadame",
+      "openCases": "Dhimmoota Banaa",
+      "resolved": "Xumurameera"
+    },
+    "recentCases": {
+      "title": "Dhimmoota Dhihoo",
+      "emptyTitle": "Dhimmoonni dhihoo hin argamne.",
+      "emptyDesc": "Gabaasonni haaraan asitti mul'atu."
+    }
+  },
+  "notifications": {
+    "title": "Beeksisoota",
+    "subtitle": "Haaromsa dhimmoota siif ramadamanii fi caqasaman.",
+    "markAllRead": "Hundaa akka dubbifametti mallatteessi",
+    "loading": "Beeksisoota fe'aa jira...",
+    "emptyTitle": "Ammaaf beeksisni hin jiru.",
+    "emptyDesc": "Hundumaa hordofteerta!"
+  },
+  "staff": {
+    "title": "Tarree Hojjattootaa",
+    "subtitle": "Fayyadamtota dhaabbata keetif bulchi",
+    "addStaff": "Hojjetaa Dabali",
+    "roles": {
+      "case_worker": "Hojjetaa Dhimmaa",
+      "institution_admin": "Bulchaa",
+      "system_admin": "Bulchaa Sirnaa"
+    },
+    "modal": {
+      "title": "Miseensa Hojjetaa Dabali",
+      "desc": "Imeeyilii ykn bilbila isaanitiin liinkii seenuu ni argatu.",
+      "fullName": "Maqaa Guutuu *",
+      "email": "Imeeyilii",
+      "phone": "Bilbila",
+      "role": "Gahee",
+      "cancel": "Haqi",
+      "submit": "Affeerraa Ergi"
+    },
+    "searchPlaceholder": "Hojjetaa barbaadi...",
+    "table": {
+      "name": "Maqaa",
+      "role": "Gahee",
+      "cases": "Dhimmoota",
+      "status": "Sadarkaa",
+      "joined": "Makameera",
+      "actions": "Tarkaanfiiwwan"
+    },
+    "status": {
+      "active": "Sosocho'aa",
+      "suspended": "Dhaabate"
+    },
+    "actions": {
+      "suspend": "Dhaabi",
+      "activate": "Kaasi"
+    },
+    "loading": "Hojjattoota fe'aa jira...",
+    "empty": "Hojjetaan hin argamne."
+  },
+  "referrals": {
+    "title": "Dabarsuu",
+    "subtitle": "Dhimmoota dhaabbilee gidduutti dabarfaman.",
+    "tabs": {
+      "incoming": "Dhufe",
+      "outgoing": "Ba'e"
+    },
+    "searchPlaceholder": "Dhimma # ykn dhaabbatadhaaf barbaadi...",
+    "filterStatus": "Sadarkaawwan Hundaa",
+    "status": {
+      "pending": "Eegumsa",
+      "accepted": "Fudhatame",
+      "rejected": "Kufaa ta'e"
+    },
+    "table": {
+      "caseNum": "Dhimma #",
+      "institution": "Dhaabbata",
+      "priority": "Dursaa",
+      "status": "Sadarkaa",
+      "date": "Guyyaa",
+      "action": "Tarkaanfii"
+    },
+    "direction": {
+      "from": "Irraa:",
+      "to": "Gara:"
+    },
+    "actions": {
+      "review": "Gamaaggami",
+      "view": "Ilaali"
+    },
+    "loading": "Dabarsuu fe'aa jira...",
+    "error": "Dabarsuu fe'uu hin dandeenye.",
+    "emptyTitle": "Dabarsi hin argamne",
+    "emptyIncoming": "Ammaaf dabarsi gara kee dhufe hin jiru.",
+    "emptyOutgoing": "Dabarsi kamiyyuu hin ergine."
+  },
+  "institutions": {
+    "title": "Dhaabbilee",
+    "subtitle": "Dhaabbilee hirmaatan fi hayyama isaanii bulchi.",
+    "addInstitution": "Dhaabbata Dabali",
+    "searchPlaceholder": "Dhaabbilee barbaadi...",
+    "filterType": "Gosoota Hundaa",
+    "modal": {
+      "title": "Dhaabbata Galmeessi",
+      "desc": "Dhaabbata haaraa hirmaatu dabali.",
+      "name": "Maqaa Dhaabbataa *",
+      "namePlaceholder": "fkn., Safe Haven Addis",
+      "email": "Imeeyilii *",
+      "phone": "Bilbila",
+      "city": "Magaalaa",
+      "services": "Gosoota Tajaajilaa",
+      "cancel": "Haqi",
+      "submit": "Galmeessi"
+    },
+    "table": {
+      "institution": "Dhaabbata",
+      "location": "Bakka",
+      "services": "Tajaajiloota",
+      "staff": "Hojjetaa",
+      "status": "Sadarkaa",
+      "actions": "Tarkaanfiiwwan"
+    },
+    "actions": {
+      "edit": "Gulaali"
+    },
+    "loading": "Dhaabbilee fe'aa jira...",
+    "empty": "Dhaabbileen hin argamne"
+  }
+}

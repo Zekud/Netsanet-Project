@@ -1,0 +1,48 @@
+{
+  "greeting": {
+    "withName": "Bakka nageenyaatti argamtu, {{name}}.",
+    "noName": "Bakka nageenyaatti argamtu.",
+    "subtitle": "Asitti wanti hunduu dhuunfaa fi icciitii dha. Yeroo fudhattaa."
+  },
+  "actions": {
+    "report": {
+      "title": "Toftaa Gabaasi",
+      "description": "Maal akka ta'e nageenyaan fi icciitiidhan nutti himi. Garee keenya si gargaaruuf as jira.",
+      "cta": "Jalqabi →"
+    },
+    "chat": {
+      "title": "Qajeelfama Seeraa AI waliin dubbadhu",
+      "description": "Mirga kee, ajaja eegumsa fi tarkaanfii seeraa argachuu dandeessu gaafadhu.",
+      "cta": "Bani →"
+    }
+  },
+  "cases": {
+    "heading": "Dhimmoota kee",
+    "seeAll": "Hundaa ilaali →",
+    "loading": "Dhimmoota kee fe'aa jira...",
+    "empty": {
+      "icon": "📋",
+      "message": "Ammaaf dhimmi gabaafame hin jiru.",
+      "cta": "Dhimma jalqabaa kee gabaasi →"
+    }
+  },
+  "resources": {
+    "heading": "Qabeenya",
+    "legalRights": {
+      "title": "Mirga Seeraa Kee",
+      "body": "Mirga kee seeraa Itoophiyaa jalatti baradhu — ajaja eegumsa, hiikaa, kunuunsa ijoollee fi kan biroo."
+    },
+    "emergency": {
+      "title": "Quunnamtii Ariifachiisaa",
+      "body": "Poolisii: 911 · MoWSA Hotline: 8335 · GBV Ariifachiisaa: 0800 720 060 (kaffaltii malee)"
+    },
+    "localSupport": {
+      "title": "Buufata Deeggarsa Naannoo",
+      "body": "Ministeera Dubartootaa fi Dhimmoota Hawaasummaa — Finfinnee: +251 11 155 0077. Wiixataa–Jimaata 8am–5pm banaa."
+    },
+    "ewla": {
+      "title": "Gargaarsa Seeraa EWLA",
+      "body": "Waldaan Abbootii Seeraa Dubartootaa Itoophiyaa bakka bu'umsa seeraa bilisaa kenna. Quunnamtii: +251 11 551 7790."
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "sidebar": {
+    "heading": "Marii",
+    "newBtn": "+ Haaraa",
+    "empty": "Marii hin jiru. Gaaffii jalqabaa kee gaafadhu!",
+    "untitled": "Maqaa hin qabne"
+  },
+  "topBar": {
+    "title": "Qajeelfama Seeraa AI",
+    "subtitle": "Sanadadwan seeraa Itoophiyaan deeggarama",
+    "deleteChat": "Marii haquu"
+  },
+  "disclaimer": "⚠️ AI kun odeeffannoo seeraa qofa kenna, gorsa seeraa miti. Tarkaanfii seeraa addaaf, abbaa seeraa ga'umsa qabu mariisi.",
+  "welcome": {
+    "title": "Qajeelfama Seeraa AI kee",
+    "subtitle": "Mirga kee, ajaja eegumsa, hiikaa, kunuunsa ijoollee fi kan biroo seeraa Itoophiyaa jalatti natti gaafadhu."
+  },
+  "starters": {
+    "protection": "Ajajni eegumsa maal dha?",
+    "divorce": "Itoophiyaatti akkamitti hiikoo argachuu danda'a?",
+    "custody": "Mirgi kunuunsa ijoollee koo maal dha?",
+    "anonymous": "Maqaa osoo hin eeriin miidhaa gabaasuu nan danda'aa?"
+  },
+  "sources": {
+    "hide": "Dhoksi",
+    "view": "Ilaali",
+    "count_one": "{{count}} madda seeraa",
+    "count_other": "{{count}} madda seeraa",
+    "article": "Keeyyata"
+  },
+  "thinking": "Madda seeraa sakatta'aa jira...",
+  "input": {
+    "placeholder": "Mirga seeraa kee gaafadhu...",
+    "hint": "Enter erguuf · Shift+Enter sarara haaraadhaf"
+  },
+  "error": "Wanti tokko dogoggore. Maaloo irra deebi'ii yaali."
+}
