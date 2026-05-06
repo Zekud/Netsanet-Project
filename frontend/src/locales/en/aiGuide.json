@@ -1,0 +1,37 @@
+{
+  "sidebar": {
+    "heading": "Conversations",
+    "newBtn": "+ New",
+    "empty": "No conversations yet. Ask your first question!",
+    "untitled": "Untitled"
+  },
+  "topBar": {
+    "title": "Legal AI Guide",
+    "subtitle": "Powered by Ethiopian legal documents",
+    "deleteChat": "Delete chat"
+  },
+  "disclaimer": "⚠️ This AI provides legal information only, not legal advice. For specific legal action, always consult a qualified lawyer.",
+  "welcome": {
+    "title": "Your Legal AI Guide",
+    "subtitle": "Ask me anything about your legal rights, protection orders, divorce, custody, and more under Ethiopian law."
+  },
+  "starters": {
+    "protection": "What is a protection order?",
+    "divorce": "How can I get a divorce in Ethiopia?",
+    "custody": "What are my custody rights?",
+    "anonymous": "Can I report abuse anonymously?"
+  },
+  "sources": {
+    "hide": "Hide",
+    "view": "View",
+    "count_one": "{{count}} legal source",
+    "count_other": "{{count}} legal sources",
+    "article": "Article"
+  },
+  "thinking": "Analyzing legal resources...",
+  "input": {
+    "placeholder": "Ask about your legal rights...",
+    "hint": "Enter to send · Shift+Enter for new line"
+  },
+  "error": "Something went wrong. Please try again."
+}

@@ -15,3 +15,4 @@ export { default as QuickExitButton } from './QuickExitButton';
 export { default as Spinner } from './Spinner';
 export { default as StatusBadge } from './StatusBadge';
 export { default as UrgencyBadge } from './UrgencyBadge';
+export { default as LanguageSwitcher } from './LanguageSwitcher';

@@ -1,0 +1,48 @@
+{
+  "greeting": {
+    "withName": "You are in a safe space, {{name}}.",
+    "noName": "You are in a safe space.",
+    "subtitle": "Everything here is private and confidential. Take your time."
+  },
+  "actions": {
+    "report": {
+      "title": "Report an Incident",
+      "description": "Tell us what happened securely and confidentially. Our team is here to help.",
+      "cta": "Get started →"
+    },
+    "chat": {
+      "title": "Talk to Legal AI Guide",
+      "description": "Ask questions about your rights, protection orders, and legal steps available to you.",
+      "cta": "Open →"
+    }
+  },
+  "cases": {
+    "heading": "Your Cases",
+    "seeAll": "See all →",
+    "loading": "Loading your cases…",
+    "empty": {
+      "icon": "📋",
+      "message": "You haven't submitted any cases yet.",
+      "cta": "Report your first case →"
+    }
+  },
+  "resources": {
+    "heading": "Resources",
+    "legalRights": {
+      "title": "Your Legal Rights",
+      "body": "Learn about your rights under Ethiopian law — protection orders, divorce, custody, and more."
+    },
+    "emergency": {
+      "title": "Emergency Contacts",
+      "body": "Police: 911 · MoWSA Hotline: 8335 · GBV Emergency Line: 0800 720 060 (toll-free)"
+    },
+    "localSupport": {
+      "title": "Local Support Centers",
+      "body": "Ministry of Women & Social Affairs — Addis Ababa: +251 11 155 0077. Open Mon–Fri 8am–5pm."
+    },
+    "ewla": {
+      "title": "EWLA Legal Aid",
+      "body": "Ethiopian Women Lawyers Association offers free legal representation. Contact: +251 11 551 7790."
+    }
+  }
+}

@@ -1,118 +1,56 @@
 // CaseDetailPage — Survivor's view of a single case.
-// Route: /safe-space/cases/:id
-// Shows: status progress timeline, AI summary, activity log,
-//        messaging panel with assigned worker, evidence link.
+// Route: /safe-space/cases/:id — Fully localized via caseDetail namespace.
 
 import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import { StatusBadge, UrgencyBadge, Spinner } from '../../components/ui';
 import { supabase } from '../../lib/supabase';
 import api from '../../lib/api';
 
-// ─── Types ────────────────────────────────────────────────────
+type CaseStatus = 'new' | 'under_review' | 'referred' | 'active' | 'resolved' | 'closed';
 
 interface CaseDetail {
-  id: string;
-  case_number: string;
-  title: string;
-  description: string;
-  status: string;
-  category: string;
-  urgency_level: string;
-  ai_summary: string;
-  incident_date: string | null;
-  location_text: string | null;
-  assigned_worker_id: string | null;
-  created_at: string;
+  id: string; case_number: string; title: string; description: string;
+  status: string; category: string; urgency_level: string; ai_summary: string;
+  incident_date: string | null; location_text: string | null;
+  assigned_worker_id: string | null; created_at: string;
 }
-
-interface Activity {
-  id: string;
-  activity_type: string;
-  description: string;
-  created_at: string;
-}
-
-interface Message {
-  id: string;
-  sender_id: string;
-  content: string;
-  created_at: string;
-}
-
-// ─── Helpers ──────────────────────────────────────────────────
+interface Activity { id: string; activity_type: string; description: string; created_at: string; }
+interface Message { id: string; sender_id: string; content: string; created_at: string; }
 
 const STATUS_STEPS = ['new', 'under_review', 'active', 'resolved'];
 
-const SURVIVOR_FRIENDLY: Record<string, string> = {
-  case_created: 'Your report was received and secured.',
-  status_change: 'Your case status was updated.',
-  assigned: 'A case manager was assigned to your case.',
-  referral_sent: 'Your case was referred to a specialist team.',
-  referral_accepted: 'A new support team accepted your case.',
-  referral_rejected: 'The referral was updated — your original team continues.',
-  evidence_added: 'Evidence was added to your case.',
-  evidence_removed: 'An evidence file was removed.',
-  note: 'A note was added by your case team.',
-};
-
-function friendlyActivity(type: string): string {
-  return SURVIVOR_FRIENDLY[type] ?? 'Your case was updated.';
-}
-
 function relativeTime(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
-  const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return 'just now';
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  if (days < 7) return `${days}d ago`;
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  if (d < 7) return `${d}d ago`;
   return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 }
 
-// ─── Status Timeline ──────────────────────────────────────────
-
-function StatusTimeline({ status }: { status: string }) {
-  const currentIndex = STATUS_STEPS.indexOf(status);
-  const effectiveIndex = currentIndex === -1 ? 0 : currentIndex;
-
-  const labels: Record<string, string> = {
-    new: 'Received',
-    under_review: 'Under Review',
-    active: 'In Progress',
-    resolved: 'Resolved',
-  };
-
+function StatusTimeline({ status, stepLabels }: { status: string; stepLabels: Record<string, string> }) {
+  const idx = STATUS_STEPS.indexOf(status);
+  const effective = idx === -1 ? 0 : idx;
   return (
     <div className="flex items-center w-full">
       {STATUS_STEPS.map((step, i) => {
-        const done = i <= effectiveIndex;
-        const isCurrent = i === effectiveIndex;
+        const done = i <= effective; const isCurrent = i === effective;
         return (
           <div key={step} className="flex items-center flex-1 last:flex-none">
             <div className="flex flex-col items-center">
-              <div
-                className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                  isCurrent
-                    ? 'bg-teal-500 text-white ring-4 ring-teal-100 scale-110'
-                    : done
-                    ? 'bg-teal-500 text-white'
-                    : 'bg-gray-100 text-gray-400'
-                }`}
-              >
+              <div className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${isCurrent ? 'bg-teal-500 text-white ring-4 ring-teal-100 scale-110' : done ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-400'}`}>
                 {done && !isCurrent ? '✓' : i + 1}
               </div>
-              <p className={`mt-1.5 text-[10px] text-center w-16 leading-tight ${done ? 'text-teal-700 font-medium' : 'text-gray-400'}`}>
-                {labels[step]}
-              </p>
+              <p className={`mt-1.5 text-[10px] text-center w-16 leading-tight ${done ? 'text-teal-700 font-medium' : 'text-gray-400'}`}>{stepLabels[step]}</p>
             </div>
-            {i < STATUS_STEPS.length - 1 && (
-              <div className={`flex-1 h-0.5 mx-1 mb-5 ${i < effectiveIndex ? 'bg-teal-500' : 'bg-gray-100'}`} />
-            )}
+            {i < STATUS_STEPS.length - 1 && <div className={`flex-1 h-0.5 mx-1 mb-5 ${i < effective ? 'bg-teal-500' : 'bg-gray-100'}`} />}
           </div>
         );
       })}
@@ -120,9 +58,9 @@ function StatusTimeline({ status }: { status: string }) {
   );
 }
 
-// ─── Messaging Panel ──────────────────────────────────────────
-
-function MessagingPanel({ caseId, assignedWorkerId }: { caseId: string; assignedWorkerId: string | null }) {
+function MessagingPanel({ caseId, assignedWorkerId, t }: {
+  caseId: string; assignedWorkerId: string | null; t: (k: string) => string;
+}) {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [draft, setDraft] = useState('');
@@ -130,251 +68,167 @@ function MessagingPanel({ caseId, assignedWorkerId }: { caseId: string; assigned
 
   const { data: messages = [], isLoading } = useQuery<Message[]>({
     queryKey: ['case-messages', caseId],
-    queryFn: async () => {
-      const res = await api.get(`/cases/${caseId}/messages`);
-      return res.data.data ?? [];
-    },
+    queryFn: async () => { const r = await api.get(`/cases/${caseId}/messages`); return r.data.data ?? []; },
     enabled: !!assignedWorkerId,
   });
 
-  // Realtime subscription
   useEffect(() => {
     if (!assignedWorkerId) return;
-    const channel = supabase
-      .channel(`case-messages-survivor-${caseId}-${Date.now()}`)
-      .on('postgres_changes', {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'messages',
-        filter: `case_id=eq.${caseId}`,
-      }, (payload) => {
-        queryClient.setQueryData<Message[]>(['case-messages', caseId], (prev = []) => [
-          ...prev,
-          payload.new as Message,
-        ]);
-      })
+    const ch = supabase.channel(`case-msg-${caseId}-${Date.now()}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `case_id=eq.${caseId}` },
+        (p) => queryClient.setQueryData<Message[]>(['case-messages', caseId], (prev = []) => [...prev, p.new as Message]))
       .subscribe();
-    return () => { supabase.removeChannel(channel); };
+    return () => { supabase.removeChannel(ch); };
   }, [caseId, assignedWorkerId, queryClient]);
 
-  // Auto-scroll
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages.length]);
+  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages.length]);
 
   const sendMutation = useMutation({
-    mutationFn: async (content: string) => {
-      await api.post(`/cases/${caseId}/messages`, { content });
-    },
-    onSuccess: () => {
-      setDraft('');
-      queryClient.invalidateQueries({ queryKey: ['case-messages', caseId] });
-    },
+    mutationFn: (content: string) => api.post(`/cases/${caseId}/messages`, { content }),
+    onSuccess: () => { setDraft(''); queryClient.invalidateQueries({ queryKey: ['case-messages', caseId] }); },
   });
 
-  const handleSend = () => {
-    const trimmed = draft.trim();
-    if (!trimmed || sendMutation.isPending) return;
-    sendMutation.mutate(trimmed);
-  };
-
-  if (!assignedWorkerId) {
-    return (
-      <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 text-center">
-        <p className="text-2xl mb-2">👤</p>
-        <p className="text-sm font-medium text-dark mb-1">No case manager assigned yet</p>
-        <p className="text-xs text-gray-500">
-          Once a case manager is assigned to your case, you'll be able to message them directly here.
-        </p>
-      </div>
-    );
-  }
+  if (!assignedWorkerId) return (
+    <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 text-center">
+      <p className="text-2xl mb-2">👤</p>
+      <p className="text-sm font-medium text-dark mb-1">{t('messaging.noWorker.title')}</p>
+      <p className="text-xs text-gray-500">{t('messaging.noWorker.body')}</p>
+    </div>
+  );
 
   return (
     <div className="flex flex-col rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden" style={{ height: '360px' }}>
       <div className="border-b border-gray-100 px-4 py-2.5 flex items-center gap-2">
         <div className="h-2 w-2 rounded-full bg-teal-500" />
-        <p className="text-sm font-medium text-dark">Message your case manager</p>
+        <p className="text-sm font-medium text-dark">{t('messaging.panelTitle')}</p>
       </div>
-
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
-        {isLoading ? (
-          <div className="flex justify-center py-4"><Spinner size="sm" /></div>
-        ) : messages.length === 0 ? (
-          <p className="text-center text-xs text-gray-400 py-4">No messages yet. Send a message to your case manager.</p>
-        ) : (
-          messages.map((msg) => {
-            const isMine = msg.sender_id === user?.id;
-            return (
-              <div key={msg.id} className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-xs rounded-2xl px-4 py-2 text-sm ${
-                  isMine
-                    ? 'rounded-br-sm bg-teal-500 text-white'
-                    : 'rounded-bl-sm bg-gray-100 text-dark'
-                }`}>
-                  <p>{msg.content}</p>
-                  <p className={`text-[10px] mt-1 ${isMine ? 'text-teal-100' : 'text-gray-400'}`}>
-                    {relativeTime(msg.created_at)}
-                  </p>
+        {isLoading ? <div className="flex justify-center py-4"><Spinner size="sm" /></div>
+          : messages.length === 0 ? <p className="text-center text-xs text-gray-400 py-4">{t('messaging.empty')}</p>
+          : messages.map((msg) => {
+              const mine = msg.sender_id === user?.id;
+              return (
+                <div key={msg.id} className={`flex ${mine ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-xs rounded-2xl px-4 py-2 text-sm ${mine ? 'rounded-br-sm bg-teal-500 text-white' : 'rounded-bl-sm bg-gray-100 text-dark'}`}>
+                    <p>{msg.content}</p>
+                    <p className={`text-[10px] mt-1 ${mine ? 'text-teal-100' : 'text-gray-400'}`}>{relativeTime(msg.created_at)}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })
-        )}
+              );
+            })}
         <div ref={bottomRef} />
       </div>
-
-      {/* Input */}
       <div className="border-t border-gray-100 px-3 py-2 flex gap-2">
-        <input
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
-          placeholder="Type a message…"
-          className="flex-1 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-dark placeholder:text-gray-400 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-500"
-        />
-        <button
-          onClick={handleSend}
+        <input value={draft} onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (draft.trim()) sendMutation.mutate(draft.trim()); } }}
+          placeholder={t('messaging.placeholder')}
+          className="flex-1 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-dark placeholder:text-gray-400 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-500" />
+        <button onClick={() => { if (draft.trim()) sendMutation.mutate(draft.trim()); }}
           disabled={!draft.trim() || sendMutation.isPending}
-          className="shrink-0 rounded-lg bg-teal-500 px-3 py-2 text-xs font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {sendMutation.isPending ? '…' : 'Send'}
+          className="shrink-0 rounded-lg bg-teal-500 px-3 py-2 text-xs font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          {sendMutation.isPending ? '…' : t('messaging.send')}
         </button>
       </div>
     </div>
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────
-
 export default function CaseDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation('caseDetail');
 
-  const { data: caseRes, isLoading: caseLoading } = useQuery<{ data: CaseDetail }>({
+  const stepLabels = {
+    new: t('timeline.steps.new'), under_review: t('timeline.steps.under_review'),
+    active: t('timeline.steps.active'), resolved: t('timeline.steps.resolved'),
+  };
+
+  const { data: caseRes, isLoading } = useQuery<{ data: CaseDetail }>({
     queryKey: ['case-detail', id],
-    queryFn: async () => {
-      const res = await api.get(`/cases/${id}`);
-      return res.data;
-    },
+    queryFn: async () => { const r = await api.get(`/cases/${id}`); return r.data; },
     enabled: !!id,
   });
-
   const { data: activitiesRes } = useQuery<{ data: Activity[] }>({
     queryKey: ['case-activities', id],
-    queryFn: async () => {
-      const res = await api.get(`/cases/${id}/activities`);
-      return res.data;
-    },
+    queryFn: async () => { const r = await api.get(`/cases/${id}/activities`); return r.data; },
     enabled: !!id,
   });
 
   const c = caseRes?.data;
   const activities = activitiesRes?.data ?? [];
 
-  if (caseLoading) {
-    return (
-      <div className="flex items-center justify-center py-24">
-        <Spinner />
-      </div>
-    );
-  }
+  if (isLoading) return <div className="flex items-center justify-center py-24"><Spinner /></div>;
 
-  if (!c) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-2xl mb-2">🔍</p>
-        <p className="font-medium text-dark">Case not found</p>
-        <Link to="/safe-space/cases" className="mt-3 inline-block text-sm text-teal-600 hover:underline">
-          ← Back to my cases
-        </Link>
-      </div>
-    );
-  }
+  if (!c) return (
+    <div className="py-16 text-center">
+      <p className="text-2xl mb-2">🔍</p>
+      <p className="font-medium text-dark">{t('notFound.message')}</p>
+      <Link to="/safe-space/cases" className="mt-3 inline-block text-sm text-teal-600 hover:underline">{t('notFound.back')}</Link>
+    </div>
+  );
 
   return (
     <div className="space-y-6">
-      {/* ─── Header ─────────────────────────────────────────── */}
+      {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <Link to="/safe-space/cases" className="text-xs text-teal-600 hover:underline mb-1 inline-block">
-            ← My cases
-          </Link>
+          <Link to="/safe-space/cases" className="text-xs text-teal-600 hover:underline mb-1 inline-block">{t('backLink')}</Link>
           <h1 className="font-serif text-2xl text-teal-900">{c.title}</h1>
           <div className="flex items-center gap-3 mt-2 flex-wrap">
             <span className="font-mono text-xs text-gray-400">{c.case_number}</span>
-            <StatusBadge status={c.status} />
+            <StatusBadge status={c.status as CaseStatus} />
             {c.urgency_level && <UrgencyBadge level={c.urgency_level as 'critical' | 'high' | 'medium' | 'low'} />}
           </div>
         </div>
-        <Link
-          to={`/safe-space/evidence/${c.id}`}
-          className="shrink-0 flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-dark hover:border-teal-300 hover:text-teal-700 transition-colors shadow-sm"
-        >
-          🔒 Evidence
+        <Link to={`/safe-space/evidence/${c.id}`}
+          className="shrink-0 flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-dark hover:border-teal-300 hover:text-teal-700 transition-colors shadow-sm">
+          🔒 {t('evidence.title')}
         </Link>
       </div>
 
-      {/* ─── Status Timeline ─────────────────────────────────── */}
+      {/* Status Timeline */}
       <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
-        <p className="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wide">Case Progress</p>
-        <StatusTimeline status={c.status} />
-        {c.status === 'referred' && (
-          <p className="mt-4 text-xs text-amber-700 bg-amber-50 rounded-lg px-3 py-2">
-            ℹ️ Your case has been referred to a specialist team who can better support your needs.
-          </p>
-        )}
-        {c.status === 'closed' && (
-          <p className="mt-4 text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
-            This case is now closed. If you need further help, you can submit a new report.
-          </p>
-        )}
+        <p className="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wide">{t('timeline.heading')}</p>
+        <StatusTimeline status={c.status} stepLabels={stepLabels} />
+        {c.status === 'referred' && <p className="mt-4 text-xs text-amber-700 bg-amber-50 rounded-lg px-3 py-2">{t('timeline.referred')}</p>}
+        {c.status === 'closed' && <p className="mt-4 text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">{t('timeline.closed')}</p>}
       </div>
 
-      {/* ─── AI Summary ──────────────────────────────────────── */}
+      {/* AI Summary */}
       {c.ai_summary && (
         <div className="rounded-xl border border-teal-100 bg-teal-50 p-4">
-          <p className="text-xs font-semibold text-teal-700 uppercase tracking-wide mb-2">What our system noted</p>
+          <p className="text-xs font-semibold text-teal-700 uppercase tracking-wide mb-2">{t('aiSummary.heading')}</p>
           <p className="text-sm text-teal-900 leading-relaxed">{c.ai_summary}</p>
-          <div className="flex gap-2 mt-3 flex-wrap">
-            {c.category && (
-              <span className="rounded-full bg-teal-100 px-2.5 py-0.5 text-xs font-medium text-teal-800 capitalize">
-                {c.category}
-              </span>
-            )}
-          </div>
+          {c.category && <div className="flex gap-2 mt-3"><span className="rounded-full bg-teal-100 px-2.5 py-0.5 text-xs font-medium text-teal-800 capitalize">{c.category}</span></div>}
         </div>
       )}
 
-      {/* ─── Incident Details ────────────────────────────────── */}
+      {/* Incident Details */}
       <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
-        <p className="text-xs font-medium text-gray-500 mb-3 uppercase tracking-wide">What you reported</p>
+        <p className="text-xs font-medium text-gray-500 mb-3 uppercase tracking-wide">{t('incidents.heading')}</p>
         <p className="text-sm text-dark leading-relaxed whitespace-pre-wrap">{c.description}</p>
         {(c.incident_date || c.location_text) && (
           <div className="mt-4 flex flex-wrap gap-4 text-xs text-gray-500">
-            {c.incident_date && (
-              <span>📅 {new Date(c.incident_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-            )}
+            {c.incident_date && <span>📅 {new Date(c.incident_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>}
             {c.location_text && <span>📍 {c.location_text}</span>}
           </div>
         )}
       </div>
 
-      {/* ─── Messaging Panel ─────────────────────────────────── */}
+      {/* Messaging */}
       <div>
-        <p className="text-xs font-medium text-gray-500 mb-3 uppercase tracking-wide">Message your case manager</p>
-        <MessagingPanel caseId={c.id} assignedWorkerId={c.assigned_worker_id} />
+        <p className="text-xs font-medium text-gray-500 mb-3 uppercase tracking-wide">{t('messaging.heading')}</p>
+        <MessagingPanel caseId={c.id} assignedWorkerId={c.assigned_worker_id} t={t} />
       </div>
 
-      {/* ─── Activity Timeline ───────────────────────────────── */}
+      {/* Activity Timeline */}
       {activities.length > 0 && (
         <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wide">Case Updates</p>
+          <p className="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wide">{t('activities.heading')}</p>
           <ol className="relative border-l border-gray-100 ml-2 space-y-4">
             {activities.map((a) => (
               <li key={a.id} className="ml-4">
                 <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border-2 border-white bg-teal-400" />
-                <p className="text-sm text-dark">{friendlyActivity(a.activity_type)}</p>
+                <p className="text-sm text-dark">{(t as (k: string) => string)(`activities.${a.activity_type}`) || t('activities.default')}</p>
                 <time className="text-xs text-gray-400">{relativeTime(a.created_at)}</time>
               </li>
             ))}
@@ -382,16 +236,14 @@ export default function CaseDetailPage() {
         </div>
       )}
 
-      {/* ─── Evidence Link ───────────────────────────────────── */}
-      <Link
-        to={`/safe-space/evidence/${c.id}`}
-        className="flex items-center justify-between rounded-xl border border-gray-100 bg-white px-5 py-4 shadow-sm hover:border-teal-200 hover:shadow-md transition-all"
-      >
+      {/* Evidence Link */}
+      <Link to={`/safe-space/evidence/${c.id}`}
+        className="flex items-center justify-between rounded-xl border border-gray-100 bg-white px-5 py-4 shadow-sm hover:border-teal-200 hover:shadow-md transition-all">
         <div className="flex items-center gap-3">
           <span className="text-2xl">🔒</span>
           <div>
-            <p className="text-sm font-medium text-dark">Evidence Locker</p>
-            <p className="text-xs text-gray-400">Upload photos, videos, documents, or audio recordings</p>
+            <p className="text-sm font-medium text-dark">{t('evidence.title')}</p>
+            <p className="text-xs text-gray-400">{t('evidence.body')}</p>
           </div>
         </div>
         <span className="text-gray-300">›</span>
