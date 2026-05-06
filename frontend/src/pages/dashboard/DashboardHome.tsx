@@ -3,6 +3,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import api from '../../lib/api';
 
@@ -41,6 +42,7 @@ function relativeDate(dateStr: string): string {
 
 export default function DashboardHome() {
   const { user } = useAuth();
+  const { t } = useTranslation('dashboard');
 
   const { data: overviewRes } = useQuery<{ data: Overview }>({
     queryKey: ['analytics-overview'],
@@ -56,7 +58,16 @@ export default function DashboardHome() {
   const cases = casesRes?.data ?? [];
 
   const hour = new Date().getHours();
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const greeting = hour < 12 ? t('home.greeting.morning') : hour < 17 ? t('home.greeting.afternoon') : t('home.greeting.evening');
+
+  const statusLabels: Record<string, string> = {
+    new: t('shared.status.new'),
+    under_review: t('shared.status.under_review'),
+    referred: t('shared.status.referred'),
+    active: t('shared.status.active'),
+    resolved: t('shared.status.resolved'),
+    closed: t('shared.status.closed'),
+  };
 
   return (
     <div className="space-y-6">
@@ -71,10 +82,10 @@ export default function DashboardHome() {
       {/* KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { icon: '📋', label: 'Total Cases', value: overview?.totalCases ?? '—' },
-          { icon: '🔓', label: 'Open Cases', value: overview?.openCases ?? '—', accent: 'border-l-4 border-l-teal-500' },
-          { icon: '🚨', label: 'Critical', value: overview?.criticalCases ?? '—', accent: 'border-l-4 border-l-red-500' },
-          { icon: '⏱️', label: 'Avg Resolution', value: overview ? `${overview.avgResolutionDays}d` : '—' },
+          { icon: '📋', label: t('analytics.kpi.totalCases'), value: overview?.totalCases ?? '—' },
+          { icon: '🔓', label: t('analytics.kpi.openCases'), value: overview?.openCases ?? '—', accent: 'border-l-4 border-l-teal-500' },
+          { icon: '🚨', label: t('analytics.kpi.criticalCases'), value: overview?.criticalCases ?? '—', accent: 'border-l-4 border-l-red-500' },
+          { icon: '⏱️', label: t('analytics.kpi.avgResolution'), value: overview ? `${overview.avgResolutionDays}d` : '—' },
         ].map((kpi) => (
           <div key={kpi.label} className={`rounded-xl border border-gray-100 bg-white p-4 shadow-sm ${kpi.accent ?? ''}`}>
             <span className="text-xl">{kpi.icon}</span>
@@ -87,18 +98,18 @@ export default function DashboardHome() {
       {/* Recent Cases */}
       <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-          <h2 className="text-sm font-semibold text-dark">Recent Cases</h2>
+          <h2 className="text-sm font-semibold text-dark">{t('home.recentCases.title')}</h2>
           <Link to="/dashboard/cases" className="text-xs text-teal-600 hover:underline">View all →</Link>
         </div>
         {cases.length === 0 ? (
-          <div className="py-10 text-center text-sm text-gray-400">No cases yet</div>
+          <div className="py-10 text-center text-sm text-gray-400">{t('home.recentCases.emptyTitle')}</div>
         ) : (
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 text-left">
-                <th className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">Case</th>
-                <th className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">Status</th>
-                <th className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">Date</th>
+                <th className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">{t('directory.table.caseNum')}</th>
+                <th className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">{t('directory.table.status')}</th>
+                <th className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">{t('directory.table.submitted')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -112,7 +123,7 @@ export default function DashboardHome() {
                   </td>
                   <td className="px-4 py-3">
                     <span className={`rounded-md px-2 py-0.5 text-xs font-medium ${STATUS_COLORS[c.status] ?? STATUS_COLORS.new}`}>
-                      {c.status?.replace('_', ' ')}
+                      {statusLabels[c.status] ?? c.status}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-xs text-gray-400">{relativeDate(c.created_at)}</td>
@@ -126,9 +137,9 @@ export default function DashboardHome() {
       {/* Quick Links */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {[
-          { to: '/dashboard/cases', icon: '📋', label: 'All Cases' },
-          { to: '/dashboard/referrals', icon: '🔄', label: 'Referrals' },
-          { to: '/dashboard/analytics', icon: '📈', label: 'Analytics' },
+          { to: '/dashboard/cases', icon: '📋', label: t('layout.nav.cases') },
+          { to: '/dashboard/referrals', icon: '🔄', label: t('layout.nav.referrals') },
+          { to: '/dashboard/analytics', icon: '📈', label: t('layout.nav.analytics') },
         ].map((link) => (
           <Link
             key={link.to}

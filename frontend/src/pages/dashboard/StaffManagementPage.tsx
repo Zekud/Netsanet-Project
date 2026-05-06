@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import api from '../../lib/api';
 
@@ -16,15 +17,11 @@ interface StaffMember {
   created_at: string;
 }
 
-const ROLE_LABELS: Record<string, string> = {
-  case_worker: 'Case Worker',
-  institution_admin: 'Admin',
-};
-
-function AddStaffModal({ onClose, onSave, isLoading }: {
+function AddStaffModal({ onClose, onSave, isLoading, t }: {
   onClose: () => void;
   onSave: (data: { display_name: string; email: string; phone: string; role: string }) => void;
   isLoading: boolean;
+  t: any;
 }) {
   const [form, setForm] = useState({ display_name: '', email: '', phone: '', role: 'case_worker' });
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
@@ -32,46 +29,46 @@ function AddStaffModal({ onClose, onSave, isLoading }: {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-        <h3 className="font-serif text-lg text-dark mb-1">Add Staff Member</h3>
-        <p className="text-xs text-gray-500 mb-4">They'll receive a login link at their email or phone.</p>
+        <h3 className="font-serif text-lg text-dark mb-1">{t('staff.modal.title')}</h3>
+        <p className="text-xs text-gray-500 mb-4">{t('staff.modal.desc')}</p>
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Full Name *</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">{t('staff.modal.fullName')}</label>
             <input value={form.display_name} onChange={(e) => set('display_name', e.target.value)}
               className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
               placeholder="Tigist Bekele" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Email</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">{t('staff.modal.email')}</label>
             <input value={form.email} onChange={(e) => set('email', e.target.value)} type="email"
               className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
               placeholder="tigist@organization.org" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Phone</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">{t('staff.modal.phone')}</label>
             <input value={form.phone} onChange={(e) => set('phone', e.target.value)} type="tel"
               className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
               placeholder="+251911234567" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Role *</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">{t('staff.modal.role')} *</label>
             <select value={form.role} onChange={(e) => set('role', e.target.value)}
               className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
-              <option value="case_worker">Case Worker</option>
-              <option value="institution_admin">Institution Admin</option>
+              <option value="case_worker">{t('staff.roles.case_worker')}</option>
+              <option value="institution_admin">{t('staff.roles.institution_admin')}</option>
             </select>
           </div>
         </div>
         <div className="flex gap-3 mt-5">
           <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">
-            Cancel
+            {t('staff.modal.cancel')}
           </button>
           <button
             onClick={() => { if (form.display_name && (form.email || form.phone)) onSave(form); }}
             disabled={!form.display_name || (!form.email && !form.phone) || isLoading}
             className="flex-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50"
           >
-            {isLoading ? 'Adding…' : 'Add Staff Member'}
+            {isLoading ? '...' : t('staff.modal.submit')}
           </button>
         </div>
       </div>
@@ -82,8 +79,14 @@ function AddStaffModal({ onClose, onSave, isLoading }: {
 export default function StaffManagementPage() {
   const { user: currentUser } = useAuth();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('dashboard');
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const ROLE_LABELS: Record<string, string> = {
+    case_worker: t('staff.roles.case_worker'),
+    institution_admin: t('staff.roles.institution_admin'),
+  };
 
   const { data, isLoading } = useQuery<{ data: StaffMember[] }>({
     queryKey: ['staff'],
@@ -123,14 +126,14 @@ export default function StaffManagementPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-2xl text-dark">Staff Management</h1>
+          <h1 className="font-serif text-2xl text-dark">{t('staff.title')}</h1>
           <p className="text-sm text-gray-500 mt-0.5">{active} active member{active !== 1 ? 's' : ''}</p>
         </div>
         <button
           onClick={() => { setError(null); setShowModal(true); }}
           className="rounded-xl bg-teal-500 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors"
         >
-          + Add Staff Member
+          + {t('staff.addStaff')}
         </button>
       </div>
 
@@ -146,16 +149,16 @@ export default function StaffManagementPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50 text-left">
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Name</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Role</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Cases</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Actions</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('staff.table.name')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('staff.table.role')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('staff.table.cases')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('staff.table.status')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('staff.table.actions')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
               {staff.length === 0 ? (
-                <tr><td colSpan={5} className="px-4 py-10 text-center text-sm text-gray-400">No staff members yet. Add your first team member.</td></tr>
+                <tr><td colSpan={5} className="px-4 py-10 text-center text-sm text-gray-400">{t('staff.empty')}</td></tr>
               ) : staff.map((s) => (
                 <tr key={s.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3">
@@ -171,16 +174,15 @@ export default function StaffManagementPage() {
                   </td>
                   <td className="px-4 py-3">
                     <span className="font-mono text-sm text-dark">{s.cases_assigned}</span>
-                    <span className="text-xs text-gray-400 ml-1">assigned</span>
                   </td>
                   <td className="px-4 py-3">
                     {s.is_active ? (
                       <span className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" /> Active
+                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" /> {t('staff.status.active')}
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500">
-                        <span className="h-1.5 w-1.5 rounded-full bg-gray-400" /> Inactive
+                        <span className="h-1.5 w-1.5 rounded-full bg-gray-400" /> {t('staff.status.suspended')}
                       </span>
                     )}
                   </td>
@@ -197,7 +199,7 @@ export default function StaffManagementPage() {
                             : 'border border-teal-200 text-teal-600 hover:bg-teal-50'
                         }`}
                       >
-                        {s.is_active ? 'Deactivate' : 'Reactivate'}
+                        {s.is_active ? t('staff.actions.suspend') : t('staff.actions.activate')}
                       </button>
                     )}
                   </td>
@@ -213,6 +215,7 @@ export default function StaffManagementPage() {
           onClose={() => setShowModal(false)}
           onSave={(d) => addMutation.mutate(d)}
           isLoading={addMutation.isPending}
+          t={t}
         />
       )}
     </div>

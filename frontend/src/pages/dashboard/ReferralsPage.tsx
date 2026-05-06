@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import api from '../../lib/api';
 import { PageHeader, Spinner, EmptyState, Badge, Modal, Button } from '../../components/ui';
 
@@ -29,12 +30,6 @@ interface Referral {
 
 // ─── Status badge mapping ─────────────────────────────────────
 
-const statusConfig = {
-  pending: { label: 'Pending', variant: 'amber' as const },
-  accepted: { label: 'Accepted', variant: 'teal' as const },
-  rejected: { label: 'Rejected', variant: 'red' as const },
-};
-
 const urgencyColors: Record<string, string> = {
   critical: 'text-critical',
   high: 'text-orange-500',
@@ -49,12 +44,20 @@ function ReferralCard({
   onAccept,
   onReject,
   showActions,
+  t
 }: {
   referral: Referral;
   onAccept?: () => void;
   onReject?: () => void;
   showActions: boolean;
+  t: any;
 }) {
+  const statusConfig = {
+    pending: { label: t('referrals.status.pending'), variant: 'amber' as const },
+    accepted: { label: t('referrals.status.accepted'), variant: 'teal' as const },
+    rejected: { label: t('referrals.status.rejected'), variant: 'red' as const },
+  };
+
   const cfg = statusConfig[referral.status];
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm space-y-3">
@@ -65,11 +68,11 @@ function ReferralCard({
               {referral.cases?.case_number || '—'}
             </span>
             <span className={`text-xs font-medium ${urgencyColors[referral.cases?.urgency_level || 'low']}`}>
-              {referral.cases?.urgency_level?.toUpperCase()}
+              {t(`shared.urgency.${referral.cases?.urgency_level || 'low'}`).toUpperCase()}
             </span>
           </div>
           <p className="mt-0.5 text-sm font-medium text-dark truncate">
-            {referral.cases?.title || 'Untitled case'}
+            {referral.cases?.title || '—'}
           </p>
         </div>
         <Badge variant={cfg.variant}>{cfg.label}</Badge>
@@ -77,9 +80,9 @@ function ReferralCard({
 
       {/* Institution arrow */}
       <div className="flex items-center gap-2 text-xs text-gray-500">
-        <span>{referral.institutions?.name || 'Unknown institution'}</span>
+        <span>{referral.institutions?.name || '—'}</span>
         <span>→</span>
-        <span className="text-dark font-medium">Your Institution</span>
+        <span className="text-dark font-medium">{t('layout.nav.institutions') /* Assuming representing own institution */}</span>
       </div>
 
       {/* Note */}
@@ -99,7 +102,6 @@ function ReferralCard({
       )}
 
       <p className="text-xs text-gray-500">
-        Received{' '}
         {new Date(referral.created_at).toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -111,10 +113,10 @@ function ReferralCard({
       {showActions && referral.status === 'pending' && (
         <div className="flex gap-2 pt-1">
           <Button size="sm" onClick={onAccept}>
-            Accept
+            {t('referrals.actions.review')}
           </Button>
           <Button size="sm" variant="danger" onClick={onReject}>
-            Reject
+            {t('referrals.status.rejected')}
           </Button>
         </div>
       )}
@@ -124,7 +126,13 @@ function ReferralCard({
 
 // ─── Outgoing Referral Card ───────────────────────────────────
 
-function OutgoingCard({ referral }: { referral: Referral }) {
+function OutgoingCard({ referral, t }: { referral: Referral, t: any }) {
+  const statusConfig = {
+    pending: { label: t('referrals.status.pending'), variant: 'amber' as const },
+    accepted: { label: t('referrals.status.accepted'), variant: 'teal' as const },
+    rejected: { label: t('referrals.status.rejected'), variant: 'red' as const },
+  };
+
   const cfg = statusConfig[referral.status];
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm space-y-3">
@@ -135,25 +143,25 @@ function OutgoingCard({ referral }: { referral: Referral }) {
               {referral.cases?.case_number || '—'}
             </span>
             <span className={`text-xs font-medium ${urgencyColors[referral.cases?.urgency_level || 'low']}`}>
-              {referral.cases?.urgency_level?.toUpperCase()}
+              {t(`shared.urgency.${referral.cases?.urgency_level || 'low'}`).toUpperCase()}
             </span>
           </div>
           <p className="mt-0.5 text-sm font-medium text-dark truncate">
-            {referral.cases?.title || 'Untitled case'}
+            {referral.cases?.title || '—'}
           </p>
         </div>
         <Badge variant={cfg.variant}>{cfg.label}</Badge>
       </div>
 
       <div className="flex items-center gap-2 text-xs text-gray-500">
-        <span className="text-dark font-medium">Your Institution</span>
+        <span className="text-dark font-medium">{t('layout.nav.institutions')}</span>
         <span>→</span>
-        <span>{referral.institutions?.name || 'Unknown institution'}</span>
+        <span>{referral.institutions?.name || '—'}</span>
       </div>
 
       {referral.note && (
         <div className="rounded-lg bg-gray-100 px-3 py-2">
-          <p className="text-xs font-medium text-gray-500 mb-0.5">Your note</p>
+          <p className="text-xs font-medium text-gray-500 mb-0.5">Note</p>
           <p className="text-xs text-dark">{referral.note}</p>
         </div>
       )}
@@ -161,7 +169,7 @@ function OutgoingCard({ referral }: { referral: Referral }) {
       {referral.response_note && (
         <div className={`rounded-lg px-3 py-2 ${referral.status === 'rejected' ? 'bg-red-50' : 'bg-teal-50'}`}>
           <p className={`text-xs font-medium mb-0.5 ${referral.status === 'rejected' ? 'text-critical' : 'text-teal-700'}`}>
-            Response from institution
+            Response
           </p>
           <p className={`text-xs ${referral.status === 'rejected' ? 'text-red-900' : 'text-teal-900'}`}>
             {referral.response_note}
@@ -170,7 +178,6 @@ function OutgoingCard({ referral }: { referral: Referral }) {
       )}
 
       <p className="text-xs text-gray-500">
-        Sent{' '}
         {new Date(referral.created_at).toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -185,6 +192,7 @@ function OutgoingCard({ referral }: { referral: Referral }) {
 
 export default function ReferralsPage() {
   const queryClient = useQueryClient();
+  const { t } = useTranslation('dashboard');
   const [tab, setTab] = useState<'incoming' | 'outgoing'>('incoming');
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
   const [selectedReferralId, setSelectedReferralId] = useState<string | null>(null);
@@ -244,8 +252,8 @@ export default function ReferralsPage() {
   return (
     <div>
       <PageHeader
-        title="Referrals"
-        subtitle="Manage case referrals between institutions"
+        title={t('referrals.title')}
+        subtitle={t('referrals.subtitle')}
       />
 
       {/* Tabs */}
@@ -258,7 +266,7 @@ export default function ReferralsPage() {
               : 'text-gray-500 hover:text-dark'
           }`}
         >
-          Incoming
+          {t('referrals.tabs.incoming')}
           {pendingCount > 0 && (
             <span className="ml-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-critical text-[10px] font-bold text-white">
               {pendingCount}
@@ -273,7 +281,7 @@ export default function ReferralsPage() {
               : 'text-gray-500 hover:text-dark'
           }`}
         >
-          Outgoing
+          {t('referrals.tabs.outgoing')}
         </button>
       </div>
 
@@ -282,13 +290,13 @@ export default function ReferralsPage() {
         <>
           {incomingLoading ? (
             <div className="flex justify-center py-16">
-              <Spinner size="lg" label="Loading referrals..." />
+              <Spinner size="lg" label={t('referrals.loading')} />
             </div>
           ) : !incoming || incoming.length === 0 ? (
             <EmptyState
               icon={<span>📥</span>}
-              title="No incoming referrals"
-              description="Cases referred to your institution will appear here."
+              title={t('referrals.emptyTitle')}
+              description={t('referrals.emptyIncoming')}
             />
           ) : (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -302,6 +310,7 @@ export default function ReferralsPage() {
                     setSelectedReferralId(referral.id);
                     setRejectModalOpen(true);
                   }}
+                  t={t}
                 />
               ))}
             </div>
@@ -314,18 +323,18 @@ export default function ReferralsPage() {
         <>
           {outgoingLoading ? (
             <div className="flex justify-center py-16">
-              <Spinner size="lg" label="Loading referrals..." />
+              <Spinner size="lg" label={t('referrals.loading')} />
             </div>
           ) : !outgoing || outgoing.length === 0 ? (
             <EmptyState
               icon={<span>📤</span>}
-              title="No outgoing referrals"
-              description="Cases you've referred to other institutions will appear here."
+              title={t('referrals.emptyTitle')}
+              description={t('referrals.emptyOutgoing')}
             />
           ) : (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {outgoing.map((referral) => (
-                <OutgoingCard key={referral.id} referral={referral} />
+                <OutgoingCard key={referral.id} referral={referral} t={t} />
               ))}
             </div>
           )}
@@ -361,7 +370,7 @@ export default function ReferralsPage() {
                 rejectMutation.mutate({ referralId: selectedReferralId, note: responseNote })
               }
             >
-              Confirm Rejection
+              Confirm
             </Button>
           </>
         }

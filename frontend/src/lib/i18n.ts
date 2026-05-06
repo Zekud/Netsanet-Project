@@ -22,12 +22,20 @@ import amAiGuide         from '../locales/am/aiGuide.json';
 import enEvidenceLocker  from '../locales/en/evidenceLocker.json';
 import amEvidenceLocker  from '../locales/am/evidenceLocker.json';
 
+// Auth & Dashboard translations
+import enAuth from '../locales/en/auth.json';
+import amAuth from '../locales/am/auth.json';
+import enDashboard from '../locales/en/dashboard.json';
+import amDashboard from '../locales/am/dashboard.json';
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources: {
       en: {
+        auth:           enAuth,
+        dashboard:      enDashboard,
         survivorHome:   enSurvivorHome,
         survivorLayout: enSurvivorLayout,
         reportCase:     enReportCase,
@@ -37,6 +45,8 @@ i18n
         evidenceLocker: enEvidenceLocker,
       },
       am: {
+        auth:           amAuth,
+        dashboard:      amDashboard,
         survivorHome:   amSurvivorHome,
         survivorLayout: amSurvivorLayout,
         reportCase:     amReportCase,
@@ -58,6 +68,8 @@ i18n
     supportedLngs: ['en', 'am'],
 
     ns: [
+      'auth',
+      'dashboard',
       'survivorHome',
       'survivorLayout',
       'reportCase',

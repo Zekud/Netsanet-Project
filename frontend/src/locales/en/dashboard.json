@@ -1,0 +1,293 @@
+{
+  "directory": {
+    "title": "Cases",
+    "subtitle": "{{total}} total cases",
+    "searchPlaceholder": "Search by title or description...",
+    "filterStatus": "Status:",
+    "filterUrgency": "Urgency:",
+    "loading": "Loading cases...",
+    "error": "Failed to load cases. Please try again.",
+    "emptyTitle": "No cases found",
+    "emptyFiltered": "Try adjusting your filters or search query.",
+    "emptyNew": "New cases will appear here when survivors submit reports.",
+    "table": {
+      "caseNum": "Case #",
+      "urgency": "Urgency",
+      "category": "Category",
+      "status": "Status",
+      "title": "Title",
+      "submitted": "Submitted"
+    },
+    "anonymous": "Anonymous",
+    "pagination": {
+      "info": "Page {{page}} of {{totalPages}}",
+      "prev": "Previous",
+      "next": "Next"
+    }
+  },
+  "assessment": {
+    "breadcrumb": "Cases",
+    "back": "← Back",
+    "submittedOn": "Submitted on {{date}}",
+    "anonymous": {
+      "title": "Anonymous Survivor",
+      "desc": "Identity hidden at survivor's request"
+    },
+    "survivorId": "Survivor ID:",
+    "aiSummary": {
+      "title": "AI Triage Summary",
+      "reasoning": "AI Reasoning"
+    },
+    "incident": {
+      "title": "Incident Details",
+      "date": "Incident Date",
+      "location": "Location"
+    },
+    "evidence": {
+      "title": "Evidence Files",
+      "empty": "No evidence uploaded by the survivor yet.",
+      "view": "View"
+    },
+    "activity": {
+      "title": "Activity Log",
+      "loading": "Loading activities...",
+      "empty": "No activity yet."
+    },
+    "messages": "Messages",
+    "updateStatus": {
+      "title": "Update Status",
+      "placeholder": "Select new status...",
+      "button": "Update Status",
+      "error": "Failed to update status."
+    },
+    "assignWorker": {
+      "title": "Assign Case Worker",
+      "currentlyAssigned": "Currently assigned:",
+      "placeholder": "Select a worker...",
+      "button": "Assign Worker",
+      "error": "Failed to assign worker."
+    },
+    "referCase": {
+      "title": "Refer Case",
+      "desc": "Transfer this case to another institution for specialized support.",
+      "button": "🔀 Refer to Institution"
+    },
+    "addNote": {
+      "title": "Add a Note",
+      "placeholder": "Write a note about this case...",
+      "button": "Add Note"
+    },
+    "quickInfo": {
+      "caseId": "Case ID",
+      "created": "Created",
+      "updated": "Last Updated",
+      "anonymous": "Anonymous",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "notFound": {
+      "title": "Case not found",
+      "desc": "This case may have been removed or you don't have access.",
+      "back": "Back to Cases"
+    }
+  },
+  "analytics": {
+    "title": "Analytics",
+    "subtitle": "Case management performance overview",
+    "kpi": {
+      "totalCases": "Total Cases",
+      "openCases": "Open Cases",
+      "criticalCases": "Critical Cases",
+      "needsAttention": "needs attention",
+      "avgResolution": "Avg Resolution",
+      "resolvedCases": "resolved cases"
+    },
+    "charts": {
+      "byStatus": "Cases by Status",
+      "byCategory": "Cases by Category",
+      "overTime": "Cases Over Time",
+      "noData": "No data yet",
+      "tooltipCases": "{{value}} cases",
+      "tooltipDate": "Date: {{label}}"
+    },
+    "periods": {
+      "7d": "7 days",
+      "30d": "30 days",
+      "90d": "90 days"
+    }
+  },
+  "shared": {
+    "status": {
+      "all": "All",
+      "new": "New",
+      "under_review": "Under Review",
+      "referred": "Referred",
+      "active": "Active",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "urgency": {
+      "all": "All",
+      "critical": "Critical",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "category": {
+      "legal": "Legal",
+      "medical": "Medical",
+      "shelter": "Shelter",
+      "counseling": "Counseling",
+      "other": "Other"
+    }
+  },
+  "layout": {
+    "nav": {
+      "overview": "Overview",
+      "cases": "Cases",
+      "referrals": "Referrals",
+      "notifications": "Notifications",
+      "staff": "Staff",
+      "analytics": "Analytics",
+      "institutions": "Institutions"
+    },
+    "badge": "Staff",
+    "fallbackName": "Staff Member",
+    "signOut": "Sign Out"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
+    "title": "Overview",
+    "subtitle": "Here is what's happening today.",
+    "kpi": {
+      "needsAttention": "Needs Attention",
+      "assignedToMe": "Assigned to Me",
+      "openCases": "Open Cases",
+      "resolved": "Resolved"
+    },
+    "recentCases": {
+      "title": "Recent Cases",
+      "emptyTitle": "No recent cases found.",
+      "emptyDesc": "New submissions will appear here."
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Updates on your assigned cases and mentions.",
+    "markAllRead": "Mark all as read",
+    "loading": "Loading notifications...",
+    "emptyTitle": "No notifications yet.",
+    "emptyDesc": "You're all caught up!"
+  },
+  "staff": {
+    "title": "Staff Roster",
+    "subtitle": "Manage users for your institution",
+    "addStaff": "Add Staff",
+    "roles": {
+      "case_worker": "Case Worker",
+      "institution_admin": "Admin",
+      "system_admin": "System Admin"
+    },
+    "modal": {
+      "title": "Add Staff Member",
+      "desc": "They'll receive a login link at their email or phone.",
+      "fullName": "Full Name *",
+      "email": "Email",
+      "phone": "Phone",
+      "role": "Role",
+      "cancel": "Cancel",
+      "submit": "Send Invite"
+    },
+    "searchPlaceholder": "Search staff...",
+    "table": {
+      "name": "Name",
+      "role": "Role",
+      "cases": "Cases",
+      "status": "Status",
+      "joined": "Joined",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended"
+    },
+    "actions": {
+      "suspend": "Suspend",
+      "activate": "Activate"
+    },
+    "loading": "Loading staff...",
+    "empty": "No staff found."
+  },
+  "referrals": {
+    "title": "Referrals",
+    "subtitle": "Cases transferred between institutions.",
+    "tabs": {
+      "incoming": "Incoming",
+      "outgoing": "Outgoing"
+    },
+    "searchPlaceholder": "Search by case # or institution...",
+    "filterStatus": "All Statuses",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    },
+    "table": {
+      "caseNum": "Case #",
+      "institution": "Institution",
+      "priority": "Priority",
+      "status": "Status",
+      "date": "Date",
+      "action": "Action"
+    },
+    "direction": {
+      "from": "From:",
+      "to": "To:"
+    },
+    "actions": {
+      "review": "Review",
+      "view": "View"
+    },
+    "loading": "Loading referrals...",
+    "error": "Failed to load referrals.",
+    "emptyTitle": "No referrals found",
+    "emptyIncoming": "You have no incoming referrals at this time.",
+    "emptyOutgoing": "You have not sent any referrals."
+  },
+  "institutions": {
+    "title": "Institutions",
+    "subtitle": "Manage participating institutions and their access.",
+    "addInstitution": "Add Institution",
+    "searchPlaceholder": "Search institutions...",
+    "filterType": "All Types",
+    "modal": {
+      "title": "Register Institution",
+      "desc": "Add a new participating organization.",
+      "name": "Institution Name *",
+      "namePlaceholder": "e.g., Safe Haven Addis",
+      "email": "Email *",
+      "phone": "Phone",
+      "city": "City",
+      "services": "Service Types",
+      "cancel": "Cancel",
+      "submit": "Register"
+    },
+    "table": {
+      "institution": "Institution",
+      "location": "Location",
+      "services": "Services",
+      "staff": "Staff",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "actions": {
+      "edit": "Edit"
+    },
+    "loading": "Loading institutions...",
+    "empty": "No institutions found"
+  }
+}

@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import api from '../../lib/api';
 import { useAuth } from '../../hooks/useAuth';
 import {
@@ -68,23 +69,6 @@ const statusOptions: CaseDetail['status'][] = [
   'new', 'under_review', 'referred', 'active', 'resolved', 'closed',
 ];
 
-const statusLabels: Record<string, string> = {
-  new: 'New',
-  under_review: 'Under Review',
-  referred: 'Referred',
-  active: 'Active',
-  resolved: 'Resolved',
-  closed: 'Closed',
-};
-
-const categoryLabels: Record<string, string> = {
-  legal: 'Legal',
-  medical: 'Medical',
-  shelter: 'Shelter',
-  counseling: 'Counseling',
-  other: 'Other',
-};
-
 const activityIcons: Record<string, string> = {
   case_created: '📝',
   status_changed: '🔄',
@@ -100,12 +84,31 @@ export default function CaseAssessmentPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useTranslation('dashboard');
   const queryClient = useQueryClient();
 
   const [selectedStatus, setSelectedStatus] = useState('');
   const [selectedWorkerId, setSelectedWorkerId] = useState('');
   const [noteText, setNoteText] = useState('');
   const [referModalOpen, setReferModalOpen] = useState(false);
+
+  // Dynamic labels from translations
+  const statusLabels: Record<string, string> = {
+    new: t('shared.status.new'),
+    under_review: t('shared.status.under_review'),
+    referred: t('shared.status.referred'),
+    active: t('shared.status.active'),
+    resolved: t('shared.status.resolved'),
+    closed: t('shared.status.closed'),
+  };
+
+  const categoryLabels: Record<string, string> = {
+    legal: t('shared.category.legal'),
+    medical: t('shared.category.medical'),
+    shelter: t('shared.category.shelter'),
+    counseling: t('shared.category.counseling'),
+    other: t('shared.category.other'),
+  };
 
   // ─── Queries ──────────────────────────────────────────────
 
@@ -196,9 +199,9 @@ export default function CaseAssessmentPage() {
   if (caseError || !caseData) {
     return (
       <div className="py-20 text-center">
-        <h2 className="font-serif text-2xl text-dark mb-2">Case not found</h2>
-        <p className="text-gray-500 mb-4">This case may have been removed or you don't have access.</p>
-        <Button onClick={() => navigate('/dashboard/cases')}>Back to Cases</Button>
+        <h2 className="font-serif text-2xl text-dark mb-2">{t('assessment.notFound.title')}</h2>
+        <p className="text-gray-500 mb-4">{t('assessment.notFound.desc')}</p>
+        <Button onClick={() => navigate('/dashboard/cases')}>{t('assessment.notFound.back')}</Button>
       </div>
     );
   }
@@ -211,10 +214,10 @@ export default function CaseAssessmentPage() {
     <div>
       <PageHeader
         title={caseData.case_number}
-        breadcrumb={['Cases', caseData.case_number]}
+        breadcrumb={[t('assessment.breadcrumb'), caseData.case_number]}
         action={
           <Button variant="secondary" onClick={() => navigate('/dashboard/cases')}>
-            ← Back
+            {t('assessment.back')}
           </Button>
         }
       />
@@ -234,12 +237,13 @@ export default function CaseAssessmentPage() {
             </div>
             <h2 className="font-serif text-xl text-dark mb-1">{caseData.title}</h2>
             <p className="text-xs text-gray-500">
-              Submitted on{' '}
-              {new Date(caseData.created_at).toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
+              {t('assessment.submittedOn', {
+                date: new Date(caseData.created_at).toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })
               })}
             </p>
           </Card>
@@ -252,13 +256,13 @@ export default function CaseAssessmentPage() {
                   🔒
                 </span>
                 <div>
-                  <p className="font-medium text-dark">Anonymous Survivor</p>
-                  <p className="text-xs text-gray-500">Identity hidden at survivor's request</p>
+                  <p className="font-medium text-dark">{t('assessment.anonymous.title')}</p>
+                  <p className="text-xs text-gray-500">{t('assessment.anonymous.desc')}</p>
                 </div>
               </div>
             ) : (
               <p className="text-sm text-gray-500">
-                Survivor ID:{' '}
+                {t('assessment.survivorId')}{' '}
                 <span className="font-mono text-xs text-dark">{caseData.survivor_id.slice(0, 8)}...</span>
               </p>
             )}
@@ -269,13 +273,13 @@ export default function CaseAssessmentPage() {
             <Card header={
               <div className="flex items-center gap-2">
                 <span className="text-base">🤖</span>
-                <h3 className="text-sm font-medium text-dark">AI Triage Summary</h3>
+                <h3 className="text-sm font-medium text-dark">{t('assessment.aiSummary.title')}</h3>
               </div>
             }>
               <p className="text-sm text-dark leading-relaxed mb-3">{caseData.ai_summary}</p>
               {caseData.ai_raw_output?.reasoning && (
                 <div className="rounded-lg bg-teal-50 px-3 py-2">
-                  <p className="text-xs font-medium text-teal-700 mb-0.5">AI Reasoning</p>
+                  <p className="text-xs font-medium text-teal-700 mb-0.5">{t('assessment.aiSummary.reasoning')}</p>
                   <p className="text-xs text-teal-900 leading-relaxed">
                     {caseData.ai_raw_output.reasoning}
                   </p>
@@ -285,14 +289,14 @@ export default function CaseAssessmentPage() {
           )}
 
           {/* Incident Details */}
-          <Card header={<h3 className="text-sm font-medium text-dark">Incident Details</h3>}>
+          <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.incident.title')}</h3>}>
             <p className="text-sm text-dark leading-relaxed whitespace-pre-wrap mb-4">
               {caseData.description}
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               {caseData.incident_date && (
                 <div>
-                  <p className="text-xs text-gray-500 mb-0.5">Incident Date</p>
+                  <p className="text-xs text-gray-500 mb-0.5">{t('assessment.incident.date')}</p>
                   <p className="text-sm text-dark">
                     {new Date(caseData.incident_date).toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -304,7 +308,7 @@ export default function CaseAssessmentPage() {
               )}
               {caseData.location_text && (
                 <div>
-                  <p className="text-xs text-gray-500 mb-0.5">Location</p>
+                  <p className="text-xs text-gray-500 mb-0.5">{t('assessment.incident.location')}</p>
                   <p className="text-sm text-dark">{caseData.location_text}</p>
                 </div>
               )}
@@ -312,9 +316,9 @@ export default function CaseAssessmentPage() {
           </Card>
 
           {/* Evidence Files */}
-          <Card header={<h3 className="text-sm font-medium text-dark">Evidence Files</h3>}>
+          <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.evidence.title')}</h3>}>
             {!evidenceFiles || evidenceFiles.length === 0 ? (
-              <p className="text-sm text-gray-400">No evidence uploaded by the survivor yet.</p>
+              <p className="text-sm text-gray-400">{t('assessment.evidence.empty')}</p>
             ) : (
               <div className="space-y-2">
                 {evidenceFiles.map((f) => {
@@ -338,7 +342,7 @@ export default function CaseAssessmentPage() {
                         }}
                         className="shrink-0 ml-2 rounded-lg border border-teal-200 px-2.5 py-1 text-xs font-medium text-teal-600 hover:bg-teal-50 transition-colors"
                       >
-                        View
+                        {t('assessment.evidence.view')}
                       </button>
                     </div>
                   );
@@ -348,11 +352,11 @@ export default function CaseAssessmentPage() {
           </Card>
 
           {/* Activity / Audit Trail */}
-          <Card header={<h3 className="text-sm font-medium text-dark">Activity Log</h3>}>
+          <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.activity.title')}</h3>}>
             {activitiesLoading ? (
-              <Spinner size="sm" label="Loading activities..." />
+              <Spinner size="sm" label={t('assessment.activity.loading')} />
             ) : !activities || activities.length === 0 ? (
-              <p className="text-sm text-gray-500">No activity yet.</p>
+              <p className="text-sm text-gray-500">{t('assessment.activity.empty')}</p>
             ) : (
               <div className="space-y-0">
                 {activities.map((activity, idx) => (
@@ -384,7 +388,7 @@ export default function CaseAssessmentPage() {
           </Card>
 
           {/* Case Messaging */}
-          <Card header={<h3 className="text-sm font-medium text-dark">Messages</h3>} padding="none">
+          <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.messages')}</h3>} padding="none">
             <div className="h-96">
               <ChatPanel
                 caseId={caseData.id}
@@ -398,14 +402,14 @@ export default function CaseAssessmentPage() {
         {/* ─── RIGHT COLUMN (Action Panel) ─────────────────── */}
         <div className="space-y-5">
           {/* Status Update */}
-          <Card header={<h3 className="text-sm font-medium text-dark">Update Status</h3>}>
+          <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.updateStatus.title')}</h3>}>
             <div className="space-y-3">
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
                 className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-dark focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
               >
-                <option value="">Select new status...</option>
+                <option value="">{t('assessment.updateStatus.placeholder')}</option>
                 {statusOptions
                   .filter((s) => s !== caseData.status)
                   .map((s) => (
@@ -421,21 +425,21 @@ export default function CaseAssessmentPage() {
                 isLoading={statusMutation.isPending}
                 className="w-full"
               >
-                Update Status
+                {t('assessment.updateStatus.button')}
               </Button>
               {statusMutation.isError && (
-                <p className="text-xs text-critical">Failed to update status.</p>
+                <p className="text-xs text-critical">{t('assessment.updateStatus.error')}</p>
               )}
             </div>
           </Card>
 
           {/* Assign Worker (admin only) */}
           {isAdmin && (
-            <Card header={<h3 className="text-sm font-medium text-dark">Assign Case Worker</h3>}>
+            <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.assignWorker.title')}</h3>}>
               <div className="space-y-3">
                 {caseData.assigned_worker_id && (
                   <p className="text-xs text-gray-500">
-                    Currently assigned:{' '}
+                    {t('assessment.assignWorker.currentlyAssigned')}{' '}
                     <span className="font-mono text-dark">
                       {caseData.assigned_worker_id.slice(0, 8)}...
                     </span>
@@ -446,7 +450,7 @@ export default function CaseAssessmentPage() {
                   onChange={(e) => setSelectedWorkerId(e.target.value)}
                   className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-dark focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
                 >
-                  <option value="">Select a worker...</option>
+                  <option value="">{t('assessment.assignWorker.placeholder')}</option>
                   {(workers || []).map((w) => (
                     <option key={w.id} value={w.id}>
                       {w.display_name || w.id.slice(0, 8)}
@@ -460,10 +464,10 @@ export default function CaseAssessmentPage() {
                   isLoading={assignMutation.isPending}
                   className="w-full"
                 >
-                  Assign Worker
+                  {t('assessment.assignWorker.button')}
                 </Button>
                 {assignMutation.isError && (
-                  <p className="text-xs text-critical">Failed to assign worker.</p>
+                  <p className="text-xs text-critical">{t('assessment.assignWorker.error')}</p>
                 )}
               </div>
             </Card>
@@ -471,9 +475,9 @@ export default function CaseAssessmentPage() {
 
           {/* Refer Case (admin only) */}
           {isAdmin && (
-            <Card header={<h3 className="text-sm font-medium text-dark">Refer Case</h3>}>
+            <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.referCase.title')}</h3>}>
               <p className="text-xs text-gray-500 mb-3">
-                Transfer this case to another institution for specialized support.
+                {t('assessment.referCase.desc')}
               </p>
               <Button
                 size="sm"
@@ -481,18 +485,18 @@ export default function CaseAssessmentPage() {
                 onClick={() => setReferModalOpen(true)}
                 className="w-full"
               >
-                🔀 Refer to Institution
+                {t('assessment.referCase.button')}
               </Button>
             </Card>
           )}
 
           {/* Add Note */}
-          <Card header={<h3 className="text-sm font-medium text-dark">Add a Note</h3>}>
+          <Card header={<h3 className="text-sm font-medium text-dark">{t('assessment.addNote.title')}</h3>}>
             <div className="space-y-3">
               <textarea
                 value={noteText}
                 onChange={(e) => setNoteText(e.target.value)}
-                placeholder="Write a note about this case..."
+                placeholder={t('assessment.addNote.placeholder')}
                 rows={3}
                 className="w-full resize-y rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-dark placeholder:text-gray-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
               />
@@ -503,7 +507,7 @@ export default function CaseAssessmentPage() {
                 isLoading={noteMutation.isPending}
                 className="w-full"
               >
-                Add Note
+                {t('assessment.addNote.button')}
               </Button>
             </div>
           </Card>
@@ -512,24 +516,24 @@ export default function CaseAssessmentPage() {
           <Card>
             <div className="space-y-2.5 text-xs">
               <div className="flex justify-between">
-                <span className="text-gray-500">Case ID</span>
+                <span className="text-gray-500">{t('assessment.quickInfo.caseId')}</span>
                 <span className="font-mono text-dark">{caseData.id.slice(0, 8)}...</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Created</span>
+                <span className="text-gray-500">{t('assessment.quickInfo.created')}</span>
                 <span className="text-dark">
                   {new Date(caseData.created_at).toLocaleDateString()}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Last Updated</span>
+                <span className="text-gray-500">{t('assessment.quickInfo.updated')}</span>
                 <span className="text-dark">
                   {new Date(caseData.updated_at).toLocaleDateString()}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Anonymous</span>
-                <span className="text-dark">{caseData.is_anonymous ? 'Yes' : 'No'}</span>
+                <span className="text-gray-500">{t('assessment.quickInfo.anonymous')}</span>
+                <span className="text-dark">{caseData.is_anonymous ? t('assessment.quickInfo.yes') : t('assessment.quickInfo.no')}</span>
               </div>
             </div>
           </Card>
