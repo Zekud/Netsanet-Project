@@ -1,9 +1,11 @@
 // InstitutionsPage — system_admin manages all institutions.
 // Route: /dashboard/institutions
+// Uses semantic tokens + Lucide icons.
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { Building2, UserPlus, X } from 'lucide-react';
 import api from '../../lib/api';
 
 interface Institution {
@@ -26,29 +28,36 @@ function InstitutionModal({
 }: {
   onClose: () => void;
   onSave: (data: { name: string; type: string; description: string }) => void;
-  t: any;
+  t: ReturnType<typeof useTranslation>['t'];
 }) {
   const [form, setForm] = useState({ name: '', type: 'mowsa', description: '' });
+  const inputClasses = 'w-full rounded-xl border border-border bg-surface px-3 py-2 text-sm text-heading focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20';
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-        <h3 className="font-serif text-lg text-dark mb-4">{t('institutions.addInstitution')}</h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-heading/40 backdrop-blur-sm px-4 animate-fade-in">
+      <div className="w-full max-w-md rounded-2xl bg-surface border border-border p-6 shadow-2xl animate-scale-in">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-heading text-lg text-heading">{t('institutions.addInstitution')}</h3>
+          <button onClick={onClose} className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:bg-inset transition-colors">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">{t('institutions.modal.name')}</label>
+            <label className="block text-xs font-medium text-muted mb-1">{t('institutions.modal.name')}</label>
             <input
               value={form.name}
               onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className={inputClasses}
               placeholder={t('institutions.modal.namePlaceholder')}
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">{t('institutions.modal.services')} *</label>
+            <label className="block text-xs font-medium text-muted mb-1">{t('institutions.modal.services')} *</label>
             <select
               value={form.type}
               onChange={(e) => setForm((p) => ({ ...p, type: e.target.value }))}
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+              className={inputClasses}
             >
               {Object.entries(TYPE_LABELS).map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
@@ -56,21 +65,21 @@ function InstitutionModal({
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Description</label>
+            <label className="block text-xs font-medium text-muted mb-1">Description</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
               rows={2}
-              className="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className={`${inputClasses} resize-none`}
             />
           </div>
         </div>
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">{t('institutions.modal.cancel')}</button>
+          <button onClick={onClose} className="flex-1 rounded-xl border border-border py-2.5 text-sm text-body hover:bg-inset transition-colors">{t('institutions.modal.cancel')}</button>
           <button
             onClick={() => { if (form.name) onSave(form); }}
             disabled={!form.name}
-            className="flex-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50"
+            className="flex-1 rounded-xl bg-primary py-2.5 text-sm font-medium text-primary-fg hover:bg-primary-hover transition-colors disabled:opacity-50"
           >
             {t('institutions.modal.submit')}
           </button>
@@ -95,49 +104,56 @@ function AddAdminModal({
   onSave: (data: { email: string; display_name: string }) => void;
   isLoading: boolean;
   error: string | null;
-  t: any;
+  t: ReturnType<typeof useTranslation>['t'];
 }) {
   const [form, setForm] = useState({ email: '', display_name: '' });
+  const inputClasses = 'w-full rounded-xl border border-border bg-surface px-3 py-2 text-sm text-heading focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20';
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-        <div className="mb-4">
-          <h3 className="font-serif text-lg text-dark">Add Institution Admin</h3>
-          <p className="text-xs text-gray-500 mt-0.5">for <span className="font-medium text-teal-700">{institution.name}</span></p>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-heading/40 backdrop-blur-sm px-4 animate-fade-in">
+      <div className="w-full max-w-md rounded-2xl bg-surface border border-border p-6 shadow-2xl animate-scale-in">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="font-heading text-lg text-heading">Add Institution Admin</h3>
+            <p className="text-xs text-muted mt-0.5">for <span className="font-medium text-primary">{institution.name}</span></p>
+          </div>
+          <button onClick={onClose} className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:bg-inset transition-colors">
+            <X className="h-4 w-4" />
+          </button>
         </div>
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Full Name *</label>
+            <label className="block text-xs font-medium text-muted mb-1">Full Name *</label>
             <input
               value={form.display_name}
               onChange={(e) => setForm((p) => ({ ...p, display_name: e.target.value }))}
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className={inputClasses}
               placeholder="Almaz Tadesse"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">{t('institutions.modal.email')}</label>
+            <label className="block text-xs font-medium text-muted mb-1">{t('institutions.modal.email')}</label>
             <input
               type="email"
               value={form.email}
               onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className={inputClasses}
               placeholder="admin@institution.gov.et"
             />
           </div>
           {error && (
-            <p className="rounded-lg bg-red-50 px-3 py-2 text-xs text-red-600">{error}</p>
+            <p className="rounded-xl bg-danger-soft border border-danger/20 px-3 py-2 text-xs text-danger">{error}</p>
           )}
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-muted">
             The admin will receive an email OTP to log in for the first time.
           </p>
         </div>
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose} className="flex-1 rounded-xl border border-gray-200 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">{t('institutions.modal.cancel')}</button>
+          <button onClick={onClose} className="flex-1 rounded-xl border border-border py-2.5 text-sm text-body hover:bg-inset transition-colors">{t('institutions.modal.cancel')}</button>
           <button
             onClick={() => { if (form.email && form.display_name) onSave(form); }}
             disabled={!form.email || !form.display_name || isLoading}
-            className="flex-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-50"
+            className="flex-1 rounded-xl bg-primary py-2.5 text-sm font-medium text-primary-fg hover:bg-primary-hover transition-colors disabled:opacity-50"
           >
             {isLoading ? 'Creating...' : 'Create Admin'}
           </button>
@@ -212,57 +228,62 @@ export default function InstitutionsPage() {
   const institutions = data?.data ?? [];
 
   return (
-    <div className="space-y-6">
+    <div className="relative space-y-6">
+      {/* Background mesh */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-3xl z-0 -mx-4 sm:-mx-6 px-4 sm:px-6">
+        <div className="mesh-blob-1 -top-10 -right-20" />
+        <div className="mesh-blob-2 top-40 -left-20" />
+      </div>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-2xl text-dark">{t('institutions.title')}</h1>
-          <p className="text-sm text-gray-500 mt-0.5">{t('institutions.subtitle')}</p>
+          <h1 className="font-heading text-2xl text-heading">{t('institutions.title')}</h1>
+          <p className="text-sm text-muted mt-0.5">{t('institutions.subtitle')}</p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="rounded-xl bg-teal-500 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700 transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-fg hover:bg-primary-hover transition-colors"
         >
-          + {t('institutions.addInstitution')}
+          <Building2 className="h-4 w-4" /> {t('institutions.addInstitution')}
         </button>
       </div>
 
       {/* Table */}
       {isLoading ? (
-        <div className="flex justify-center py-16"><div className="h-8 w-8 animate-spin rounded-full border-2 border-teal-500 border-t-transparent" /></div>
+        <div className="flex justify-center py-16"><div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" /></div>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50 text-left">
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.institution')}</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.services')}</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.status')}</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{t('institutions.table.actions')}</th>
+              <tr className="border-b border-border bg-inset text-left">
+                <th className="px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wide">{t('institutions.table.institution')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wide">{t('institutions.table.services')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wide">{t('institutions.table.status')}</th>
+                <th className="px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wide">{t('institutions.table.actions')}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-border-muted">
               {institutions.length === 0 ? (
-                <tr><td colSpan={4} className="px-4 py-10 text-center text-sm text-gray-400">{t('institutions.empty')}</td></tr>
+                <tr><td colSpan={4} className="px-4 py-10 text-center text-sm text-placeholder">{t('institutions.empty')}</td></tr>
               ) : institutions.map((inst) => (
-                <tr key={inst.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={inst.id} className="hover:bg-inset transition-colors">
                   <td className="px-4 py-3">
-                    <p className="font-medium text-dark">{inst.name}</p>
-                    {inst.description && <p className="text-xs text-gray-400 mt-0.5 truncate max-w-xs">{inst.description}</p>}
+                    <p className="font-medium text-heading">{inst.name}</p>
+                    {inst.description && <p className="text-xs text-muted mt-0.5 truncate max-w-xs">{inst.description}</p>}
                   </td>
                   <td className="px-4 py-3">
-                    <span className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
+                    <span className="rounded-lg bg-inset px-2 py-0.5 text-xs font-medium text-muted">
                       {TYPE_LABELS[inst.type] ?? inst.type}
                     </span>
                   </td>
                   <td className="px-4 py-3">
                     {inst.is_active ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" /> {t('shared.status.active')}
+                      <span className="inline-flex items-center gap-1.5 rounded-lg bg-success-soft px-2 py-0.5 text-xs font-medium text-success">
+                        <span className="h-1.5 w-1.5 rounded-full bg-success" /> {t('shared.status.active')}
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> Pending
+                      <span className="inline-flex items-center gap-1.5 rounded-lg bg-warning-soft px-2 py-0.5 text-xs font-medium text-warning">
+                        <span className="h-1.5 w-1.5 rounded-full bg-warning" /> Pending
                       </span>
                     )}
                   </td>
@@ -270,17 +291,17 @@ export default function InstitutionsPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => { setAdminError(null); setAdminTarget(inst); }}
-                        className="rounded-lg border border-teal-200 px-3 py-1.5 text-xs font-medium text-teal-600 hover:bg-teal-50 transition-colors"
+                        className="inline-flex items-center gap-1 rounded-xl border border-primary-muted px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary-soft transition-colors"
                       >
-                        + Add Admin
+                        <UserPlus className="h-3 w-3" /> Add Admin
                       </button>
                       <button
                         onClick={() => toggleMutation.mutate({ id: inst.id, is_active: !inst.is_active })}
                         disabled={toggleMutation.isPending}
-                        className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                        className={`rounded-xl px-3 py-1.5 text-xs font-medium transition-colors ${
                           inst.is_active
-                            ? 'border border-red-200 text-red-500 hover:bg-red-50'
-                            : 'bg-teal-500 text-white hover:bg-teal-700'
+                            ? 'border border-danger/30 text-danger hover:bg-danger-soft'
+                            : 'bg-primary text-primary-fg hover:bg-primary-hover'
                         }`}
                       >
                         {inst.is_active ? 'Deactivate' : 'Approve'}

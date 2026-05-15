@@ -1,10 +1,11 @@
 // AnalyticsPage — KPI dashboard with charts for institution_admin / system_admin.
 // Route: /dashboard/analytics
-// Uses Recharts for visualisations. Run: npm install recharts
+// Uses Recharts for visualisations + semantic tokens + Lucide icons.
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { ClipboardList, FolderOpen, AlertTriangle, Clock } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
@@ -23,27 +24,29 @@ interface StatusItem { status: string; count: number; }
 interface CategoryItem { category: string; count: number; }
 interface TrendItem { date: string; count: number; }
 
-// ─── Colors ───────────────────────────────────────────────────
+// ─── Colors — using the violet palette ────────────────────────
 
 const STATUS_COLORS: Record<string, string> = {
-  new: '#1A7A6E', under_review: '#D97706', referred: '#3B82F6',
+  new: '#7C3AED', under_review: '#D97706', referred: '#6366F1',
   active: '#059669', resolved: '#6B7280', closed: '#9CA3AF',
 };
-const CATEGORY_COLORS = ['#1A7A6E', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6'];
+const CATEGORY_COLORS = ['#7C3AED', '#6366F1', '#F59E0B', '#EF4444', '#A78BFA'];
 
 // ─── KPI Card ─────────────────────────────────────────────────
 
-function KpiCard({ label, value, icon, sub, accent }: {
-  label: string; value: number | string; icon: string; sub?: string; accent?: string;
+function KpiCard({ icon: Icon, label, value, sub, accent }: {
+  icon: React.ElementType; label: string; value: number | string; sub?: string; accent?: string;
 }) {
   return (
-    <div className={`rounded-xl border bg-white p-5 shadow-sm ${accent ? `border-l-4 ${accent}` : 'border-gray-100'}`}>
+    <div className={`rounded-2xl border bg-surface p-5 shadow-sm hover-lift ${accent ? `border-l-4 ${accent}` : 'border-border'}`}>
       <div className="flex items-start justify-between mb-3">
-        <span className="text-2xl">{icon}</span>
-        {sub && <span className="text-[10px] text-gray-400 bg-gray-50 rounded-md px-2 py-0.5">{sub}</span>}
+        <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${accent ? 'bg-primary-soft text-primary' : 'bg-inset text-muted'}`}>
+          <Icon className="h-4 w-4" />
+        </div>
+        {sub && <span className="text-[10px] text-placeholder bg-inset rounded-lg px-2 py-0.5">{sub}</span>}
       </div>
-      <p className="font-mono text-3xl font-bold text-dark">{value}</p>
-      <p className="text-xs text-gray-500 mt-1">{label}</p>
+      <p className="font-mono text-3xl font-bold text-heading">{value}</p>
+      <p className="text-xs text-muted mt-1">{label}</p>
     </div>
   );
 }
@@ -54,7 +57,6 @@ export default function AnalyticsPage() {
   const { t } = useTranslation('dashboard');
   const [period, setPeriod] = useState('30d');
 
-  // Move constants that depend on translations inside the component
   const STATUS_LABELS: Record<string, string> = {
     new: t('shared.status.new'),
     under_review: t('shared.status.under_review'),
@@ -103,44 +105,40 @@ export default function AnalyticsPage() {
   const categoryData = (categoryRes?.data ?? []).map((c) => ({ ...c, label: CATEGORY_LABELS[c.category] ?? c.category }));
   const trendData = trendRes?.data ?? [];
 
-  // Format date labels for trend chart
-  const formattedTrend = trendData.map((t) => ({
-    ...t,
-    label: new Date(t.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }),
+  const formattedTrend = trendData.map((item) => ({
+    ...item,
+    label: new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }),
   }));
 
   return (
-    <div className="space-y-6">
+    <div className="relative space-y-6">
+      {/* Background mesh */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-3xl z-0 -mx-4 sm:-mx-6 px-4 sm:px-6">
+        <div className="mesh-blob-1 -top-10 -right-20" />
+        <div className="mesh-blob-2 top-60 -left-20" />
+      </div>
+
       {/* Header */}
-      <div>
-        <h1 className="font-serif text-2xl text-dark">{t('analytics.title')}</h1>
-        <p className="text-sm text-gray-500 mt-0.5">{t('analytics.subtitle')}</p>
+      <div className="relative z-10 animate-fade-in-up">
+        <h1 className="font-heading text-2xl text-heading">{t('analytics.title')}</h1>
+        <p className="text-sm text-muted mt-0.5">{t('analytics.subtitle')}</p>
       </div>
 
       {/* KPI Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard icon="📋" label={t('analytics.kpi.totalCases')} value={overview?.totalCases ?? '—'} />
-        <KpiCard icon="🔓" label={t('analytics.kpi.openCases')} value={overview?.openCases ?? '—'} accent="border-l-teal-500" />
-        <KpiCard
-          icon="🚨" label={t('analytics.kpi.criticalCases')}
-          value={overview?.criticalCases ?? '—'}
-          accent="border-l-red-500"
-          sub={t('analytics.kpi.needsAttention')}
-        />
-        <KpiCard
-          icon="⏱️" label={t('analytics.kpi.avgResolution')}
-          value={overview ? `${overview.avgResolutionDays}d` : '—'}
-          sub={t('analytics.kpi.resolvedCases')}
-        />
+      <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="animate-stagger-1"><KpiCard icon={ClipboardList} label={t('analytics.kpi.totalCases')} value={overview?.totalCases ?? '—'} /></div>
+        <div className="animate-stagger-2"><KpiCard icon={FolderOpen} label={t('analytics.kpi.openCases')} value={overview?.openCases ?? '—'} accent="border-l-primary" /></div>
+        <div className="animate-stagger-3"><KpiCard icon={AlertTriangle} label={t('analytics.kpi.criticalCases')} value={overview?.criticalCases ?? '—'} accent="border-l-danger" sub={t('analytics.kpi.needsAttention')} /></div>
+        <div className="animate-stagger-4"><KpiCard icon={Clock} label={t('analytics.kpi.avgResolution')} value={overview ? `${overview.avgResolutionDays}d` : '—'} sub={t('analytics.kpi.resolvedCases')} /></div>
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-4 animate-stagger-5">
         {/* Status Donut */}
-        <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
-          <h2 className="text-sm font-semibold text-dark mb-4">{t('analytics.charts.byStatus')}</h2>
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+          <h2 className="text-sm font-semibold text-heading mb-4">{t('analytics.charts.byStatus')}</h2>
           {statusData.length === 0 ? (
-            <p className="text-center text-sm text-gray-400 py-10">{t('analytics.charts.noData')}</p>
+            <p className="text-center text-sm text-placeholder py-10">{t('analytics.charts.noData')}</p>
           ) : (
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
@@ -157,10 +155,10 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Category Horizontal Bar */}
-        <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
-          <h2 className="text-sm font-semibold text-dark mb-4">{t('analytics.charts.byCategory')}</h2>
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+          <h2 className="text-sm font-semibold text-heading mb-4">{t('analytics.charts.byCategory')}</h2>
           {categoryData.length === 0 ? (
-            <p className="text-center text-sm text-gray-400 py-10">{t('analytics.charts.noData')}</p>
+            <p className="text-center text-sm text-placeholder py-10">{t('analytics.charts.noData')}</p>
           ) : (
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={categoryData} layout="vertical" margin={{ left: 8, right: 16 }}>
@@ -179,16 +177,16 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Trend Chart */}
-      <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
+      <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-dark">{t('analytics.charts.overTime')}</h2>
+          <h2 className="text-sm font-semibold text-heading">{t('analytics.charts.overTime')}</h2>
           <div className="flex gap-1">
             {PERIODS.map((p) => (
               <button
                 key={p.value}
                 onClick={() => setPeriod(p.value)}
-                className={`rounded-lg px-3 py-1 text-xs font-medium transition-colors ${
-                  period === p.value ? 'bg-teal-500 text-white' : 'text-gray-500 hover:bg-gray-100'
+                className={`rounded-xl px-3 py-1 text-xs font-medium transition-colors ${
+                  period === p.value ? 'bg-primary text-primary-fg' : 'text-muted hover:bg-inset'
                 }`}
               >
                 {p.label}
@@ -197,14 +195,14 @@ export default function AnalyticsPage() {
           </div>
         </div>
         {formattedTrend.length === 0 ? (
-          <p className="text-center text-sm text-gray-400 py-10">{t('analytics.charts.noData')}</p>
+          <p className="text-center text-sm text-placeholder py-10">{t('analytics.charts.noData')}</p>
         ) : (
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={formattedTrend} margin={{ left: 0, right: 8 }}>
               <XAxis dataKey="label" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
               <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
               <Tooltip formatter={(v) => [t('analytics.charts.tooltipCases', { value: v })]} labelFormatter={(l) => t('analytics.charts.tooltipDate', { label: l })} />
-              <Bar dataKey="count" fill="#1A7A6E" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="count" fill="#7C3AED" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         )}

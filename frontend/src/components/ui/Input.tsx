@@ -1,4 +1,5 @@
 // Input — text input with label, error state, and optional helper text.
+// Uses semantic tokens for dark/light mode support.
 
 import { forwardRef, type InputHTMLAttributes } from 'react';
 
@@ -17,7 +18,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="mb-1.5 block text-sm font-medium text-dark"
+            className="mb-1.5 block text-sm font-medium text-heading"
           >
             {label}
           </label>
@@ -25,14 +26,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={inputId}
-          className={`w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 ${
-            error ? 'border-critical' : 'border-gray-200'
+          className={`w-full rounded-xl border bg-surface px-3.5 py-2.5 text-sm text-heading placeholder:text-placeholder transition-all duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20 ${
+            error ? 'border-danger' : 'border-border'
           } ${className}`}
           {...props}
         />
-        {error && <p className="mt-1 text-xs text-critical">{error}</p>}
+        {error && <p className="mt-1 text-xs text-danger">{error}</p>}
         {helperText && !error && (
-          <p className="mt-1 text-xs text-gray-500">{helperText}</p>
+          <p className="mt-1 text-xs text-muted">{helperText}</p>
         )}
       </div>
     );

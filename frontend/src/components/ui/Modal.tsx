@@ -1,6 +1,8 @@
 // Modal — generic dialog overlay with title, content, and close behavior.
+// Uses semantic tokens + Lucide icons for dark/light support.
 
 import { useEffect, useRef, type ReactNode } from 'react';
+import { X } from 'lucide-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -55,27 +57,25 @@ export default function Modal({
       }}
     >
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-dark/40 backdrop-blur-sm" />
+      <div className="fixed inset-0 bg-heading/40 backdrop-blur-sm animate-fade-in" />
 
       {/* Modal Panel */}
       <div
-        className={`relative w-full rounded-xl bg-white shadow-lg ${sizeStyles[size]}`}
+        className={`relative w-full rounded-2xl bg-surface border border-border shadow-xl animate-scale-in ${sizeStyles[size]}`}
         role="dialog"
         aria-modal="true"
         aria-label={title}
       >
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
-            <h3 className="font-serif text-lg text-dark">{title}</h3>
+          <div className="flex items-center justify-between border-b border-border-muted px-5 py-4">
+            <h3 className="font-heading text-lg text-heading">{title}</h3>
             <button
               onClick={onClose}
-              className="rounded-lg p-1 text-gray-500 transition-colors duration-150 hover:bg-gray-100 hover:text-dark"
+              className="rounded-xl p-1.5 text-muted transition-colors duration-150 hover:bg-inset hover:text-heading"
               aria-label="Close dialog"
             >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="h-5 w-5" />
             </button>
           </div>
         )}
@@ -85,7 +85,7 @@ export default function Modal({
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-2 border-t border-gray-200 px-5 py-3">
+          <div className="flex items-center justify-end gap-2 border-t border-border-muted px-5 py-3">
             {footer}
           </div>
         )}

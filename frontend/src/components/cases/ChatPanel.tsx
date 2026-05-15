@@ -1,9 +1,11 @@
 // ChatPanel — real-time case-scoped messaging between survivor and staff.
 // Used inside CaseAssessmentPage (staff) and future CaseDetailPage (survivor).
 // Subscribes to Supabase Realtime on mount for instant message delivery.
+// Uses semantic tokens + Lucide icons.
 
 import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { MessageSquare, Send, Bot } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import api from '../../lib/api';
 import { Spinner } from '../ui';
@@ -142,15 +144,15 @@ export default function ChatPanel({ caseId, currentUserId, currentUserRole }: Ch
   return (
     <div className="flex flex-col h-full min-h-0">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 shrink-0">
-        <h3 className="text-sm font-medium text-dark">Case Messages</h3>
+      <div className="flex items-center justify-between border-b border-border px-4 py-3 shrink-0">
+        <h3 className="text-sm font-medium text-heading">Case Messages</h3>
         <div className="flex items-center gap-1.5">
           <span
             className={`h-2 w-2 rounded-full ${
-              realtimeReady ? 'bg-teal-500' : 'bg-gray-300'
+              realtimeReady ? 'bg-success' : 'bg-placeholder'
             }`}
           />
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-muted">
             {realtimeReady ? 'Live' : 'Connecting...'}
           </span>
         </div>
@@ -164,9 +166,11 @@ export default function ChatPanel({ caseId, currentUserId, currentUserRole }: Ch
           </div>
         ) : allMessages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
-            <span className="text-2xl mb-2">💬</span>
-            <p className="text-sm text-gray-500">No messages yet.</p>
-            <p className="text-xs text-gray-500">Start the conversation below.</p>
+            <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary">
+              <MessageSquare className="h-5 w-5" />
+            </div>
+            <p className="text-sm text-muted">No messages yet.</p>
+            <p className="text-xs text-placeholder">Start the conversation below.</p>
           </div>
         ) : (
           allMessages.map((msg) => (
@@ -176,9 +180,9 @@ export default function ChatPanel({ caseId, currentUserId, currentUserRole }: Ch
             >
               {/* Sender label (only on others' messages) */}
               {!isMine(msg) && (
-                <span className="mb-1 text-[10px] font-medium text-gray-500 px-1">
+                <span className="mb-1 text-[10px] font-medium text-muted px-1 inline-flex items-center gap-1">
                   {msg.sender_name || 'Unknown'}
-                  {isAI(msg) && ' 🤖'}
+                  {isAI(msg) && <Bot className="h-3 w-3 text-primary" />}
                 </span>
               )}
 
@@ -186,17 +190,17 @@ export default function ChatPanel({ caseId, currentUserId, currentUserRole }: Ch
               <div
                 className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                   isMine(msg)
-                    ? 'rounded-br-sm bg-teal-500 text-white'
+                    ? 'rounded-br-sm bg-chat-mine text-chat-mine-fg'
                     : isAI(msg)
-                    ? 'rounded-bl-sm bg-teal-50 text-teal-900 border border-teal-100'
-                    : 'rounded-bl-sm bg-white text-dark border border-gray-200 shadow-sm'
+                    ? 'rounded-bl-sm bg-chat-ai text-chat-ai-fg border border-chat-ai-border'
+                    : 'rounded-bl-sm bg-surface text-body border border-border shadow-sm'
                 }`}
               >
                 {msg.content}
               </div>
 
               {/* Timestamp */}
-              <span className="mt-0.5 text-[10px] text-gray-500 px-1">
+              <span className="mt-0.5 text-[10px] text-placeholder px-1">
                 {new Date(msg.created_at).toLocaleTimeString('en-US', {
                   hour: 'numeric',
                   minute: '2-digit',
@@ -209,9 +213,9 @@ export default function ChatPanel({ caseId, currentUserId, currentUserRole }: Ch
       </div>
 
       {/* Input bar */}
-      <div className="border-t border-gray-200 px-4 py-3 shrink-0">
+      <div className="border-t border-border px-4 py-3 shrink-0">
         {sendMutation.isError && (
-          <p className="mb-2 text-xs text-critical">Failed to send message. Try again.</p>
+          <p className="mb-2 text-xs text-danger">Failed to send message. Try again.</p>
         )}
         <div className="flex gap-2 items-end">
           <textarea
@@ -221,7 +225,7 @@ export default function ChatPanel({ caseId, currentUserId, currentUserRole }: Ch
             onKeyDown={handleKeyDown}
             placeholder={`Message${currentUserRole === 'survivor' ? ' your case worker' : ' the survivor'}... (Enter to send)`}
             rows={1}
-            className="flex-1 resize-none rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+            className="flex-1 resize-none rounded-xl border border-border bg-surface px-3 py-2 text-sm text-heading placeholder:text-placeholder transition-all duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
             style={{ maxHeight: '100px' }}
             onInput={(e) => {
               const target = e.currentTarget;
@@ -232,21 +236,16 @@ export default function ChatPanel({ caseId, currentUserId, currentUserRole }: Ch
           <button
             onClick={handleSend}
             disabled={!draft.trim() || sendMutation.isPending}
-            className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-teal-500 text-white transition-colors duration-150 hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="shrink-0 flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-fg transition-colors duration-150 hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
           >
             {sendMutation.isPending ? (
-              <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-              </svg>
+              <Spinner size="sm" />
             ) : (
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-              </svg>
+              <Send className="h-4 w-4" />
             )}
           </button>
         </div>
-        <p className="mt-1.5 text-[10px] text-gray-500">
+        <p className="mt-1.5 text-[10px] text-placeholder">
           Shift+Enter for new line · Enter to send
         </p>
       </div>

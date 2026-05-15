@@ -16,8 +16,8 @@ export default function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-surface">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-3 border-teal-500 border-t-transparent" />
-          <p className="text-sm text-gray-500 font-sans">Loading...</p>
+          <div className="h-8 w-8 animate-spin rounded-full border-[3px] border-primary border-t-transparent" />
+          <p className="text-sm text-muted">Loading...</p>
         </div>
       </div>
     );

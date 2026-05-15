@@ -2,8 +2,10 @@
 // Usage: import { useToast } from './ToastProvider'
 //        const { showToast } = useToast();
 //        showToast('Title', 'Body text', '/dashboard/cases/123');
+// Uses semantic tokens + Lucide icons for dark/light support.
 
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { X } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────
 
@@ -55,13 +57,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="pointer-events-auto w-72 overflow-hidden rounded-xl bg-white shadow-lg border border-gray-200 animate-[slideIn_0.2s_ease-out]"
-            style={{
-              animation: 'slideIn 0.2s ease-out',
-            }}
+            className="pointer-events-auto w-72 overflow-hidden rounded-2xl bg-surface shadow-xl border border-border animate-slide-in-right"
           >
             <div
-              className={`flex gap-3 p-4 ${toast.href ? 'cursor-pointer hover:bg-gray-100 transition-colors' : ''}`}
+              className={`flex gap-3 p-4 ${toast.href ? 'cursor-pointer hover:bg-inset transition-colors' : ''}`}
               onClick={() => {
                 if (toast.href) {
                   window.location.href = toast.href;
@@ -69,34 +68,25 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 dismiss(toast.id);
               }}
             >
-              {/* Teal accent bar */}
-              <div className="w-1 shrink-0 rounded-full bg-teal-500" />
+              {/* Primary accent bar */}
+              <div className="w-1 shrink-0 rounded-full bg-primary" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-dark truncate">{toast.title}</p>
-                <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{toast.body}</p>
+                <p className="text-sm font-medium text-heading truncate">{toast.title}</p>
+                <p className="text-xs text-muted mt-0.5 line-clamp-2">{toast.body}</p>
               </div>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   dismiss(toast.id);
                 }}
-                className="shrink-0 text-gray-500 hover:text-dark transition-colors"
+                className="shrink-0 text-muted hover:text-heading transition-colors"
               >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <X className="h-4 w-4" />
               </button>
             </div>
           </div>
         ))}
       </div>
-
-      <style>{`
-        @keyframes slideIn {
-          from { opacity: 0; transform: translateX(100%); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-      `}</style>
     </ToastContext.Provider>
   );
 }

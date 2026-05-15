@@ -1,0 +1,82 @@
+{
+  "hero": {
+    "title": "A Safe Space for Every Woman",
+    "subtitle": "Netsanet is Ethiopia's AI-powered platform for confidential GBV case reporting, legal guidance, and survivor support — available in your language.",
+    "cta": "Get Started",
+    "ctaSecondary": "Learn More"
+  },
+  "features": {
+    "badge": "Why Netsanet?",
+    "title": "Built for Safety, Designed for Trust",
+    "subtitle": "Every feature is crafted to empower survivors and the institutions that serve them.",
+    "items": [
+      {
+        "title": "Confidential Reporting",
+        "description": "Submit cases anonymously or with your identity — your safety comes first, always."
+      },
+      {
+        "title": "AI-Powered Triage",
+        "description": "Our intelligent system prioritizes urgent cases so help reaches those who need it most."
+      },
+      {
+        "title": "Secure Evidence Locker",
+        "description": "Upload and store photos, audio, and documents in an encrypted, tamper-proof vault."
+      },
+      {
+        "title": "Legal Guidance AI",
+        "description": "Get instant, context-aware legal information in Amharic, Tigrinya, Oromifa, and more."
+      },
+      {
+        "title": "Real-Time Messaging",
+        "description": "Communicate directly with your assigned case worker through secure, encrypted channels."
+      },
+      {
+        "title": "Multi-Institution Network",
+        "description": "Cases are seamlessly referred between MoWSA, EWLA, shelters, and medical facilities."
+      }
+    ]
+  },
+  "stats": {
+    "institutions": "Partner Institutions",
+    "languages": "Languages Supported",
+    "encryption": "End-to-End Encrypted",
+    "available": "Available 24/7"
+  },
+  "howItWorks": {
+    "badge": "How It Works",
+    "title": "Three Simple Steps",
+    "subtitle": "From reporting to resolution — we walk with you every step of the way.",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Report",
+        "description": "Submit your case securely through our guided form. Choose anonymous or identified reporting."
+      },
+      {
+        "step": "02",
+        "title": "Get Matched",
+        "description": "AI analyzes your case and connects you with the right institution and case worker."
+      },
+      {
+        "step": "03",
+        "title": "Receive Support",
+        "description": "Track your case, communicate with your worker, and access legal guidance — all in one place."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Take the First Step?",
+    "subtitle": "Every journey begins with courage. Netsanet is here to support you — confidentially and compassionately.",
+    "button": "Sign In Securely",
+    "note": "No password needed. We use a secure one-time code sent to your email."
+  },
+  "footer": {
+    "tagline": "AI-powered support for women across Ethiopia.",
+    "copyright": "© {{year}} Netsanet Platform — AASTU Final Year Project",
+    "links": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "contact": "Contact"
+    }
+  }
+}

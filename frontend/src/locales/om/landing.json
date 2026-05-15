@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "title": "Bakka Nageenya Dubartii Hundaaf",
+    "subtitle": "Netsanet waltajjii AI-n kan hojjetu, gabaasa icciitii dhimma, qajeelfama seeraa fi deeggarsa miidhamtootaaf — afaan keessaniin argamuu danda'a.",
+    "cta": "Jalqabi",
+    "ctaSecondary": "Dabalata Barbaadi"
+  },
+  "features": {
+    "badge": "Maaliif Netsanet?",
+    "title": "Nageenya'f Kan Ijaarame, Amanamummaaf Kan Qophaa'e",
+    "subtitle": "Amalli hundi miidhamtoota fi dhaabbilee tajaajilan cimsuu'f kan hojjetame.",
+    "items": [
+      { "title": "Gabaasa Icciitii", "description": "Dhimmoota maqaa malee yookiin eenyummaa keessaniin dhiyeessuu dandeessu — nageenya keessan dursa." },
+      { "title": "AI-n Kan Hojjetu", "description": "Sirni ogummaa dhimmoota ariifachiisaa dursa kenna — gargaarsi namoota barbaadaniif ga'a." },
+      { "title": "Kuusaa Ragaa Nageenya", "description": "Suuraa, sagalee fi sanadoota kuusaa icciitii keessa kaa'aa." },
+      { "title": "Qajeelfama Seeraa AI", "description": "Odeeffannoo seeraa ariifataa Afaan Amaaraa, Tigrinya, Oromoo fi kan birootiin argadhaa." },
+      { "title": "Ergaa Kallattii", "description": "Hojjetaa dhimmaa keessan waliin karaa icciitiin kallattiin wal quunnamaa." },
+      { "title": "Netwoorkii Dhaabbilee", "description": "Dhimmonni Dhimma Hawaasummaa, EWLA, dahoo fi mana yaalaa gidduutti dabarfamu." }
+    ]
+  },
+  "stats": { "institutions": "Dhaabbilee Michuu", "languages": "Afaan Deeggaraman", "encryption": "Icciitii Guutuu", "available": "Sa'aatii 24/7" },
+  "howItWorks": {
+    "badge": "Akkamitti Hojjeta",
+    "title": "Tarkaanfii Sadii Salphaadha",
+    "subtitle": "Gabaasa irraa hanga furmaataatti — tarkaanfii hunda isin waliin deemna.",
+    "steps": [
+      { "step": "01", "title": "Gabaasi", "description": "Dhimma keessan unka qajeelfamaan nageenya'n galchaa." },
+      { "step": "02", "title": "Wal Simadhaa", "description": "AI dhimma keessan xiinxalee dhaabbata sirriin isin quunnamsiisa." },
+      { "step": "03", "title": "Deeggarsa Argadhaa", "description": "Dhimma keessan hordofaa, hojjetaa waliin dubbadha — hunduu bakka tokkotti." }
+    ]
+  },
+  "cta": { "title": "Tarkaanfii Jalqabaa Fudhachuuf Qophii?", "subtitle": "Imalli hundi gootummaan jalqaba. Netsanet icciitii fi jaalalan deeggaruuf qophii dha.", "button": "Nageenya'n Seeni", "note": "Jecha icciitii hin barbaachisu. Koodii yeroo tokkoo imeelii keessanitti erginaatti fayyadamna." },
+  "footer": { "tagline": "Itoophiyaa guutuutti dubartootaaf deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
+}
