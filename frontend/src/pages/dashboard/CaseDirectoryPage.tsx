@@ -1,10 +1,12 @@
 // CaseDirectoryPage — staff data table with filters, search, and pagination.
 // Shows all cases scoped by the user's role with urgency/status badges.
+// Uses semantic tokens + Lucide icons.
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { Search, ClipboardList } from 'lucide-react';
 import api from '../../lib/api';
 import { PageHeader, UrgencyBadge, StatusBadge, EmptyState, Spinner } from '../../components/ui';
 
@@ -45,7 +47,6 @@ export default function CaseDirectoryPage() {
   const [page, setPage] = useState(1);
   const limit = 15;
 
-  // Option lists generated using translation keys
   const statusOptions = [
     { value: '', label: t('shared.status.all') },
     { value: 'new', label: t('shared.status.new') },
@@ -95,7 +96,12 @@ export default function CaseDirectoryPage() {
   // ─── Render ───────────────────────────────────────────────
 
   return (
-    <div>
+    <div className="relative">
+      {/* Background mesh */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-3xl z-0 -mx-4 sm:-mx-6 px-4 sm:px-6">
+        <div className="mesh-blob-1 -top-10 -right-20" />
+        <div className="mesh-blob-2 top-40 -left-20" />
+      </div>
       <PageHeader
         title={t('directory.title')}
         subtitle={pagination ? t('directory.subtitle', { total: pagination.total }) : undefined}
@@ -105,15 +111,7 @@ export default function CaseDirectoryPage() {
       <div className="mb-5 space-y-3">
         {/* Search */}
         <div className="relative">
-          <svg
-            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-placeholder" />
           <input
             type="text"
             placeholder={t('directory.searchPlaceholder')}
@@ -122,13 +120,13 @@ export default function CaseDirectoryPage() {
               setSearch(e.target.value);
               setPage(1);
             }}
-            className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-10 pr-4 text-sm text-dark placeholder:text-gray-500 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 sm:max-w-sm"
+            className="w-full rounded-xl border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-heading placeholder:text-placeholder transition-all duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20 sm:max-w-sm"
           />
         </div>
 
         {/* Status chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-gray-500 mr-1">{t('directory.filterStatus')}</span>
+          <span className="text-xs font-medium text-muted mr-1">{t('directory.filterStatus')}</span>
           {statusOptions.map((opt) => (
             <button
               key={opt.value}
@@ -136,10 +134,10 @@ export default function CaseDirectoryPage() {
                 setStatusFilter(opt.value);
                 setPage(1);
               }}
-              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors duration-150 ${
+              className={`rounded-xl px-2.5 py-1 text-xs font-medium transition-colors duration-150 ${
                 statusFilter === opt.value
-                  ? 'bg-teal-500 text-white'
-                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                  ? 'bg-primary text-primary-fg'
+                  : 'bg-inset text-muted hover:bg-border'
               }`}
             >
               {opt.label}
@@ -149,7 +147,7 @@ export default function CaseDirectoryPage() {
 
         {/* Urgency chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-gray-500 mr-1">{t('directory.filterUrgency')}</span>
+          <span className="text-xs font-medium text-muted mr-1">{t('directory.filterUrgency')}</span>
           {urgencyOptions.map((opt) => (
             <button
               key={opt.value}
@@ -157,10 +155,10 @@ export default function CaseDirectoryPage() {
                 setUrgencyFilter(opt.value);
                 setPage(1);
               }}
-              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors duration-150 ${
+              className={`rounded-xl px-2.5 py-1 text-xs font-medium transition-colors duration-150 ${
                 urgencyFilter === opt.value
-                  ? 'bg-teal-500 text-white'
-                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                  ? 'bg-primary text-primary-fg'
+                  : 'bg-inset text-muted hover:bg-border'
               }`}
             >
               {opt.label}
@@ -175,12 +173,12 @@ export default function CaseDirectoryPage() {
           <Spinner size="lg" label={t('directory.loading')} />
         </div>
       ) : isError ? (
-        <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-critical">
+        <div className="rounded-xl bg-danger-soft border border-danger/20 px-4 py-3 text-sm text-danger">
           {t('directory.error')}
         </div>
       ) : cases.length === 0 ? (
         <EmptyState
-          icon={<span>📋</span>}
+          icon={<ClipboardList className="h-6 w-6" />}
           title={t('directory.emptyTitle')}
           description={
             search || statusFilter || urgencyFilter
@@ -191,16 +189,16 @@ export default function CaseDirectoryPage() {
       ) : (
         <>
           {/* Data Table */}
-          <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+          <div className="overflow-x-auto rounded-2xl border border-border bg-surface shadow-sm">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-gray-200 bg-gray-100">
-                  <th className="px-4 py-3 font-medium text-gray-500">{t('directory.table.caseNum')}</th>
-                  <th className="px-4 py-3 font-medium text-gray-500">{t('directory.table.urgency')}</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 hidden sm:table-cell">{t('directory.table.category')}</th>
-                  <th className="px-4 py-3 font-medium text-gray-500">{t('directory.table.status')}</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 hidden lg:table-cell">{t('directory.table.title')}</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 hidden md:table-cell">{t('directory.table.submitted')}</th>
+                <tr className="border-b border-border bg-inset">
+                  <th className="px-4 py-3 font-medium text-muted">{t('directory.table.caseNum')}</th>
+                  <th className="px-4 py-3 font-medium text-muted">{t('directory.table.urgency')}</th>
+                  <th className="px-4 py-3 font-medium text-muted hidden sm:table-cell">{t('directory.table.category')}</th>
+                  <th className="px-4 py-3 font-medium text-muted">{t('directory.table.status')}</th>
+                  <th className="px-4 py-3 font-medium text-muted hidden lg:table-cell">{t('directory.table.title')}</th>
+                  <th className="px-4 py-3 font-medium text-muted hidden md:table-cell">{t('directory.table.submitted')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -208,10 +206,10 @@ export default function CaseDirectoryPage() {
                   <tr
                     key={c.id}
                     onClick={() => navigate(`/dashboard/cases/${c.id}`)}
-                    className="cursor-pointer border-b border-gray-200 transition-colors duration-150 hover:bg-gray-100 last:border-b-0"
+                    className="cursor-pointer border-b border-border-muted transition-colors duration-150 hover:bg-inset last:border-b-0"
                   >
                     <td className="px-4 py-3">
-                      <span className="font-mono text-xs font-medium text-teal-700">
+                      <span className="font-mono text-xs font-medium text-primary">
                         {c.case_number}
                       </span>
                     </td>
@@ -219,7 +217,7 @@ export default function CaseDirectoryPage() {
                       <UrgencyBadge level={c.urgency_level} />
                     </td>
                     <td className="px-4 py-3 hidden sm:table-cell">
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-muted">
                         {categoryLabels[c.category] || c.category}
                       </span>
                     </td>
@@ -227,13 +225,13 @@ export default function CaseDirectoryPage() {
                       <StatusBadge status={c.status} />
                     </td>
                     <td className="px-4 py-3 hidden lg:table-cell">
-                      <p className="max-w-xs truncate text-dark">{c.title}</p>
+                      <p className="max-w-xs truncate text-heading">{c.title}</p>
                       {c.is_anonymous && (
-                        <span className="text-[10px] text-gray-500">{t('directory.anonymous')}</span>
+                        <span className="text-[10px] text-muted">{t('directory.anonymous')}</span>
                       )}
                     </td>
                     <td className="px-4 py-3 hidden md:table-cell">
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-muted">
                         {new Date(c.created_at).toLocaleDateString('en-US', {
                           month: 'short',
                           day: 'numeric',
@@ -250,21 +248,21 @@ export default function CaseDirectoryPage() {
           {/* Pagination */}
           {pagination && pagination.totalPages > 1 && (
             <div className="mt-4 flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted">
                 {t('directory.pagination.info', { page: pagination.page, totalPages: pagination.totalPages })}
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page <= 1}
-                  className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-500 transition-colors duration-150 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-xl border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted transition-colors duration-150 hover:bg-inset disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {t('directory.pagination.prev')}
                 </button>
                 <button
                   onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}
                   disabled={page >= pagination.totalPages}
-                  className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-500 transition-colors duration-150 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-xl border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted transition-colors duration-150 hover:bg-inset disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {t('directory.pagination.next')}
                 </button>

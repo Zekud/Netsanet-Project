@@ -1,10 +1,12 @@
 // EvidenceLockerPage — secure file upload + management for a case.
 // Route: /safe-space/evidence/:caseId — Fully localized via evidenceLocker namespace.
+// Uses semantic tokens + Lucide icons.
 
 import { useState, useRef, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { ArrowLeft, Upload, Image, Video, Music, FileText, File, X, Eye, Trash2, Download, Lock } from 'lucide-react';
 import api from '../../lib/api';
 
 interface EvidenceFile {
@@ -18,12 +20,12 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-function getFileIcon(mime: string): string {
-  if (mime.startsWith('image/')) return '🖼️';
-  if (mime.startsWith('video/')) return '🎥';
-  if (mime.startsWith('audio/')) return '🎵';
-  if (mime === 'application/pdf') return '📄';
-  return '📁';
+function getFileIcon(mime: string) {
+  if (mime.startsWith('image/')) return Image;
+  if (mime.startsWith('video/')) return Video;
+  if (mime.startsWith('audio/')) return Music;
+  if (mime === 'application/pdf') return FileText;
+  return File;
 }
 
 function relativeTime(dateStr: string): string {
@@ -91,16 +93,16 @@ export default function EvidenceLockerPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
+    <div className="mx-auto max-w-3xl">
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-2xl text-teal-900 mb-1">{t('heading')}</h1>
-          <p className="text-sm text-gray-500">{t('subtitle')}</p>
+          <Link to={`/safe-space/cases/${caseId}`} className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary-hover transition-colors mb-1">
+            <ArrowLeft className="h-3 w-3" /> {t('backLink')}
+          </Link>
+          <h1 className="font-heading text-2xl text-heading mb-1">{t('heading')}</h1>
+          <p className="text-sm text-muted">{t('subtitle')}</p>
         </div>
-        <Link to={`/safe-space/cases/${caseId}`} className="text-sm text-teal-600 hover:text-teal-800 transition-colors">
-          {t('backLink')}
-        </Link>
       </div>
 
       {/* Drop zone */}
@@ -109,91 +111,105 @@ export default function EvidenceLockerPage() {
         onDragLeave={() => setIsDragOver(false)}
         onDrop={onDrop}
         onClick={() => fileInputRef.current?.click()}
-        className={`mb-6 cursor-pointer rounded-2xl border-2 border-dashed transition-all duration-200 p-8 text-center ${isDragOver ? 'border-teal-500 bg-teal-50 scale-[1.01]' : 'border-gray-200 bg-white hover:border-teal-300 hover:bg-teal-50/50'}`}
+        className={`mb-6 cursor-pointer rounded-2xl border-2 border-dashed transition-all duration-200 p-8 text-center ${isDragOver ? 'border-primary bg-primary-soft scale-[1.01]' : 'border-border bg-surface hover:border-primary/50 hover:bg-primary-soft/30'}`}
       >
         <input ref={fileInputRef} type="file" multiple accept={ACCEPTED_TYPES} className="hidden" onChange={onFileInput} />
-        <div className="mb-3 text-4xl">{isDragOver ? '📂' : '📎'}</div>
-        <p className="text-sm font-medium text-dark mb-1">{isDragOver ? t('dropzone.over') : t('dropzone.idle')}</p>
-        <p className="text-xs text-gray-500">{t('dropzone.hint')}</p>
+        <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl ${isDragOver ? 'bg-primary text-primary-fg' : 'bg-primary-soft text-primary'} transition-colors`}>
+          <Upload className="h-5 w-5" />
+        </div>
+        <p className="text-sm font-medium text-heading mb-1">{isDragOver ? t('dropzone.over') : t('dropzone.idle')}</p>
+        <p className="text-xs text-muted">{t('dropzone.hint')}</p>
       </div>
 
       {/* Upload queue */}
       {uploadQueue.length > 0 && (
-        <div className="mb-6 rounded-xl border border-teal-100 bg-teal-50 p-4">
-          <p className="text-sm font-medium text-teal-800 mb-3">
+        <div className="mb-6 rounded-2xl border border-primary-muted bg-primary-soft p-4">
+          <p className="text-sm font-medium text-primary mb-3">
             {t('queue.ready', { count: uploadQueue.length })}
           </p>
           <div className="space-y-2 mb-4 max-h-40 overflow-y-auto">
-            {uploadQueue.map((f, i) => (
-              <div key={i} className="flex items-center justify-between rounded-lg bg-white px-3 py-2">
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-base">{getFileIcon(f.type)}</span>
-                  <span className="text-xs text-dark truncate">{f.name}</span>
-                  <span className="text-xs text-gray-400 shrink-0">{formatBytes(f.size)}</span>
+            {uploadQueue.map((f, i) => {
+              const FileIcon = getFileIcon(f.type);
+              return (
+                <div key={i} className="flex items-center justify-between rounded-xl bg-surface px-3 py-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <FileIcon className="h-4 w-4 text-primary shrink-0" />
+                    <span className="text-xs text-heading truncate">{f.name}</span>
+                    <span className="text-xs text-muted shrink-0">{formatBytes(f.size)}</span>
+                  </div>
+                  <button onClick={(e) => { e.stopPropagation(); setUploadQueue((p) => p.filter((_, j) => j !== i)); }}
+                    className="ml-2 shrink-0 text-muted hover:text-danger transition-colors">
+                    <X className="h-3.5 w-3.5" />
+                  </button>
                 </div>
-                <button onClick={(e) => { e.stopPropagation(); setUploadQueue((p) => p.filter((_, j) => j !== i)); }}
-                  className="ml-2 shrink-0 text-gray-400 hover:text-red-500 transition-colors text-xs">✕</button>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <button onClick={() => uploadMutation.mutate(uploadQueue)} disabled={uploadMutation.isPending}
-            className="w-full rounded-xl bg-teal-500 py-2.5 text-sm font-medium text-white hover:bg-teal-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+            className="w-full rounded-xl bg-primary py-2.5 text-sm font-medium text-primary-fg hover:bg-primary-hover transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
             {uploadMutation.isPending ? t('queue.uploading') : t('queue.uploadBtn', { count: uploadQueue.length })}
           </button>
-          {uploadMutation.isError && <p className="mt-2 text-xs text-red-500 text-center">{t('queue.error')}</p>}
+          {uploadMutation.isError && <p className="mt-2 text-xs text-danger text-center">{t('queue.error')}</p>}
         </div>
       )}
 
       {/* File grid */}
       {isLoading ? (
         <div className="flex items-center justify-center py-16">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-teal-500 border-t-transparent" />
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
         </div>
       ) : files.length === 0 ? (
-        <div className="rounded-2xl border border-gray-100 bg-white p-12 text-center shadow-sm">
-          <p className="text-4xl mb-3">🔒</p>
-          <p className="font-medium text-dark mb-1">{t('empty.title')}</p>
-          <p className="text-sm text-gray-500">{t('empty.body')}</p>
+        <div className="rounded-2xl border border-border bg-surface p-12 text-center shadow-sm">
+          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+            <Lock className="h-6 w-6" />
+          </div>
+          <p className="font-medium text-heading mb-1">{t('empty.title')}</p>
+          <p className="text-sm text-muted">{t('empty.body')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {files.map((file) => (
-            <div key={file.id} className="group relative rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-teal-200 hover:shadow-md transition-all duration-150">
-              <div className="flex items-start gap-3">
-                <span className="text-3xl shrink-0">{getFileIcon(file.mime_type)}</span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-dark truncate" title={file.file_name}>{file.file_name}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{formatBytes(file.size_bytes)} · {relativeTime(file.created_at)}</p>
+          {files.map((file) => {
+            const FileIcon = getFileIcon(file.mime_type);
+            return (
+              <div key={file.id} className="group relative rounded-2xl border border-border bg-surface p-4 shadow-sm hover:border-primary/30 hover:shadow-md transition-all duration-200">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
+                    <FileIcon className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-heading truncate" title={file.file_name}>{file.file_name}</p>
+                    <p className="text-xs text-muted mt-0.5">{formatBytes(file.size_bytes)} · {relativeTime(file.created_at)}</p>
+                  </div>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex gap-2 rounded-b-2xl bg-surface/95 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 border-t border-border-muted">
+                  <button onClick={() => openFile(file.id, file.file_name, file.mime_type)}
+                    className="flex-1 inline-flex items-center justify-center gap-1 rounded-xl bg-primary py-1.5 text-xs font-medium text-primary-fg hover:bg-primary-hover transition-colors">
+                    <Eye className="h-3 w-3" /> {t('files.view')}
+                  </button>
+                  <button onClick={() => setDeleteTargetId(file.id)}
+                    className="inline-flex items-center justify-center gap-1 rounded-xl border border-danger/30 px-3 py-1.5 text-xs font-medium text-danger hover:bg-danger-soft transition-colors">
+                    <Trash2 className="h-3 w-3" /> {t('files.delete')}
+                  </button>
                 </div>
               </div>
-              <div className="absolute inset-x-0 bottom-0 flex gap-2 rounded-b-xl bg-white/95 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 border-t border-gray-100">
-                <button onClick={() => openFile(file.id, file.file_name, file.mime_type)}
-                  className="flex-1 rounded-lg bg-teal-500 py-1.5 text-xs font-medium text-white hover:bg-teal-700 transition-colors">
-                  {t('files.view')}
-                </button>
-                <button onClick={() => setDeleteTargetId(file.id)}
-                  className="rounded-lg border border-red-200 px-3 py-1.5 text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">
-                  {t('files.delete')}
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
       {/* Delete modal */}
       {deleteTargetId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
-            <h3 className="font-serif text-lg text-dark mb-2">{t('deleteModal.title')}</h3>
-            <p className="text-sm text-gray-500 mb-6">{t('deleteModal.body')}</p>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-heading/40 backdrop-blur-sm px-4 animate-fade-in">
+          <div className="w-full max-w-sm rounded-2xl bg-surface border border-border p-6 shadow-2xl animate-scale-in">
+            <h3 className="font-heading text-lg text-heading mb-2">{t('deleteModal.title')}</h3>
+            <p className="text-sm text-muted mb-6">{t('deleteModal.body')}</p>
             <div className="flex gap-3">
               <button onClick={() => setDeleteTargetId(null)}
-                className="flex-1 rounded-xl border border-gray-200 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+                className="flex-1 rounded-xl border border-border py-2.5 text-sm font-medium text-body hover:bg-inset transition-colors">
                 {t('deleteModal.cancel')}
               </button>
               <button onClick={() => deleteMutation.mutate(deleteTargetId)} disabled={deleteMutation.isPending}
-                className="flex-1 rounded-xl bg-red-500 py-2.5 text-sm font-medium text-white hover:bg-red-600 transition-colors disabled:opacity-60">
+                className="flex-1 rounded-xl bg-danger py-2.5 text-sm font-medium text-danger-fg hover:brightness-110 transition-all disabled:opacity-60">
                 {deleteMutation.isPending ? t('deleteModal.deleting') : t('deleteModal.confirm')}
               </button>
             </div>
@@ -203,27 +219,29 @@ export default function EvidenceLockerPage() {
 
       {/* File viewer modal */}
       {viewingUrl && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 p-4">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-heading/80 p-4 animate-fade-in">
           <div className="w-full max-w-4xl">
             <div className="mb-3 flex items-center justify-between">
               <p className="text-sm font-medium text-white truncate">{viewingUrl.name}</p>
               <div className="flex gap-3">
                 <a href={viewingUrl.url} download={viewingUrl.name}
-                  className="rounded-lg bg-teal-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-teal-700 transition-colors">
-                  {t('viewer.download')}
+                  className="inline-flex items-center gap-1 rounded-xl bg-primary px-3 py-1.5 text-xs font-medium text-primary-fg hover:bg-primary-hover transition-colors">
+                  <Download className="h-3 w-3" /> {t('viewer.download')}
                 </a>
                 <button onClick={() => setViewingUrl(null)}
-                  className="rounded-lg bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20 transition-colors">
+                  className="rounded-xl bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20 transition-colors">
                   {t('viewer.close')}
                 </button>
               </div>
             </div>
-            <div className="overflow-hidden rounded-xl bg-black max-h-[80vh] flex items-center justify-center">
+            <div className="overflow-hidden rounded-2xl bg-black max-h-[80vh] flex items-center justify-center">
               {viewingUrl.mime.startsWith('image/') && <img src={viewingUrl.url} alt={viewingUrl.name} className="max-h-[80vh] max-w-full object-contain" />}
               {viewingUrl.mime.startsWith('video/') && <video src={viewingUrl.url} controls className="max-h-[80vh] max-w-full" />}
               {viewingUrl.mime.startsWith('audio/') && (
                 <div className="p-8 text-center">
-                  <p className="text-6xl mb-4">🎵</p>
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+                    <Music className="h-8 w-8" />
+                  </div>
                   <p className="text-white text-sm mb-4">{viewingUrl.name}</p>
                   <audio src={viewingUrl.url} controls className="w-full" />
                 </div>

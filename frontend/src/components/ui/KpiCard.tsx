@@ -1,4 +1,5 @@
-// KpiCard — metric card with icon, number, label, and optional trend.
+// KpiCard — metric card for dashboards with icon, value, label, and optional accent.
+// Uses semantic tokens for dark/light mode support.
 
 import { type ReactNode } from 'react';
 
@@ -6,45 +7,42 @@ interface KpiCardProps {
   icon: ReactNode;
   label: string;
   value: string | number;
-  trend?: {
-    value: string;
-    direction: 'up' | 'down' | 'neutral';
-  };
+  sub?: string;
+  accent?: 'primary' | 'danger' | 'warning' | 'success';
   className?: string;
 }
+
+const accentBorders: Record<string, string> = {
+  primary: 'border-l-primary',
+  danger: 'border-l-danger',
+  warning: 'border-l-warning',
+  success: 'border-l-success',
+};
 
 export default function KpiCard({
   icon,
   label,
   value,
-  trend,
+  sub,
+  accent,
   className = '',
 }: KpiCardProps) {
-  const trendColor =
-    trend?.direction === 'up'
-      ? 'text-green-600'
-      : trend?.direction === 'down'
-        ? 'text-critical'
-        : 'text-gray-500';
-
   return (
-    <div
-      className={`rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5 ${className}`}
-    >
-      <div className="flex items-start justify-between">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-50 text-lg text-teal-700">
+    <div className={`rounded-2xl border bg-surface p-5 shadow-sm transition-all duration-200 hover:shadow-md ${
+      accent ? `border-l-4 ${accentBorders[accent]} border-border` : 'border-border'
+    } ${className}`}>
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary text-lg">
           {icon}
         </div>
-        {trend && (
-          <span className={`text-xs font-medium ${trendColor}`}>
-            {trend.direction === 'up' && '↑ '}
-            {trend.direction === 'down' && '↓ '}
-            {trend.value}
+        {sub && (
+          <span className="text-[10px] text-muted bg-inset rounded-lg px-2 py-0.5">
+            {sub}
           </span>
         )}
       </div>
-      <p className="mt-3 font-mono text-2xl font-medium text-dark">{value}</p>
-      <p className="mt-0.5 text-xs text-gray-500">{label}</p>
+      <p className="font-mono text-3xl font-bold text-heading">{value}</p>
+      <p className="text-xs text-muted mt-1">{label}</p>
     </div>
   );
 }

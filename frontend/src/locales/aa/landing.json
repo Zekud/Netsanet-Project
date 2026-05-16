@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "title": "Bakka Nagaa Dubartii Hundaaf",
+    "subtitle": "Netsanet madda AI-n deeggaramu, gabaasa dacwaa icitii, qajeelfama seeraa fi deeggarsa — afaan keessaniin.",
+    "cta": "Jalqabi",
+    "ctaSecondary": "Dabalata Barbaadi"
+  },
+  "features": {
+    "badge": "Maalif Netsanet?",
+    "title": "Nagaaf ijaarame, Amanamummaaf qophaa'e",
+    "subtitle": "Amalli hundi miidhamtoota fi dhaabbilee cimsuu'f hojjetame.",
+    "items": [
+      { "title": "Gabaasa Icciitii", "description": "Dhimmoota maqaa malee dhiyeessuu dandeessu." },
+      { "title": "AI Dursa", "description": "Sirni ogummaa dhimmoota ariifachiisaa dursa kenna." },
+      { "title": "Kuusaa Ragaa", "description": "Suuraa fi sanadoota kuusaa icciitii keessa kaa'aa." },
+      { "title": "Qajeelfama Seeraa AI", "description": "Odeeffannoo seeraa ariifataa afaan hedduun argadhaa." },
+      { "title": "Ergaa Kallattii", "description": "Hojjetaa dhimmaa waliin karaa icciitiin wal quunnamaa." },
+      { "title": "Netwoorkii", "description": "Dhimmonni dhaabbilee gidduutti dabarfamu." }
+    ]
+  },
+  "stats": { "institutions": "Dhaabbilee", "languages": "Afaan", "encryption": "Icciitii", "available": "24/7" },
+  "howItWorks": {
+    "badge": "Akkamitti Hojjeta",
+    "title": "Tarkaanfii Sadii",
+    "subtitle": "Gabaasa irraa hanga furmaataatti — isin waliin deemna.",
+    "steps": [
+      { "step": "01", "title": "Gabaasi", "description": "Dhimma keessan nageenya'n galchaa." },
+      { "step": "02", "title": "Wal Simadhaa", "description": "AI dhaabbata sirriin isin quunnamsiisa." },
+      { "step": "03", "title": "Deeggarsa", "description": "Dhimma keessan hordofaa — hunduu bakka tokkotti." }
+    ]
+  },
+  "cta": { "title": "Tarkaanfii Jalqabaa Fudhachuuf Qophii?", "subtitle": "Netsanet icciitii fi jaalalan deeggaruuf qophii dha.", "button": "Seeni", "note": "Jecha icciitii hin barbaachisu." },
+  "footer": { "tagline": "Itoophiyaa guutuutti deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
+}

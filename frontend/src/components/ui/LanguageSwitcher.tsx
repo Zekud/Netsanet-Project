@@ -1,9 +1,10 @@
 // LanguageSwitcher.tsx — Dropdown to select between English, Amharic, Tigrinya, Afaan Oromoo, Somali, and Afar.
 // Uses custom SVG flags to ensure consistent rendering across all OS (Windows fix).
-// Features a premium dropdown UI with smooth transitions and teal branding.
+// Features a premium dropdown UI with smooth transitions and design system tokens.
 
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ChevronDown, Check } from 'lucide-react';
 
 // ─── Flag Components ──────────────────────────────────────────
 
@@ -105,7 +106,7 @@ export default function LanguageSwitcher() {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className="flex items-center gap-2 rounded-xl bg-white border border-gray-100 px-3 py-2 text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-teal-200 hover:bg-teal-50/30"
+        className="flex items-center gap-2 rounded-xl bg-surface border border-border px-3 py-2 text-sm font-medium text-body shadow-xs transition-all duration-200 hover:border-primary/30 hover:bg-primary-soft/30"
       >
         <div className="flex items-center" aria-hidden="true">
           {currentLang.flag}
@@ -113,27 +114,19 @@ export default function LanguageSwitcher() {
         <span className="hidden sm:inline">
           {currentLang.label}
         </span>
-        <svg
-          className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
+        <ChevronDown className={`h-3.5 w-3.5 text-muted transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-44 origin-top-right rounded-2xl bg-white border border-gray-100 p-1.5 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50 animate-in fade-in zoom-in-95 duration-150">
+        <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-2xl bg-surface border border-border p-1.5 shadow-xl z-50 animate-scale-in">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
               className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
                 current.startsWith(lang.code)
-                  ? 'bg-teal-50 text-teal-700'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-dark'
+                  ? 'bg-primary-soft text-primary'
+                  : 'text-body hover:bg-inset hover:text-heading'
               }`}
             >
               <div className="flex items-center" aria-hidden="true">
@@ -141,9 +134,7 @@ export default function LanguageSwitcher() {
               </div>
               <span className="font-medium">{lang.label}</span>
               {current.startsWith(lang.code) && (
-                <svg className="ml-auto h-4 w-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
+                <Check className="ml-auto h-4 w-4 text-primary" />
               )}
             </button>
           ))}

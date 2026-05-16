@@ -1,9 +1,11 @@
 // ReferralsPage — two-tab view of incoming/outgoing referrals.
 // Incoming tab: Accept and Reject buttons with response_note modal.
+// Uses semantic tokens + Lucide icons.
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { Inbox, Send as SendIcon } from 'lucide-react';
 import api from '../../lib/api';
 import { PageHeader, Spinner, EmptyState, Badge, Modal, Button } from '../../components/ui';
 
@@ -33,8 +35,8 @@ interface Referral {
 const urgencyColors: Record<string, string> = {
   critical: 'text-critical',
   high: 'text-orange-500',
-  medium: 'text-amber-500',
-  low: 'text-gray-500',
+  medium: 'text-warning',
+  low: 'text-muted',
 };
 
 // ─── Referral Card ────────────────────────────────────────────
@@ -50,7 +52,7 @@ function ReferralCard({
   onAccept?: () => void;
   onReject?: () => void;
   showActions: boolean;
-  t: any;
+  t: ReturnType<typeof useTranslation>['t'];
 }) {
   const statusConfig = {
     pending: { label: t('referrals.status.pending'), variant: 'amber' as const },
@@ -60,18 +62,18 @@ function ReferralCard({
 
   const cfg = statusConfig[referral.status];
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm space-y-3">
+    <div className="rounded-2xl border border-border bg-surface p-4 shadow-sm space-y-3 transition-all hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-mono text-xs font-medium text-teal-700">
+            <span className="font-mono text-xs font-medium text-primary">
               {referral.cases?.case_number || '—'}
             </span>
             <span className={`text-xs font-medium ${urgencyColors[referral.cases?.urgency_level || 'low']}`}>
               {t(`shared.urgency.${referral.cases?.urgency_level || 'low'}`).toUpperCase()}
             </span>
           </div>
-          <p className="mt-0.5 text-sm font-medium text-dark truncate">
+          <p className="mt-0.5 text-sm font-medium text-heading truncate">
             {referral.cases?.title || '—'}
           </p>
         </div>
@@ -79,29 +81,29 @@ function ReferralCard({
       </div>
 
       {/* Institution arrow */}
-      <div className="flex items-center gap-2 text-xs text-gray-500">
+      <div className="flex items-center gap-2 text-xs text-muted">
         <span>{referral.institutions?.name || '—'}</span>
-        <span>→</span>
-        <span className="text-dark font-medium">{t('layout.nav.institutions') /* Assuming representing own institution */}</span>
+        <span className="text-placeholder">→</span>
+        <span className="text-heading font-medium">{t('layout.nav.institutions')}</span>
       </div>
 
       {/* Note */}
       {referral.note && (
-        <div className="rounded-lg bg-gray-100 px-3 py-2">
-          <p className="text-xs font-medium text-gray-500 mb-0.5">Referral note</p>
-          <p className="text-xs text-dark">{referral.note}</p>
+        <div className="rounded-xl bg-inset px-3 py-2">
+          <p className="text-xs font-medium text-muted mb-0.5">Referral note</p>
+          <p className="text-xs text-heading">{referral.note}</p>
         </div>
       )}
 
       {/* Response note */}
       {referral.response_note && (
-        <div className="rounded-lg bg-teal-50 px-3 py-2">
-          <p className="text-xs font-medium text-teal-700 mb-0.5">Response note</p>
-          <p className="text-xs text-teal-900">{referral.response_note}</p>
+        <div className="rounded-xl bg-primary-soft border border-primary-muted px-3 py-2">
+          <p className="text-xs font-medium text-primary mb-0.5">Response note</p>
+          <p className="text-xs text-heading">{referral.response_note}</p>
         </div>
       )}
 
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-muted">
         {new Date(referral.created_at).toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -126,7 +128,7 @@ function ReferralCard({
 
 // ─── Outgoing Referral Card ───────────────────────────────────
 
-function OutgoingCard({ referral, t }: { referral: Referral, t: any }) {
+function OutgoingCard({ referral, t }: { referral: Referral, t: ReturnType<typeof useTranslation>['t'] }) {
   const statusConfig = {
     pending: { label: t('referrals.status.pending'), variant: 'amber' as const },
     accepted: { label: t('referrals.status.accepted'), variant: 'teal' as const },
@@ -135,49 +137,49 @@ function OutgoingCard({ referral, t }: { referral: Referral, t: any }) {
 
   const cfg = statusConfig[referral.status];
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm space-y-3">
+    <div className="rounded-2xl border border-border bg-surface p-4 shadow-sm space-y-3 transition-all hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-mono text-xs font-medium text-teal-700">
+            <span className="font-mono text-xs font-medium text-primary">
               {referral.cases?.case_number || '—'}
             </span>
             <span className={`text-xs font-medium ${urgencyColors[referral.cases?.urgency_level || 'low']}`}>
               {t(`shared.urgency.${referral.cases?.urgency_level || 'low'}`).toUpperCase()}
             </span>
           </div>
-          <p className="mt-0.5 text-sm font-medium text-dark truncate">
+          <p className="mt-0.5 text-sm font-medium text-heading truncate">
             {referral.cases?.title || '—'}
           </p>
         </div>
         <Badge variant={cfg.variant}>{cfg.label}</Badge>
       </div>
 
-      <div className="flex items-center gap-2 text-xs text-gray-500">
-        <span className="text-dark font-medium">{t('layout.nav.institutions')}</span>
-        <span>→</span>
+      <div className="flex items-center gap-2 text-xs text-muted">
+        <span className="text-heading font-medium">{t('layout.nav.institutions')}</span>
+        <span className="text-placeholder">→</span>
         <span>{referral.institutions?.name || '—'}</span>
       </div>
 
       {referral.note && (
-        <div className="rounded-lg bg-gray-100 px-3 py-2">
-          <p className="text-xs font-medium text-gray-500 mb-0.5">Note</p>
-          <p className="text-xs text-dark">{referral.note}</p>
+        <div className="rounded-xl bg-inset px-3 py-2">
+          <p className="text-xs font-medium text-muted mb-0.5">Note</p>
+          <p className="text-xs text-heading">{referral.note}</p>
         </div>
       )}
 
       {referral.response_note && (
-        <div className={`rounded-lg px-3 py-2 ${referral.status === 'rejected' ? 'bg-red-50' : 'bg-teal-50'}`}>
-          <p className={`text-xs font-medium mb-0.5 ${referral.status === 'rejected' ? 'text-critical' : 'text-teal-700'}`}>
+        <div className={`rounded-xl px-3 py-2 ${referral.status === 'rejected' ? 'bg-danger-soft border border-danger/20' : 'bg-primary-soft border border-primary-muted'}`}>
+          <p className={`text-xs font-medium mb-0.5 ${referral.status === 'rejected' ? 'text-danger' : 'text-primary'}`}>
             Response
           </p>
-          <p className={`text-xs ${referral.status === 'rejected' ? 'text-red-900' : 'text-teal-900'}`}>
+          <p className={`text-xs ${referral.status === 'rejected' ? 'text-heading' : 'text-heading'}`}>
             {referral.response_note}
           </p>
         </div>
       )}
 
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-muted">
         {new Date(referral.created_at).toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -250,35 +252,40 @@ export default function ReferralsPage() {
   // ─── Render ─────────────────────────────────────────────────
 
   return (
-    <div>
+    <div className="relative">
+      {/* Background mesh */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-3xl z-0 -mx-4 sm:-mx-6 px-4 sm:px-6">
+        <div className="mesh-blob-1 -top-10 -right-20" />
+        <div className="mesh-blob-2 top-40 -left-20" />
+      </div>
       <PageHeader
         title={t('referrals.title')}
         subtitle={t('referrals.subtitle')}
       />
 
       {/* Tabs */}
-      <div className="mb-5 flex gap-1 rounded-lg border border-gray-200 bg-gray-100 p-1 w-fit">
+      <div className="mb-5 flex gap-1 rounded-xl border border-border bg-inset p-1 w-fit">
         <button
           onClick={() => setTab('incoming')}
-          className={`relative rounded-md px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
+          className={`relative rounded-lg px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
             tab === 'incoming'
-              ? 'bg-white text-dark shadow-sm'
-              : 'text-gray-500 hover:text-dark'
+              ? 'bg-surface text-heading shadow-sm'
+              : 'text-muted hover:text-heading'
           }`}
         >
           {t('referrals.tabs.incoming')}
           {pendingCount > 0 && (
-            <span className="ml-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-critical text-[10px] font-bold text-white">
+            <span className="ml-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-danger text-[10px] font-bold text-danger-fg">
               {pendingCount}
             </span>
           )}
         </button>
         <button
           onClick={() => setTab('outgoing')}
-          className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
+          className={`rounded-lg px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
             tab === 'outgoing'
-              ? 'bg-white text-dark shadow-sm'
-              : 'text-gray-500 hover:text-dark'
+              ? 'bg-surface text-heading shadow-sm'
+              : 'text-muted hover:text-heading'
           }`}
         >
           {t('referrals.tabs.outgoing')}
@@ -294,7 +301,7 @@ export default function ReferralsPage() {
             </div>
           ) : !incoming || incoming.length === 0 ? (
             <EmptyState
-              icon={<span>📥</span>}
+              icon={<Inbox className="h-6 w-6" />}
               title={t('referrals.emptyTitle')}
               description={t('referrals.emptyIncoming')}
             />
@@ -327,7 +334,7 @@ export default function ReferralsPage() {
             </div>
           ) : !outgoing || outgoing.length === 0 ? (
             <EmptyState
-              icon={<span>📤</span>}
+              icon={<SendIcon className="h-6 w-6" />}
               title={t('referrals.emptyTitle')}
               description={t('referrals.emptyOutgoing')}
             />
@@ -376,7 +383,7 @@ export default function ReferralsPage() {
         }
       >
         <div className="space-y-3">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted">
             You can optionally provide a reason for rejecting this referral. The referring institution will be notified.
           </p>
           <textarea
@@ -384,7 +391,7 @@ export default function ReferralsPage() {
             onChange={(e) => setResponseNote(e.target.value)}
             placeholder="Reason for rejection (optional)..."
             rows={3}
-            className="w-full resize-y rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-dark placeholder:text-gray-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+            className="w-full resize-y rounded-xl border border-border bg-surface px-3 py-2 text-sm text-heading placeholder:text-placeholder focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
           />
         </div>
       </Modal>

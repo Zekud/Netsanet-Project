@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "title": "Meel Ammaan ah oo Haween kasta",
+    "subtitle": "Netsanet waa madal AI-ku shaqeeyo oo ah warbixin dacwadeed sir ah, hagitaanka sharciga iyo taageerada dadka dhibaataysan — oo ku helaya luqaddaada.",
+    "cta": "Bilow",
+    "ctaSecondary": "Wax badan baro"
+  },
+  "features": {
+    "badge": "Maxay Netsanet?",
+    "title": "Badbaadada loo dhisay, Kalsooni loo naqshadeeyay",
+    "subtitle": "Sifooyin kasta waxaa loo sameeyay inay xoojiyaan dadka dhibaataysan iyo hay'adaha u adeega.",
+    "items": [
+      { "title": "Warbixin Sir ah", "description": "Dacwadaha u soo gudbi si qarsoodi ah ama aqoonsigaaga — ammaankaagu waa marka hore." },
+      { "title": "AI Kala-soocida", "description": "Nidaamkayaga caqliga lahu dacwadaha degdegga ah mudnaanta siiyaa." },
+      { "title": "Kaydka Caddaynta", "description": "Sawirro, codad iyo dukumentiyada ku kaydi bakhaarka sir ahaaneed." },
+      { "title": "Hagitaanka Sharciga AI", "description": "Macluumaad sharci oo degdeg ah ku hel Amxaarik, Tigrinya, Oromiffa iwm." },
+      { "title": "Fariimo Toos ah", "description": "Si toos ah kala xiriir shaqaalaha dacwaddaada kanaalka sirta ah." },
+      { "title": "Shabakadda Hay'adaha", "description": "Dacwadaha waxaa lagu wareejiyaa MoWSA, EWLA, hoyga iyo bukaan-socod." }
+    ]
+  },
+  "stats": { "institutions": "Hay'ado Iskaashi", "languages": "Luqadaha la taageero", "encryption": "Sir Dhammaystiran", "available": "24/7 La heli karaa" },
+  "howItWorks": {
+    "badge": "Sida ay u shaqeyso",
+    "title": "Saddex Tallaabo Fudud",
+    "subtitle": "Warbixinta ilaa xalka — tallaabo kasta waan kula soconnaa.",
+    "steps": [
+      { "step": "01", "title": "Warbixin", "description": "Dacwaddaada si ammaan ah u soo gudbi foomka hagaha." },
+      { "step": "02", "title": "Isu ekeysi", "description": "AI dacwaddaada baaraysa oo kula xiriirinaysa hay'adda saxda ah." },
+      { "step": "03", "title": "Taageero hel", "description": "Dacwaddaada raac, shaqaalaha la xiriir — dhammaanteed hal meel." }
+    ]
+  },
+  "cta": { "title": "Diyaar ma u tahay Tallaabooyinka ugu horreeya?", "subtitle": "Safar kasta wuxuu ku bilowdaa geesinimo. Netsanet ayaa diyaar u ah inay ku taageeraan.", "button": "Si Ammaan ah gal", "note": "Erayga sirta ah looma baahna. Koodhka hal-mar loo isticmaalo ee emailkaaga loo soo diro ayaa la isticmaalaa." },
+  "footer": { "tagline": "Taageerada AI ee haweenka Itoobiya oo dhan.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Asturnaanta", "terms": "Shuruudaha", "contact": "Nala soo xiriir" } }
+}

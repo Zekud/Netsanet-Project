@@ -1,6 +1,8 @@
 // FileUploadZone — drag-and-drop file upload area with preview support.
+// Uses semantic tokens + Lucide icons for dark/light mode support.
 
 import { useState, useRef, type DragEvent, type ChangeEvent } from 'react';
+import { Upload } from 'lucide-react';
 
 interface FileUploadZoneProps {
   onFilesSelected: (files: File[]) => void;
@@ -78,12 +80,12 @@ export default function FileUploadZone({
   return (
     <div className={className}>
       <div
-        className={`relative flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed p-6 text-center transition-colors duration-150 ${
+        className={`relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-200 ${
           disabled
-            ? 'cursor-not-allowed border-gray-200 bg-gray-100 opacity-50'
+            ? 'cursor-not-allowed border-border bg-inset opacity-50'
             : isDragOver
-              ? 'border-teal-500 bg-teal-50'
-              : 'border-gray-200 bg-white hover:border-gray-500 hover:bg-gray-100'
+              ? 'border-primary bg-primary-soft scale-[1.01]'
+              : 'border-border bg-surface hover:border-primary/50 hover:bg-primary-soft/50'
         }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -105,30 +107,20 @@ export default function FileUploadZone({
           disabled={disabled}
         />
 
-        <svg
-          className="mb-2 h-8 w-8 text-gray-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-          />
-        </svg>
+        <div className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl ${isDragOver ? 'bg-primary text-primary-fg' : 'bg-primary-soft text-primary'} transition-colors`}>
+          <Upload className="h-5 w-5" />
+        </div>
 
-        <p className="text-sm font-medium text-dark">
+        <p className="text-sm font-medium text-heading">
           {isDragOver ? 'Drop files here' : 'Click or drag files to upload'}
         </p>
-        <p className="mt-1 text-xs text-gray-500">
+        <p className="mt-1 text-xs text-muted">
           Photos, videos, audio recordings, and PDFs. Max {maxSizeMb}MB per file.
         </p>
       </div>
 
       {error && (
-        <p className="mt-2 text-xs text-critical">{error}</p>
+        <p className="mt-2 text-xs text-danger">{error}</p>
       )}
     </div>
   );

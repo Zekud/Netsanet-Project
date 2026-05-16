@@ -1,4 +1,5 @@
 // Button — reusable button with primary, secondary, ghost, and danger variants.
+// Updated to use semantic design tokens for dark/light theme support.
 
 import { type ButtonHTMLAttributes, type ReactNode } from 'react';
 
@@ -15,19 +16,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-teal-500 text-white hover:bg-teal-700 disabled:opacity-50',
+    'bg-primary text-primary-fg hover:bg-primary-hover active:scale-[0.98] disabled:opacity-50 shadow-xs hover:shadow-sm',
   secondary:
-    'bg-white text-dark border border-gray-200 hover:bg-gray-100 disabled:opacity-50',
+    'bg-surface text-heading border border-border hover:bg-inset hover:border-primary/30 active:scale-[0.98] disabled:opacity-50',
   ghost:
-    'bg-transparent text-gray-500 hover:bg-gray-100 hover:text-dark disabled:opacity-50',
+    'bg-transparent text-muted hover:bg-inset hover:text-heading active:scale-[0.98] disabled:opacity-50',
   danger:
-    'bg-critical text-white hover:bg-red-700 disabled:opacity-50',
+    'bg-danger text-danger-fg hover:brightness-110 active:scale-[0.98] disabled:opacity-50',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-xs rounded-md gap-1.5',
-  md: 'px-4 py-2 text-sm rounded-lg gap-2',
-  lg: 'px-5 py-2.5 text-base rounded-lg gap-2',
+  sm: 'px-3 py-1.5 text-xs rounded-lg gap-1.5',
+  md: 'px-4 py-2 text-sm rounded-xl gap-2',
+  lg: 'px-5 py-2.5 text-base rounded-xl gap-2',
 };
 
 export default function Button({
@@ -42,7 +43,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`inline-flex items-center justify-center font-medium transition-colors duration-150 disabled:cursor-not-allowed ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      className={`inline-flex items-center justify-center font-medium transition-all duration-200 disabled:cursor-not-allowed ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
       disabled={disabled || isLoading}
       {...props}
     >

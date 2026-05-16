@@ -1,16 +1,14 @@
-// NotificationBell — real-time notification dropdown + unread count badge.
-// Subscribes to Supabase Realtime for instant delivery.
-// Shows toast on new notifications + dropdown panel with grouped history.
+// NotificationBell — real-time notification indicator with dropdown.
+// Subscribes to Supabase Realtime for instant notification delivery.
+// Uses semantic tokens + Lucide icons for dark/light mode support.
 
 import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Bell, ExternalLink } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { useAuth } from '../../hooks/useAuth';
 import { useToast } from './ToastProvider';
 import api from '../../lib/api';
-
-// ─── Types ────────────────────────────────────────────────────
 
 interface Notification {
   id: string;
@@ -22,284 +20,139 @@ interface Notification {
   created_at: string;
 }
 
-// ─── Helpers ──────────────────────────────────────────────────
-
-function relativeTime(dateStr: string, t: any): string {
+function relativeTime(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
-  const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return t('dashboard:notifications.time.justNow', 'just now');
-  if (minutes < 60) return t('dashboard:notifications.time.minutes', '{{count}}m ago', { count: minutes });
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return t('dashboard:notifications.time.hours', '{{count}}h ago', { count: hours });
-  const days = Math.floor(hours / 24);
-  return t('dashboard:notifications.time.days', '{{count}}d ago', { count: days });
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
 }
 
-const typeColors: Record<string, string> = {
-  new_message: 'bg-teal-500',
-  referral_received: 'bg-amber-500',
-  referral_accepted: 'bg-green-500',
-  referral_rejected: 'bg-red-400',
-  case_update: 'bg-blue-400',
-  new_case: 'bg-purple-500',
-  default: 'bg-gray-300',
+const TYPE_COLORS: Record<string, string> = {
+  new_message: 'bg-primary',
+  referral_received: 'bg-warning',
+  referral_accepted: 'bg-success',
+  referral_rejected: 'bg-danger',
+  case_update: 'bg-secondary',
+  new_case: 'bg-accent',
+  default: 'bg-muted',
 };
 
-// ─── Component ────────────────────────────────────────────────
-
-interface NotificationBellProps {
-  userId: string;
-  userRole?: string;
-}
-
-export default function NotificationBell({ userId, userRole }: NotificationBellProps) {
-  const navigate = useNavigate();
+export default function NotificationBell() {
+  const { user } = useAuth();
   const queryClient = useQueryClient();
   const { showToast } = useToast();
-  const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Build case URL based on who is viewing
-  const caseUrl = (caseId: string) =>
-    userRole === 'survivor'
-      ? `/safe-space/cases/${caseId}`
-      : `/dashboard/cases/${caseId}`;
-
-  // ─── Fetch notifications ─────────────────────────────────
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const { data } = useQuery<{ data: Notification[]; unread_count: number }>({
     queryKey: ['notifications'],
-    queryFn: async () => {
-      const res = await api.get('/notifications?limit=20');
-      return res.data;
-    },
+    queryFn: async () => (await api.get('/notifications?limit=10')).data,
+    enabled: !!user,
     refetchInterval: 30000,
   });
 
-  const notifications = data?.data || [];
-  const [unreadCount, setUnreadCount] = useState(0);
+  const markReadMutation = useMutation({
+    mutationFn: (id: string) => api.patch(`/notifications/${id}/read`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notifications'] }),
+  });
 
+  const notifications = data?.data ?? [];
+  const unread = data?.unread_count ?? 0;
+
+  // Supabase Realtime subscription
   useEffect(() => {
-    setUnreadCount(data?.unread_count ?? 0);
-  }, [data?.unread_count]);
+    if (!user) return;
+    const channel = supabase
+      .channel(`notifications-${user.id}-${Date.now()}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'notifications',
+          filter: `user_id=eq.${user.id}`,
+        },
+        (payload) => {
+          queryClient.invalidateQueries({ queryKey: ['notifications'] });
+          const n = payload.new as Notification;
+          showToast(n.title, n.body, n.case_id ? `/dashboard/cases/${n.case_id}` : undefined);
+        }
+      )
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, [user, queryClient, showToast]);
 
-  // ─── Supabase Realtime subscription ──────────────────────
-  // Use a unique channel name per mount to avoid React StrictMode
-  // double-mount issues where .on() is called after .subscribe().
-
-  useEffect(() => {
-    if (!userId) return;
-
-    let channel: ReturnType<typeof supabase.channel> | null = null;
-
-    try {
-      const channelName = `notifications-${userId}-${Date.now()}`;
-      channel = supabase
-        .channel(channelName)
-        .on(
-          'postgres_changes',
-          {
-            event: 'INSERT',
-            schema: 'public',
-            table: 'notifications',
-            filter: `user_id=eq.${userId}`,
-          },
-          (payload) => {
-            const n = payload.new as Notification;
-            setUnreadCount((prev) => prev + 1);
-            showToast(
-              n.title,
-              n.body,
-              n.case_id ? caseUrl(n.case_id) : undefined
-            );
-            queryClient.invalidateQueries({ queryKey: ['notifications'] });
-          }
-        )
-        .subscribe();
-    } catch (err) {
-      console.warn('[NotificationBell] Realtime setup failed:', err);
-    }
-
-    return () => {
-      if (channel) supabase.removeChannel(channel);
-    };
-  }, [userId, showToast, queryClient]);
-
-  // ─── Close dropdown on outside click ─────────────────────
-
+  // Close on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      if (ref.current && !ref.current.contains(e.target as Node)) setIsOpen(false);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // ─── Mutations ────────────────────────────────────────────
-
-  const markAllMutation = useMutation({
-    mutationFn: async () => api.patch('/notifications/read-all'),
-    onSuccess: () => {
-      setUnreadCount(0);
-      queryClient.invalidateQueries({ queryKey: ['notifications'] });
-    },
-  });
-
-  const markOneMutation = useMutation({
-    mutationFn: async (id: string) => api.patch(`/notifications/${id}/read`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notifications'] });
-    },
-  });
-
-  const handleNotificationClick = (n: Notification) => {
-    if (!n.is_read) {
-      markOneMutation.mutate(n.id);
-      setUnreadCount((prev) => Math.max(0, prev - 1));
-    }
-    setOpen(false);
-    if (n.case_id) {
-      navigate(caseUrl(n.case_id));
-    }
-  };
-
-  // ─── Group into today / earlier ───────────────────────────
-
-  const today = new Date().toDateString();
-  const todayItems = notifications.filter(
-    (n) => new Date(n.created_at).toDateString() === today
-  );
-  const earlierItems = notifications.filter(
-    (n) => new Date(n.created_at).toDateString() !== today
-  );
-
-  // ─── Render ───────────────────────────────────────────────
-
   return (
-    <div className="relative" ref={dropdownRef}>
-      {/* Bell button */}
+    <div className="relative" ref={ref}>
       <button
-        onClick={() => setOpen((o) => !o)}
-        className="relative flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition-colors duration-150 hover:bg-gray-100 hover:text-dark"
-        aria-label="Notifications"
+        id="notification-bell"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={`Notifications${unread > 0 ? ` (${unread} unread)` : ''}`}
+        className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-surface text-muted transition-all duration-200 hover:border-primary/30 hover:text-primary hover:bg-primary-soft"
       >
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-          />
-        </svg>
-
-        {/* Unread badge */}
-        {unreadCount > 0 && (
-          <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-critical text-[9px] font-bold text-white">
-            {unreadCount > 9 ? '9+' : unreadCount}
+        <Bell className="h-4 w-4" />
+        {unread > 0 && (
+          <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-danger px-1 text-[10px] font-bold text-danger-fg">
+            {unread > 9 ? '9+' : unread}
           </span>
         )}
       </button>
 
-      {/* Dropdown panel */}
-      {open && (
-        <div className="absolute right-0 top-11 z-40 w-80 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl">
-          {/* Header */}
-          <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
-            <h3 className="text-sm font-medium text-dark">{t('dashboard:notifications.title', 'Notifications')}</h3>
-            {unreadCount > 0 && (
-              <button
-                onClick={() => markAllMutation.mutate()}
-                disabled={markAllMutation.isPending}
-                className="text-xs font-medium text-teal-600 hover:text-teal-800 transition-colors"
-              >
-                {t('dashboard:notifications.markAllRead', 'Mark all read')}
-              </button>
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-80 origin-top-right rounded-2xl border border-border bg-surface shadow-xl z-50 animate-scale-in">
+          <div className="border-b border-border-muted px-4 py-3">
+            <p className="text-sm font-semibold text-heading">Notifications</p>
+          </div>
+
+          <div className="max-h-80 overflow-y-auto divide-y divide-border-muted">
+            {notifications.length === 0 ? (
+              <p className="px-4 py-8 text-center text-sm text-muted">No notifications yet</p>
+            ) : (
+              notifications.map((n) => (
+                <div
+                  key={n.id}
+                  className={`flex gap-3 px-4 py-3 transition-colors cursor-pointer hover:bg-inset ${!n.is_read ? 'bg-primary-soft/50' : ''}`}
+                  onClick={() => {
+                    if (!n.is_read) markReadMutation.mutate(n.id);
+                    if (n.case_id) window.location.href = `/dashboard/cases/${n.case_id}`;
+                    setIsOpen(false);
+                  }}
+                >
+                  <div className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${TYPE_COLORS[n.type] ?? TYPE_COLORS.default}`} />
+                  <div className="flex-1 min-w-0">
+                    <p className={`text-sm truncate ${!n.is_read ? 'font-semibold text-heading' : 'text-body'}`}>
+                      {n.title}
+                    </p>
+                    <p className="text-xs text-muted mt-0.5 line-clamp-2">{n.body}</p>
+                    <p className="text-[10px] text-placeholder mt-1">{relativeTime(n.created_at)}</p>
+                  </div>
+                  {n.case_id && <ExternalLink className="h-3 w-3 shrink-0 text-placeholder mt-1" />}
+                </div>
+              ))
             )}
           </div>
 
-          {/* Notification list */}
-          <div className="max-h-80 overflow-y-auto">
-            {notifications.length === 0 ? (
-              <div className="flex flex-col items-center py-8 text-center">
-                <span className="mb-2 text-2xl">🔔</span>
-                <p className="text-sm text-gray-500">{t('dashboard:notifications.emptyTitle', 'No notifications yet')}</p>
-              </div>
-            ) : (
-              <>
-                {todayItems.length > 0 && (
-                  <div>
-                    <p className="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 bg-gray-100">
-                      {t('dashboard:notifications.today', 'Today')}
-                    </p>
-                    {todayItems.map((n) => (
-                      <NotificationItem
-                        key={n.id}
-                        notification={n}
-                        onClick={() => handleNotificationClick(n)}
-                        t={t}
-                      />
-                    ))}
-                  </div>
-                )}
-                {earlierItems.length > 0 && (
-                  <div>
-                    <p className="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 bg-gray-100">
-                      {t('dashboard:notifications.earlier', 'Earlier')}
-                    </p>
-                    {earlierItems.map((n) => (
-                      <NotificationItem
-                        key={n.id}
-                        notification={n}
-                        onClick={() => handleNotificationClick(n)}
-                        t={t}
-                      />
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
-          </div>
+          {notifications.length > 0 && (
+            <div className="border-t border-border-muted px-4 py-2">
+              <a href="/dashboard/notifications" className="text-xs font-medium text-primary hover:text-primary-hover transition-colors">
+                View all notifications
+              </a>
+            </div>
+          )}
         </div>
       )}
     </div>
-  );
-}
-
-// ─── Single notification row ──────────────────────────────────
-
-function NotificationItem({
-  notification: n,
-  onClick,
-  t,
-}: {
-  notification: Notification;
-  onClick: () => void;
-  t: any;
-}) {
-  const colorClass = typeColors[n.type] || typeColors.default;
-
-  return (
-    <button
-      onClick={onClick}
-      className={`w-full flex gap-3 px-4 py-3 text-left transition-colors duration-150 hover:bg-gray-100 border-b border-gray-200 last:border-b-0 ${
-        !n.is_read ? 'bg-teal-50' : 'bg-white'
-      }`}
-    >
-      <div className={`mt-1.5 h-8 w-1 shrink-0 rounded-full ${colorClass}`} />
-      <div className="min-w-0 flex-1">
-        <p className={`text-sm truncate ${!n.is_read ? 'font-semibold text-dark' : 'font-medium text-dark'}`}>
-          {n.title}
-        </p>
-        <p className="text-xs text-gray-500 mt-0.5 line-clamp-2 leading-relaxed">
-          {n.body}
-        </p>
-        <p className="mt-1 text-[10px] text-gray-500">{relativeTime(n.created_at, t)}</p>
-      </div>
-      {!n.is_read && (
-        <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-teal-500" />
-      )}
-    </button>
   );
 }

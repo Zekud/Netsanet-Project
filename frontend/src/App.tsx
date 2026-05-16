@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import ProtectedRoute from './routes/ProtectedRoute';
 
+// Landing page
+import LandingPage from './pages/landing/LandingPage';
+
 // Auth pages
 import LoginPage from './pages/auth/LoginPage';
 import VerifyOtpPage from './pages/auth/VerifyOtpPage';
@@ -76,19 +79,19 @@ export default function App() {
         </Route>
 
         {/* ─── Root Redirect ──────────────────────────────── */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<LandingPage />} />
 
         {/* ─── 404 Catch-All ──────────────────────────────── */}
         <Route
           path="*"
           element={
-            <div className="flex min-h-screen items-center justify-center bg-surface">
-              <div className="text-center">
-                <h1 className="font-serif text-4xl text-teal-900 mb-3">Page Not Found</h1>
-                <p className="text-gray-500 mb-6">The page you're looking for doesn't exist.</p>
+            <div className="flex min-h-screen items-center justify-center bg-bg">
+              <div className="text-center animate-fade-in-up max-w-sm px-4">
+                <h1 className="font-heading text-4xl text-heading mb-3">Page Not Found</h1>
+                <p className="text-muted mb-6">The page you're looking for doesn't exist.</p>
                 <a
                   href="/"
-                  className="rounded-lg bg-teal-500 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700"
+                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-fg transition-all duration-200 hover:bg-primary-hover shadow-sm hover:shadow-md"
                 >
                   Go home
                 </a>

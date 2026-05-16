@@ -1,4 +1,5 @@
-// StatusBadge — maps case_status enum values to colored badges with human-readable labels.
+// StatusBadge — styled badge showing case status with semantic colors.
+// Uses design tokens for dark/light mode support.
 
 type CaseStatus = 'new' | 'under_review' | 'referred' | 'active' | 'resolved' | 'closed';
 
@@ -8,39 +9,20 @@ interface StatusBadgeProps {
 }
 
 const statusConfig: Record<CaseStatus, { label: string; classes: string }> = {
-  new: {
-    label: 'New',
-    classes: 'bg-teal-50 text-teal-700',
-  },
-  under_review: {
-    label: 'Under Review',
-    classes: 'bg-amber-50 text-amber-700',
-  },
-  referred: {
-    label: 'Referred',
-    classes: 'bg-blue-50 text-blue-700',
-  },
-  active: {
-    label: 'Active',
-    classes: 'bg-green-50 text-green-700',
-  },
-  resolved: {
-    label: 'Resolved',
-    classes: 'bg-gray-100 text-gray-700',
-  },
-  closed: {
-    label: 'Closed',
-    classes: 'bg-gray-200 text-gray-500',
-  },
+  new:          { label: 'New',          classes: 'bg-primary-soft text-primary' },
+  under_review: { label: 'Under Review', classes: 'bg-warning-soft text-warning' },
+  referred:     { label: 'Referred',     classes: 'bg-secondary-soft text-secondary' },
+  active:       { label: 'Active',       classes: 'bg-success-soft text-success' },
+  resolved:     { label: 'Resolved',     classes: 'bg-inset text-muted' },
+  closed:       { label: 'Closed',       classes: 'bg-inset text-placeholder' },
 };
 
 export default function StatusBadge({ status, className = '' }: StatusBadgeProps) {
-  const config = statusConfig[status] || statusConfig.new;
+  const config = statusConfig[status] ?? statusConfig.new;
 
   return (
-    <span
-      className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium ${config.classes} ${className}`}
-    >
+    <span className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${config.classes} ${className}`}>
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-70" />
       {config.label}
     </span>
   );

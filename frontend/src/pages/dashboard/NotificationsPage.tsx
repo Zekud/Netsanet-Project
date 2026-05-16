@@ -1,8 +1,10 @@
 // NotificationsPage — full notification history for staff dashboard.
 // Route: /dashboard/notifications
+// Uses semantic tokens + Lucide icons.
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { Bell, MessageSquare, ArrowRightLeft, CheckCircle, XCircle, RefreshCw, PlusCircle } from 'lucide-react';
 import api from '../../lib/api';
 
 interface Notification {
@@ -25,14 +27,23 @@ function relativeTime(dateStr: string): string {
   return `${Math.floor(hours / 24)}d ago`;
 }
 
+const TYPE_ICONS: Record<string, React.ElementType> = {
+  new_message: MessageSquare,
+  referral_received: ArrowRightLeft,
+  referral_accepted: CheckCircle,
+  referral_rejected: XCircle,
+  case_update: RefreshCw,
+  new_case: PlusCircle,
+};
+
 const TYPE_COLORS: Record<string, string> = {
-  new_message: 'bg-teal-500',
-  referral_received: 'bg-amber-500',
-  referral_accepted: 'bg-green-500',
-  referral_rejected: 'bg-red-400',
-  case_update: 'bg-blue-400',
-  new_case: 'bg-purple-500',
-  default: 'bg-gray-300',
+  new_message: 'bg-primary',
+  referral_received: 'bg-warning',
+  referral_accepted: 'bg-success',
+  referral_rejected: 'bg-danger',
+  case_update: 'bg-secondary',
+  new_case: 'bg-accent',
+  default: 'bg-muted',
 };
 
 export default function NotificationsPage() {
@@ -58,12 +69,17 @@ export default function NotificationsPage() {
   const unread = data?.unread_count ?? 0;
 
   return (
-    <div className="space-y-4">
+    <div className="relative space-y-4">
+      {/* Background mesh */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-3xl z-0 -mx-4 sm:-mx-6 px-4 sm:px-6">
+        <div className="mesh-blob-1 -top-10 -right-20" />
+        <div className="mesh-blob-2 top-40 -left-20" />
+      </div>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-2xl text-dark">{t('notifications.title')}</h1>
-          <p className="text-sm text-gray-500 mt-0.5">
+          <h1 className="font-heading text-2xl text-heading">{t('notifications.title')}</h1>
+          <p className="text-sm text-muted mt-0.5">
             {unread > 0 ? `${unread} unread` : t('notifications.emptyDesc')}
           </p>
         </div>
@@ -71,7 +87,7 @@ export default function NotificationsPage() {
           <button
             onClick={() => markAllMutation.mutate()}
             disabled={markAllMutation.isPending}
-            className="rounded-xl border border-teal-200 px-4 py-2 text-sm font-medium text-teal-600 hover:bg-teal-50 transition-colors disabled:opacity-50"
+            className="rounded-xl border border-primary-muted px-4 py-2 text-sm font-medium text-primary hover:bg-primary-soft transition-colors disabled:opacity-50"
           >
             {t('notifications.markAllRead')}
           </button>
@@ -81,43 +97,50 @@ export default function NotificationsPage() {
       {/* List */}
       {isLoading ? (
         <div className="flex justify-center py-16">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-teal-500 border-t-transparent" />
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
         </div>
       ) : notifications.length === 0 ? (
-        <div className="rounded-2xl border border-gray-100 bg-white p-10 text-center shadow-sm">
-          <p className="text-4xl mb-3">🔔</p>
-          <p className="font-medium text-dark mb-1">{t('notifications.emptyTitle')}</p>
-          <p className="text-sm text-gray-500">{t('notifications.subtitle')}</p>
+        <div className="rounded-2xl border border-border bg-surface p-10 text-center shadow-sm">
+          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+            <Bell className="h-6 w-6" />
+          </div>
+          <p className="font-medium text-heading mb-1">{t('notifications.emptyTitle')}</p>
+          <p className="text-sm text-muted">{t('notifications.subtitle')}</p>
         </div>
       ) : (
-        <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden divide-y divide-gray-50">
-          {notifications.map((n) => (
-            <div
-              key={n.id}
-              className={`flex gap-3 px-4 py-4 ${!n.is_read ? 'bg-teal-50/60' : ''}`}
-            >
-              {/* Color strip */}
-              <div className={`mt-1 h-8 w-1 shrink-0 rounded-full ${TYPE_COLORS[n.type] ?? TYPE_COLORS.default}`} />
+        <div className="rounded-2xl border border-border bg-surface shadow-sm overflow-hidden divide-y divide-border-muted">
+          {notifications.map((n) => {
+            const Icon = TYPE_ICONS[n.type] ?? Bell;
+            return (
+              <div
+                key={n.id}
+                className={`flex gap-3 px-4 py-4 transition-colors ${!n.is_read ? 'bg-primary-soft/40' : ''}`}
+              >
+                {/* Icon */}
+                <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-white ${TYPE_COLORS[n.type] ?? TYPE_COLORS.default}`}>
+                  <Icon className="h-3.5 w-3.5" />
+                </div>
 
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <p className={`text-sm truncate ${!n.is_read ? 'font-semibold text-dark' : 'font-medium text-dark'}`}>
-                  {n.title}
-                </p>
-                <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{n.body}</p>
-                <p className="text-[10px] text-gray-400 mt-1">{relativeTime(n.created_at)}</p>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm truncate ${!n.is_read ? 'font-semibold text-heading' : 'font-medium text-heading'}`}>
+                    {n.title}
+                  </p>
+                  <p className="text-xs text-muted mt-0.5 leading-relaxed">{n.body}</p>
+                  <p className="text-[10px] text-placeholder mt-1">{relativeTime(n.created_at)}</p>
+                </div>
+
+                {/* Mark read */}
+                {!n.is_read && (
+                  <button
+                    onClick={() => markOneMutation.mutate(n.id)}
+                    className="shrink-0 mt-1 h-2 w-2 rounded-full bg-primary hover:bg-primary-hover transition-colors"
+                    title="Mark as read"
+                  />
+                )}
               </div>
-
-              {/* Mark read */}
-              {!n.is_read && (
-                <button
-                  onClick={() => markOneMutation.mutate(n.id)}
-                  className="shrink-0 mt-1 h-2 w-2 rounded-full bg-teal-500 hover:bg-teal-700 transition-colors"
-                  title="Mark as read"
-                />
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

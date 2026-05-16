@@ -1,19 +1,21 @@
 // VerifyOtpPage — user enters the 6-digit code sent to their email.
 // On success, redirects based on role: survivors → /safe-space, staff → /dashboard.
+// Premium design with the new design system.
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { ShieldCheck, ArrowRight, RotateCcw, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import type { UserRole } from '../../hooks/useAuth';
 import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
+import ThemeToggle from '../../components/ui/ThemeToggle';
 
 interface VerifyFormData {
   token: string;
 }
 
-// Maps each role to its post-login landing page
 function getRedirectPath(role: UserRole): string {
   switch (role) {
     case 'survivor':
@@ -36,16 +38,59 @@ export default function VerifyOtpPage() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [resendCooldown, setResendCooldown] = useState(false);
 
-  // Email is passed from LoginPage via router state
   const email = (location.state as { email?: string })?.email;
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    setValue,
+    clearErrors,
+    formState: { errors, isSubmitting, isSubmitted },
   } = useForm<VerifyFormData>();
 
-  // If no email in state, redirect back to login
+  const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(''));
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleOtpChange = (index: number, value: string) => {
+    const newValue = value.replace(/\D/g, '');
+    if (!newValue && value !== '') return;
+
+    const newOtpValues = [...otpValues];
+    newOtpValues[index] = newValue.slice(-1);
+    setOtpValues(newOtpValues);
+    
+    const tokenStr = newOtpValues.join('');
+    setValue('token', tokenStr, { shouldValidate: tokenStr.length === 6 || isSubmitted });
+    if (tokenStr.length === 6) clearErrors('token');
+
+    if (newValue && index < 5) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && !otpValues[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleOtpPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+    if (pastedData) {
+      const newOtpValues = [...otpValues];
+      for (let i = 0; i < pastedData.length; i++) {
+        newOtpValues[i] = pastedData[i];
+      }
+      setOtpValues(newOtpValues);
+      const tokenStr = newOtpValues.join('');
+      setValue('token', tokenStr, { shouldValidate: tokenStr.length === 6 || isSubmitted });
+      if (tokenStr.length === 6) clearErrors('token');
+      const nextIndex = Math.min(pastedData.length, 5);
+      inputRefs.current[nextIndex]?.focus();
+    }
+  };
+
   if (!email) {
     return <Navigate to="/login" replace />;
   }
@@ -67,7 +112,6 @@ export default function VerifyOtpPage() {
     try {
       setResendCooldown(true);
       await requestOtp(email);
-      // 30 second cooldown before allowing another resend
       setTimeout(() => setResendCooldown(false), 30000);
     } catch {
       setResendCooldown(false);
@@ -75,55 +119,78 @@ export default function VerifyOtpPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-surface">
-      <div className="flex justify-end p-4">
-        <LanguageSwitcher />
+    <div className="flex min-h-screen flex-col bg-bg relative overflow-hidden">
+      {/* Background effects */}
+      <div className="mesh-blob-1 top-10 -right-20" />
+      <div className="mesh-blob-2 bottom-10 -left-20" />
+      {/* Top bar */}
+      <div className="flex items-center justify-between p-4">
+        <button
+          onClick={() => navigate('/login')}
+          className="flex items-center gap-1.5 text-sm text-muted hover:text-heading transition-colors rounded-xl px-3 py-1.5 hover:bg-inset"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          {t('verify.back', { defaultValue: 'Back' })}
+        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <LanguageSwitcher />
+        </div>
       </div>
+
       <div className="flex flex-1 items-center justify-center px-4">
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-sm animate-fade-in-up">
+          {/* Icon badge */}
+          <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+            <ShieldCheck className="h-7 w-7" />
+          </div>
+
           {/* Header */}
-          <div className="mb-8 text-left">
-            <h1 className="font-serif text-3xl text-teal-900 mb-2">{t('verify.title')}</h1>
-            <p className="text-base text-gray-500 leading-relaxed">
+          <div className="mb-8">
+            <h1 className="font-heading text-3xl text-heading mb-2">{t('verify.title')}</h1>
+            <p className="text-base text-muted leading-relaxed">
               {t('verify.subtitle')}{' '}
-              <span className="font-medium text-dark">{email}</span>
+              <span className="font-medium text-heading">{email}</span>
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div>
-              <label
-                htmlFor="otp-token"
-                className="mb-1.5 block text-sm font-medium text-dark"
-              >
+              <label className="mb-2 block text-sm font-medium text-heading text-center">
                 {t('verify.codeLabel')}
               </label>
-              <input
-                id="otp-token"
-                type="text"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                placeholder={t('verify.codePlaceholder')}
-                maxLength={6}
-                {...register('token', {
-                  required: t('verify.codeRequired'),
-                  pattern: {
-                    value: /^\d{6}$/,
-                    message: t('verify.codeInvalid'),
-                  },
-                })}
-                className={`w-full rounded-lg border bg-white px-3.5 py-2.5 text-center font-mono text-lg tracking-[0.3em] text-dark placeholder:text-gray-200 transition-colors duration-150 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 ${
-                  errors.token ? 'border-critical' : 'border-gray-200'
-                }`}
-              />
+              <div className="flex justify-between gap-2 sm:gap-3" onPaste={handleOtpPaste}>
+                {otpValues.map((val, i) => (
+                  <input
+                    key={i}
+                    ref={el => { inputRefs.current[i] = el; }}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={val}
+                    onChange={e => handleOtpChange(i, e.target.value)}
+                    onKeyDown={e => handleOtpKeyDown(i, e)}
+                    className={`h-12 w-12 sm:h-14 sm:w-14 rounded-xl border-2 border-solid bg-surface text-center font-mono text-xl sm:text-2xl text-heading transition-all duration-200 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20 ${
+                      errors.token ? 'border-danger' : 'border-border-muted hover:border-border'
+                    }`}
+                  />
+                ))}
+              </div>
+              <input type="hidden" {...register('token', {
+                required: t('verify.codeRequired'),
+                pattern: {
+                  value: /^\d{6}$/,
+                  message: t('verify.codeInvalid'),
+                },
+              })} />
               {errors.token && (
-                <p className="mt-1 text-xs text-critical">{errors.token.message}</p>
+                <p className="mt-2 text-center text-xs text-danger">{errors.token.message}</p>
               )}
             </div>
 
             {serverError && (
-              <div className="rounded-lg bg-red-50 px-3.5 py-2.5 text-sm text-critical">
+              <div className="rounded-xl bg-danger-soft px-3.5 py-2.5 text-sm text-danger border border-danger/20">
                 {serverError}
               </div>
             )}
@@ -131,15 +198,18 @@ export default function VerifyOtpPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex w-full items-center justify-center rounded-lg bg-teal-500 px-4 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-fg transition-all duration-200 hover:bg-primary-hover active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               {isSubmitting ? (
                 <>
-                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary-fg border-t-transparent" />
                   {t('verify.buttonLoading')}
                 </>
               ) : (
-                t('verify.button')
+                <>
+                  {t('verify.button')}
+                  <ArrowRight className="h-4 w-4" />
+                </>
               )}
             </button>
           </form>
@@ -149,8 +219,9 @@ export default function VerifyOtpPage() {
             <button
               onClick={handleResend}
               disabled={resendCooldown}
-              className="text-sm text-teal-500 transition-colors duration-150 hover:text-teal-700 disabled:cursor-not-allowed disabled:text-gray-500"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors duration-200 hover:text-primary-hover disabled:cursor-not-allowed disabled:text-muted"
             >
+              <RotateCcw className={`h-3.5 w-3.5 ${resendCooldown ? 'animate-spin' : ''}`} />
               {resendCooldown ? t('verify.resendCooldown') : t('verify.resend')}
             </button>
           </div>

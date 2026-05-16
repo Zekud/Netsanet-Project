@@ -1,4 +1,5 @@
 // Card — wrapper component with optional header section.
+// Uses semantic tokens for automatic dark/light mode support.
 
 import { type ReactNode } from 'react';
 
@@ -28,9 +29,9 @@ export default function Card({
 
   return (
     <div
-      className={`rounded-xl border border-gray-200 bg-white shadow-sm ${
+      className={`rounded-2xl border border-border bg-surface shadow-sm ${
         isClickable
-          ? 'cursor-pointer transition-shadow duration-150 hover:shadow-md'
+          ? 'cursor-pointer transition-all duration-200 hover:shadow-md hover:border-primary/30'
           : ''
       } ${className}`}
       onClick={onClick}
@@ -45,7 +46,7 @@ export default function Card({
       }
     >
       {header && (
-        <div className="border-b border-gray-200 px-4 py-3 sm:px-5">
+        <div className="border-b border-border-muted px-4 py-3 sm:px-5">
           {header}
         </div>
       )}

@@ -1,66 +1,570 @@
-/* Netsanet — Global styles and Tailwind v4 design system */
+/* ================================================================
+   NETSANET — Global Design System
+   A survivor-centered, trust-communicating design token system.
+   Supports light and dark themes via [data-theme] attribute.
+   ================================================================ */
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ─── Design Tokens (CSS Custom Properties) ─────────────────── */
+/* ─── Theme Variables (Light — Default) ─────────────────────────── */
 
-@theme {
-  /* Brand — teal is the soul of this product */
-  --color-teal-50:  #E8F5F3;
-  --color-teal-100: #B2DDD8;
-  --color-teal-500: #1A7A6E;
-  --color-teal-700: #145F56;
-  --color-teal-900: #0D3D38;
+:root {
+  /* Backgrounds */
+  --c-bg: #FAF9F7;
+  --c-surface: #FFFFFF;
+  --c-elevated: #FFFFFF;
+  --c-inset: #F3F1EE;
+  --c-overlay: rgba(12, 10, 20, 0.45);
 
-  /* Neutrals */
-  --color-dark:     #1A2332;
-  --color-gray-700: #374151;
-  --color-gray-500: #6B7280;
-  --color-gray-200: #E5E7EB;
-  --color-gray-100: #F3F4F6;
-  --color-surface:  #F8FAFB;
+  /* Text hierarchy */
+  --c-heading: #1A1625;
+  --c-body: #3D3650;
+  --c-muted: #6E6585;
+  --c-placeholder: #A8A0B8;
 
-  /* Urgency — must be immediately readable at a glance */
-  --color-critical: #DC2626;
-  --color-high:     #EA580C;
-  --color-medium:   #D97706;
-  --color-low:      #6B7280;
+  /* Borders */
+  --c-border: #E4E0EC;
+  --c-border-muted: #F0EDF5;
+  --c-ring: #7C3AED;
 
-  /* Functional */
-  --color-exit-red: #EF4444;
+  /* Primary — Violet */
+  --c-primary: #7C3AED;
+  --c-primary-hover: #6D28D9;
+  --c-primary-fg: #FFFFFF;
+  --c-primary-soft: #F5F3FF;
+  --c-primary-muted: #EDE9FE;
 
-  /* Typography */
-  --font-serif: 'DM Serif Display', serif;
-  --font-sans:  'DM Sans', sans-serif;
-  --font-mono:  'JetBrains Mono', monospace;
+  /* Secondary — Indigo */
+  --c-secondary: #6366F1;
+  --c-secondary-hover: #4F46E5;
+  --c-secondary-soft: #EEF2FF;
+
+  /* Accent — Warm Violet */
+  --c-accent: #A78BFA;
+  --c-accent-soft: #F5F3FF;
+
+  /* Success */
+  --c-success: #059669;
+  --c-success-fg: #FFFFFF;
+  --c-success-soft: #ECFDF5;
+
+  /* Warning */
+  --c-warning: #D97706;
+  --c-warning-fg: #FFFFFF;
+  --c-warning-soft: #FFFBEB;
+
+  /* Danger */
+  --c-danger: #DC2626;
+  --c-danger-fg: #FFFFFF;
+  --c-danger-soft: #FEF2F2;
+
+  /* Urgency — glanceable at any scale */
+  --c-critical: #DC2626;
+  --c-critical-fg: #FFFFFF;
+  --c-high: #EA580C;
+  --c-high-fg: #FFFFFF;
+  --c-medium: #D97706;
+  --c-medium-fg: #1A1625;
+  --c-low: #6B7280;
+  --c-low-fg: #FFFFFF;
+
+  /* Safety */
+  --c-exit: #EF4444;
+
+  /* Sidebar */
+  --c-sidebar: #FFFFFF;
+  --c-sidebar-active: #F5F3FF;
+  --c-sidebar-text: #6E6585;
+  --c-sidebar-active-text: #7C3AED;
+
+  /* Chat bubbles */
+  --c-chat-mine: #7C3AED;
+  --c-chat-mine-fg: #FFFFFF;
+  --c-chat-theirs: #F3F1EE;
+  --c-chat-theirs-fg: #1A1625;
+  --c-chat-ai: #F5F3FF;
+  --c-chat-ai-fg: #1A1625;
+  --c-chat-ai-border: #EDE9FE;
 }
 
-/* ─── Base Layer ────────────────────────────────────────────── */
+/* ─── Theme Variables (Dark) ────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --c-bg: #0C0A14;
+  --c-surface: #161228;
+  --c-elevated: #1E1A30;
+  --c-inset: #110E1E;
+  --c-overlay: rgba(0, 0, 0, 0.65);
+
+  --c-heading: #F5F3FF;
+  --c-body: #C4B8D8;
+  --c-muted: #8B7FA0;
+  --c-placeholder: #5C5270;
+
+  --c-border: #2A2440;
+  --c-border-muted: #1E1A30;
+  --c-ring: #A78BFA;
+
+  --c-primary: #A78BFA;
+  --c-primary-hover: #C4B5FD;
+  --c-primary-fg: #0C0A14;
+  --c-primary-soft: #1E1636;
+  --c-primary-muted: #281F42;
+
+  --c-secondary: #818CF8;
+  --c-secondary-hover: #A5B4FC;
+  --c-secondary-soft: #1A1840;
+
+  --c-accent: #C4B5FD;
+  --c-accent-soft: #1E1636;
+
+  --c-success: #34D399;
+  --c-success-fg: #0C0A14;
+  --c-success-soft: #0C2518;
+
+  --c-warning: #FBBF24;
+  --c-warning-fg: #0C0A14;
+  --c-warning-soft: #2A2008;
+
+  --c-danger: #F87171;
+  --c-danger-fg: #0C0A14;
+  --c-danger-soft: #2A0C0C;
+
+  --c-critical: #F87171;
+  --c-critical-fg: #0C0A14;
+  --c-high: #FB923C;
+  --c-high-fg: #0C0A14;
+  --c-medium: #FBBF24;
+  --c-medium-fg: #0C0A14;
+  --c-low: #9CA3AF;
+  --c-low-fg: #0C0A14;
+
+  --c-exit: #F87171;
+
+  --c-sidebar: #161228;
+  --c-sidebar-active: #1E1636;
+  --c-sidebar-text: #8B7FA0;
+  --c-sidebar-active-text: #A78BFA;
+
+  --c-chat-mine: #7C3AED;
+  --c-chat-mine-fg: #FFFFFF;
+  --c-chat-theirs: #1E1A30;
+  --c-chat-theirs-fg: #F5F3FF;
+  --c-chat-ai: #1E1636;
+  --c-chat-ai-fg: #F5F3FF;
+  --c-chat-ai-border: #281F42;
+}
+
+/* ─── Tailwind v4 Design Tokens ─────────────────────────────────── */
+
+@theme {
+  /* Semantic — respond to light/dark automatically */
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-elevated: var(--c-elevated);
+  --color-inset: var(--c-inset);
+
+  --color-heading: var(--c-heading);
+  --color-body: var(--c-body);
+  --color-muted: var(--c-muted);
+  --color-placeholder: var(--c-placeholder);
+
+  --color-border: var(--c-border);
+  --color-border-muted: var(--c-border-muted);
+  --color-ring: var(--c-ring);
+
+  --color-primary: var(--c-primary);
+  --color-primary-hover: var(--c-primary-hover);
+  --color-primary-fg: var(--c-primary-fg);
+  --color-primary-soft: var(--c-primary-soft);
+  --color-primary-muted: var(--c-primary-muted);
+
+  --color-secondary: var(--c-secondary);
+  --color-secondary-hover: var(--c-secondary-hover);
+  --color-secondary-soft: var(--c-secondary-soft);
+
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+
+  --color-success: var(--c-success);
+  --color-success-fg: var(--c-success-fg);
+  --color-success-soft: var(--c-success-soft);
+
+  --color-warning: var(--c-warning);
+  --color-warning-fg: var(--c-warning-fg);
+  --color-warning-soft: var(--c-warning-soft);
+
+  --color-danger: var(--c-danger);
+  --color-danger-fg: var(--c-danger-fg);
+  --color-danger-soft: var(--c-danger-soft);
+
+  --color-critical: var(--c-critical);
+  --color-critical-fg: var(--c-critical-fg);
+  --color-high: var(--c-high);
+  --color-high-fg: var(--c-high-fg);
+  --color-medium: var(--c-medium);
+  --color-medium-fg: var(--c-medium-fg);
+  --color-low: var(--c-low);
+  --color-low-fg: var(--c-low-fg);
+
+  --color-exit-red: var(--c-exit);
+
+  --color-sidebar: var(--c-sidebar);
+  --color-sidebar-active: var(--c-sidebar-active);
+  --color-sidebar-text: var(--c-sidebar-text);
+  --color-sidebar-active-text: var(--c-sidebar-active-text);
+
+  --color-chat-mine: var(--c-chat-mine);
+  --color-chat-mine-fg: var(--c-chat-mine-fg);
+  --color-chat-theirs: var(--c-chat-theirs);
+  --color-chat-theirs-fg: var(--c-chat-theirs-fg);
+  --color-chat-ai: var(--c-chat-ai);
+  --color-chat-ai-fg: var(--c-chat-ai-fg);
+  --color-chat-ai-border: var(--c-chat-ai-border);
+
+  /* ── Backward-compat: old teal-* → new violet values ──
+     This bridges ALL existing components without code changes.
+     Existing classes like bg-teal-500 now render as violet. */
+  --color-teal-50:  var(--c-primary-soft);
+  --color-teal-100: var(--c-primary-muted);
+  --color-teal-500: var(--c-primary);
+  --color-teal-700: var(--c-primary-hover);
+  --color-teal-900: var(--c-heading);
+
+  /* Neutrals — map to semantic values */
+  --color-dark: var(--c-heading);
+  --color-gray-700: var(--c-body);
+  --color-gray-500: var(--c-muted);
+  --color-gray-200: var(--c-border);
+  --color-gray-100: var(--c-inset);
+
+  /* Typography */
+  --font-heading: 'Outfit', 'Noto Sans Ethiopic', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Noto Sans Ethiopic', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Keep old aliases working */
+  --font-serif: 'Outfit', 'Noto Sans Ethiopic', system-ui, sans-serif;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Base Layer ────────────────────────────────────────────────── */
 
 @layer base {
   html {
     font-family: var(--font-sans);
-    color: var(--color-dark);
+    color: var(--c-body);
+    background-color: var(--c-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
     margin: 0;
-    background-color: var(--color-surface);
     min-height: 100dvh;
+    transition: background-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
   }
 
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif);
-    font-weight: 400;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
     line-height: 1.2;
+    color: var(--c-heading);
   }
 
-  /* Remove default focus outlines and add accessible custom ones */
+  /* Accessible focus ring */
   *:focus-visible {
-    outline: 2px solid var(--color-teal-500);
+    outline: 2px solid var(--c-ring);
     outline-offset: 2px;
     border-radius: 4px;
   }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Smooth transitions for theme-aware elements */
+  .theme-transition {
+    transition: background-color 0.3s var(--ease-smooth),
+                color 0.3s var(--ease-smooth),
+                border-color 0.3s var(--ease-smooth),
+                box-shadow 0.3s var(--ease-smooth);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-border);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--c-muted);
+  }
 }
+
+/* ─── Animations ────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(124, 58, 237, 0.15); }
+  50%      { box-shadow: 0 0 20px rgba(124, 58, 237, 0.35); }
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideInUpBounce {
+  0%   { opacity: 0; transform: translateY(24px) scale(0.96); }
+  60%  { opacity: 1; transform: translateY(-3px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes chatSlideIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes chatSlideOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(16px) scale(0.95); }
+}
+
+@keyframes meshFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(30px, -20px) scale(1.05); }
+  66%      { transform: translate(-15px, 15px) scale(0.97); }
+}
+
+@keyframes meshFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-25px, 18px) scale(1.03); }
+  66%      { transform: translate(20px, -12px) scale(0.98); }
+}
+
+/* ─── Utility Animations ────────────────────────────────────────── */
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.2s var(--ease-smooth);
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.3s var(--ease-smooth) both;
+  }
+
+  .animate-fade-in-down {
+    animation: fadeInDown 0.3s var(--ease-smooth);
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.25s var(--ease-smooth);
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.25s var(--ease-smooth);
+  }
+
+  .animate-slide-in-up {
+    animation: slideInUp 0.35s var(--ease-smooth) both;
+  }
+
+  .animate-slide-in-up-bounce {
+    animation: slideInUpBounce 0.5s var(--ease-smooth) both;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s var(--ease-spring);
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, var(--c-inset) 25%, var(--c-border-muted) 50%, var(--c-inset) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glowPulse 2.5s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  .animate-chat-in {
+    animation: chatSlideIn 0.3s var(--ease-spring) both;
+  }
+
+  .animate-chat-out {
+    animation: chatSlideOut 0.2s var(--ease-smooth) both;
+  }
+
+  /* ── Staggered entrance delays ── */
+  .animate-stagger-1 { animation: fadeInUp 0.4s var(--ease-smooth) 0.05s both; }
+  .animate-stagger-2 { animation: fadeInUp 0.4s var(--ease-smooth) 0.10s both; }
+  .animate-stagger-3 { animation: fadeInUp 0.4s var(--ease-smooth) 0.15s both; }
+  .animate-stagger-4 { animation: fadeInUp 0.4s var(--ease-smooth) 0.20s both; }
+  .animate-stagger-5 { animation: fadeInUp 0.4s var(--ease-smooth) 0.25s both; }
+  .animate-stagger-6 { animation: fadeInUp 0.4s var(--ease-smooth) 0.30s both; }
+  .animate-stagger-7 { animation: fadeInUp 0.4s var(--ease-smooth) 0.35s both; }
+  .animate-stagger-8 { animation: fadeInUp 0.4s var(--ease-smooth) 0.40s both; }
+
+  /* ── Hover lift effect ── */
+  .hover-lift {
+    transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth);
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(124, 58, 237, 0.08), 0 4px 10px -5px rgba(0,0,0,0.06);
+  }
+
+  /* ── Glass morphism ── */
+  .glass {
+    background: color-mix(in srgb, var(--c-surface) 80%, transparent);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+
+  .glass-strong {
+    background: color-mix(in srgb, var(--c-surface) 90%, transparent);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+  }
+
+  /* ── Background mesh blobs ── */
+  .mesh-blob-1 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--c-primary) 0%, transparent 70%);
+    opacity: 0.06;
+    filter: blur(60px);
+    animation: meshFloat1 12s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .mesh-blob-2 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--c-accent) 0%, transparent 70%);
+    opacity: 0.05;
+    filter: blur(50px);
+    animation: meshFloat2 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* ── Gradient border card (for AI summary, featured sections) ── */
+  .gradient-border {
+    position: relative;
+    border-radius: 1rem;
+    background: var(--c-surface);
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--c-primary), var(--c-accent), var(--c-secondary));
+    z-index: -1;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
+  .gradient-border:hover::before {
+    opacity: 0.5;
+  }
+}
+

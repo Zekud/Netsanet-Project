@@ -6,6 +6,14 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+// Landing page translations
+import enLanding         from '../locales/en/landing.json';
+import amLanding         from '../locales/am/landing.json';
+import tiLanding         from '../locales/ti/landing.json';
+import omLanding         from '../locales/om/landing.json';
+import soLanding         from '../locales/so/landing.json';
+import aaLanding         from '../locales/aa/landing.json';
+
 // Survivor portal translations
 import enSurvivorHome    from '../locales/en/survivorHome.json';
 import amSurvivorHome    from '../locales/am/survivorHome.json';
@@ -77,6 +85,7 @@ i18n
   .init({
     resources: {
       en: {
+        landing:        enLanding,
         auth:           enAuth,
         dashboard:      enDashboard,
         survivorHome:   enSurvivorHome,
@@ -88,6 +97,7 @@ i18n
         evidenceLocker: enEvidenceLocker,
       },
       am: {
+        landing:        amLanding,
         auth:           amAuth,
         dashboard:      amDashboard,
         survivorHome:   amSurvivorHome,
@@ -99,6 +109,7 @@ i18n
         evidenceLocker: amEvidenceLocker,
       },
       ti: {
+        landing:        tiLanding,
         auth:           tiAuth,
         dashboard:      tiDashboard,
         survivorHome:   tiSurvivorHome,
@@ -110,6 +121,7 @@ i18n
         evidenceLocker: tiEvidenceLocker,
       },
       om: {
+        landing:        omLanding,
         auth:           omAuth,
         dashboard:      omDashboard,
         survivorHome:   omSurvivorHome,
@@ -121,6 +133,7 @@ i18n
         evidenceLocker: omEvidenceLocker,
       },
       so: {
+        landing:        soLanding,
         auth:           soAuth,
         dashboard:      soDashboard,
         survivorHome:   soSurvivorHome,
@@ -132,6 +145,7 @@ i18n
         evidenceLocker: soEvidenceLocker,
       },
       aa: {
+        landing:        aaLanding,
         auth:           aaAuth,
         dashboard:      aaDashboard,
         survivorHome:   aaSurvivorHome,
@@ -155,6 +169,7 @@ i18n
     supportedLngs: ['en', 'am', 'ti', 'om', 'so', 'aa'],
 
     ns: [
+      'landing',
       'auth',
       'dashboard',
       'survivorHome',
@@ -165,7 +180,7 @@ i18n
       'aiGuide',
       'evidenceLocker',
     ],
-    defaultNS: 'survivorHome',
+    defaultNS: 'landing',
 
     interpolation: {
       escapeValue: false,
