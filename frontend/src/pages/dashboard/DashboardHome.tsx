@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ClipboardList, FolderOpen, AlertTriangle, Clock, ArrowUpRight, ChevronRight, BarChart3 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
-import { StatusBadge } from '../../components/ui';
+import { StatusBadge, Skeleton } from '../../components/ui';
 import api from '../../lib/api';
 
 interface Overview {
@@ -54,15 +54,17 @@ export default function DashboardHome() {
   const { user } = useAuth();
   const { t } = useTranslation('dashboard');
 
-  const { data: overviewRes } = useQuery<{ data: Overview }>({
+  const { data: overviewRes, isLoading: overviewLoading } = useQuery<{ data: Overview }>({
     queryKey: ['analytics-overview'],
     queryFn: async () => (await api.get('/analytics/overview')).data,
   });
 
-  const { data: casesRes } = useQuery<{ data: Case[] }>({
+  const { data: casesRes, isLoading: casesLoading } = useQuery<{ data: Case[] }>({
     queryKey: ['recent-cases'],
     queryFn: async () => (await api.get('/cases?limit=5&sort_by=created_at&sort_dir=desc')).data,
   });
+
+  const isLoading = overviewLoading || casesLoading;
 
   const overview = overviewRes?.data;
   const cases = casesRes?.data ?? [];
@@ -80,18 +82,38 @@ export default function DashboardHome() {
 
       {/* Header */}
       <div className="relative z-10 animate-fade-in-up">
-        <h1 className="font-heading text-2xl text-heading">
-          {greeting}, {user?.display_name?.split(' ')[0] || 'there'}
-        </h1>
-        <p className="text-sm text-muted mt-0.5 capitalize">{user?.role?.replace('_', ' ')}</p>
+        {isLoading ? (
+          <div className="space-y-2">
+            <Skeleton className="h-8 w-64" />
+            <Skeleton className="h-4 w-32" />
+          </div>
+        ) : (
+          <>
+            <h1 className="font-heading text-2xl text-heading">
+              {greeting}, {user?.display_name?.split(' ')[0] || 'there'}
+            </h1>
+            <p className="text-sm text-muted mt-0.5 capitalize">{user?.role?.replace('_', ' ')}</p>
+          </>
+        )}
       </div>
 
       {/* KPI Cards */}
       <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="animate-stagger-1"><KpiCard icon={ClipboardList} label={t('analytics.kpi.totalCases')} value={overview?.totalCases ?? '—'} /></div>
-        <div className="animate-stagger-2"><KpiCard icon={FolderOpen} label={t('analytics.kpi.openCases')} value={overview?.openCases ?? '—'} accent="border-l-primary" /></div>
-        <div className="animate-stagger-3"><KpiCard icon={AlertTriangle} label={t('analytics.kpi.criticalCases')} value={overview?.criticalCases ?? '—'} accent="border-l-danger" /></div>
-        <div className="animate-stagger-4"><KpiCard icon={Clock} label={t('analytics.kpi.avgResolution')} value={overview ? `${overview.avgResolutionDays}d` : '—'} /></div>
+        {isLoading ? (
+          <>
+            <Skeleton className="h-32 w-full rounded-2xl" />
+            <Skeleton className="h-32 w-full rounded-2xl" />
+            <Skeleton className="h-32 w-full rounded-2xl" />
+            <Skeleton className="h-32 w-full rounded-2xl" />
+          </>
+        ) : (
+          <>
+            <div className="animate-stagger-1"><KpiCard icon={ClipboardList} label={t('analytics.kpi.totalCases')} value={overview?.totalCases ?? '—'} /></div>
+            <div className="animate-stagger-2"><KpiCard icon={FolderOpen} label={t('analytics.kpi.openCases')} value={overview?.openCases ?? '—'} accent="border-l-primary" /></div>
+            <div className="animate-stagger-3"><KpiCard icon={AlertTriangle} label={t('analytics.kpi.criticalCases')} value={overview?.criticalCases ?? '—'} accent="border-l-danger" /></div>
+            <div className="animate-stagger-4"><KpiCard icon={Clock} label={t('analytics.kpi.avgResolution')} value={overview ? `${overview.avgResolutionDays}d` : '—'} /></div>
+          </>
+        )}
       </div>
 
       {/* Recent Cases */}
@@ -102,7 +124,13 @@ export default function DashboardHome() {
             View all <ArrowUpRight className="h-3 w-3" />
           </Link>
         </div>
-        {cases.length === 0 ? (
+        {isLoading ? (
+          <div className="p-4 space-y-4">
+            <Skeleton className="h-12 w-full rounded-xl" />
+            <Skeleton className="h-12 w-full rounded-xl" />
+            <Skeleton className="h-12 w-full rounded-xl" />
+          </div>
+        ) : cases.length === 0 ? (
           <div className="py-10 text-center text-sm text-placeholder">{t('home.recentCases.emptyTitle')}</div>
         ) : (
           <table className="w-full text-sm">

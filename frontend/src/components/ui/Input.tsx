@@ -26,14 +26,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={inputId}
+          aria-invalid={!!error}
+          aria-describedby={
+            error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined
+          }
           className={`w-full rounded-xl border bg-surface px-3.5 py-2.5 text-sm text-heading placeholder:text-placeholder transition-all duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20 ${
             error ? 'border-danger' : 'border-border'
           } ${className}`}
           {...props}
         />
-        {error && <p className="mt-1 text-xs text-danger">{error}</p>}
+        {error && <p id={`${inputId}-error`} className="mt-1 text-xs text-danger" aria-live="polite">{error}</p>}
         {helperText && !error && (
-          <p className="mt-1 text-xs text-muted">{helperText}</p>
+          <p id={`${inputId}-helper`} className="mt-1 text-xs text-muted">{helperText}</p>
         )}
       </div>
     );

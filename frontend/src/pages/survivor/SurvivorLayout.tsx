@@ -11,6 +11,7 @@ import { useAuth } from '../../hooks/useAuth';
 import NotificationBell from '../../components/ui/NotificationBell';
 import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
 import ThemeToggle from '../../components/ui/ThemeToggle';
+import QuickExitButton from '../../components/ui/QuickExitButton';
 
 export default function SurvivorLayout() {
   const { user, logout } = useAuth();
@@ -33,6 +34,7 @@ export default function SurvivorLayout() {
 
   return (
     <div className={`flex flex-col bg-bg ${location.pathname.includes('/chat') ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'}`}>
+      <QuickExitButton />
       {/* ─── Top Navigation ─── */}
       <header className="sticky top-0 z-30 border-b border-border bg-surface/95 backdrop-blur-md px-4 py-3 sm:px-6">
         <div className="mx-auto flex max-w-5xl items-center justify-between">

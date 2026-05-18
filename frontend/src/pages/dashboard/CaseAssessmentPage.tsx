@@ -4,24 +4,18 @@
 
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import {
-  Sparkles, Lock, Calendar, MapPin, FileText, Image, Music, Paperclip,
-  PenLine, RefreshCw, UserCheck, Pin, ArrowRightLeft, MessageSquare, Eye,
-  X,
-} from 'lucide-react';
+import { Sparkles, Lock, Calendar, MapPin, MessageSquare, X } from 'lucide-react';
 import api from '../../lib/api';
 import { useAuth } from '../../hooks/useAuth';
-import {
-  PageHeader, UrgencyBadge, StatusBadge, Spinner, Button, Card,
-} from '../../components/ui';
+import { PageHeader, UrgencyBadge, StatusBadge, Button, Skeleton } from '../../components/ui';
 import ReferModal from '../../components/cases/ReferModal';
 import ChatPanel from '../../components/cases/ChatPanel';
+import CaseTabs from '../../components/cases/assessment/CaseTabs';
+import CaseActionPanel from '../../components/cases/assessment/CaseActionPanel';
 
-// ─── Types ────────────────────────────────────────────────────
-
-interface CaseDetail {
+export interface CaseDetail {
   id: string;
   case_number: string;
   title: string;
@@ -41,81 +35,20 @@ interface CaseDetail {
   updated_at: string;
 }
 
-interface Activity {
-  id: string;
-  activity_type: string;
-  description: string;
-  actor_name: string;
-  metadata: Record<string, unknown> | null;
-  created_at: string;
-}
-
-interface EvidenceFile {
-  id: string;
-  file_name: string;
-  mime_type: string;
-  size_bytes: number;
-  created_at: string;
-}
-
-interface Worker {
-  id: string;
-  display_name: string | null;
-  role: string;
-}
-
-// ─── Constants ────────────────────────────────────────────────
-
-const statusOptions: CaseDetail['status'][] = [
-  'new', 'under_review', 'referred', 'active', 'resolved', 'closed',
-];
-
-const activityIcons: Record<string, React.ElementType> = {
-  case_created: PenLine,
-  status_changed: RefreshCw,
-  worker_assigned: UserCheck,
-  note_added: Pin,
-  referral_created: ArrowRightLeft,
-  message_sent: MessageSquare,
-};
-
-function getFileIcon(mime: string) {
-  if (mime.startsWith('image/')) return Image;
-  if (mime.startsWith('audio/')) return Music;
-  if (mime === 'application/pdf') return FileText;
-  return Paperclip;
-}
-
-type TabKey = 'details' | 'evidence' | 'activity';
-
-// ─── Component ────────────────────────────────────────────────
-
 export default function CaseAssessmentPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useTranslation('dashboard');
-  const queryClient = useQueryClient();
 
-  const [selectedStatus, setSelectedStatus] = useState('');
-  const [selectedWorkerId, setSelectedWorkerId] = useState('');
-  const [noteText, setNoteText] = useState('');
   const [referModalOpen, setReferModalOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<TabKey>('details');
 
-  const statusLabels: Record<string, string> = {
-    new: t('shared.status.new'), under_review: t('shared.status.under_review'),
-    referred: t('shared.status.referred'), active: t('shared.status.active'),
-    resolved: t('shared.status.resolved'), closed: t('shared.status.closed'),
-  };
   const categoryLabels: Record<string, string> = {
     legal: t('shared.category.legal'), medical: t('shared.category.medical'),
     shelter: t('shared.category.shelter'), counseling: t('shared.category.counseling'),
     other: t('shared.category.other'),
   };
-
-  // ─── Queries ──────────────────────────────────────────────
 
   const { data: caseData, isLoading: caseLoading, isError: caseError } = useQuery<CaseDetail>({
     queryKey: ['case', id],
@@ -123,56 +56,27 @@ export default function CaseAssessmentPage() {
     enabled: !!id,
   });
 
-  const { data: activities, isLoading: activitiesLoading } = useQuery<Activity[]>({
-    queryKey: ['case-activities', id],
-    queryFn: async () => (await api.get(`/cases/${id}/activities`)).data.data,
-    enabled: !!id,
-  });
-
-  const { data: workers } = useQuery<Worker[]>({
-    queryKey: ['workers'],
-    queryFn: async () => (await api.get('/users/workers')).data.data || [],
-    enabled: user?.role === 'institution_admin' || user?.role === 'system_admin',
-  });
-
-  const { data: evidenceFiles } = useQuery<EvidenceFile[]>({
-    queryKey: ['evidence', id],
-    queryFn: async () => (await api.get(`/cases/${id}/evidence`)).data.data ?? [],
-    enabled: !!id,
-  });
-
-  // ─── Mutations ────────────────────────────────────────────
-
-  const statusMutation = useMutation({
-    mutationFn: (status: string) => api.patch(`/cases/${id}/status`, { status }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['case', id] });
-      queryClient.invalidateQueries({ queryKey: ['case-activities', id] });
-      setSelectedStatus('');
-    },
-  });
-
-  const assignMutation = useMutation({
-    mutationFn: (workerId: string) => api.patch(`/cases/${id}/assign`, { assigned_worker_id: workerId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['case', id] });
-      queryClient.invalidateQueries({ queryKey: ['case-activities', id] });
-      setSelectedWorkerId('');
-    },
-  });
-
-  const noteMutation = useMutation({
-    mutationFn: (description: string) => api.post(`/cases/${id}/activities`, { description }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['case-activities', id] });
-      setNoteText('');
-    },
-  });
-
-  // ─── Loading / Error ─────────────────────────────────────
-
   if (caseLoading) {
-    return <div className="flex justify-center py-20"><Spinner size="lg" label="Loading case..." /></div>;
+    return (
+      <div className="relative space-y-6 px-4 sm:px-6">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-8 w-1/3" />
+          <Skeleton className="h-10 w-24" />
+        </div>
+        <Skeleton className="h-32 w-full rounded-2xl" />
+        <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
+          <div className="space-y-5">
+            <Skeleton className="h-10 w-full rounded-xl" />
+            <Skeleton className="h-64 w-full rounded-xl" />
+          </div>
+          <div className="space-y-4">
+            <Skeleton className="h-32 w-full rounded-xl" />
+            <Skeleton className="h-32 w-full rounded-xl" />
+            <Skeleton className="h-32 w-full rounded-xl" />
+          </div>
+        </div>
+      </div>
+    );
   }
   if (caseError || !caseData) {
     return (
@@ -185,14 +89,6 @@ export default function CaseAssessmentPage() {
   }
 
   const isAdmin = user?.role === 'institution_admin' || user?.role === 'system_admin';
-  const selectClasses = 'w-full rounded-xl border border-border bg-surface px-3 py-2 text-sm text-heading focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20';
-  const textareaClasses = 'w-full resize-y rounded-xl border border-border bg-surface px-3 py-2 text-sm text-heading placeholder:text-placeholder focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20';
-
-  const tabs: { key: TabKey; label: string }[] = [
-    { key: 'details', label: t('assessment.tabs.details', { defaultValue: 'Details' }) },
-    { key: 'evidence', label: t('assessment.tabs.evidence', { defaultValue: 'Evidence' }) },
-    { key: 'activity', label: t('assessment.tabs.activity', { defaultValue: 'Activity' }) },
-  ];
 
   return (
     <div className="relative">
@@ -251,7 +147,7 @@ export default function CaseAssessmentPage() {
           </div>
         </div>
 
-        {/* ─── AI Triage Summary (gradient border highlight) ─── */}
+        {/* ─── AI Triage Summary ─── */}
         {caseData.ai_summary && (
           <div className="animate-stagger-2 mb-6">
             <div className="gradient-border p-5 shadow-sm">
@@ -275,200 +171,10 @@ export default function CaseAssessmentPage() {
         {/* ─── TWO-COLUMN: Tabs + Actions ─── */}
         <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
           {/* LEFT: Tabbed content */}
-          <div className="animate-stagger-3">
-            {/* Tab bar */}
-            <div className="flex gap-1 rounded-xl bg-inset p-1 mb-5">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
-                    activeTab === tab.key
-                      ? 'bg-surface text-heading shadow-sm'
-                      : 'text-muted hover:text-heading'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Tab: Details */}
-            {activeTab === 'details' && (
-              <div className="space-y-5 animate-fade-in-up">
-                {/* Survivor Info */}
-                <Card header={<h3 className="text-sm font-medium text-heading">Survivor Information</h3>}>
-                  {caseData.is_anonymous ? (
-                    <div className="flex items-center gap-2 text-sm text-muted">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-soft text-primary">
-                        <Lock className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-heading">{t('assessment.anonymous.title')}</p>
-                        <p className="text-xs text-muted">{t('assessment.anonymous.desc')}</p>
-                      </div>
-                    </div>
-                  ) : (
-                    <p className="text-sm text-muted">
-                      {t('assessment.survivorId')}{' '}
-                      <span className="font-mono text-xs text-heading">{caseData.survivor_id.slice(0, 8)}...</span>
-                    </p>
-                  )}
-                </Card>
-
-                {/* Incident Description */}
-                <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.incident.title')}</h3>}>
-                  <p className="text-sm text-body leading-relaxed whitespace-pre-wrap">
-                    {caseData.description}
-                  </p>
-                </Card>
-              </div>
-            )}
-
-            {/* Tab: Evidence */}
-            {activeTab === 'evidence' && (
-              <div className="space-y-5 animate-fade-in-up">
-                <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.evidence.title')}</h3>}>
-                  {!evidenceFiles || evidenceFiles.length === 0 ? (
-                    <div className="flex flex-col items-center py-8 text-center">
-                      <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-inset text-muted">
-                        <Paperclip className="h-5 w-5" />
-                      </div>
-                      <p className="text-sm text-muted">{t('assessment.evidence.empty')}</p>
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      {evidenceFiles.map((f, i) => {
-                        const FileIcon = getFileIcon(f.mime_type);
-                        const displayFileName = f.file_name.length > 25 ? `${f.file_name.substring(0, 22)}...` : f.file_name;
-                        return (
-                          <div key={f.id} className={`flex items-center justify-between min-w-0 rounded-xl border border-border-muted bg-inset px-3 py-2.5 hover-lift animate-stagger-${Math.min(i + 1, 8)}`}>
-                            <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-primary">
-                                <FileIcon className="h-4 w-4" />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <p className="text-sm font-medium text-heading truncate" title={f.file_name}>{displayFileName}</p>
-                                <p className="text-[10px] text-placeholder">{(f.size_bytes / 1024).toFixed(0)} KB · {new Date(f.created_at).toLocaleDateString()}</p>
-                              </div>
-                            </div>
-                            <button
-                              onClick={async () => {
-                                const res = await api.get(`/cases/${id}/evidence/${f.id}/url`);
-                                window.open(res.data.data.url, '_blank');
-                              }}
-                              className="shrink-0 ml-2 inline-flex items-center gap-1 rounded-xl border border-primary-muted px-2.5 py-1.5 text-xs font-medium text-primary hover:bg-primary-soft transition-colors"
-                            >
-                              <Eye className="h-3 w-3" /> {t('assessment.evidence.view')}
-                            </button>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </Card>
-              </div>
-            )}
-
-            {/* Tab: Activity */}
-            {activeTab === 'activity' && (
-              <div className="animate-fade-in-up">
-                <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.activity.title')}</h3>}>
-                  {activitiesLoading ? (
-                    <Spinner size="sm" label={t('assessment.activity.loading')} />
-                  ) : !activities || activities.length === 0 ? (
-                    <p className="text-sm text-muted py-4 text-center">{t('assessment.activity.empty')}</p>
-                  ) : (
-                    <div className="space-y-0">
-                      {activities.map((activity, idx) => {
-                        const Icon = activityIcons[activity.activity_type] ?? RefreshCw;
-                        return (
-                          <div
-                            key={activity.id}
-                            className={`flex gap-3 py-3 ${idx < activities.length - 1 ? 'border-b border-border-muted' : ''}`}
-                          >
-                            <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-inset text-muted">
-                              <Icon className="h-3.5 w-3.5" />
-                            </div>
-                            <div className="min-w-0 flex-1">
-                              <p className="text-sm text-body">{activity.description}</p>
-                              <p className="mt-0.5 text-xs text-muted">
-                                {activity.actor_name} · {new Date(activity.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
-                              </p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </Card>
-              </div>
-            )}
-          </div>
+          <CaseTabs caseId={id!} caseData={caseData} />
 
           {/* RIGHT: Action panel */}
-          <div className="space-y-4 min-w-0">
-            {/* Status Update */}
-            <div className="animate-stagger-4">
-              <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.updateStatus.title')}</h3>}>
-                <div className="space-y-3">
-                  <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} className={selectClasses}>
-                    <option value="">{t('assessment.updateStatus.placeholder')}</option>
-                    {statusOptions.filter((s) => s !== caseData.status).map((s) => (
-                      <option key={s} value={s}>{statusLabels[s]}</option>
-                    ))}
-                  </select>
-                  <Button size="sm" onClick={() => selectedStatus && statusMutation.mutate(selectedStatus)} disabled={!selectedStatus || statusMutation.isPending} isLoading={statusMutation.isPending} className="w-full">
-                    {t('assessment.updateStatus.button')}
-                  </Button>
-                </div>
-              </Card>
-            </div>
-
-            {/* Assign Worker */}
-            {isAdmin && (
-              <div className="animate-stagger-5">
-                <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.assignWorker.title')}</h3>}>
-                  <div className="space-y-3">
-                    {caseData.assigned_worker_id && (
-                      <p className="text-xs text-muted">{t('assessment.assignWorker.currentlyAssigned')} <span className="font-mono text-heading">{caseData.assigned_worker_id.slice(0, 8)}...</span></p>
-                    )}
-                    <select value={selectedWorkerId} onChange={(e) => setSelectedWorkerId(e.target.value)} className={selectClasses}>
-                      <option value="">{t('assessment.assignWorker.placeholder')}</option>
-                      {(workers || []).map((w) => (<option key={w.id} value={w.id}>{w.display_name || w.id.slice(0, 8)}</option>))}
-                    </select>
-                    <Button size="sm" onClick={() => selectedWorkerId && assignMutation.mutate(selectedWorkerId)} disabled={!selectedWorkerId || assignMutation.isPending} isLoading={assignMutation.isPending} className="w-full">
-                      {t('assessment.assignWorker.button')}
-                    </Button>
-                  </div>
-                </Card>
-              </div>
-            )}
-
-            {/* Refer Case */}
-            {isAdmin && (
-              <div className="animate-stagger-6">
-                <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.referCase.title')}</h3>}>
-                  <p className="text-xs text-muted mb-3">{t('assessment.referCase.desc')}</p>
-                  <Button size="sm" variant="secondary" onClick={() => setReferModalOpen(true)} className="w-full">
-                    {t('assessment.referCase.button')}
-                  </Button>
-                </Card>
-              </div>
-            )}
-
-            {/* Add Note */}
-            <div className="animate-stagger-7">
-              <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.addNote.title')}</h3>}>
-                <div className="space-y-3">
-                  <textarea value={noteText} onChange={(e) => setNoteText(e.target.value)} placeholder={t('assessment.addNote.placeholder')} rows={3} className={textareaClasses} />
-                  <Button size="sm" onClick={() => noteText.trim() && noteMutation.mutate(noteText.trim())} disabled={!noteText.trim() || noteMutation.isPending} isLoading={noteMutation.isPending} className="w-full">
-                    {t('assessment.addNote.button')}
-                  </Button>
-                </div>
-              </Card>
-            </div>
-          </div>
+          <CaseActionPanel caseId={id!} caseData={caseData} isAdmin={isAdmin} setReferModalOpen={setReferModalOpen} />
         </div>
       </div>
 
