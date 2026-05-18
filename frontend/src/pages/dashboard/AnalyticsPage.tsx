@@ -32,6 +32,24 @@ const STATUS_COLORS: Record<string, string> = {
 };
 const CATEGORY_COLORS = ['#7C3AED', '#6366F1', '#F59E0B', '#EF4444', '#A78BFA'];
 
+// ─── Custom Tooltip ───────────────────────────────────────────
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    const dataLabel = label || payload[0].payload.label || payload[0].name;
+    return (
+      <div className="rounded-xl border border-border bg-surface/90 backdrop-blur-md p-3 shadow-xl animate-scale-in">
+        <p className="text-xs font-semibold text-muted mb-1 uppercase tracking-wider">{dataLabel}</p>
+        <p className="text-sm font-bold text-heading flex items-center gap-1.5">
+          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: payload[0].payload.fill || payload[0].color }} />
+          {payload[0].value} <span className="font-medium text-muted">cases</span>
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 // ─── KPI Card ─────────────────────────────────────────────────
 
 function KpiCard({ icon: Icon, label, value, sub, accent }: {
@@ -147,7 +165,7 @@ export default function AnalyticsPage() {
                     <Cell key={entry.status} fill={STATUS_COLORS[entry.status] ?? CATEGORY_COLORS[i % CATEGORY_COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(v) => [t('analytics.charts.tooltipCases', { value: v })]} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
                 <Legend iconType="circle" iconSize={8} />
               </PieChart>
             </ResponsiveContainer>
@@ -163,8 +181,8 @@ export default function AnalyticsPage() {
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={categoryData} layout="vertical" margin={{ left: 8, right: 16 }}>
                 <XAxis type="number" tick={{ fontSize: 11 }} />
-                <YAxis type="category" dataKey="label" tick={{ fontSize: 11 }} width={80} />
-                <Tooltip formatter={(v) => [t('analytics.charts.tooltipCases', { value: v })]} />
+                <YAxis type="category" dataKey="label" tick={{ fontSize: 11 }} width={80} axisLine={false} tickLine={false} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
                 <Bar dataKey="count" radius={[0, 4, 4, 0]}>
                   {categoryData.map((_, i) => (
                     <Cell key={i} fill={CATEGORY_COLORS[i % CATEGORY_COLORS.length]} />
@@ -199,10 +217,10 @@ export default function AnalyticsPage() {
         ) : (
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={formattedTrend} margin={{ left: 0, right: 8 }}>
-              <XAxis dataKey="label" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
-              <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
-              <Tooltip formatter={(v) => [t('analytics.charts.tooltipCases', { value: v })]} labelFormatter={(l) => t('analytics.charts.tooltipDate', { label: l })} />
-              <Bar dataKey="count" fill="#7C3AED" radius={[3, 3, 0, 0]} />
+              <XAxis dataKey="label" tick={{ fontSize: 10 }} interval="preserveStartEnd" axisLine={false} tickLine={false} dy={10} />
+              <YAxis allowDecimals={false} tick={{ fontSize: 11 }} axisLine={false} tickLine={false} dx={-10} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'var(--color-inset)' }} />
+              <Bar dataKey="count" fill="#7C3AED" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         )}

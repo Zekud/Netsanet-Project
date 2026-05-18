@@ -45,6 +45,7 @@ export default function Button({
     <button
       className={`inline-flex items-center justify-center font-medium transition-all duration-200 disabled:cursor-not-allowed ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
       disabled={disabled || isLoading}
+      aria-busy={isLoading}
       {...props}
     >
       {isLoading ? (

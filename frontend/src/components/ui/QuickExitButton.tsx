@@ -23,12 +23,12 @@ export default function QuickExitButton() {
   return (
     <button
       onClick={handleExit}
-      className="fixed top-4 right-4 z-50 flex items-center gap-1.5 bg-exit-red hover:brightness-110 text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-150 shadow-lg hover:shadow-xl active:scale-95"
+      className="fixed bottom-24 right-4 md:bottom-8 md:right-8 z-50 flex items-center gap-1.5 bg-exit-red hover:bg-danger text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-1 active:scale-95"
       aria-label="Quick exit — leave this site immediately (Shift+Escape)"
       title="Shift+Escape to exit"
     >
-      <LogOut className="h-3.5 w-3.5" />
-      Quick Exit
+      <LogOut className="h-4 w-4" />
+      <span>Quick Exit</span>
     </button>
   );
 }
