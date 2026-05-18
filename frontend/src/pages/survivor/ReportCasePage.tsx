@@ -37,7 +37,7 @@ export default function ReportCasePage() {
 
   // Autosave logic (loads on mount, saves on change)
   useEffect(() => {
-    const savedDraft = localStorage.getItem(AUTOSAVE_KEY);
+    const savedDraft = sessionStorage.getItem(AUTOSAVE_KEY);
     if (savedDraft) {
       try {
         const parsed = JSON.parse(savedDraft);
@@ -53,7 +53,7 @@ export default function ReportCasePage() {
   useEffect(() => {
     // Only save if there's actual data to save
     if (formData.title || formData.description) {
-      localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(formData));
+      sessionStorage.setItem(AUTOSAVE_KEY, JSON.stringify(formData));
     }
   }, [formData]);
 
@@ -70,7 +70,7 @@ export default function ReportCasePage() {
     onSuccess: (response) => {
       if (response.success) {
         setCreatedCase(response.data as CreatedCase);
-        localStorage.removeItem(AUTOSAVE_KEY); // Clear draft on success
+        sessionStorage.removeItem(AUTOSAVE_KEY); // Clear draft on success
       }
     },
   });
