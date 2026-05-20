@@ -107,6 +107,12 @@
   },
   "footer": {
     "tagline": "ኣብ ምሉእ ኢትዮጵያ ንሴቶች AI-ተኮር ድጋፍ።",
-    "copyright": "© {{year}} ኔፃኔት መድረኽ — AASTU መወዳእታ ዓመት ፕሮጀክት"
+    "copyright": "© {{year}} ኔፃኔት መድረኽ — AASTU መወዳእታ ዓመት ፕሮጀክት",
+    "links": {
+      "about": "ብዛዕባና",
+      "privacy": "ግላውነት",
+      "terms": "ውዕላት",
+      "contact": "ርኸቡና"
+    }
   }
 }

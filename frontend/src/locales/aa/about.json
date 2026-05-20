@@ -107,6 +107,12 @@
   },
   "footer": {
     "tagline": "Itoophiyaa guutuutti deeggarsa AI.",
-    "copyright": "© {{year}} Netsanet — Pirojektii AASTU"
+    "copyright": "© {{year}} Netsanet — Pirojektii AASTU",
+    "links": {
+      "about": "Waa'ee",
+      "privacy": "Icciitii",
+      "terms": "Haala",
+      "contact": "Nu Quunnamaa"
+    }
   }
 }

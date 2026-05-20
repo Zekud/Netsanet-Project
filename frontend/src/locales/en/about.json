@@ -107,6 +107,12 @@
   },
   "footer": {
     "tagline": "AI-powered support for women across Ethiopia.",
-    "copyright": "© {{year}} Netsanet Platform — AASTU Final Year Project"
+    "copyright": "© {{year}} Netsanet Platform — AASTU Final Year Project",
+    "links": {
+      "about": "About",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "contact": "Contact"
+    }
   }
 }

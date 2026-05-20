@@ -107,6 +107,12 @@
   },
   "footer": {
     "tagline": "Taageerada AI ee haweenka Itoobiya oo dhan.",
-    "copyright": "© {{year}} Madal Netsanet — Mashruuca Sannad u Dambeeya AASTU"
+    "copyright": "© {{year}} Madal Netsanet — Mashruuca Sannad u Dambeeya AASTU",
+    "links": {
+      "about": "Naga",
+      "privacy": "Asturnaanta",
+      "terms": "Shuruudaha",
+      "contact": "Nala soo xiriir"
+    }
   }
 }

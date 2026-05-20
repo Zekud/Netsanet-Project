@@ -107,6 +107,12 @@
   },
   "footer": {
     "tagline": "በመላ ኢትዮጵያ ለሴቶች AI-ተኮር ድጋፍ።",
-    "copyright": "© {{year}} ኔፃኔት መድረክ — AASTU የመመረቂያ ፕሮጀክት"
+    "copyright": "© {{year}} ኔፃኔት መድረክ — AASTU የመመረቂያ ፕሮጀክት",
+    "links": {
+      "about": "ስለ እኛ",
+      "privacy": "ግላዊነት",
+      "terms": "ውሎች",
+      "contact": "ያግኙን"
+    }
   }
 }

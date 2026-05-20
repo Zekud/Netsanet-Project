@@ -226,10 +226,10 @@ export default function About() {
             </div>
 
             <div className="flex items-center gap-4 text-xs text-muted">
-              <a href="/about" className="hover:text-heading transition-colors">About</a>
-              <a href="#" className="hover:text-heading transition-colors">Privacy</a>
-              <a href="#" className="hover:text-heading transition-colors">Terms</a>
-              <a href="#" className="hover:text-heading transition-colors">Contact</a>
+              <a href="/about" className="hover:text-heading transition-colors">{t('footer.links.about')}</a>
+              <a href="#" className="hover:text-heading transition-colors">{t('footer.links.privacy')}</a>
+              <a href="#" className="hover:text-heading transition-colors">{t('footer.links.terms')}</a>
+              <a href="#" className="hover:text-heading transition-colors">{t('footer.links.contact')}</a>
             </div>
           </div>
 

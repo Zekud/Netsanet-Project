@@ -107,6 +107,12 @@
   },
   "footer": {
     "tagline": "Itoophiyaa guutuutti dubartootaaf deeggarsa AI.",
-    "copyright": "© {{year}} Waltajjii Netsanet — Pirojektii Waggaa Dhumaa AASTU"
+    "copyright": "© {{year}} Waltajjii Netsanet — Pirojektii Waggaa Dhumaa AASTU",
+    "links": {
+      "about": "Waa'ee Keenya",
+      "privacy": "Icciitii",
+      "terms": "Haala",
+      "contact": "Nu Quunnamaa"
+    }
   }
 }
