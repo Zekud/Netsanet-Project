@@ -22,6 +22,10 @@ import omAbout           from '../locales/om/about.json';
 import soAbout           from '../locales/so/about.json';
 import aaAbout           from '../locales/aa/about.json';
 
+// Privacy page translations
+import enPrivacy         from '../locales/en/privacy.json';
+import amPrivacy         from '../locales/am/privacy.json';
+
 // Survivor portal translations
 import enSurvivorHome    from '../locales/en/survivorHome.json';
 import amSurvivorHome    from '../locales/am/survivorHome.json';
@@ -95,6 +99,7 @@ i18n
       en: {
         landing:        enLanding,
         about:          enAbout,
+        privacy:        enPrivacy,
         auth:           enAuth,
         dashboard:      enDashboard,
         survivorHome:   enSurvivorHome,
@@ -108,6 +113,7 @@ i18n
       am: {
         landing:        amLanding,
         about:          amAbout,
+        privacy:        amPrivacy,
         auth:           amAuth,
         dashboard:      amDashboard,
         survivorHome:   amSurvivorHome,
@@ -185,6 +191,7 @@ i18n
     ns: [
       'landing',
       'about',
+      'privacy',
       'auth',
       'dashboard',
       'survivorHome',

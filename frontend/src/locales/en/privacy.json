@@ -1,0 +1,195 @@
+{
+  "hero": {
+    "badge": "Privacy Policy",
+    "title": "Your Privacy & Safety Come First",
+    "description": "At Netsanet, protecting survivor privacy and data security is our highest priority. This policy explains how we collect, use, and safeguard your information."
+  },
+  "principles": {
+    "title": "Our Privacy Principles",
+    "description": "These core principles guide every decision we make about your data.",
+    "items": [
+      {
+        "title": "Safety First",
+        "description": "Your safety is paramount. We never share survivor data with unauthorized parties."
+      },
+      {
+        "title": "End-to-End Encryption",
+        "description": "All communications and evidence are encrypted. Even we cannot access your private messages."
+      },
+      {
+        "title": "Anonymous Option",
+        "description": "You can report cases anonymously. Your identity remains hidden unless you choose to reveal it."
+      },
+      {
+        "title": "Transparency",
+        "description": "We clearly explain what data we collect, why we collect it, and how it's used."
+      },
+      {
+        "title": "Minimal Data",
+        "description": "We only collect information necessary to provide support services."
+      },
+      {
+        "title": "Your Control",
+        "description": "You control your data. Request access, corrections, or deletion at any time."
+      }
+    ]
+  },
+  "collection": {
+    "title": "Information We Collect",
+    "description": "We collect only what's necessary to provide you with safe, effective support services.",
+    "items": [
+      {
+        "title": "Account Information",
+        "details": [
+          "Email address for authentication via one-time password (OTP)",
+          "User role and institution assignment (for case workers and admins)"
+        ]
+      },
+      {
+        "title": "Case Information",
+        "details": [
+          "Incident details including date, location, and description",
+          "Evidence files and encrypted communication with case workers"
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "title": "How We Use Your Information",
+    "items": [
+      {
+        "title": "Provide Support Services",
+        "description": "Connect you with case workers, legal aid, and support institutions."
+      },
+      {
+        "title": "Case Management",
+        "description": "Track case progress, coordinate referrals, and facilitate communication."
+      },
+      {
+        "title": "AI-Powered Assistance",
+        "description": "Provide risk assessment, case prioritization, and legal guidance through our AI systems."
+      },
+      {
+        "title": "Security & Safety",
+        "description": "Detect and prevent unauthorized access, fraud, and abuse of the platform."
+      },
+      {
+        "title": "Service Improvement",
+        "description": "Analyze anonymized usage patterns to improve platform features and user experience."
+      },
+      {
+        "title": "Legal Compliance",
+        "description": "Comply with Ethiopian laws and respond to valid legal requests (with survivor notification when possible)."
+      }
+    ]
+  },
+  "sharing": {
+    "title": "Who We Share Data With",
+    "warning": {
+      "title": "Important: Limited Sharing",
+      "description": "We NEVER sell your data. We only share information with authorized parties necessary for your support and safety."
+    },
+    "items": [
+      {
+        "title": "Assigned Case Workers",
+        "description": "Your assigned case worker can access case details to provide support. Anonymous cases hide your identity."
+      },
+      {
+        "title": "Partner Institutions",
+        "description": "When you consent to a referral, relevant case information is shared with the receiving institution (e.g., legal aid, medical facility)."
+      },
+      {
+        "title": "System Administrators",
+        "description": "AASTU technical staff have limited access for system maintenance and security. They are bound by strict confidentiality agreements."
+      },
+      {
+        "title": "Law Enforcement (Only When Required)",
+        "description": "We may be legally required to share information in response to valid court orders. We will notify you unless prohibited by law."
+      },
+      {
+        "title": "AI Service Providers",
+        "description": "Google Gemini processes case data for risk assessment. Data is anonymized and encrypted. Google does not store or use this data for other purposes."
+      }
+    ]
+  },
+  "rights": {
+    "title": "Your Privacy Rights",
+    "items": [
+      {
+        "title": "Access Your Information",
+        "description": "View your account information and case details through your dashboard."
+      },
+      {
+        "title": "Update Case Information",
+        "description": "Correct or update information in your reported cases as needed."
+      },
+      {
+        "title": "Anonymous Reporting",
+        "description": "Report cases anonymously to protect your identity while receiving support."
+      },
+      {
+        "title": "Request Data Deletion",
+        "description": "Contact us to request account deletion (subject to legal retention requirements for active cases)."
+      }
+    ],
+    "contact": "For privacy-related requests or concerns, contact us at"
+  },
+  "security": {
+    "title": "How We Protect Your Data",
+    "description": "Multiple layers of security ensure your information stays safe and confidential.",
+    "items": [
+      {
+        "title": "Encryption",
+        "description": "All data is encrypted in transit (TLS/SSL) and at rest (AES-256). Evidence files are stored in encrypted containers."
+      },
+      {
+        "title": "Access Controls",
+        "description": "Role-based access ensures only authorized personnel can view specific data. All access is logged and audited."
+      },
+      {
+        "title": "Secure Infrastructure",
+        "description": "Data is stored on secure servers with regular backups, firewalls, and intrusion detection systems."
+      },
+      {
+        "title": "Regular Audits",
+        "description": "We conduct regular security audits and penetration testing to identify and fix vulnerabilities."
+      }
+    ]
+  },
+  "retention": {
+    "title": "Data Retention",
+    "description": "We retain your data only as long as necessary to provide services and comply with legal obligations.",
+    "items": [
+      {
+        "label": "Active cases",
+        "duration": "Retained until case closure + 7 years",
+        "note": "Ethiopian legal requirement"
+      },
+      {
+        "label": "Account data",
+        "duration": "Retained while account is active + 1 year after deletion request",
+        "note": "Allows account recovery"
+      },
+      {
+        "label": "Security logs",
+        "duration": "Retained for 90 days",
+        "note": "Anonymized for privacy"
+      },
+      {
+        "label": "Analytics data",
+        "duration": "Anonymized and aggregated, retained indefinitely",
+        "note": "Improves platform services"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "AI-powered support for women across Ethiopia.",
+    "links": {
+      "about": "About",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "contact": "Contact"
+    },
+    "copyright": "© {{year}} Netsanet Platform — AASTU Final Year Project"
+  }
+}
