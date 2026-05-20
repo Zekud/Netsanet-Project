@@ -2,7 +2,7 @@
 // Multilingual, mobile-first, premium design with animations.
 // Route: /
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   Shield, Sparkles, Lock, Scale, MessageSquare, Building2,
@@ -302,6 +302,7 @@ export default function LandingPage() {
             </div>
 
             <div className="flex items-center gap-4 text-xs text-muted">
+              <Link to="/about" className="hover:text-heading transition-colors">{t('footer.links.about')}</Link>
               <a href="#" className="hover:text-heading transition-colors">{t('footer.links.privacy')}</a>
               <a href="#" className="hover:text-heading transition-colors">{t('footer.links.terms')}</a>
               <a href="#" className="hover:text-heading transition-colors">{t('footer.links.contact')}</a>

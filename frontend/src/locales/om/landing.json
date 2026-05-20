@@ -30,5 +30,5 @@
     ]
   },
   "cta": { "title": "Tarkaanfii Jalqabaa Fudhachuuf Qophii?", "subtitle": "Imalli hundi gootummaan jalqaba. Netsanet icciitii fi jaalalan deeggaruuf qophii dha.", "button": "Nageenya'n Seeni", "note": "Jecha icciitii hin barbaachisu. Koodii yeroo tokkoo imeelii keessanitti erginaatti fayyadamna." },
-  "footer": { "tagline": "Itoophiyaa guutuutti dubartootaaf deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
+  "footer": { "tagline": "Itoophiyaa guutuutti dubartootaaf deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "about": "Waa'ee Keenya", "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
 }

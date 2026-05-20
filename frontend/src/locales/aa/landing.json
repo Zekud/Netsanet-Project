@@ -30,5 +30,5 @@
     ]
   },
   "cta": { "title": "Tarkaanfii Jalqabaa Fudhachuuf Qophii?", "subtitle": "Netsanet icciitii fi jaalalan deeggaruuf qophii dha.", "button": "Seeni", "note": "Jecha icciitii hin barbaachisu." },
-  "footer": { "tagline": "Itoophiyaa guutuutti deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
+  "footer": { "tagline": "Itoophiyaa guutuutti deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "about": "Waa'ee", "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
 }

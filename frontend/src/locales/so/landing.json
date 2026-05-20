@@ -30,5 +30,5 @@
     ]
   },
   "cta": { "title": "Diyaar ma u tahay Tallaabooyinka ugu horreeya?", "subtitle": "Safar kasta wuxuu ku bilowdaa geesinimo. Netsanet ayaa diyaar u ah inay ku taageeraan.", "button": "Si Ammaan ah gal", "note": "Erayga sirta ah looma baahna. Koodhka hal-mar loo isticmaalo ee emailkaaga loo soo diro ayaa la isticmaalaa." },
-  "footer": { "tagline": "Taageerada AI ee haweenka Itoobiya oo dhan.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Asturnaanta", "terms": "Shuruudaha", "contact": "Nala soo xiriir" } }
+  "footer": { "tagline": "Taageerada AI ee haweenka Itoobiya oo dhan.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "about": "Naga", "privacy": "Asturnaanta", "terms": "Shuruudaha", "contact": "Nala soo xiriir" } }
 }

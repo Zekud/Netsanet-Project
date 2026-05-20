@@ -30,5 +30,5 @@
     ]
   },
   "cta": { "title": "መጀመርያ ስጉምቲ ክትወስዱ ድሉዋት ዲኹም?", "subtitle": "ኩሉ ጉዕዞ ብትብዓት ይጅምር። ኔፃኔት ብምስጢርን ብርሕራሐን ክድግፈኩም ድልው።", "button": "ብድሕነት ኣቲኹም", "note": "ምስጢረ ቃል ኣየድልን። ናብ ኢመይልኩም ዝላኣኽ ውሑስ ኮድ ንጥቀም።" },
-  "footer": { "tagline": "ኣብ ምሉእ ኢትዮጵያ ንሴቶች AI-ተኮር ድጋፍ።", "copyright": "© {{year}} ኔፃኔት — AASTU", "links": { "privacy": "ግላውነት", "terms": "ውዕላት", "contact": "ርኸቡና" } }
+  "footer": { "tagline": "ኣብ ምሉእ ኢትዮጵያ ንሴቶች AI-ተኮር ድጋፍ።", "copyright": "© {{year}} ኔፃኔት — AASTU", "links": { "about": "ብዛዕባና", "privacy": "ግላውነት", "terms": "ውዕላት", "contact": "ርኸቡና" } }
 }
