@@ -8,6 +8,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 // Landing page
 import LandingPage from './pages/landing/LandingPage';
 import About from './pages/landing/About';
+import Privacy from './pages/landing/Privacy';
 
 // Auth pages
 import LoginPage from './pages/auth/LoginPage';
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/login/verify" element={<VerifyOtpPage />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/privacy" element={<Privacy />} />
 
         {/* ─── Survivor Portal ────────────────────────────── */}
         <Route element={<ProtectedRoute allowedRoles={['survivor']} />}>
