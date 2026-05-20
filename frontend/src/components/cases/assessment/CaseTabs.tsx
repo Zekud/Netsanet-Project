@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Lock, Paperclip, Image, Music, FileText, Pin, RefreshCw, UserCheck, ArrowRightLeft, MessageSquare, Eye } from 'lucide-react';
 import api from '../../../lib/api';
 import { Card, Spinner, LightboxModal } from '../../ui';
+import ChatPanel from '../ChatPanel';
+import { useAuth } from '../../../hooks/useAuth';
 
 interface EvidenceFile {
   id: string;
@@ -38,7 +40,7 @@ function getFileIcon(mime: string) {
   return Paperclip;
 }
 
-type TabKey = 'details' | 'evidence' | 'activity';
+type TabKey = 'details' | 'evidence' | 'messages' | 'activity';
 
 interface CaseTabsProps {
   caseId: string;
@@ -47,6 +49,7 @@ interface CaseTabsProps {
 
 export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
   const { t } = useTranslation('dashboard');
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<TabKey>('details');
   
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -67,6 +70,7 @@ export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
   const tabs: { key: TabKey; label: string }[] = [
     { key: 'details', label: t('assessment.tabs.details', { defaultValue: 'Details' }) },
     { key: 'evidence', label: t('assessment.tabs.evidence', { defaultValue: 'Evidence' }) },
+    { key: 'messages', label: t('assessment.tabs.messages', { defaultValue: 'Messages' }) },
     { key: 'activity', label: t('assessment.tabs.activity', { defaultValue: 'Activity' }) },
   ];
 
@@ -162,6 +166,17 @@ export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
               </div>
             )}
           </Card>
+        </div>
+      )}
+
+      {/* Tab: Messages */}
+      {activeTab === 'messages' && user && (
+        <div className="animate-fade-in-up h-[500px] border border-border rounded-2xl overflow-hidden bg-surface shadow-sm">
+          <ChatPanel
+            caseId={caseId}
+            currentUserId={user.id}
+            currentUserRole={user.role}
+          />
         </div>
       )}
 

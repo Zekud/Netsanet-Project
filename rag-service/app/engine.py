@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH_ABS = os.path.join(SCRIPT_DIR, "legal_db")
+DB_PATH_ABS = os.path.join(SCRIPT_DIR, "legal_db").replace("\\", "/")
 
 # Initialize ChromaDB client and collection
 client = chromadb.PersistentClient(path=DB_PATH_ABS)

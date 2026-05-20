@@ -178,51 +178,6 @@ export default function CaseAssessmentPage() {
         </div>
       </div>
 
-      {/* ─── FLOATING CHAT FAB ─── */}
-      <button
-        onClick={() => setChatOpen(!chatOpen)}
-        className={`fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all duration-300 ${
-          chatOpen
-            ? 'bg-danger text-danger-fg rotate-90 hover:bg-danger/90'
-            : 'bg-primary text-primary-fg hover:bg-primary-hover animate-glow'
-        }`}
-        aria-label={chatOpen ? 'Close chat' : 'Open chat'}
-      >
-        {chatOpen ? <X className="h-5 w-5" /> : <MessageSquare className="h-5 w-5" />}
-      </button>
-
-      {/* ─── FLOATING CHAT DRAWER ─── */}
-      {chatOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-[360px] max-h-[520px] rounded-2xl border border-border bg-surface shadow-2xl overflow-hidden animate-chat-in">
-          {/* Chat header */}
-          <div className="flex items-center justify-between border-b border-border-muted bg-inset px-4 py-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary-soft text-primary">
-                <MessageSquare className="h-3.5 w-3.5" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-heading">{t('assessment.messages')}</p>
-                <p className="text-[10px] text-muted">{caseData.case_number}</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setChatOpen(false)}
-              className="rounded-lg p-1.5 text-muted hover:bg-surface hover:text-heading transition-colors"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
-          {/* Chat body */}
-          <div className="h-[440px]">
-            <ChatPanel
-              caseId={caseData.id}
-              currentUserId={user!.id}
-              currentUserRole={user!.role}
-            />
-          </div>
-        </div>
-      )}
-
       {/* Refer Modal */}
       {id && caseData && (
         <ReferModal
