@@ -1,0 +1,112 @@
+{
+  "hero": {
+    "badge": "Waa'ee Netsanet",
+    "title": "Deeggarsa Miidhamtootaa Itoophiyaa Keessatti Jijjiiruu",
+    "subtitle": "Yunivarsiitii Saayinsii fi Teeknooloojii Addis Ababa keessatti akka pirojektii waggaa dhumaatti kan hojjetame, Netsanet teeknooloojii AI ammayyaa hubannoo gadi fagoo haala hawaasummaa Itoophiyaa waliin walitti makuun karaa miidhamtoonni goolii saalaa irratti hundaa'e deeggarsa fi haqaa argatan jijjiiruu hojjeta."
+  },
+  "mission": {
+    "title": "Ergama Keenya",
+    "description": "Itoophiyaa keessatti miidhamtoonni goolii saalaa irratti hundaa'e haqaa barbaaduu fi jireenya isaanii irra deebi'anii ijaaruu meeshaalee, qabeenya fi deeggarsa isaan barbaachisu kan jajjabeessu waltajjii nageenya, dhaqqabamaa fi teeknooloojiin kan geggeeffamu dhiyeessuu."
+  },
+  "vision": {
+    "title": "Mul'ata Keenya",
+    "description": "Gara fuulduraatti miidhamaan Itoophiyaa keessa jiru hundi battalumatti deeggarsa dhoksaa, qajeelfama seeraa fi kunuunsa walitti qabame argatu — teeknooloojii kalaqaan rakkoolee afaanii, bakkaafi dhiibbaa hawaasummaa cabsuun."
+  },
+  "problem": {
+    "title": "Netsanet Maaliif Uumame",
+    "subtitle": "Gooliin saalaa irratti hundaa'e Itoophiyaa keessatti rakkoo murteessaa ta'ee itti fufa, miidhamtoonni deeggarsa fi haqaa argachuuf gufuuwwan hedduun isaan mudatu.",
+    "items": [
+      {
+        "title": "Dhaqqabummaa Daangeffame",
+        "description": "Miidhamtoonni hedduun keessumaa naannoo baadiyyaa keessatti gargaarsa seeraa, gorsa fi tajaajila deeggarsa hin qaban."
+      },
+      {
+        "title": "Sodaa fi Dhiibbaa Hawaasummaa",
+        "description": "Dhiibbaan aadaa hawaasummaafi sodaan haaloo ba'uu miidhamtoota wantoota mudatan gabaasuu fi gargaarsa barbaaduu irraa dhorkaa."
+      },
+      {
+        "title": "Kunuunsa Bittinnaa'e",
+        "description": "Tajaajiloonni deeggarsa dhaabbiilee hedduu keessatti bittinnaa'anii walitti dhufeenya fi qunnamtii dadhabaa qabu."
+      }
+    ]
+  },
+  "solution": {
+    "title": "Netsanet Maal Isa Adda Taasisa",
+    "subtitle": "Sirna deeggarsa aadaa irraa kan adda ta'e, Netsanet teeknooloojii, beekumsa naannoo fi tumsa dhaabbilee walitti makuun sirna kunuunsa guutuu uuma.",
+    "items": [
+      {
+        "title": "Dizaayinii Waliigaltee Waliin Ijaarame",
+        "description": "Miidhamtoota, hojjettootaa dhimmaafi ogeeyyii seeraa waliin ji'oota dheeraaf af-gaaffii, workshop fi qorannoo irra deddeebi'ameen hojjetame."
+      },
+      {
+        "title": "Guddina Qorannoo Irratti Hundaa'e",
+        "description": "Sirna deeggarsa GBV, mala dizaayinii miidhaa irratti hundaa'e fi bu'uura seeraa Itoophiyaa irratti qorannoo akkaadaamikaan kan hundaa'e."
+      },
+      {
+        "title": "Ogummaa Afaan Naannoo",
+        "description": "Afaanota jaʼaan hunda irratti qunnamtii dhugaa fi kabajamaa mirkaneessuuf dubbistootaa dhalootaafi gorsitootaa aadaa waliin hojjetame."
+      },
+      {
+        "title": "Tumsa Damee-Cehumsaa",
+        "description": "Ministeerota mootummaa, dhaabbilee seeraa, ogeeyyii teeknooloojii fi hawaasa siviilii tumsa hin mul'anne keessatti walitti fide."
+      },
+      {
+        "title": "Cimina Akkaadaamikaa Dhiibbaa Dhugaa Waliin Walqabsiisa",
+        "description": "Sadarkaa qorannoo yunivarsiitii hojiirra oolmaa qabatamaa dhaabbilee deeggarsa dhugaa Itoophiyaa keessatti waliin walqabsiisa."
+      },
+      {
+        "title": "Jijjiiramaf Banaa",
+        "description": "Akkaataa itti fayyadama irraa baratuu fi fedhii haaraa miidhamtootaafi dhaabbileen qaban waliin madaquu akka waltajjii jiraataa dizaayinii godhamee."
+      }
+    ]
+  },
+  "team": {
+    "title": "Barattootaan Ijaarame, Ogeeyyiin Deeggarame",
+    "subtitle": "Netsanet Yunivarsiitii Saayinsii fi Teeknooloojii Addis Ababa (AASTU) keessatti dhaabbilee hooggantoota waliin tumsuun hojjetame pirojektii waggaa dhumaa dha.",
+    "partnersTitle": "Dhaabbilee Hirmaatota",
+    "partners": [
+      {
+        "name": "Ministeeraa Dhimma Hawaasummaa Dubartootaa",
+        "description": "Ministry of Women & Social Affairs"
+      },
+      {
+        "name": "EWLA",
+        "description": "Waldaa Laammiilee Dubartootaa Itoophiyaa"
+      },
+      {
+        "name": "AASTU",
+        "description": "Yunivarsiitii Saayinsii fi Teeknooloojii Addis Ababa"
+      },
+      {
+        "name": "UNICEF",
+        "description": "Dhaabbata Ijoollee Mootummoota Gamtoomanii"
+      }
+    ],
+    "acknowledgment": "Yeroo guddina keessatti yaada gatii hin qabne nuuf kennaniif gorsitootaa keenya, hojjettootaa dhimmaa, ogeeyyii seeraafi miidhamtoota galata addaa."
+  },
+  "values": {
+    "title": "Gatiiwwan Ijoo Keenya",
+    "items": [
+      {
+        "title": "Nageenya Dursa",
+        "description": "Murtoon dizaayinii hundi nageenya miidhamtootaa, iccitii fi nageenyaaf dursa kenna."
+      },
+      {
+        "title": "Gara Laafina",
+        "description": "Qunnamtii hunda gara laafina, kabajafi miira aadaatiin dhiyeessina."
+      },
+      {
+        "title": "Ifa Ta'uu",
+        "description": "Odeeffannoon akkamitti akka itti fayyadamu, akka kuufamuu fi akka eegamu qunnamtii ifa ta'e."
+      },
+      {
+        "title": "Tumsa",
+        "description": "Bu'aa gaarii argachuuf dhaabbilee, ogeeyyii fi hawaasa waliin tumsuun hojjechuu."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Itoophiyaa guutuutti dubartootaaf deeggarsa AI.",
+    "copyright": "© {{year}} Waltajjii Netsanet — Pirojektii Waggaa Dhumaa AASTU"
+  }
+}

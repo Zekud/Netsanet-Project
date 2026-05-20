@@ -17,6 +17,10 @@ import aaLanding         from '../locales/aa/landing.json';
 // About page translations
 import enAbout           from '../locales/en/about.json';
 import amAbout           from '../locales/am/about.json';
+import tiAbout           from '../locales/ti/about.json';
+import omAbout           from '../locales/om/about.json';
+import soAbout           from '../locales/so/about.json';
+import aaAbout           from '../locales/aa/about.json';
 
 // Survivor portal translations
 import enSurvivorHome    from '../locales/en/survivorHome.json';
@@ -116,6 +120,7 @@ i18n
       },
       ti: {
         landing:        tiLanding,
+        about:          tiAbout,
         auth:           tiAuth,
         dashboard:      tiDashboard,
         survivorHome:   tiSurvivorHome,
@@ -128,6 +133,7 @@ i18n
       },
       om: {
         landing:        omLanding,
+        about:          omAbout,
         auth:           omAuth,
         dashboard:      omDashboard,
         survivorHome:   omSurvivorHome,
@@ -140,6 +146,7 @@ i18n
       },
       so: {
         landing:        soLanding,
+        about:          soAbout,
         auth:           soAuth,
         dashboard:      soDashboard,
         survivorHome:   soSurvivorHome,
@@ -152,6 +159,7 @@ i18n
       },
       aa: {
         landing:        aaLanding,
+        about:          aaAbout,
         auth:           aaAuth,
         dashboard:      aaDashboard,
         survivorHome:   aaSurvivorHome,

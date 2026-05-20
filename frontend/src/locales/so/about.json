@@ -1,0 +1,112 @@
+{
+  "hero": {
+    "badge": "Ku saabsan Netsanet",
+    "title": "Beddelka Taageerada Dhibaataysan ee Itoobiya",
+    "subtitle": "Oo lagu sameeyay Jaamacadda Sayniska iyo Tignoolajiyada Addis Ababa sida mashruuc sannad u dambeeya, Netsanet waxay isku dhaftaa tignoolajiyada AI casriga ah iyo faham qoto dheer oo ku saabsan xaalada bulshada Itoobiya si ay u beddesho sida dhibaataysan rabshadaha ku salaysan jinsiga ay u helaan taageero iyo caddaalad."
+  },
+  "mission": {
+    "title": "Hadafkeenna",
+    "description": "In la bixiyo madal ammaan ah, la heli karo, oo tignoolajiyada ku salaysan oo xoojiya dhibaataysan rabshadaha ku salaysan jinsiga Itoobiya iyagoo leh qalabka, kheyraadka iyo taageerada ay u baahan yihiin si ay u raadiyaan caddaalad oo ay dib u dhisaan noloshooda."
+  },
+  "vision": {
+    "title": "Aragtideenna",
+    "description": "Mustaqbal kasta oo dhibaataysan Itoobiya ku jira uu si degdeg ah u helo taageero qarsoodi ah, hagitaan sharci ah, iyo daryeel isku duwan — iyada oo la burburinayo caqabadaha luqadda, goobta iyo ceebta iyada oo loo marayo tignoolajiyada hal-abuurka leh."
+  },
+  "problem": {
+    "title": "Maxay Netsanet u Jirtaa",
+    "subtitle": "Rabshadaha ku salaysan jinsiga wuxuu sii ahaan yahay caqabad muhiim ah Itoobiya, iyadoo dhibaataysan ay la kulmaan caqabado badan oo taageero iyo caddaalad lagu helo.",
+    "items": [
+      {
+        "title": "Helitaan Xaddidan",
+        "description": "Dhibaataysan badan ayaa ka maqan caawimaad sharci ah, la-talinta iyo adeegyada taageerada, gaar ahaan gobollada miyiga."
+      },
+      {
+        "title": "Cabsi iyo Ceeb",
+        "description": "Ceebta dhaqanka iyo cabsida aargudashada ayaa ka hortagaya dhibaataysan inay soo sheegaan dhacdooyinka oo ay raadiyaan caawimaad."
+      },
+      {
+        "title": "Daryeel Kala Firdhay",
+        "description": "Adeegyada taageerada ayaa ku kala firdhay hay'ado badan oo leh isku-dubarid iyo isgaarsiinyo liita."
+      }
+    ]
+  },
+  "solution": {
+    "title": "Maxaa Netsanet ka Duwan",
+    "subtitle": "Ka duwan nidaamyada taageerada dhaqameed, Netsanet waxay isku keentaa tignoolajiyada, khibradda maxalliga ah, iyo iskaashiga hay'adaha si ay u abuurto nidaam daryeel oo dhammaystiran.",
+    "items": [
+      {
+        "title": "Lagu Dhisay Naqshad Wadajir ah",
+        "description": "Lagu sameeyay dhibaataysan, shaqaalaha kiisaska iyo xirfadlayaasha sharciga bilaha dhaadheer wareysiyada, aqoon-isweydaarsiyada iyo tijaabooyin soo noqnoqda."
+      },
+      {
+        "title": "Horumar Cilmi-baaris ku Salaysan",
+        "description": "Ku salaysan cilmi-baaris akadeemig ah oo ku saabsan nidaamyada taageerada GBV, mabaadi'da naqshadeynta dhaawaca ku salaysan iyo qaababka sharciga Itoobiya."
+      },
+      {
+        "title": "Khibradda Luqadda Maxalliga ah",
+        "description": "Lala shaqeeyay dadka luqadda ku hadla iyo la-taliyayaasha dhaqanka si loo hubiyo isgaarsiinta dhab ah oo ixtiraama leh dhammaan luqadaha lixda ah."
+      },
+      {
+        "title": "Iskaashi Qaybaha-dhexdhexaadka",
+        "description": "Waxay isku keentay wasaaradaha dowladda, ururada sharciga, khubarada tignoolajiyada iyo bulshada rayidka iskaashi aan horay loo arag."
+      },
+      {
+        "title": "Adag Akadeemig Saameyn Run ah la Xiriira",
+        "description": "Waxay isku dhaftaa heerarka cilmi-baarista jaamacadda iyo hirgelinta dhab ah hay'adaha taageerada runta ah Itoobiya gudaheeda."
+      },
+      {
+        "title": "u Furan Isbeddelka",
+        "description": "Loo naqshadeeyay madal nool oo ka barta qaababka isticmaalka oo la qabsada baahiyaha cusub ee dhibaataysan iyo hay'adaha."
+      }
+    ]
+  },
+  "team": {
+    "title": "Ay Dhiseen Ardayda, Ay Taageereen Khubarada",
+    "subtitle": "Netsanet waa mashruuc sannad u dambeeya oo lagu sameeyay Jaamacadda Sayniska iyo Tignoolajiyada Addis Ababa (AASTU) iskaashi la leh hay'ado hogaaminaya.",
+    "partnersTitle": "Hay'adaha Iskaashiga",
+    "partners": [
+      {
+        "name": "Wasaaradda Haweenka iyo Arrimaha Bulshada",
+        "description": "Ministry of Women & Social Affairs"
+      },
+      {
+        "name": "EWLA",
+        "description": "Ururka Qareenada Haweenka Itoobiya"
+      },
+      {
+        "name": "AASTU",
+        "description": "Jaamacadda Sayniska iyo Tignoolajiyada Addis Ababa"
+      },
+      {
+        "name": "UNICEF",
+        "description": "Ururka Carruurta Qaramada Midoobay"
+      }
+    ],
+    "acknowledgment": "Mahad gaar ah waxaa leh la-taliyayaasheenna, shaqaalaha kiisaska, khubarada sharciga iyo dhibaataysan kuwaas oo bixiyay jawaab celin qiimo leh inta lagu jiro horumarinta."
+  },
+  "values": {
+    "title": "Qiyamkeenna Muhiimka ah",
+    "items": [
+      {
+        "title": "Badbaado Marka Hore",
+        "description": "Go'aan kasta oo naqshadeyn ah wuxuu mudnaanta siiyaa badbaadada dhibaataysan, sirta iyo amniga."
+      },
+      {
+        "title": "Naxariis",
+        "description": "Waxaan ku soo dhowaynaa isgaarsiinta kasta naxariis, ixtiraam iyo dareen dhaqan."
+      },
+      {
+        "title": "Hufnaanta",
+        "description": "Isgaarsiinta cad ee sida macluumaadka loo isticmaalo, loo kaydiyo loona ilaaliyo."
+      },
+      {
+        "title": "Iskaashi",
+        "description": "Ka shaqaynta hay'adaha, khubarada iyo bulshada si wanaagsan loo helo natiijooyin wanaagsan."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Taageerada AI ee haweenka Itoobiya oo dhan.",
+    "copyright": "© {{year}} Madal Netsanet — Mashruuca Sannad u Dambeeya AASTU"
+  }
+}

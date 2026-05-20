@@ -1,0 +1,112 @@
+{
+  "hero": {
+    "badge": "Waa'ee Netsanet",
+    "title": "Deeggarsa Miidhamtootaa Itoophiyaa Keessatti Jijjiiruu",
+    "subtitle": "Yunivarsiitii Saayinsii Addis Ababa keessatti akka pirojektii waggaa dhumaatti hojjetame, Netsanet teeknooloojii AI hubannoo haala hawaasummaa Itoophiyaa waliin walitti makuun karaa miidhamtoonni deeggarsa argatan jijjiiruu hojjeta."
+  },
+  "mission": {
+    "title": "Ergama Keenya",
+    "description": "Itoophiyaa keessatti miidhamtoonni haqaa barbaaduu fi jireenya isaanii ijaaruu meeshaalee fi deeggarsa barbaachisu dhiyeessuu."
+  },
+  "vision": {
+    "title": "Mul'ata Keenya",
+    "description": "Gara fuulduraatti miidhamaan hundi deeggarsa dhoksaa, qajeelfama seeraa fi kunuunsa argatu — teeknooloojiin rakkoolee afaanii fi bakkaafi cabsuun."
+  },
+  "problem": {
+    "title": "Netsanet Maaliif Uumame",
+    "subtitle": "Gooliin Itoophiyaa keessatti rakkoo ta'ee itti fufa, miidhamtoonni deeggarsa argachuuf gufuuwwan isaan mudatu.",
+    "items": [
+      {
+        "title": "Dhaqqabummaa Daangeffame",
+        "description": "Miidhamtoonni hedduun gargaarsa seeraa fi tajaajila deeggarsa hin qaban."
+      },
+      {
+        "title": "Sodaa fi Dhiibbaa",
+        "description": "Dhiibbaan aadaa miidhamtoota gabaasuu fi gargaarsa barbaaduu irraa dhorkaa."
+      },
+      {
+        "title": "Kunuunsa Bittinnaa'e",
+        "description": "Tajaajiloonni deeggarsa dhaabbiilee hedduu keessatti bittinnaa'anii walitti dhufeenya dadhabaa qabu."
+      }
+    ]
+  },
+  "solution": {
+    "title": "Netsanet Maal Isa Adda Taasisa",
+    "subtitle": "Netsanet teeknooloojii, beekumsa naannoo fi tumsa dhaabbilee walitti makuun sirna kunuunsa uuma.",
+    "items": [
+      {
+        "title": "Dizaayinii Waliigaltee Waliin",
+        "description": "Miidhamtoota fi ogeeyyii seeraa waliin ji'oota dheeraaf qorannoo waliin hojjetame."
+      },
+      {
+        "title": "Guddina Qorannoo",
+        "description": "Sirna deeggarsa fi bu'uura seeraa Itoophiyaa irratti qorannoo kan hundaa'e."
+      },
+      {
+        "title": "Ogummaa Afaan Naannoo",
+        "description": "Afaanota jaʼaan hunda irratti qunnamtii dhugaa mirkaneessuuf hojjetame."
+      },
+      {
+        "title": "Tumsa Damee",
+        "description": "Ministeerota mootummaa fi dhaabbilee seeraa walitti fide."
+      },
+      {
+        "title": "Cimina Akkaadaamikaa",
+        "description": "Sadarkaa qorannoo yunivarsiitii hojiirra oolmaa waliin walqabsiisa."
+      },
+      {
+        "title": "Jijjiiramaf Banaa",
+        "description": "Fedhii haaraa miidhamtootaa waliin madaquu akka waltajjii dizaayinii godhamee."
+      }
+    ]
+  },
+  "team": {
+    "title": "Barattootaan Ijaarame, Ogeeyyiin Deeggarame",
+    "subtitle": "Netsanet Yunivarsiitii Addis Ababa (AASTU) keessatti dhaabbilee waliin hojjetame pirojektii waggaa dhumaa dha.",
+    "partnersTitle": "Dhaabbilee Hirmaatota",
+    "partners": [
+      {
+        "name": "Ministeeraa Dhimma Dubartootaa",
+        "description": "Ministry of Women & Social Affairs"
+      },
+      {
+        "name": "EWLA",
+        "description": "Waldaa Laammiilee Dubartootaa"
+      },
+      {
+        "name": "AASTU",
+        "description": "Yunivarsiitii Addis Ababa"
+      },
+      {
+        "name": "UNICEF",
+        "description": "Dhaabbata Ijoollee"
+      }
+    ],
+    "acknowledgment": "Gorsitootaa keenya, hojjettootaa dhimmaa fi miidhamtoota galata addaa."
+  },
+  "values": {
+    "title": "Gatiiwwan Ijoo Keenya",
+    "items": [
+      {
+        "title": "Nageenya Dursa",
+        "description": "Murtoon hundi nageenya miidhamtootaa dursa kenna."
+      },
+      {
+        "title": "Gara Laafina",
+        "description": "Qunnamtii hunda gara laafina fi kabajaan dhiyeessina."
+      },
+      {
+        "title": "Ifa Ta'uu",
+        "description": "Odeeffannoon akkamitti akka itti fayyadamu qunnamtii ifa ta'e."
+      },
+      {
+        "title": "Tumsa",
+        "description": "Dhaabbilee fi hawaasa waliin tumsuun hojjechuu."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Itoophiyaa guutuutti deeggarsa AI.",
+    "copyright": "© {{year}} Netsanet — Pirojektii AASTU"
+  }
+}
