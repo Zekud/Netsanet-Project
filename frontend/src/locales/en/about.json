@@ -1,0 +1,112 @@
+{
+  "hero": {
+    "badge": "About Netsanet",
+    "title": "Transforming Survivor Support in Ethiopia",
+    "subtitle": "Developed as a final year project at Addis Ababa Science and Technology University, Netsanet combines cutting-edge AI technology with deep understanding of Ethiopia's social context to transform how survivors of gender-based violence access support and justice."
+  },
+  "mission": {
+    "title": "Our Mission",
+    "description": "To provide a safe, accessible, and technology-driven platform that empowers survivors of gender-based violence in Ethiopia with the tools, resources, and support they need to seek justice and rebuild their lives."
+  },
+  "vision": {
+    "title": "Our Vision",
+    "description": "A future where every survivor in Ethiopia has immediate access to confidential support, legal guidance, and coordinated care — breaking down barriers of language, location, and stigma through innovative technology."
+  },
+  "problem": {
+    "title": "Why Netsanet Exists",
+    "subtitle": "Gender-based violence remains a critical challenge in Ethiopia, with survivors facing numerous barriers to accessing support and justice.",
+    "items": [
+      {
+        "title": "Limited Access",
+        "description": "Many survivors lack access to legal aid, counseling, and support services, especially in rural areas."
+      },
+      {
+        "title": "Fear & Stigma",
+        "description": "Cultural stigma and fear of retaliation prevent survivors from reporting incidents and seeking help."
+      },
+      {
+        "title": "Fragmented Care",
+        "description": "Support services are scattered across multiple institutions with poor coordination and communication."
+      }
+    ]
+  },
+  "solution": {
+    "title": "What Makes Netsanet Different",
+    "subtitle": "Unlike traditional support systems, Netsanet brings together technology, local expertise, and institutional collaboration to create a comprehensive ecosystem of care.",
+    "items": [
+      {
+        "title": "Built Through Co-Design",
+        "description": "Developed alongside survivors, case workers, and legal professionals through months of interviews, workshops, and iterative testing."
+      },
+      {
+        "title": "Research-Driven Development",
+        "description": "Grounded in academic research on GBV support systems, trauma-informed design principles, and Ethiopian legal frameworks."
+      },
+      {
+        "title": "Local Language Expertise",
+        "description": "Worked with native speakers and cultural consultants to ensure authentic, respectful communication across all six languages."
+      },
+      {
+        "title": "Cross-Sector Partnership",
+        "description": "Brought together government ministries, legal organizations, tech experts, and civil society in unprecedented collaboration."
+      },
+      {
+        "title": "Academic Rigor Meets Real Impact",
+        "description": "Combines university research standards with practical deployment in real support institutions across Ethiopia."
+      },
+      {
+        "title": "Open to Evolution",
+        "description": "Designed as a living platform that learns from usage patterns and adapts to emerging needs of survivors and institutions."
+      }
+    ]
+  },
+  "team": {
+    "title": "Built by Students, Backed by Experts",
+    "subtitle": "Netsanet is a final year project developed at Addis Ababa Science and Technology University (AASTU) in collaboration with leading institutions.",
+    "partnersTitle": "Partner Institutions",
+    "partners": [
+      {
+        "name": "MoWSA",
+        "description": "Ministry of Women & Social Affairs"
+      },
+      {
+        "name": "EWLA",
+        "description": "Ethiopian Women Lawyers Association"
+      },
+      {
+        "name": "AASTU",
+        "description": "Addis Ababa Science & Technology University"
+      },
+      {
+        "name": "UNICEF",
+        "description": "United Nations Children's Fund"
+      }
+    ],
+    "acknowledgment": "Special thanks to our advisors, case workers, legal experts, and survivors who provided invaluable feedback throughout development."
+  },
+  "values": {
+    "title": "Our Core Values",
+    "items": [
+      {
+        "title": "Safety First",
+        "description": "Every design decision prioritizes survivor safety, privacy, and security."
+      },
+      {
+        "title": "Compassion",
+        "description": "We approach every interaction with empathy, respect, and cultural sensitivity."
+      },
+      {
+        "title": "Transparency",
+        "description": "Clear communication about how data is used, stored, and protected."
+      },
+      {
+        "title": "Collaboration",
+        "description": "Working together with institutions, experts, and communities for better outcomes."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "AI-powered support for women across Ethiopia.",
+    "copyright": "© {{year}} Netsanet Platform — AASTU Final Year Project"
+  }
+}

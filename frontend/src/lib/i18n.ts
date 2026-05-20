@@ -14,6 +14,10 @@ import omLanding         from '../locales/om/landing.json';
 import soLanding         from '../locales/so/landing.json';
 import aaLanding         from '../locales/aa/landing.json';
 
+// About page translations
+import enAbout           from '../locales/en/about.json';
+import amAbout           from '../locales/am/about.json';
+
 // Survivor portal translations
 import enSurvivorHome    from '../locales/en/survivorHome.json';
 import amSurvivorHome    from '../locales/am/survivorHome.json';
@@ -86,6 +90,7 @@ i18n
     resources: {
       en: {
         landing:        enLanding,
+        about:          enAbout,
         auth:           enAuth,
         dashboard:      enDashboard,
         survivorHome:   enSurvivorHome,
@@ -98,6 +103,7 @@ i18n
       },
       am: {
         landing:        amLanding,
+        about:          amAbout,
         auth:           amAuth,
         dashboard:      amDashboard,
         survivorHome:   amSurvivorHome,
@@ -170,6 +176,7 @@ i18n
 
     ns: [
       'landing',
+      'about',
       'auth',
       'dashboard',
       'survivorHome',

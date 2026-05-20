@@ -10,9 +10,28 @@ import {
 import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
 import ThemeToggle from '../../components/ui/ThemeToggle';
 
+const SOLUTION_ICONS = [Shield, Sparkles, Globe, Users, Building2, Award];
+const VALUE_ICONS = [Shield, Heart, CheckCircle, Users];
+
 export default function About() {
   const navigate = useNavigate();
   const { t } = useTranslation('about');
+
+  const problemItems = t('problem.items', { returnObjects: true }) as {
+    title: string; description: string;
+  }[];
+
+  const solutionItems = t('solution.items', { returnObjects: true }) as {
+    title: string; description: string;
+  }[];
+
+  const partners = t('team.partners', { returnObjects: true }) as {
+    name: string; description: string;
+  }[];
+
+  const values = t('values.items', { returnObjects: true }) as {
+    title: string; description: string;
+  }[];
 
   return (
     <div className="min-h-screen bg-bg">
@@ -48,15 +67,15 @@ export default function About() {
         <div className="relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-20">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-muted bg-primary-soft px-4 py-1.5 text-sm font-medium text-primary animate-fade-in">
             <Heart className="h-3.5 w-3.5" />
-            About Netsanet
+            {t('hero.badge')}
           </div>
 
           <h1 className="font-heading text-4xl leading-tight text-heading sm:text-5xl animate-stagger-1 text-center">
-            Transforming Survivor Support in Ethiopia
+            {t('hero.title')}
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted leading-relaxed animate-stagger-2 text-center">
-            Developed as a final year project at Addis Ababa Science and Technology University, Netsanet combines cutting-edge AI technology with deep understanding of Ethiopia's social context to transform how survivors of gender-based violence access support and justice.
+            {t('hero.subtitle')}
           </p>
         </div>
       </section>
@@ -69,9 +88,9 @@ export default function About() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-soft text-primary">
                 <Target className="h-6 w-6" />
               </div>
-              <h2 className="font-heading text-2xl text-heading mb-3">Our Mission</h2>
+              <h2 className="font-heading text-2xl text-heading mb-3">{t('mission.title')}</h2>
               <p className="text-muted leading-relaxed">
-                To provide a safe, accessible, and technology-driven platform that empowers survivors of gender-based violence in Ethiopia with the tools, resources, and support they need to seek justice and rebuild their lives.
+                {t('mission.description')}
               </p>
             </div>
 
@@ -79,9 +98,9 @@ export default function About() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-soft text-primary">
                 <Sparkles className="h-6 w-6" />
               </div>
-              <h2 className="font-heading text-2xl text-heading mb-3">Our Vision</h2>
+              <h2 className="font-heading text-2xl text-heading mb-3">{t('vision.title')}</h2>
               <p className="text-muted leading-relaxed">
-                A future where every survivor in Ethiopia has immediate access to confidential support, legal guidance, and coordinated care — breaking down barriers of language, location, and stigma through innovative technology.
+                {t('vision.description')}
               </p>
             </div>
           </div>
@@ -92,27 +111,14 @@ export default function About() {
       <section className="border-y border-border bg-inset py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="text-center mb-10">
-            <h2 className="font-heading text-3xl text-heading mb-3">Why Netsanet Exists</h2>
+            <h2 className="font-heading text-3xl text-heading mb-3">{t('problem.title')}</h2>
             <p className="text-muted max-w-2xl mx-auto">
-              Gender-based violence remains a critical challenge in Ethiopia, with survivors facing numerous barriers to accessing support and justice.
+              {t('problem.subtitle')}
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              {
-                title: 'Limited Access',
-                description: 'Many survivors lack access to legal aid, counseling, and support services, especially in rural areas.',
-              },
-              {
-                title: 'Fear & Stigma',
-                description: 'Cultural stigma and fear of retaliation prevent survivors from reporting incidents and seeking help.',
-              },
-              {
-                title: 'Fragmented Care',
-                description: 'Support services are scattered across multiple institutions with poor coordination and communication.',
-              },
-            ].map((item, i) => (
+            {problemItems.map((item, i) => (
               <div key={i} className="rounded-xl border border-border bg-surface p-6 text-center">
                 <h3 className="font-heading text-lg text-heading mb-2">{item.title}</h3>
                 <p className="text-sm text-muted leading-relaxed">{item.description}</p>
@@ -126,53 +132,25 @@ export default function About() {
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl text-heading mb-3">What Makes Netsanet Different</h2>
+            <h2 className="font-heading text-3xl text-heading mb-3">{t('solution.title')}</h2>
             <p className="text-muted max-w-2xl mx-auto">
-              Unlike traditional support systems, Netsanet brings together technology, local expertise, and institutional collaboration to create a comprehensive ecosystem of care.
+              {t('solution.subtitle')}
             </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                icon: Shield,
-                title: 'Built Through Co-Design',
-                description: 'Developed alongside survivors, case workers, and legal professionals through months of interviews, workshops, and iterative testing.',
-              },
-              {
-                icon: Sparkles,
-                title: 'Research-Driven Development',
-                description: 'Grounded in academic research on GBV support systems, trauma-informed design principles, and Ethiopian legal frameworks.',
-              },
-              {
-                icon: Globe,
-                title: 'Local Language Expertise',
-                description: 'Worked with native speakers and cultural consultants to ensure authentic, respectful communication across all six languages.',
-              },
-              {
-                icon: Users,
-                title: 'Cross-Sector Partnership',
-                description: 'Brought together government ministries, legal organizations, tech experts, and civil society in unprecedented collaboration.',
-              },
-              {
-                icon: Building2,
-                title: 'Academic Rigor Meets Real Impact',
-                description: 'Combines university research standards with practical deployment in real support institutions across Ethiopia.',
-              },
-              {
-                icon: Award,
-                title: 'Open to Evolution',
-                description: 'Designed as a living platform that learns from usage patterns and adapts to emerging needs of survivors and institutions.',
-              },
-            ].map((feature, i) => (
-              <div key={i} className="rounded-2xl border border-border bg-surface p-6 hover-lift">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary-soft text-primary">
-                  <feature.icon className="h-5 w-5" />
+            {solutionItems.map((item, i) => {
+              const Icon = SOLUTION_ICONS[i] ?? Shield;
+              return (
+                <div key={i} className="rounded-2xl border border-border bg-surface p-6 hover-lift">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary-soft text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-heading text-lg text-heading mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{item.description}</p>
                 </div>
-                <h3 className="font-heading text-lg text-heading mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -181,27 +159,22 @@ export default function About() {
       <section className="border-y border-border bg-inset py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="text-center mb-10">
-            <h2 className="font-heading text-3xl text-heading mb-3">Built by Students, Backed by Experts</h2>
+            <h2 className="font-heading text-3xl text-heading mb-3">{t('team.title')}</h2>
             <p className="text-muted max-w-2xl mx-auto">
-              Netsanet is a final year project developed at Addis Ababa Science and Technology University (AASTU) in collaboration with leading institutions.
+              {t('team.subtitle')}
             </p>
           </div>
 
           <div className="rounded-2xl border border-border bg-surface p-8 mb-8">
-            <h3 className="font-heading text-xl text-heading mb-4 text-center">Partner Institutions</h3>
+            <h3 className="font-heading text-xl text-heading mb-4 text-center">{t('team.partnersTitle')}</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {[
-                { name: 'MoWSA', desc: 'Ministry of Women & Social Affairs' },
-                { name: 'EWLA', desc: 'Ethiopian Women Lawyers Association' },
-                { name: 'AASTU', desc: 'Addis Ababa Science & Technology University' },
-                { name: 'UNICEF', desc: 'United Nations Children\'s Fund' },
-              ].map((partner, i) => (
+              {partners.map((partner, i) => (
                 <div key={i} className="text-center p-4 rounded-xl border border-border-muted hover-lift">
                   <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-soft text-primary font-heading text-sm font-bold">
                     {partner.name.charAt(0)}
                   </div>
                   <p className="text-sm font-semibold text-heading">{partner.name}</p>
-                  <p className="text-[10px] text-muted mt-0.5 leading-tight">{partner.desc}</p>
+                  <p className="text-[10px] text-muted mt-0.5 leading-tight">{partner.description}</p>
                 </div>
               ))}
             </div>
@@ -209,7 +182,7 @@ export default function About() {
 
           <div className="text-center">
             <p className="text-sm text-muted mb-4">
-              Special thanks to our advisors, case workers, legal experts, and survivors who provided invaluable feedback throughout development.
+              {t('team.acknowledgment')}
             </p>
           </div>
         </div>
@@ -219,42 +192,24 @@ export default function About() {
       <section className="border-y border-border bg-inset py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="text-center mb-10">
-            <h2 className="font-heading text-3xl text-heading mb-3">Our Core Values</h2>
+            <h2 className="font-heading text-3xl text-heading mb-3">{t('values.title')}</h2>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              {
-                icon: Shield,
-                title: 'Safety First',
-                description: 'Every design decision prioritizes survivor safety, privacy, and security.',
-              },
-              {
-                icon: Heart,
-                title: 'Compassion',
-                description: 'We approach every interaction with empathy, respect, and cultural sensitivity.',
-              },
-              {
-                icon: CheckCircle,
-                title: 'Transparency',
-                description: 'Clear communication about how data is used, stored, and protected.',
-              },
-              {
-                icon: Users,
-                title: 'Collaboration',
-                description: 'Working together with institutions, experts, and communities for better outcomes.',
-              },
-            ].map((value, i) => (
-              <div key={i} className="flex gap-4 rounded-xl border border-border bg-surface p-6">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-primary">
-                  <value.icon className="h-5 w-5" />
+            {values.map((value, i) => {
+              const Icon = VALUE_ICONS[i] ?? Shield;
+              return (
+                <div key={i} className="flex gap-4 rounded-xl border border-border bg-surface p-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg text-heading mb-1">{value.title}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{value.description}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-heading text-lg text-heading mb-1">{value.title}</h3>
-                  <p className="text-sm text-muted leading-relaxed">{value.description}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -267,7 +222,7 @@ export default function About() {
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-fg font-heading text-xs font-bold">
                 N
               </div>
-              <span className="text-sm text-muted">AI-powered support for women across Ethiopia.</span>
+              <span className="text-sm text-muted">{t('footer.tagline')}</span>
             </div>
 
             <div className="flex items-center gap-4 text-xs text-muted">
@@ -279,7 +234,7 @@ export default function About() {
           </div>
 
           <p className="mt-6 text-center text-[11px] text-placeholder">
-            © {new Date().getFullYear()} Netsanet Platform — AASTU Final Year Project
+            {t('footer.copyright', { year: new Date().getFullYear() })}
           </p>
         </div>
       </footer>
