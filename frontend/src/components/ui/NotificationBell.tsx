@@ -1,10 +1,10 @@
 // NotificationBell — real-time notification indicator with dropdown.
 // Subscribes to Supabase Realtime for instant notification delivery.
-// Uses semantic tokens + Lucide icons for dark/light mode support.
+// Accepts basePath prop: '/dashboard' for staff, '/safe-space' for survivors.
 
 import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Bell, ExternalLink } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../hooks/useAuth';
 import { useToast } from './ToastProvider';
@@ -20,6 +20,11 @@ interface Notification {
   created_at: string;
 }
 
+interface NotificationBellProps {
+  /** Base path for case links. '/dashboard' for staff, '/safe-space' for survivors. */
+  basePath?: string;
+}
+
 function relativeTime(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
   const m = Math.floor(diff / 60000);
@@ -31,21 +36,23 @@ function relativeTime(dateStr: string): string {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  new_message: 'bg-primary',
+  new_message:       'bg-primary',
   referral_received: 'bg-warning',
   referral_accepted: 'bg-success',
   referral_rejected: 'bg-danger',
-  case_update: 'bg-secondary',
-  new_case: 'bg-accent',
-  default: 'bg-muted',
+  case_update:       'bg-secondary',
+  new_case:          'bg-accent',
+  default:           'bg-muted',
 };
 
-export default function NotificationBell() {
+export default function NotificationBell({ basePath = '/dashboard' }: NotificationBellProps) {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const { showToast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  const isSurvivorPortal = basePath === '/safe-space';
 
   const { data } = useQuery<{ data: Notification[]; unread_count: number }>({
     queryKey: ['notifications'],
@@ -59,31 +66,31 @@ export default function NotificationBell() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notifications'] }),
   });
 
+  const markAllReadMutation = useMutation({
+    mutationFn: () => api.patch('/notifications/read-all'),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notifications'] }),
+  });
+
   const notifications = data?.data ?? [];
   const unread = data?.unread_count ?? 0;
 
-  // Supabase Realtime subscription
+  // Supabase Realtime subscription — toast link uses portal-specific basePath
   useEffect(() => {
     if (!user) return;
     const channel = supabase
       .channel(`notifications-${user.id}-${Date.now()}`)
       .on(
         'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'notifications',
-          filter: `user_id=eq.${user.id}`,
-        },
+        { event: 'INSERT', schema: 'public', table: 'notifications', filter: `user_id=eq.${user.id}` },
         (payload) => {
           queryClient.invalidateQueries({ queryKey: ['notifications'] });
           const n = payload.new as Notification;
-          showToast(n.title, n.body, n.case_id ? `/dashboard/cases/${n.case_id}` : undefined);
+          showToast(n.title, n.body, n.case_id ? `${basePath}/cases/${n.case_id}` : undefined);
         }
       )
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, [user, queryClient, showToast]);
+  }, [user, queryClient, showToast, basePath]);
 
   // Close on outside click
   useEffect(() => {
@@ -93,6 +100,14 @@ export default function NotificationBell() {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
+
+  const handleNotificationClick = (n: Notification) => {
+    // Mark as read on any click
+    if (!n.is_read) markReadMutation.mutate(n.id);
+    // Navigate to the case using the correct portal path
+    if (n.case_id) window.location.href = `${basePath}/cases/${n.case_id}`;
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative" ref={ref}>
@@ -112,8 +127,16 @@ export default function NotificationBell() {
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-80 origin-top-right rounded-2xl border border-border bg-surface shadow-xl z-50 animate-scale-in">
-          <div className="border-b border-border-muted px-4 py-3">
+          <div className="border-b border-border-muted px-4 py-3 flex items-center justify-between">
             <p className="text-sm font-semibold text-heading">Notifications</p>
+            {unread > 0 && (
+              <button
+                onClick={() => markAllReadMutation.mutate()}
+                className="text-xs text-primary hover:text-primary-hover transition-colors"
+              >
+                Mark all read
+              </button>
+            )}
           </div>
 
           <div className="max-h-80 overflow-y-auto divide-y divide-border-muted">
@@ -124,11 +147,7 @@ export default function NotificationBell() {
                 <div
                   key={n.id}
                   className={`flex gap-3 px-4 py-3 transition-colors cursor-pointer hover:bg-inset ${!n.is_read ? 'bg-primary-soft/50' : ''}`}
-                  onClick={() => {
-                    if (!n.is_read) markReadMutation.mutate(n.id);
-                    if (n.case_id) window.location.href = `/dashboard/cases/${n.case_id}`;
-                    setIsOpen(false);
-                  }}
+                  onClick={() => handleNotificationClick(n)}
                 >
                   <div className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${TYPE_COLORS[n.type] ?? TYPE_COLORS.default}`} />
                   <div className="flex-1 min-w-0">
@@ -138,13 +157,13 @@ export default function NotificationBell() {
                     <p className="text-xs text-muted mt-0.5 line-clamp-2">{n.body}</p>
                     <p className="text-[10px] text-placeholder mt-1">{relativeTime(n.created_at)}</p>
                   </div>
-                  {n.case_id && <ExternalLink className="h-3 w-3 shrink-0 text-placeholder mt-1" />}
                 </div>
               ))
             )}
           </div>
 
-          {notifications.length > 0 && (
+          {/* "View all" only for dashboard — survivors have no dedicated notifications page */}
+          {notifications.length > 0 && !isSurvivorPortal && (
             <div className="border-t border-border-muted px-4 py-2">
               <a href="/dashboard/notifications" className="text-xs font-medium text-primary hover:text-primary-hover transition-colors">
                 View all notifications

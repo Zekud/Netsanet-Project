@@ -85,7 +85,7 @@ export default function SurvivorLayout() {
           <div className="flex items-center gap-1.5 sm:gap-2">
             <ThemeToggle />
             <LanguageSwitcher />
-            {user?.id && <NotificationBell />}
+            {user?.id && <NotificationBell basePath="/safe-space" />}
             <button
               onClick={handleLogout}
               className="hidden items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-sm font-semibold text-muted transition-all duration-150 hover:bg-red-500/10 hover:text-danger md:flex"

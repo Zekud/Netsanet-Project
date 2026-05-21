@@ -144,12 +144,11 @@ export default function LandingPage() {
           STATS BAR
       ══════════════════════════════════════════════════════════ */}
       <section className="border-y border-border bg-bg transition-colors duration-300">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-border">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-3 divide-x divide-y lg:divide-y-0 divide-border">
           {[
-            { value: '20+',    label: t('stats.institutions') },
-            { value: '6',      label: t('stats.languages') },
-            { value: '256-bit',label: t('stats.encryption') },
-            { value: '24/7',   label: t('stats.available') },
+            { value: '20+',  label: t('stats.institutions') },
+            { value: '6',    label: t('stats.languages') },
+            { value: '24/7', label: t('stats.available') },
           ].map((s, i) => (
             <Reveal key={i} className="px-8 py-8 text-center">
               <p className="font-mono text-3xl font-extrabold text-heading sm:text-4xl">{s.value}</p>
