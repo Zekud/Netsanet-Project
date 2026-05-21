@@ -44,8 +44,8 @@ export default function SurvivorLayout() {
           draggable={false}
           className="w-full h-full object-cover object-center"
         />
-        {/* Light: subtle pale wash. Dark: near-black veil so mountain is a very subtle silhouette. */}
-        <div className="absolute inset-0 bg-white/35 dark:bg-black/88 transition-colors duration-300" />
+        {/* Light: subtle pale wash. Dark: soft dark veil — mountain silhouette still breathes through. */}
+        <div className="absolute inset-0 bg-white/35 dark:bg-black/65 transition-colors duration-300" />
       </div>
 
       <QuickExitButton />
@@ -166,7 +166,7 @@ export default function SurvivorLayout() {
         {location.pathname.includes('/chat') ? (
           <Outlet />
         ) : (
-          <div className="flex-1 bg-white/85 backdrop-blur-md dark:backdrop-blur-none dark:bg-bg border border-border/40 dark:border-white/8 rounded-3xl p-6 md:p-8 shadow-xl min-h-0 animate-fade-in">
+          <div className="flex-1 bg-white/85 backdrop-blur-md dark:backdrop-blur-none dark:bg-surface border border-border/40 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl min-h-0 animate-fade-in">
             <Outlet />
           </div>
         )}
