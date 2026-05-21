@@ -11,6 +11,8 @@ import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
 import ThemeToggle from '../../components/ui/ThemeToggle';
 import QuickExitButton from '../../components/ui/QuickExitButton';
 import TestimonialShuffle from '../../components/ui/TestimonialShuffle';
+import Logo from '../../components/ui/Logo';
+
 
 // ─── Animation helpers ─────────────────────────────────────────────
 const E = [0.215, 0.61, 0.355, 1] as const;
@@ -64,11 +66,8 @@ export default function LandingPage() {
         <nav className="relative z-20 px-4 pt-5 md:px-8 !overflow-visible">
           <div className="liquid-glass rounded-2xl px-5 py-3 flex items-center justify-between max-w-7xl mx-auto !overflow-visible">
             {/* Logo */}
-            <button onClick={() => navigate('/')} className="flex items-center gap-2.5 focus:outline-none">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center font-serif text-base font-bold text-primary-fg shadow-sm shrink-0">
-                N
-              </div>
-              <span className="font-serif text-lg font-bold text-heading tracking-tight hidden sm:block">Netsanet</span>
+            <button onClick={() => navigate('/')} className="focus:outline-none">
+              <Logo size="md" />
             </button>
 
             {/* Centre links — REMOVED per user request */}
@@ -377,7 +376,9 @@ export default function LandingPage() {
       <footer className="bg-bg border-t border-border py-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-5 md:px-12 flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="flex items-center gap-3">
-            <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center font-serif text-sm font-bold text-primary-fg shadow-sm">N</div>
+            <button onClick={() => navigate('/')} className="focus:outline-none">
+              <Logo size="sm" />
+            </button>
             <span className="text-xs text-muted font-medium">{t('footer.tagline')}</span>
           </div>
           <div className="flex gap-6 text-xs font-semibold text-muted">

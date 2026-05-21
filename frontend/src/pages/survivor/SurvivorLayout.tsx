@@ -12,6 +12,8 @@ import NotificationBell from '../../components/ui/NotificationBell';
 import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
 import ThemeToggle from '../../components/ui/ThemeToggle';
 import QuickExitButton from '../../components/ui/QuickExitButton';
+import Logo from '../../components/ui/Logo';
+
 
 export default function SurvivorLayout() {
   const { user, logout } = useAuth();
@@ -54,11 +56,8 @@ export default function SurvivorLayout() {
       <header className="relative z-30 px-4 pt-5 md:px-6 w-full max-w-5xl mx-auto !overflow-visible">
         <div className="liquid-glass rounded-2xl px-5 py-3 border border-border flex items-center justify-between !overflow-visible">
           {/* Logo */}
-          <NavLink to="/safe-space/home" className="flex items-center gap-2.5 focus:outline-none shrink-0">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-fg font-serif font-bold text-base shadow-sm">
-              N
-            </div>
-            <span className="font-serif text-lg font-bold text-heading tracking-tight hidden sm:block">Netsanet</span>
+          <NavLink to="/safe-space/home" className="focus:outline-none shrink-0">
+            <Logo size="md" />
           </NavLink>
 
           {/* Desktop nav links */}

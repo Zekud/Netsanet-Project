@@ -1,0 +1,54 @@
+# .github/workflows/deploy.yml — Netsanet Automated Deployment CI/CD Pipeline
+# Triggered on merge/push to the main branch. SSHs into AWS EC2, updates repository, rebuilds and restarts services.
+
+name: Deploy Netsanet Services
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to AWS EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            echo "🚀 Starting automated deployment pipeline..."
+            
+            # 1. Navigate to the project root on EC2
+            cd /var/www/netsanet
+            
+            # 2. Reset any local changes and pull the latest code
+            git reset --hard HEAD
+            git pull origin main
+            
+            # 3. Build & Update Backend
+            echo "📦 Building Express Backend..."
+            cd backend
+            npm ci
+            npm run build
+            cd ..
+            
+            # 4. Update RAG Service dependencies (if any)
+            echo "🐍 Checking Python RAG Service dependencies..."
+            cd rag-service
+            if [ -f "requirements.txt" ]; then
+              ./venv/bin/pip install -r requirements.txt
+            fi
+            cd ..
+            
+            # 5. Reload processes gracefully via PM2
+            echo "🔄 Restarting active services using PM2..."
+            pm2 startOrReload ecosystem.config.js --update-env
+            
+            # 6. Save current PM2 processes to survive system reboots
+            pm2 save
+            
+            echo "✅ Deployment completed successfully!"
