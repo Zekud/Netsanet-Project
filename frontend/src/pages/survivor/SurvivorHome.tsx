@@ -50,7 +50,7 @@ function ResourceCard({ icon: Icon, title, body, href, to }: {
   icon: React.ElementType; title: string; body: string; href?: string; to?: string;
 }) {
   const inner = (
-    <div className="flex gap-4 rounded-2xl border border-border/50 bg-bg/40 backdrop-blur-md p-5 shadow-sm transition-all hover:border-primary/30 hover:scale-[1.01] hover-lift">
+    <div className="flex gap-4 rounded-2xl border border-border/50 bg-white/60 dark:bg-elevated backdrop-blur-sm dark:backdrop-blur-none p-5 shadow-sm transition-all hover:border-primary/30 hover:scale-[1.01] hover-lift">
       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
         <Icon className="h-4 w-4" />
       </div>
@@ -115,12 +115,12 @@ export default function SurvivorHome() {
         </div>
 
         {casesLoading ? (
-          <div className="flex items-center gap-3 rounded-2xl bg-bg/40 backdrop-blur-md border border-border/50 p-5 shadow-sm">
+          <div className="flex items-center gap-3 rounded-2xl bg-white/60 dark:bg-elevated backdrop-blur-sm dark:backdrop-blur-none border border-border/50 p-5 shadow-sm">
             <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
             <span className="text-sm text-muted font-semibold">{t('cases.loading')}</span>
           </div>
         ) : recentCases.length === 0 ? (
-          <div className="rounded-3xl border border-border/50 bg-bg/40 backdrop-blur-md p-10 text-center shadow-sm">
+          <div className="rounded-3xl border border-border/50 bg-white/60 dark:bg-elevated backdrop-blur-sm dark:backdrop-blur-none p-10 text-center shadow-sm">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-primary">
               <FileText className="h-5 w-5" />
             </div>
@@ -133,7 +133,7 @@ export default function SurvivorHome() {
           <div className="space-y-2.5">
             {recentCases.map((c) => (
               <Link key={c.id} to={`/safe-space/cases/${c.id}`}
-                className="group flex items-center justify-between rounded-2xl border border-border/50 bg-bg/30 backdrop-blur-md px-5 py-4 shadow-sm hover:border-primary/30 transition-all duration-200 hover:scale-[1.01] hover-lift">
+                className="group flex items-center justify-between rounded-2xl border border-border/50 bg-white/60 dark:bg-elevated backdrop-blur-sm dark:backdrop-blur-none px-5 py-4 shadow-sm hover:border-primary/30 transition-all duration-200 hover:scale-[1.01] hover-lift">
                 <div className="min-w-0">
                   <p className="text-sm font-bold text-heading truncate">{c.title}</p>
                   <p className="text-xs text-placeholder mt-0.5 font-mono">{c.case_number}</p>

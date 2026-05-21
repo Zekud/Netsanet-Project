@@ -44,8 +44,8 @@ export default function SurvivorLayout() {
           draggable={false}
           className="w-full h-full object-cover object-center"
         />
-        {/* Cinematic gradient overlay linked to theme background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-bg/45 via-bg/25 to-bg/55 dark:from-bg/95 dark:via-bg/80 dark:to-bg/90 transition-colors duration-300" />
+        {/* Light: subtle pale wash. Dark: near-black veil so mountain is a very subtle silhouette. */}
+        <div className="absolute inset-0 bg-white/35 dark:bg-black/88 transition-colors duration-300" />
       </div>
 
       <QuickExitButton />
@@ -158,13 +158,23 @@ export default function SurvivorLayout() {
       </nav>
 
       {/* ─── Page Content ─── */}
-      <main className={`relative z-10 flex flex-1 flex-col ${location.pathname.includes('/chat') ? 'min-h-0' : 'mx-auto w-full max-w-5xl px-4 py-6 pb-24 sm:px-6 sm:py-8 md:pb-8'}`}>
-        <Outlet />
+      <main className={`relative z-10 flex flex-1 flex-col ${
+        location.pathname.includes('/chat')
+          ? 'mx-auto w-full max-w-5xl px-3 pt-3 pb-16 md:pb-3 min-h-0'
+          : 'mx-auto w-full max-w-5xl px-4 py-6 pb-24 sm:px-6 sm:py-8 md:pb-8'
+      }`}>
+        {location.pathname.includes('/chat') ? (
+          <Outlet />
+        ) : (
+          <div className="flex-1 bg-white/85 backdrop-blur-md dark:backdrop-blur-none dark:bg-bg border border-border/40 dark:border-white/8 rounded-3xl p-6 md:p-8 shadow-xl min-h-0 animate-fade-in">
+            <Outlet />
+          </div>
+        )}
       </main>
 
       {/* ─── Footer ─── */}
-      <footer className="hidden relative z-10 border-t border-border/10 bg-transparent px-4 py-4 text-center md:block">
-        <p className="text-xs text-muted/65">{t('footer')}</p>
+      <footer className="relative z-10 bg-transparent py-4 text-center text-xs text-muted md:mb-0 mb-16 shrink-0">
+        <p>© {new Date().getFullYear()} Netsanet. All rights reserved.</p>
       </footer>
     </div>
   );

@@ -7,6 +7,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Wire Tailwind's dark: variant to the .dark class (set by ThemeContext) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+
 /* ─── Theme Variables (Light — Default) ─────────────────────────── */
 
 :root {
@@ -599,19 +603,15 @@
 
   [data-theme="dark"] .liquid-glass,
   .dark .liquid-glass {
-    background: rgba(0, 0, 0, 0.32);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(255,255,255,0.04);
-    border: none;
+    background: rgba(22, 18, 40, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px -4px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
   }
   [data-theme="dark"] .liquid-glass::before,
   .dark .liquid-glass::before {
-    background: linear-gradient(180deg,
-      rgba(255,255,255,0.28) 0%,
-      rgba(255,255,255,0.08) 30%,
-      rgba(255,255,255,0) 50%,
-      rgba(255,255,255,0.08) 70%,
-      rgba(255,255,255,0.28) 100%
-    );
+    background: none;
   }
 
   /* Teal-tinted glass for brand accent elements */
