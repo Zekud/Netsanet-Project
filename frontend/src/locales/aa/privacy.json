@@ -1,0 +1,196 @@
+{
+  "hero": {
+    "badge": "Qanoon Sirri",
+    "title": "Sirri Keessaninni Ammaan Keessan Kee Dursa Yaabu",
+    "description": "Netsanet keessa, sirri dhibbattoota ammaan xogta eeguu dursa keenna guddaa. Qanoon kun akkamitti odeeffannoo keessan walitti qabnu, itti fayyadamnu fi eegnu ibsa."
+  },
+  "principles": {
+    "title": "Qajeelfama Sirri Keenna",
+    "description": "Qajeelfamoonni ijoo kunniin murtoo waa'ee xogta keessanii goonu hunda qajeelchu.",
+    "items": [
+      {
+        "title": "Ammaan Dursa",
+        "description": "Ammaan keessan waan hundaa dura. Xogta dhibbattoota namoota hayyamamanii hin taaneef gonkumaa hin qoodnu."
+      },
+      {
+        "title": "Sirqoolid Dhuma hanga Dhumatti",
+        "description": "Qunnamtii fi ragaaleen hundi sirqooliin eegamaniiru. Nuyyuu ergaa dhuunfaa keessan argachuu hin dandeenyu."
+      },
+      {
+        "title": "Filannoo Maqaa Malee",
+        "description": "Dhimmoota maqaa malee gabaasuu dandeessu. Eenyummaan keessan hanga filattan haa mul'atu haguugamee tura."
+      },
+      {
+        "title": "Ifa Ta'uu",
+        "description": "Xogta maalii akka walitti qabnu, maaliif akka walitti qabnu fi akkamitti akka itti fayyadamnu ifatti ibsina."
+      },
+      {
+        "title": "Xogta Xiqqaa",
+        "description": "Tajaajila deeggarsa kennuuf barbaachisu qofa walitti qabna."
+      },
+      {
+        "title": "To'annoo Keessan",
+        "description": "Xogta keessan isin to'attu. Yeroo kamiyyuu argachuu, sirreessuu ykn haquu gaafachuu dandeessu."
+      }
+    ]
+  },
+  "collection": {
+    "title": "Odeeffannoo Walitti Qabnu",
+    "description": "Tajaajila deeggarsa ammaan qabuu fi bu'a qabeessa ta'e kennuuf barbaachisu qofa walitti qabna.",
+    "items": [
+      {
+        "title": "Odeeffannoo Herrega",
+        "details": [
+          "Teessoo imeelii mirkaneessaaf karaa jecha darbii yeroo tokkoo (OTP)",
+          "Gahee fayyadamaa fi ramaddii dhaabbataa (hojjettootaa dhimmaaf fi bulchitootaaf)"
+        ]
+      },
+      {
+        "title": "Odeeffannoo Dhimma",
+        "details": [
+          "Bal'ina waa'ee guyyaa, bakka fi ibsa dabalatee",
+          "Faayilii ragaa fi qunnamtii sirqooliin eegame hojjettootaa dhimma waliin"
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "title": "Akkamitti Odeeffannoo Keessan Itti Fayyadamna",
+    "items": [
+      {
+        "title": "Tajaajila Deeggarsa Kennuu",
+        "description": "Hojjettootaa dhimma, gargaarsa seeraa fi dhaabbilee deeggarsa waliin isin walqunnamsiisa."
+      },
+      {
+        "title": "Bulchiinsa Dhimma",
+        "description": "Guddina dhimma hordofuu, ergaa waliigaltee fi qunnamtii haala mijeessuu."
+      },
+      {
+        "title": "Gargaarsa AI Humna Qabu",
+        "description": "Madaallii balaa, dursa kennuu dhimmaaf fi qajeelfama seeraa karaa sirna AI keenyaan kenna."
+      },
+      {
+        "title": "Ammaan fi Eegumsa",
+        "description": "Seenuu hayyamamaa hin taane, gowwoomsaa fi itti fayyadama badaa waltajjii adda baasuu fi ittisuuf."
+      },
+      {
+        "title": "Fooyya'iinsa Tajaajilaa",
+        "description": "Amaloota waltajjiif fi muuxannoo fayyadamaa fooyya'uuf akkaataa itti fayyadama maqaa malee xiinxaluu."
+      },
+      {
+        "title": "Seera Eeguu",
+        "description": "Seera Itoophiyaa eeguu fi gaaffii seeraa dhugaa ta'eef deebii kennuu (yeroo danda'amu dhibbattootaaf beeksisuu)."
+      }
+    ]
+  },
+  "sharing": {
+    "title": "Xogta Eenyuu Waliin Qoodna",
+    "warning": {
+      "title": "Barbaachisaa: Qoodinsa Daangeffame",
+      "description": "Xogta keessan GONKUMAA hin gurgurru. Deeggarsa fi ammaan keessaniif barbaachisan qofa namoota hayyamamaniif odeeffannoo qoodna."
+    },
+    "items": [
+      {
+        "title": "Hojjettootaa Dhimma Ramadaman",
+        "description": "Hojjetaan dhimma ramadame deeggarsa kennuuf bal'ina dhimma argachuu danda'a. Dhimmoota maqaa malee eenyummaa keessan dhoksu."
+      },
+      {
+        "title": "Dhaabbilee Hirmaatota",
+        "description": "Ergaaf yeroo walii galtan, odeeffannoo dhimma walqabataa dhaabbata fudhatu waliin qoodama (fakkeenyaaf, gargaarsa seeraa, dhaabbata fayyaa)."
+      },
+      {
+        "title": "Bulchitootaa Sirna",
+        "description": "Hojjettoonni teeknikaa AASTU suphaa fi ammaan sirnaaf seenuu daangeffame qabu. Waliigaltee sirrii cimaa waliin hidhaman."
+      },
+      {
+        "title": "Raawwii Seeraa (Yeroo Barbaachisu Qofa)",
+        "description": "Ajaja mana murtii dhugaa ta'eef deebii kennuuf odeeffannoo qooduuf seeraan dirqama ta'uu danda'a. Seeraan yoo hin dhorkamne isin beeksisna."
+      },
+      {
+        "title": "Dhiyeessitootaa Tajaajila AI",
+        "description": "Google Gemini xogta dhimma madaallii balaaf qindeessa. Xogtan maqaa malee fi sirqooliin eegamee jira. Google xogta kana kaayyoo biraatiif hin kuusu yookaan itti hin fayyadamu."
+      }
+    ]
+  },
+  "rights": {
+    "title": "Mirga Sirri Keessanii",
+    "items": [
+      {
+        "title": "Odeeffannoo Keessan Argachuu",
+        "description": "Odeeffannoo herrega keessaniif fi bal'ina dhimma karaa dashboard keessan ilaalu."
+      },
+      {
+        "title": "Odeeffannoo Dhimma Haaromsuu",
+        "description": "Dhimmoota gabaafaman keessatti odeeffannoo akka barbaachisummaa isaatti sirreessuu ykn haaromsuu."
+      },
+      {
+        "title": "Gabaasa Maqaa Malee",
+        "description": "Deeggarsa yeroo fudhattan eenyummaa keessan eeguuf dhimmoota maqaa malee gabaasaa."
+      },
+      {
+        "title": "Haquu Xogta Gaafachuu",
+        "description": "Haquu herrega gaafachuuf nu quunnamaa (ulaagaa tursiisa seeraa dhimmoota socho'oo ta'aniif gadi bu'a)."
+      }
+    ],
+    "contact": "Gaaffii ykn yaaddoo sirrii walqabataa yoo qabaattan"
+  },
+  "security": {
+    "title": "Akkamitti Xogta Keessan Eegna",
+    "description": "Sadarkaalee ammaan hedduun odeeffannoon keessan ammaan qabuu fi sirrii ta'uu isaa mirkaneessa.",
+    "items": [
+      {
+        "title": "Sirqoolid",
+        "description": "Xogtan hundi yeroo ergamu (TLS/SSL) fi yeroo kuufamu (AES-256) sirqooliin eegama. Faayilii ragaa qodaa sirqooliin eegame keessatti kuufama."
+      },
+      {
+        "title": "To'annoo Seensaa",
+        "description": "Seensi gahee irratti hundaa'e hojjettoonni hayyamamoo qofa xogta addaa akka argan mirkaneessa. Seensi hundi galmaa'ee fi qoratamee jira."
+      },
+      {
+        "title": "Bu'uura Ammaan Qabu",
+        "description": "Xogtan sarvaroota ammaan qaban irratti kuufama backup idilee, firewall fi sirna adda baasuu weerara waliin."
+      },
+      {
+        "title": "Qorannoo Idilee",
+        "description": "Hanqina adda baasuu fi sirreessuuf qorannoo ammaan idilee fi qorannoo seensaa ni gaggeessina."
+      }
+    ]
+  },
+  "retention": {
+    "title": "Tursiisa Xogta",
+    "description": "Xogta keessan tajaajila kennuu fi dirqama seeraa guutuuf barbaachisu qofa ni tursina.",
+    "items": [
+      {
+        "label": "Dhimmoota socho'oo",
+        "duration": "Hanga dhimmi cufamutti + waggaa 7 ni turfama",
+        "note": "Ulaagaa seeraa Itoophiyaa"
+      },
+      {
+        "label": "Xogta herrega",
+        "duration": "Herregni yeroo socho'u + waggaa 1 booda gaaffii haquu ni turfama",
+        "note": "Deebisuu herrega ni hayyama"
+      },
+      {
+        "label": "Galmee ammaan",
+        "duration": "Guyyaa 90f ni turfama",
+        "note": "Sirritiif maqaa malee"
+      },
+      {
+        "label": "Xogta xiinxala",
+        "duration": "Maqaa malee fi walitti qabame, bara baraaf ni turfama",
+        "note": "Tajaajila waltajjii fooyya'a"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Dubartootaa Itoophiyaa keessa jiraniif deeggarsa AI humna qabu.",
+    "links": {
+      "about": "Waa'ee",
+      "privacy": "Sirri",
+      "terms": "Dambii",
+      "contact": "Nu Quunnamaa"
+    },
+    "copyright": "© {{year}} Waltajjii Netsanet — Pirojektii Waggaa Dhumaa AASTU"
+  },
+  "backToHome": "Gara Manatti Deebi'i"
+}

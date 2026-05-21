@@ -44,7 +44,7 @@ export default function Privacy() {
               className="flex items-center gap-1.5 text-sm text-muted hover:text-heading transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Back to Home</span>
+              <span className="hidden sm:inline">{t('backToHome')}</span>
             </button>
             <ThemeToggle />
             <LanguageSwitcher />
@@ -207,12 +207,6 @@ export default function Privacy() {
                 <p className="text-sm text-muted leading-relaxed">{right.description}</p>
               </div>
             ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-muted mb-4">
-              {t('rights.contact')} <a href="mailto:privacy@netsanet.et" className="text-primary hover:underline">privacy@netsanet.et</a>
-            </p>
           </div>
         </div>
       </section>

@@ -25,6 +25,10 @@ import aaAbout           from '../locales/aa/about.json';
 // Privacy page translations
 import enPrivacy         from '../locales/en/privacy.json';
 import amPrivacy         from '../locales/am/privacy.json';
+import tiPrivacy         from '../locales/ti/privacy.json';
+import omPrivacy         from '../locales/om/privacy.json';
+import soPrivacy         from '../locales/so/privacy.json';
+import aaPrivacy         from '../locales/aa/privacy.json';
 
 // Survivor portal translations
 import enSurvivorHome    from '../locales/en/survivorHome.json';
@@ -127,6 +131,7 @@ i18n
       ti: {
         landing:        tiLanding,
         about:          tiAbout,
+        privacy:        tiPrivacy,
         auth:           tiAuth,
         dashboard:      tiDashboard,
         survivorHome:   tiSurvivorHome,
@@ -140,6 +145,7 @@ i18n
       om: {
         landing:        omLanding,
         about:          omAbout,
+        privacy:        omPrivacy,
         auth:           omAuth,
         dashboard:      omDashboard,
         survivorHome:   omSurvivorHome,
@@ -153,6 +159,7 @@ i18n
       so: {
         landing:        soLanding,
         about:          soAbout,
+        privacy:        soPrivacy,
         auth:           soAuth,
         dashboard:      soDashboard,
         survivorHome:   soSurvivorHome,
@@ -166,6 +173,7 @@ i18n
       aa: {
         landing:        aaLanding,
         about:          aaAbout,
+        privacy:        aaPrivacy,
         auth:           aaAuth,
         dashboard:      aaDashboard,
         survivorHome:   aaSurvivorHome,

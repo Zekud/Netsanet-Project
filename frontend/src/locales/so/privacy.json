@@ -1,0 +1,196 @@
+{
+  "hero": {
+    "badge": "Siyaasadda Sirta",
+    "title": "Sirtaada iyo Badbaadintaadu Waa Kuwa Ugu Horreeya",
+    "description": "Netsanet, ilaalinta sirta dhibbanayaasha iyo amniga xogta waa mudnaanta ugu saraysa. Siyaasaddani waxay sharaxaysaa sida aan u ururino, u isticmaalno, oo aan u ilaalino macluumaadkaaga."
+  },
+  "principles": {
+    "title": "Mabaadi'da Sirta",
+    "description": "Mabaadi'dan aasaasiga ah waxay hagaan go'aan kasta oo aan ka gaarno xogtaada.",
+    "items": [
+      {
+        "title": "Badbaado Marka Hore",
+        "description": "Badbaadintaadu waa tan ugu muhiimsan. Weligayo ma wadaagno xogta dhibbanayaasha dadka aan la oggolaan."
+      },
+      {
+        "title": "Sirqoolid Dhammaad ilaa Dhammaad",
+        "description": "Dhammaan isgaarsiinta iyo caddaynta waa la sirqooliyay. Xitaa annaga ma heli karno fariimaha gaarka ah."
+      },
+      {
+        "title": "Doorasho Magac La'aan",
+        "description": "Waxaad sheegi kartaa kiisaska magac la'aan. Aqoonsigaagu wuu qarsoon yahay ilaa aad dooratid inaad muujiso."
+      },
+      {
+        "title": "Hufnaanta",
+        "description": "Si cad ayaan u sharaxaynaa xogta aan ururino, sababta aan u ururino, iyo sida aan u isticmaalno."
+      },
+      {
+        "title": "Xog Yar",
+        "description": "Waxaan ururinnaa oo keliya macluumaadka loo baahan yahay in la bixiyo adeegyada taageerada."
+      },
+      {
+        "title": "Xakamayntaada",
+        "description": "Xogtaada adigu waad xakameysaa. Waqti kasta waxaad codsan kartaa helitaan, saxid, ama tirtir."
+      }
+    ]
+  },
+  "collection": {
+    "title": "Macluumaadka Aan Ururino",
+    "description": "Waxaan ururinnaa oo keliya waxa loo baahan yahay si aan kuugu bixinno adeegyo taageero oo badbaado leh oo waxtar leh.",
+    "items": [
+      {
+        "title": "Macluumaadka Koontada",
+        "details": [
+          "Cinwaanka iimaylka xaqiijinta iyada oo loo marayo erayga sirta ah ee hal mar (OTP)",
+          "Doorka isticmaalaha iyo qeybinta hay'adda (shaqaalaha kiiska iyo maamulayaasha)"
+        ]
+      },
+      {
+        "title": "Macluumaadka Kiiska",
+        "details": [
+          "Faahfaahinta dhacdada oo ay ku jiraan taariikhda, goobta, iyo sharaxaadda",
+          "Faylalka caddaynta iyo isgaarsiinta sirqoolsan ee shaqaalaha kiiska"
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "title": "Sida Aan Macluumaadkaaga U Isticmaalno",
+    "items": [
+      {
+        "title": "Bixinta Adeegyada Taageerada",
+        "description": "Waxaan kula xiriirinnaa shaqaalaha kiiska, caawinta sharciga, iyo hay'adaha taageerada."
+      },
+      {
+        "title": "Maaraynta Kiiska",
+        "description": "La socodka horumarka kiiska, isku-dubaridda wareejinta, iyo fududaynta isgaarsiinta."
+      },
+      {
+        "title": "Caawinta AI-ga Awood Leh",
+        "description": "Bixinta qiimaynta khatarta, mudnaanta kiiska, iyo hagaha sharciga iyada oo loo marayo nidaamyada AI."
+      },
+      {
+        "title": "Badbaado iyo Amniga",
+        "description": "Ogaanshaha iyo ka hortagga gelitaanka aan la oggolaan, khiyaanada, iyo si xun u isticmaalka goobta."
+      },
+      {
+        "title": "Hagaajinta Adeegga",
+        "description": "Falanqaynta qaababka isticmaalka magac la'aan si loo hagaajiyosiifaha goobta iyo khibradda isticmaalaha."
+      },
+      {
+        "title": "Hoggaansanaanta Sharciga",
+        "description": "Hoggaansanaanta sharciyada Itoobiya iyo ka jawaabida codsiyada sharciga ee sax ah (ogeysiinta dhibbanayaasha marka suurtagal ah)."
+      }
+    ]
+  },
+  "sharing": {
+    "title": "Yaan Xogta La Wadaagno",
+    "warning": {
+      "title": "Muhiim: Wadaag Xaddidan",
+      "description": "WELIGAYO ma iibinno xogtaada. Waxaan wadaagnaa oo keliya macluumaad dadka la oggol yahay ee loo baahan yahay taageeradaada iyo badbaadintaada."
+    },
+    "items": [
+      {
+        "title": "Shaqaalaha Kiiska ee Loo Qoondeeyay",
+        "description": "Shaqaalaha kiiska ee loo qoondeeyay wuxuu heli karaa faahfaahinta kiiska si uu taageero u bixiyo. Kiisaska magac la'aanu waxay qariyaan aqoonsigaaga."
+      },
+      {
+        "title": "Hay'adaha Lammaanaha",
+        "description": "Markaad ogolaatid wareejin, macluumaadka kiiska ee khuseeya waxaa lala wadaagaa hay'adda qaadanaysa (tusaale ahaan, caawinta sharciga, xarunta caafimaadka)."
+      },
+      {
+        "title": "Maamulayaasha Nidaamka",
+        "description": "Shaqaalaha farsamada ee AASTU waxay leeyihiin gelitaan xaddidan dayactirka nidaamka iyo amniga. Waxay ku xiran yihiin heshiisyo sir ah oo adag."
+      },
+      {
+        "title": "Fulinta Sharciga (Oo Keliya Marka Loo Baahan Yahay)",
+        "description": "Waxaa laga yaabaa in sharci ahaan nalooga baahdo inaan wadaagno macluumaad jawaab ahaan amarrada maxkamadda ee sax ah. Waanu ku ogeysiinnaa haddii aan sharcigu mamnuucin."
+      },
+      {
+        "title": "Bixiyayaasha Adeegga AI",
+        "description": "Google Gemini wuxuu ka shaqeeyaa xogta kiiska qiimaynta khatarta. Xogta waa magac la'aan oo sirqoolsan. Google ma kaydiyo ama u isticmaalo xogtan ujeeddooyin kale."
+      }
+    ]
+  },
+  "rights": {
+    "title": "Xuquuqdaada Sirta",
+    "items": [
+      {
+        "title": "Helitaanka Macluumaadkaaga",
+        "description": "Arag macluumaadka koontadaada iyo faahfaahinta kiiska iyada oo loo marayo dashboard-kaaga."
+      },
+      {
+        "title": "Cusboonaysiinta Macluumaadka Kiiska",
+        "description": "Sax ama cusboonaysii macluumaadka kiisaska aad sheegtay sida loo baahan yahay."
+      },
+      {
+        "title": "Warbixinta Magac La'aan",
+        "description": "Sheeg kiisaska magac la'aan si aad u ilaaliso aqoonsigaaga adigoo helaya taageero."
+      },
+      {
+        "title": "Codsiga Tirtirka Xogta",
+        "description": "Nala soo xiriir si aad u codsato tirtirka koontada (waxay ku xiran tahay shuruudaha haynta sharciga ee kiisaska firfircoon)."
+      }
+    ],
+    "contact": "Codsiyada ama welwelka la xiriira sirta, nala soo xiriir"
+  },
+  "security": {
+    "title": "Sida Aan Xogtaada U Ilaalino",
+    "description": "Heeraro badan oo amniga ah ayaa xaqiijinaya in macluumaadkaagu badbaado leh oo sir ah yahay.",
+    "items": [
+      {
+        "title": "Sirqoolid",
+        "description": "Dhammaan xogta waa la sirqooliyay marka la gudbinayo (TLS/SSL) iyo marka la kaydiyayo (AES-256). Faylalka caddaynta waxaa lagu kaydiyaa weelal sirqoolsan."
+      },
+      {
+        "title": "Xakamaynta Gelitaanka",
+        "description": "Gelitaanka ku salaysan doorka wuxuu xaqiijiyaa in shaqaalaha la oggol yahay oo keliya ay arki karaan xogta gaarka ah. Gelitaanka oo dhan waa la diiwaan geliyay oo la baaray."
+      },
+      {
+        "title": "Kaabayaasha Badbaadada Leh",
+        "description": "Xogta waxaa lagu kaydiyaa serveryo badbaado leh oo leh kaabka joogtada ah, firewall-ka, iyo nidaamyada ogaanshaha weerarka."
+      },
+      {
+        "title": "Baaritaanno Joogto ah",
+        "description": "Waxaan samaynaynaa baaritaanno amniga joogto ah iyo tijaabinta gelitaanka si aan u ogaano oo aan u saxno nuglaanta."
+      }
+    ]
+  },
+  "retention": {
+    "title": "Haynta Xogta",
+    "description": "Waxaan haynaa xogtaada oo keliya inta loo baahan yahay in la bixiyo adeegyada iyo in la hoggaansanaado waajibka sharciga.",
+    "items": [
+      {
+        "label": "Kiisaska firfircoon",
+        "duration": "Waxaa la haystaa ilaa kiiska la xiro + 7 sano",
+        "note": "Shuruudda sharciga Itoobiya"
+      },
+      {
+        "label": "Xogta koontada",
+        "duration": "Waxaa la haystaa inta koontadu firfircoon tahay + 1 sano ka dib codsiga tirtirka",
+        "note": "Waxay ogolaataa soo celinta koontada"
+      },
+      {
+        "label": "Diiwaannada amniga",
+        "duration": "Waxaa la haystaa 90 maalmood",
+        "note": "Magac la'aan sirta"
+      },
+      {
+        "label": "Xogta falanqaynta",
+        "duration": "Magac la'aan oo la ururiyay, weligood la haystaa",
+        "note": "Waxay hagaajisaa adeegyada goobta"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Taageero AI awood leh oo loogu talagalay haweenka Itoobiya oo dhan.",
+    "links": {
+      "about": "Ku Saabsan",
+      "privacy": "Sirta",
+      "terms": "Shuruudaha",
+      "contact": "Nala Soo Xiriir"
+    },
+    "copyright": "© {{year}} Goobta Netsanet — Mashruuca Sanadka Ugu Dambeeya AASTU"
+  },
+  "backToHome": "Guriga Ku Noqo"
+}

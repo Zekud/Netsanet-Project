@@ -1,0 +1,196 @@
+{
+  "hero": {
+    "badge": "Imaammata Icciitii",
+    "title": "Icciitii fi Nageenya Keessan Dursa Ni Qabaata",
+    "description": "Netsanet keessatti, icciitii miidhaa argattootaa fi nageenya deetaa eeguu dursa keenya guddaa dha. Imaammanni kun akkamitti odeeffannoo keessan walitti qabnu, itti fayyadamnu fi eegnu ibsa."
+  },
+  "principles": {
+    "title": "Qajeelfama Icciitii Keenyaa",
+    "description": "Qajeelfamoonni ijoo kunniin murtoo waa'ee deetaa keessanii goonu hunda qajeelchu.",
+    "items": [
+      {
+        "title": "Nageenya Dursa",
+        "description": "Nageeenyi keessan waan hundaa dura. Deetaa miidhaa argattootaa namoota hayyamamanii hin taaneef gonkumaa hin qoodnu."
+      },
+      {
+        "title": "Icciitii Dhuma hanga Dhumatti",
+        "description": "Qunnamtii fi ragaaleen hundi icciitiin eegamaniiru. Nuyyuu ergaa dhuunfaa keessan argachuu hin dandeenyu."
+      },
+      {
+        "title": "Filannoo Maqaa Malee",
+        "description": "Dhimmoota maqaa malee gabaasuu dandeessu. Eenyummaan keessan hanga filattan haa mul'atu haguugamee tura."
+      },
+      {
+        "title": "Ifa Ta'uu",
+        "description": "Deetaa maalii akka walitti qabnu, maaliif akka walitti qabnu fi akkamitti akka itti fayyadamnu ifatti ibsina."
+      },
+      {
+        "title": "Deetaa Xiqqaa",
+        "description": "Tajaajila deeggarsa kennuuf barbaachisu qofa walitti qabna."
+      },
+      {
+        "title": "To'annoo Keessan",
+        "description": "Deetaa keessan isin to'attu. Yeroo kamiyyuu argachuu, sirreessuu ykn haquu gaafachuu dandeessu."
+      }
+    ]
+  },
+  "collection": {
+    "title": "Odeeffannoo Walitti Qabnu",
+    "description": "Tajaajila deeggarsa nageenya qabuu fi bu'a qabeessa ta'e kennuuf barbaachisu qofa walitti qabna.",
+    "items": [
+      {
+        "title": "Odeeffannoo Herrega",
+        "details": [
+          "Teessoo imeelii mirkaneessaaf karaa jecha darbii yeroo tokkoo (OTP)",
+          "Gahee fayyadamaa fi ramaddii dhaabbataa (hojjettootaa dhimmaaf fi bulchitootaaf)"
+        ]
+      },
+      {
+        "title": "Odeeffannoo Dhimma",
+        "details": [
+          "Bal'ina waa'ee guyyaa, bakka fi ibsa dabalatee",
+          "Faayilii ragaa fi qunnamtii icciitiin eegame hojjettootaa dhimma waliin"
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "title": "Akkamitti Odeeffannoo Keessan Itti Fayyadamna",
+    "items": [
+      {
+        "title": "Tajaajila Deeggarsa Kennuu",
+        "description": "Hojjettootaa dhimma, gargaarsa seeraa fi dhaabbilee deeggarsa waliin isin walqunnamsiisa."
+      },
+      {
+        "title": "Bulchiinsa Dhimma",
+        "description": "Guddina dhimma hordofuu, ergaa waliigaltee fi qunnamtii haala mijeessuu."
+      },
+      {
+        "title": "Gargaarsa AI Humna Qabu",
+        "description": "Madaallii balaa, dursa kennuu dhimmaaf fi qajeelfama seeraa karaa sirna AI keenyaan kenna."
+      },
+      {
+        "title": "Nageenya fi Eegumsa",
+        "description": "Seenuu hayyamamaa hin taane, gowwoomsaa fi itti fayyadama badaa waltajjii adda baasuu fi ittisuuf."
+      },
+      {
+        "title": "Fooyya'iinsa Tajaajilaa",
+        "description": "Amaloota waltajjiif fi muuxannoo fayyadamaa fooyya'uuf akkaataa itti fayyadama maqaa malee xiinxaluu."
+      },
+      {
+        "title": "Seera Eeguu",
+        "description": "Seera Itoophiyaa eeguu fi gaaffii seeraa dhugaa ta'eef deebii kennuu (yeroo danda'amu miidhaa argattootaaf beeksisuu)."
+      }
+    ]
+  },
+  "sharing": {
+    "title": "Deetaa Eenyuu Waliin Qoodna",
+    "warning": {
+      "title": "Barbaachisaa: Qoodinsa Daangeffame",
+      "description": "Deetaa keessan GONKUMAA hin gurgurru. Deeggarsa fi nageenya keessaniif barbaachisan qofa namoota hayyamamaniif odeeffannoo qoodna."
+    },
+    "items": [
+      {
+        "title": "Hojjettootaa Dhimma Ramadaman",
+        "description": "Hojjetaan dhimma ramadame deeggarsa kennuuf bal'ina dhimma argachuu danda'a. Dhimmoota maqaa malee eenyummaa keessan dhoksu."
+      },
+      {
+        "title": "Dhaabbilee Hirmaatota",
+        "description": "Ergaaf yeroo walii galtan, odeeffannoo dhimma walqabataa dhaabbata fudhatu waliin qoodama (fakkeenyaaf, gargaarsa seeraa, dhaabbata fayyaa)."
+      },
+      {
+        "title": "Bulchitootaa Sirna",
+        "description": "Hojjettoonni teeknikaa AASTU suphaa fi nageenya sirnaaf seenuu daangeffame qabu. Waliigaltee icciitii cimaa waliin hidhaman."
+      },
+      {
+        "title": "Raawwii Seeraa (Yeroo Barbaachisu Qofa)",
+        "description": "Ajaja mana murtii dhugaa ta'eef deebii kennuuf odeeffannoo qooduuf seeraan dirqama ta'uu danda'a. Seeraan yoo hin dhorkamne isin beeksisna."
+      },
+      {
+        "title": "Dhiyeessitootaa Tajaajila AI",
+        "description": "Google Gemini deetaa dhimma madaallii balaaf qindeessa. Deetaan maqaa malee fi icciitiin eegamee jira. Google deetaa kana kaayyoo biraatiif hin kuusu yookaan itti hin fayyadamu."
+      }
+    ]
+  },
+  "rights": {
+    "title": "Mirga Icciitii Keessanii",
+    "items": [
+      {
+        "title": "Odeeffannoo Keessan Argachuu",
+        "description": "Odeeffannoo herrega keessaniif fi bal'ina dhimma karaa dashboard keessan ilaalu."
+      },
+      {
+        "title": "Odeeffannoo Dhimma Haaromsuu",
+        "description": "Dhimmoota gabaafaman keessatti odeeffannoo akka barbaachisummaa isaatti sirreessuu ykn haaromsuu."
+      },
+      {
+        "title": "Gabaasa Maqaa Malee",
+        "description": "Deeggarsa yeroo fudhattan eenyummaa keessan eeguuf dhimmoota maqaa malee gabaasaa."
+      },
+      {
+        "title": "Haquu Deetaa Gaafachuu",
+        "description": "Haquu herrega gaafachuuf nu quunnamaa (ulaagaa tursiisa seeraa dhimmoota socho'oo ta'aniif gadi bu'a)."
+      }
+    ],
+    "contact": "Gaaffii ykn yaaddoo icciitii walqabataa yoo qabaattan"
+  },
+  "security": {
+    "title": "Akkamitti Deetaa Keessan Eegna",
+    "description": "Sadarkaalee nageenya hedduun odeeffannoon keessan nageenya qabuu fi icciitii ta'uu isaa mirkaneessa.",
+    "items": [
+      {
+        "title": "Icciitii",
+        "description": "Deetaan hundi yeroo ergamu (TLS/SSL) fi yeroo kuufamu (AES-256) icciitiin eegama. Faayilii ragaa qodaa icciitiin eegame keessatti kuufama."
+      },
+      {
+        "title": "To'annoo Seensaa",
+        "description": "Seensi gahee irratti hundaa'e hojjettoonni hayyamamoo qofa deetaa addaa akka argan mirkaneessa. Seensi hundi galmaa'ee fi qoratamee jira."
+      },
+      {
+        "title": "Bu'uura Nageenya Qabu",
+        "description": "Deetaan sarvaroota nageenya qaban irratti kuufama backup idilee, firewall fi sirna adda baasuu weerara waliin."
+      },
+      {
+        "title": "Qorannoo Idilee",
+        "description": "Hanqina adda baasuu fi sirreessuuf qorannoo nageenya idilee fi qorannoo seensaa ni gaggeessina."
+      }
+    ]
+  },
+  "retention": {
+    "title": "Tursiisa Deetaa",
+    "description": "Deetaa keessan tajaajila kennuu fi dirqama seeraa guutuuf barbaachisu qofa ni tursina.",
+    "items": [
+      {
+        "label": "Dhimmoota socho'oo",
+        "duration": "Hanga dhimmi cufamutti + waggaa 7 ni turfama",
+        "note": "Ulaagaa seeraa Itoophiyaa"
+      },
+      {
+        "label": "Deetaa herrega",
+        "duration": "Herregni yeroo socho'u + waggaa 1 booda gaaffii haquu ni turfama",
+        "note": "Deebisuu herrega ni hayyama"
+      },
+      {
+        "label": "Galmee nageenya",
+        "duration": "Guyyaa 90f ni turfama",
+        "note": "Icciitiitiif maqaa malee"
+      },
+      {
+        "label": "Deetaa xiinxala",
+        "duration": "Maqaa malee fi walitti qabame, bara baraaf ni turfama",
+        "note": "Tajaajila waltajjii fooyya'a"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Dubartootaa Itoophiyaa keessa jiraniif deeggarsa AI humna qabu.",
+    "links": {
+      "about": "Waa'ee",
+      "privacy": "Icciitii",
+      "terms": "Dambii",
+      "contact": "Nu Quunnamaa"
+    },
+    "copyright": "© {{year}} Waltajjii Netsanet — Pirojektii Waggaa Dhumaa AASTU"
+  },
+  "backToHome": "Gara Manatti Deebi'i"
+}
