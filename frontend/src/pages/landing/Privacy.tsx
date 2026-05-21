@@ -44,7 +44,7 @@ export default function Privacy() {
               className="flex items-center gap-1.5 text-sm text-muted hover:text-heading transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">{t('backToHome')}</span>
+              <span className="hidden sm:inline">Back to Home</span>
             </button>
             <ThemeToggle />
             <LanguageSwitcher />
