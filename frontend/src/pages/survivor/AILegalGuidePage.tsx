@@ -5,9 +5,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { Scale, Trash2, Menu, Send, ChevronRight, ArrowUp } from 'lucide-react';
+import { Scale, Trash2, Menu, ChevronRight, ArrowUp } from 'lucide-react';
 import api from '../../lib/api';
-import { Spinner } from '../../components/ui';
+import { Spinner, Logo } from '../../components/ui';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useTextareaResize } from '../../hooks/use-textarea-resize';
@@ -199,7 +199,7 @@ export default function AILegalGuidePage() {
           {messages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-3`}>
               {msg.role === 'assistant' && (
-                <div className="h-8 w-8 shrink-0 rounded-xl bg-primary flex items-center justify-center text-primary-fg text-xs font-serif font-bold mt-1 shadow-sm">N</div>
+                <Logo variant="mark" size="sm" className="mt-1" />
               )}
               <div className={`max-w-xl flex flex-col gap-2 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                 <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${

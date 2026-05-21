@@ -12,6 +12,8 @@ import { useAuth } from '../../hooks/useAuth';
 import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
 import ThemeToggle from '../../components/ui/ThemeToggle';
 import QuickExitButton from '../../components/ui/QuickExitButton';
+import Logo from '../../components/ui/Logo';
+
 
 interface LoginFormData { email: string }
 
@@ -54,11 +56,8 @@ export default function LoginPage() {
       <nav className="absolute top-0 left-0 right-0 z-20 px-4 pt-5 md:px-8 !overflow-visible w-full">
         <div className="liquid-glass rounded-2xl px-5 py-3 flex items-center justify-between max-w-7xl mx-auto !overflow-visible">
           {/* Logo */}
-          <button onClick={() => navigate('/')} className="flex items-center gap-2.5 focus:outline-none">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center font-serif text-base font-bold text-primary-fg shadow-sm">
-              N
-            </div>
-            <span className="font-serif text-lg font-bold text-heading tracking-tight">Netsanet</span>
+          <button onClick={() => navigate('/')} className="focus:outline-none">
+            <Logo size="md" />
           </button>
 
           {/* Right controls */}

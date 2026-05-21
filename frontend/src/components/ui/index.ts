@@ -20,4 +20,4 @@ export { default as ThemeToggle } from './ThemeToggle';
 export { default as Skeleton } from './Skeleton';
 export { default as LightboxModal } from './LightboxModal';
 export { default as TestimonialShuffle } from './TestimonialShuffle';
-
+export { default as Logo } from './Logo';

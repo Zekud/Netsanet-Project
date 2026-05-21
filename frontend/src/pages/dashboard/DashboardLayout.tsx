@@ -13,6 +13,8 @@ import { useAuth } from '../../hooks/useAuth';
 import NotificationBell from '../../components/ui/NotificationBell';
 import LanguageSwitcher from '../../components/ui/LanguageSwitcher';
 import ThemeToggle from '../../components/ui/ThemeToggle';
+import Logo from '../../components/ui/Logo';
+
 
 // Map icon components to nav items
 const ICONS: Record<string, React.ElementType> = {
@@ -75,17 +77,12 @@ export default function DashboardLayout() {
       >
         {/* Logo */}
         <div className="flex h-16 items-center justify-between border-b border-border px-4">
-          <div className="flex items-center gap-2 overflow-hidden">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-fg font-heading font-bold text-sm">
-              N
-            </div>
+          <div className="flex items-center gap-2.5 overflow-hidden">
+            <Logo variant={sidebarCollapsed ? 'mark' : 'full'} size="md" isDashboard={true} />
             {!sidebarCollapsed && (
-              <div className="flex items-center gap-2 animate-fade-in">
-                <span className="font-heading text-lg text-heading">Netsanet</span>
-                <span className="rounded-lg bg-primary-soft px-1.5 py-0.5 text-[10px] font-semibold text-primary">
-                  {t('layout.badge')}
-                </span>
-              </div>
+              <span className="rounded-lg bg-primary-soft px-1.5 py-0.5 text-[10px] font-semibold text-primary animate-fade-in shrink-0 self-start mt-1">
+                {t('layout.badge')}
+              </span>
             )}
           </div>
           {/* Collapse toggle — desktop only */}
@@ -167,10 +164,7 @@ export default function DashboardLayout() {
 
           {/* Mobile logo */}
           <div className="flex items-center gap-2 lg:hidden">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary text-primary-fg font-heading font-bold text-xs">
-              N
-            </div>
-            <span className="font-heading text-lg text-heading">Netsanet</span>
+            <Logo size="sm" isDashboard={true} />
           </div>
 
           {/* Spacer for desktop */}
