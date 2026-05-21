@@ -30,5 +30,25 @@
     ]
   },
   "cta": { "title": "Tarkaanfii Jalqabaa Fudhachuuf Qophii?", "subtitle": "Netsanet icciitii fi jaalalan deeggaruuf qophii dha.", "button": "Seeni", "note": "Jecha icciitii hin barbaachisu." },
-  "footer": { "tagline": "Itoophiyaa guutuutti deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
+  "footer": { "tagline": "Itoophiyaa guutuutti deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } },
+  "cinematic": {
+    "servingEthiopia": "Serving communities across Ethiopia",
+    "ourMission": "Our Mission",
+    "missionStatement": "Every voice deserves to be heard, protected, and answered.",
+    "missionDesc": "Netsanet is Ethiopia's first AI-powered platform dedicated to gender-based violence survivor support — built for confidential reporting, coordinated institutional response, and real-time legal guidance.",
+    "missionPoint1": "Anonymous & confidential by design",
+    "missionPoint2": "AI triage for immediate prioritisation",
+    "missionPoint3": "Multi-agency coordination in real time",
+    "missionPoint4": "Legal AI guide in your language",
+    "realStories": "Real Stories",
+    "makingDifference": "Making a Real Difference",
+    "storiesDesc": "Survivors, case workers, and legal officers across Ethiopia share how Netsanet changed how they experience safety and justice.",
+    "fasterResponse": "Faster Response",
+    "userTrust": "User Trust Rate",
+    "trustedBy": "Trusted By",
+    "mowsa": "Ministry of Women & Social Affairs",
+    "ewla": "Ethiopian Women Lawyers Association",
+    "aastu": "Addis Ababa Science & Technology Univ.",
+    "unicef": "United Nations Children's Fund"
+  }
 }

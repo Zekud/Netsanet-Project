@@ -239,13 +239,13 @@
   --color-gray-200: var(--c-border);
   --color-gray-100: var(--c-inset);
 
-  /* Typography */
-  --font-heading: 'Outfit', 'Noto Sans Ethiopic', system-ui, sans-serif;
-  --font-sans: 'Inter', 'Noto Sans Ethiopic', system-ui, sans-serif;
+  /* Typography — DM Serif Display for editorial headings, DM Sans for UI */
+  --font-heading: 'DM Serif Display', 'Noto Sans Ethiopic', serif;
+  --font-sans: 'DM Sans', 'Noto Sans Ethiopic', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Keep old aliases working */
-  --font-serif: 'Outfit', 'Noto Sans Ethiopic', system-ui, sans-serif;
+  /* Alias */
+  --font-serif: 'DM Serif Display', 'Noto Sans Ethiopic', serif;
 
   /* Shadows */
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -565,6 +565,79 @@
   }
   .gradient-border:hover::before {
     opacity: 0.5;
+  }
+
+  /* ── Liquid Glass — dynamic theme-aware cinematic glassmorphism ── */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 32px -4px rgba(26, 22, 37, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.4) 0%,
+      rgba(255,255,255,0.1) 30%,
+      rgba(255,255,255,0) 50%,
+      rgba(255,255,255,0.1) 70%,
+      rgba(255,255,255,0.4) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  [data-theme="dark"] .liquid-glass,
+  .dark .liquid-glass {
+    background: rgba(0, 0, 0, 0.32);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(255,255,255,0.04);
+    border: none;
+  }
+  [data-theme="dark"] .liquid-glass::before,
+  .dark .liquid-glass::before {
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.28) 0%,
+      rgba(255,255,255,0.08) 30%,
+      rgba(255,255,255,0) 50%,
+      rgba(255,255,255,0.08) 70%,
+      rgba(255,255,255,0.28) 100%
+    );
+  }
+
+  /* Teal-tinted glass for brand accent elements */
+  .liquid-glass-teal {
+    background: rgba(26, 122, 110, 0.22);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .liquid-glass-teal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.22) 0%,
+      rgba(255,255,255,0) 50%,
+      rgba(255,255,255,0.22) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 }
 

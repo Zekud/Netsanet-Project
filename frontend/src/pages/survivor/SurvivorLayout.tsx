@@ -33,55 +33,70 @@ export default function SurvivorLayout() {
   ];
 
   return (
-    <div className={`flex flex-col bg-bg ${location.pathname.includes('/chat') ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'}`}>
+    <div className={`relative flex flex-col bg-bg ${location.pathname.includes('/chat') ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} transition-colors duration-300 overflow-x-hidden`}>
+      
+      {/* ── Calming mist forest background image ── */}
+      <div className="absolute inset-0 z-0 select-none pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Cinematic gradient overlay linked to theme background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-bg/45 via-bg/25 to-bg/55 dark:from-bg/95 dark:via-bg/80 dark:to-bg/90 transition-colors duration-300" />
+      </div>
+
       <QuickExitButton />
-      {/* ─── Top Navigation ─── */}
-      <header className="sticky top-0 z-30 border-b border-border bg-surface/95 backdrop-blur-md px-4 py-3 sm:px-6">
-        <div className="mx-auto flex max-w-5xl items-center justify-between">
+
+      {/* ─── Floating Liquid Glass Navbar ─── */}
+      <header className="relative z-30 px-4 pt-5 md:px-6 w-full max-w-5xl mx-auto !overflow-visible">
+        <div className="liquid-glass rounded-2xl px-5 py-3 border border-border flex items-center justify-between !overflow-visible">
           {/* Logo */}
-          <NavLink to="/safe-space/home" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary text-primary-fg font-heading font-bold text-sm">
+          <NavLink to="/safe-space/home" className="flex items-center gap-2.5 focus:outline-none shrink-0">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-fg font-serif font-bold text-base shadow-sm">
               N
             </div>
-            <span className="font-heading text-xl text-heading">Netsanet</span>
+            <span className="font-serif text-lg font-bold text-heading tracking-tight hidden sm:block">Netsanet</span>
           </NavLink>
 
           {/* Desktop nav links */}
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1.5 md:flex">
             {navItems.map(({ to, label, icon: Icon }) => (
               <NavLink
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200 ${
+                  `flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-sm font-semibold transition-all duration-150 ${
                     isActive
-                      ? 'bg-primary-soft text-primary'
-                      : 'text-muted hover:bg-inset hover:text-heading'
+                      ? 'bg-primary text-primary-fg shadow-sm'
+                      : 'text-muted hover:text-heading hover:bg-white/10 dark:hover:bg-white/5'
                   }`
                 }
               >
-                <Icon className="h-4 w-4" />
-                {label}
+                <Icon className="h-4 w-4 shrink-0" />
+                <span>{label}</span>
               </NavLink>
             ))}
           </nav>
 
           {/* Right actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <ThemeToggle />
             <LanguageSwitcher />
             {user?.id && <NotificationBell />}
             <button
               onClick={handleLogout}
-              className="hidden items-center gap-1.5 rounded-xl px-3 py-2 text-sm text-muted transition-all duration-200 hover:bg-danger-soft hover:text-danger md:flex"
+              className="hidden items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-sm font-semibold text-muted transition-all duration-150 hover:bg-red-500/10 hover:text-danger md:flex"
             >
-              <LogOut className="h-4 w-4" />
-              {t('signOut')}
+              <LogOut className="h-4 w-4 shrink-0" />
+              <span>{t('signOut')}</span>
             </button>
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="flex h-9 w-9 items-center justify-center rounded-xl border border-border text-muted transition-colors hover:bg-inset md:hidden"
+              className="flex h-8 w-8 items-center justify-center rounded-xl border border-border text-muted transition-colors hover:bg-white/10 dark:hover:bg-white/5 md:hidden focus:outline-none"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -90,64 +105,66 @@ export default function SurvivorLayout() {
         </div>
       </header>
 
-      {/* ─── Mobile Menu Drawer ─── */}
+      {/* ─── Mobile Menu Drawer (Floating Glass Panel) ─── */}
       {mobileMenuOpen && (
-        <div className="border-b border-border bg-surface animate-fade-in-down md:hidden">
-          <nav className="mx-auto max-w-5xl space-y-1 px-4 py-3">
-            {navItems.map(({ to, label, icon: Icon }) => (
-              <NavLink
-                key={to}
-                to={to}
-                onClick={() => setMobileMenuOpen(false)}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? 'bg-primary-soft text-primary'
-                      : 'text-muted hover:bg-inset hover:text-heading'
-                  }`
-                }
+        <div className="relative z-30 mx-4 mt-2.5 max-w-5xl md:hidden">
+          <div className="liquid-glass rounded-2xl border border-border p-4 animate-fade-in-down">
+            <nav className="space-y-1.5">
+              {navItems.map(({ to, label, icon: Icon }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-150 ${
+                      isActive
+                        ? 'bg-primary text-primary-fg shadow-sm'
+                        : 'text-muted hover:text-heading hover:bg-white/10 dark:hover:bg-white/5'
+                    }`
+                  }
+                >
+                  <Icon className="h-4 w-4 shrink-0" />
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+              <button
+                onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-danger hover:bg-red-500/10 transition-all duration-150"
               >
-                <Icon className="h-4 w-4" />
-                {label}
-              </NavLink>
-            ))}
-            <button
-              onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
-              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-danger hover:bg-danger-soft transition-all duration-200"
-            >
-              <LogOut className="h-4 w-4" />
-              {t('signOut')}
-            </button>
-          </nav>
+                <LogOut className="h-4 w-4 shrink-0" />
+                <span>{t('signOut')}</span>
+              </button>
+            </nav>
+          </div>
         </div>
       )}
 
-      {/* ─── Mobile Bottom Nav ─── */}
-      <nav className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-border bg-surface/95 backdrop-blur-md md:hidden">
+      {/* ─── Mobile Bottom Nav (Clean Glass Bar) ─── */}
+      <nav className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-border bg-surface/80 backdrop-blur-lg md:hidden shadow-lg justify-around">
         {navItems.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex flex-1 flex-col items-center gap-0.5 py-2.5 text-[10px] font-medium transition-colors ${
-                isActive ? 'text-primary' : 'text-placeholder'
+              `flex flex-col items-center gap-0.5 py-2.5 text-[10px] font-bold transition-colors ${
+                isActive ? 'text-primary' : 'text-muted'
               }`
             }
           >
             <Icon className="h-4.5 w-4.5" />
-            {label}
+            <span>{label}</span>
           </NavLink>
         ))}
       </nav>
 
       {/* ─── Page Content ─── */}
-      <main className={`flex flex-1 flex-col ${location.pathname.includes('/chat') ? 'min-h-0' : 'mx-auto w-full max-w-5xl px-4 py-6 pb-20 sm:px-6 sm:py-8 md:pb-8'}`}>
+      <main className={`relative z-10 flex flex-1 flex-col ${location.pathname.includes('/chat') ? 'min-h-0' : 'mx-auto w-full max-w-5xl px-4 py-6 pb-24 sm:px-6 sm:py-8 md:pb-8'}`}>
         <Outlet />
       </main>
 
       {/* ─── Footer ─── */}
-      <footer className="hidden border-t border-border bg-surface px-4 py-4 text-center md:block">
-        <p className="text-xs text-muted">{t('footer')}</p>
+      <footer className="hidden relative z-10 border-t border-border/10 bg-transparent px-4 py-4 text-center md:block">
+        <p className="text-xs text-muted/65">{t('footer')}</p>
       </footer>
     </div>
   );
