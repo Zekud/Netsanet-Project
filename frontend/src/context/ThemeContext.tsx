@@ -29,7 +29,14 @@ function resolveTheme(mode: ThemeMode): 'light' | 'dark' {
 }
 
 function applyTheme(theme: 'light' | 'dark') {
+  // Set data-theme for CSS custom property selectors ([data-theme="dark"])
   document.documentElement.setAttribute('data-theme', theme);
+  // Also toggle .dark class — required for Tailwind's dark: variant utilities
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

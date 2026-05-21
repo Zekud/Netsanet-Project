@@ -78,5 +78,35 @@
       "terms": "Terms",
       "contact": "Contact"
     }
+  },
+  "cinematic": {
+    "servingEthiopia": "Serving communities across Ethiopia",
+    "ourMission": "Our Mission",
+    "missionStatement": "Every voice deserves to be heard, protected, and answered.",
+    "missionDesc": "Netsanet is Ethiopia's first AI-powered platform dedicated to gender-based violence survivor support — built for confidential reporting, coordinated institutional response, and real-time legal guidance.",
+    "missionPoint1": "Anonymous & confidential by design",
+    "missionPoint2": "AI triage for immediate prioritisation",
+    "missionPoint3": "Multi-agency coordination in real time",
+    "missionPoint4": "Legal AI guide in your language",
+    "realStories": "Real Stories",
+    "makingDifference": "Making a Real Difference",
+    "storiesDesc": "Survivors, case workers, and legal officers across Ethiopia share how Netsanet changed how they experience safety and justice.",
+    "fasterResponse": "Faster Response",
+    "userTrust": "User Trust Rate",
+    "trustedBy": "Trusted By",
+    "mowsa": "Ministry of Women & Social Affairs",
+    "ewla": "Ethiopian Women Lawyers Association",
+    "aastu": "Addis Ababa Science & Technology Univ.",
+    "unicef": "United Nations Children's Fund",
+    "testimonial1_quote": "The AI triage cut our response time by 60%. Critical cases now get help within the hour.",
+    "testimonial1_author": "Sister Almaz T.",
+    "testimonial1_role": "Case Worker — MoWSA Regional Office",
+    "testimonial2_quote": "For the first time I felt truly safe reporting. The anonymous mode gave me courage I didn't know I had.",
+    "testimonial2_author": "Anonymous Survivor",
+    "testimonial2_role": "Addis Ababa, Ethiopia",
+    "testimonial3_quote": "The referral network transformed how we coordinate legal aid across agencies.",
+    "testimonial3_author": "Aida T.",
+    "testimonial3_role": "Legal Officer — EWLA",
+    "nextStory": "Next Story"
   }
 }

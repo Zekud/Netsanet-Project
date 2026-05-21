@@ -30,5 +30,25 @@
     ]
   },
   "cta": { "title": "Diyaar ma u tahay Tallaabooyinka ugu horreeya?", "subtitle": "Safar kasta wuxuu ku bilowdaa geesinimo. Netsanet ayaa diyaar u ah inay ku taageeraan.", "button": "Si Ammaan ah gal", "note": "Erayga sirta ah looma baahna. Koodhka hal-mar loo isticmaalo ee emailkaaga loo soo diro ayaa la isticmaalaa." },
-  "footer": { "tagline": "Taageerada AI ee haweenka Itoobiya oo dhan.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Asturnaanta", "terms": "Shuruudaha", "contact": "Nala soo xiriir" } }
+  "footer": { "tagline": "Taageerada AI ee haweenka Itoobiya oo dhan.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Asturnaanta", "terms": "Shuruudaha", "contact": "Nala soo xiriir" } },
+  "cinematic": {
+    "servingEthiopia": "U adeegida bulshooyinka ku kala baahsan Itoobiya",
+    "ourMission": "Hadafkayaga",
+    "missionStatement": "Cod kastaa wuxuu mudan yahay in la maqlo, la ilaaliyo, lana u jawaabo.",
+    "missionDesc": "Netsanet waa madal AI-ku shaqeysa oo loogu talagalay caawinta dhibanayaasha xadgudubka ee Itoobiya — oo loo dhisay warbixin qarsoodi ah, jawaab celin degdeg ah iyo talo sharci ah.",
+    "missionPoint1": "Qarsoodi ah oo loo naqshadeeyay badbaado",
+    "missionPoint2": "Jawaab celin degdeg ah oo AI dhiirigeliso",
+    "missionPoint3": "Iskaashiga hay'adaha kala duwan yeroo dhabta ah",
+    "missionPoint4": "Talo sharciyeed oo AI ku siinaysa luuqadaada",
+    "realStories": "Sheekooyin Dhab ah",
+    "makingDifference": "Samaynta isbeddel dhab ah",
+    "storiesDesc": "Dhibanayaasha, hawl-wadeenada kiisaska iyo qareenada ayaa la wadaagaya sida Netsanet u beddelay khibradooda badbaadada iyo caddaaladda.",
+    "fasterResponse": "Jawaab Dhakhso Leh",
+    "userTrust": "Heerka Kalsoonida Isticmaalaha",
+    "trustedBy": "Lagu kalsoon yahay",
+    "mowsa": "Wasaaradda Arrimaha Haweenka iyo Bulshada",
+    "ewla": "Ururka Qareenada Haweenka Itoobiya",
+    "aastu": "Jaamacadda Sayniska iyo Teknoolajiyada ee Addis Ababa",
+    "unicef": "UNICEF"
+  }
 }

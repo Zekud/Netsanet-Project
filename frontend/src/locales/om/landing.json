@@ -30,5 +30,25 @@
     ]
   },
   "cta": { "title": "Tarkaanfii Jalqabaa Fudhachuuf Qophii?", "subtitle": "Imalli hundi gootummaan jalqaba. Netsanet icciitii fi jaalalan deeggaruuf qophii dha.", "button": "Nageenya'n Seeni", "note": "Jecha icciitii hin barbaachisu. Koodii yeroo tokkoo imeelii keessanitti erginaatti fayyadamna." },
-  "footer": { "tagline": "Itoophiyaa guutuutti dubartootaaf deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } }
+  "footer": { "tagline": "Itoophiyaa guutuutti dubartootaaf deeggarsa AI.", "copyright": "© {{year}} Netsanet — AASTU", "links": { "privacy": "Icciitii", "terms": "Haala", "contact": "Nu Quunnamaa" } },
+  "cinematic": {
+    "servingEthiopia": "Hawaasa guutuu Itiyoophiyaa keessaa tajaajilaa jira",
+    "ourMission": "Ergama Keenya",
+    "missionStatement": "Sagaleen hunduu dhaga'amuu, eegamuu fi deebii argachuu qaba.",
+    "missionDesc": "Netsanet jireenya dubartoota miidhaan qaqqabeef deeggarsa AI guutuu Itiyoophiyaa keessatti isa jalqabaati — gabaasa iccitii, qindoomina saffisaa fi gorsa seeraa yeroo dhugaa kennuuf kan ijaarame.",
+    "missionPoint1": "Iccitii guutuu kan eeggate",
+    "missionPoint2": "Deebii saffisaaf dursa AI irratti hundaa'e",
+    "missionPoint3": "Qindoomina dhaabbilee yeroo dhugaa",
+    "missionPoint4": "Gorsa seeraa AI afaan keessaniin",
+    "realStories": "Seenaa Dhugaa",
+    "makingDifference": "Miliqina dhugaa fiduu",
+    "storiesDesc": "Dubartoota miidhaman, hojjettoonni dhimmaa fi ogeeyyiin seeraa Netsanet akkamitti muuxannoo nageenyaa fi haqaa isaanii akka jijjiire qoodatu.",
+    "fasterResponse": "Deebii Saffisaa",
+    "userTrust": "Safartuu Amanamummaa",
+    "trustedBy": "Kan itti amaname",
+    "mowsa": "Ministeera Dhimma Dubartootaa fi Hawaasummaa",
+    "ewla": "Waldaa Dubartoota Ogeeyyii Seeraa Itiyoophiyaa",
+    "aastu": "Yuunivarsiitii Saayinsii fi Tekinoolojii Finfinnee",
+    "unicef": "UNICEF"
+  }
 }

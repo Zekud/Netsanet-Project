@@ -6,12 +6,11 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { Sparkles, Lock, Calendar, MapPin, MessageSquare, X } from 'lucide-react';
+import { Sparkles, Lock, Calendar, MapPin } from 'lucide-react';
 import api from '../../lib/api';
 import { useAuth } from '../../hooks/useAuth';
 import { PageHeader, UrgencyBadge, StatusBadge, Button, Skeleton } from '../../components/ui';
 import ReferModal from '../../components/cases/ReferModal';
-import ChatPanel from '../../components/cases/ChatPanel';
 import CaseTabs from '../../components/cases/assessment/CaseTabs';
 import CaseActionPanel from '../../components/cases/assessment/CaseActionPanel';
 
@@ -42,7 +41,6 @@ export default function CaseAssessmentPage() {
   const { t } = useTranslation('dashboard');
 
   const [referModalOpen, setReferModalOpen] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
 
   const categoryLabels: Record<string, string> = {
     legal: t('shared.category.legal'), medical: t('shared.category.medical'),
