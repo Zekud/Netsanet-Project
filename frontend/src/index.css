@@ -94,7 +94,9 @@
 
 /* ─── Theme Variables (Dark) ────────────────────────────────────── */
 
-[data-theme="dark"] {
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
   --c-bg: #0C0A14;
   --c-surface: #161228;
   --c-elevated: #1E1A30;
