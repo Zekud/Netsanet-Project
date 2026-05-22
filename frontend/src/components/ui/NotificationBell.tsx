@@ -4,6 +4,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { Bell } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../hooks/useAuth';
@@ -47,6 +48,7 @@ const TYPE_COLORS: Record<string, string> = {
 
 export default function NotificationBell({ basePath = '/dashboard' }: NotificationBellProps) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { showToast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
@@ -105,7 +107,7 @@ export default function NotificationBell({ basePath = '/dashboard' }: Notificati
     // Mark as read on any click
     if (!n.is_read) markReadMutation.mutate(n.id);
     // Navigate to the case using the correct portal path
-    if (n.case_id) window.location.href = `${basePath}/cases/${n.case_id}`;
+    if (n.case_id) navigate(`${basePath}/cases/${n.case_id}`);
     setIsOpen(false);
   };
 
