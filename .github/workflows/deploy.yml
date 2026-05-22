@@ -23,7 +23,7 @@ jobs:
             echo "🚀 Starting automated deployment pipeline..."
             
             # 1. Navigate to the project root on EC2
-            cd /var/www/netsanet
+            cd /var/www/Netsanet-Project
             
             # 2. Reset any local changes and pull the latest code
             git reset --hard HEAD
