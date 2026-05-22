@@ -17,8 +17,8 @@ module.exports = {
     },
     {
       name: 'netsanet-rag',
-      script: 'venv/bin/uvicorn',
-      args: 'app.main:app --host 127.0.0.1 --port 8000',
+      script: 'venv/bin/python',
+      args: '-m uvicorn app.main:app --host 127.0.0.1 --port 8000',
       cwd: './rag-service',
       watch: false,
       instances: 1,
