@@ -27,8 +27,24 @@ const PORT = process.env.PORT || 3001;
 // ─── Global Middleware ────────────────────────────────────────
 
 app.use(helmet());
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://netsanet-project.vercel.app',
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or server-to-server)
+    if (!origin) return callback(null, true);
+    
+    // Check if the origin matches any in our allowed origins list
+    const isAllowed = allowedOrigins.some(allowed => origin === allowed || origin.endsWith(allowed));
+    if (isAllowed || process.env.FRONTEND_URL === origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
