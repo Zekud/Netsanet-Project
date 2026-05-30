@@ -2,7 +2,7 @@
 // Route: /dashboard/users
 
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
+
 import { Users as UsersIcon } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import api from '../../lib/api';
@@ -23,7 +23,7 @@ interface UserItem {
 export default function UsersPage() {
   const { user: currentUser } = useAuth();
   const queryClient = useQueryClient();
-  const { t } = useTranslation('dashboard');
+  // const { t } = useTranslation('dashboard');
 
   const { data, isLoading } = useQuery<{ data: UserItem[] }>({
     queryKey: ['users-admin'],

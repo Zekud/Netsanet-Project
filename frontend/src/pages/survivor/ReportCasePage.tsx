@@ -228,20 +228,9 @@ export default function ReportCasePage() {
           </div>
         </div>
 
-        {/* Step 3: Privacy & Submit */}
+        {/* Step 3: Review & Submit */}
         <div className={`space-y-6 transition-all duration-500 ${step === 3 ? 'opacity-100 translate-x-0' : 'opacity-0 absolute inset-0 pointer-events-none translate-x-10'}`}>
-          <div className="rounded-2xl border border-border bg-surface p-4 shadow-sm hover-lift transition-all">
-            <label className="flex cursor-pointer items-start gap-3">
-              <input type="checkbox" {...register('is_anonymous')}
-                className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-primary accent-primary" />
-              <div>
-                <p className="text-sm font-medium text-heading">{t('form.anonymous.label')}</p>
-                <p className="text-xs text-muted mt-0.5">
-                  {isAnonymous ? t('form.anonymous.on') : t('form.anonymous.off')}
-                </p>
-              </div>
-            </label>
-          </div>
+
           
           <div className="rounded-2xl border border-border-muted bg-inset p-5 space-y-3">
             <h3 className="text-sm font-semibold text-heading mb-1 border-b border-border-muted pb-2">Review Details</h3>

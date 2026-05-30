@@ -1,6 +1,6 @@
 {
   "heading": "Evidence Locker",
-  "subtitle": "All files are encrypted and stored securely. Only you and your assigned case manager can access them.",
+  "subtitle": "All files are stored securely. Only you and your assigned case manager can access them.",
   "backLink": "← Back to case",
   "dropzone": {
     "idle": "Drag files here, or click to browse",

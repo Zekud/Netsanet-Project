@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { Sparkles, Lock, Calendar, MapPin } from 'lucide-react';
+import { Sparkles, Calendar, MapPin } from 'lucide-react';
 import api from '../../lib/api';
 import { useAuth } from '../../hooks/useAuth';
 import { PageHeader, UrgencyBadge, StatusBadge, Button, Skeleton } from '../../components/ui';
@@ -116,11 +116,6 @@ export default function CaseAssessmentPage() {
               <span className="rounded-lg bg-inset px-2 py-0.5 text-xs text-muted">
                 {categoryLabels[caseData.category] || caseData.category}
               </span>
-              {caseData.is_anonymous && (
-                <span className="flex items-center gap-1 rounded-lg bg-primary-soft px-2 py-0.5 text-xs text-primary">
-                  <Lock className="h-3 w-3" /> {t('assessment.anonymous.title')}
-                </span>
-              )}
             </div>
             <h2 className="font-heading text-xl text-heading mb-2">{caseData.title}</h2>
 
