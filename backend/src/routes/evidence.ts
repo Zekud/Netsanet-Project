@@ -7,7 +7,7 @@
 
 import { Router, Response } from 'express';
 import multer from 'multer';
-import { randomUUID } from 'crypto';
+import { randomUUID, createHash } from 'crypto';
 import { param, validationResult } from 'express-validator';
 import { supabase } from '../lib/supabase';
 import { authenticate } from '../middleware/auth';
@@ -88,6 +88,11 @@ router.post(
         const safeName = file.originalname.replace(/[^a-zA-Z0-9.\-_]/g, '_');
         const storagePath = `${caseId}/${fileId}-${safeName}`;
 
+        // ─── Compute SHA-256 integrity hash of the raw buffer ──────
+        // This hash acts as a cryptographic fingerprint of the file at
+        // the moment of upload, establishing an immutable chain of custody.
+        const sha256Hash = createHash('sha256').update(file.buffer).digest('hex');
+
         const { error: uploadError } = await supabase.storage
           .from('evidence-files')
           .upload(storagePath, file.buffer, { contentType: file.mimetype, upsert: false });
@@ -107,12 +112,14 @@ router.post(
             storage_path: storagePath,
             mime_type: file.mimetype,
             size_bytes: file.size,
+            sha256_hash: sha256Hash,
           })
-          .select('id, file_name, mime_type, size_bytes, created_at')
+          .select('id, file_name, mime_type, size_bytes, sha256_hash, created_at')
           .single();
 
         if (dbError) {
           console.error('[evidence] DB insert error:', dbError.message);
+          // Remove the orphaned bucket object if DB insert failed
           await supabase.storage.from('evidence-files').remove([storagePath]);
           continue;
         }
@@ -120,12 +127,16 @@ router.post(
         uploaded.push(record);
       }
 
+      // Build hash manifest for audit log
+      const hashManifest = (uploaded as Array<{ id: string; file_name: string; sha256_hash: string }>)
+        .map((f) => ({ id: f.id, file_name: f.file_name, sha256_hash: f.sha256_hash }));
+
       await supabase.from('case_activities').insert({
         case_id: caseId,
         actor_id: user.id,
         activity_type: 'evidence_added',
-        description: `${uploaded.length} evidence file(s) uploaded`,
-        metadata: { file_count: uploaded.length },
+        description: `${uploaded.length} evidence file(s) uploaded with SHA-256 integrity hashes`,
+        metadata: { file_count: uploaded.length, hash_manifest: hashManifest },
       });
 
       res.status(201).json({ success: true, data: uploaded });
@@ -154,7 +165,7 @@ router.get(
 
       const { data: files, error } = await supabase
         .from('evidence_files')
-        .select('id, file_name, mime_type, size_bytes, created_at, uploaded_by')
+        .select('id, file_name, mime_type, size_bytes, sha256_hash, created_at, uploaded_by')
         .eq('case_id', caseId)
         .order('created_at', { ascending: false });
 
