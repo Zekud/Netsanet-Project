@@ -76,7 +76,7 @@ router.post(
 
       const { data: institution, error } = await supabase
         .from('institutions')
-        .insert({ name, type, description: description || null, is_active: false })
+        .insert({ name, type, description: description || null, is_active: true })
         .select('id, name, type, description, is_active, created_at')
         .single();
 
@@ -110,6 +110,23 @@ router.patch(
 
       const { id } = req.params;
       const { name, type, description, is_active } = req.body;
+
+      const { data: currentInst } = await supabase
+        .from('institutions')
+        .select('type')
+        .eq('id', id)
+        .single();
+
+      if (currentInst?.type === 'mowsa') {
+        if (is_active === false) {
+          res.status(403).json({ success: false, error: { code: 'ACCESS_DENIED', message: 'The primary MoWSA institution cannot be deactivated.' } });
+          return;
+        }
+        if (type !== undefined && type !== 'mowsa') {
+          res.status(403).json({ success: false, error: { code: 'ACCESS_DENIED', message: 'The primary MoWSA institution type cannot be changed.' } });
+          return;
+        }
+      }
 
       const updates: Record<string, unknown> = {};
       if (name !== undefined) updates.name = name;

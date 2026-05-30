@@ -155,17 +155,19 @@ export default function InstitutionsPage() {
                       >
                         <UserPlus className="h-3 w-3" /> Add Admin
                       </button>
-                      <button
-                        onClick={() => toggleMutation.mutate({ id: inst.id, is_active: !inst.is_active })}
-                        disabled={toggleMutation.isPending}
-                        className={`rounded-xl px-3 py-1.5 text-xs font-medium transition-colors ${
-                          inst.is_active
-                            ? 'border border-danger/30 text-danger hover:bg-danger-soft'
-                            : 'bg-primary text-primary-fg hover:bg-primary-hover'
-                        }`}
-                      >
-                        {inst.is_active ? 'Deactivate' : 'Approve'}
-                      </button>
+                      {inst.type !== 'mowsa' && (
+                        <button
+                          onClick={() => toggleMutation.mutate({ id: inst.id, is_active: !inst.is_active })}
+                          disabled={toggleMutation.isPending}
+                          className={`rounded-xl px-3 py-1.5 text-xs font-medium transition-colors ${
+                            inst.is_active
+                              ? 'border border-danger/30 text-danger hover:bg-danger-soft'
+                              : 'bg-primary text-primary-fg hover:bg-primary-hover'
+                          }`}
+                        >
+                          {inst.is_active ? 'Deactivate' : 'Approve'}
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

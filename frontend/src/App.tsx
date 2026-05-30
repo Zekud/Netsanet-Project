@@ -34,6 +34,7 @@ import CaseAssessmentPage from './pages/dashboard/CaseAssessmentPage';
 import ReferralsPage from './pages/dashboard/ReferralsPage';
 import StaffManagementPage from './pages/dashboard/StaffManagementPage';
 import InstitutionsPage from './pages/dashboard/InstitutionsPage';
+import UsersPage from './pages/dashboard/UsersPage';
 import AnalyticsPage from './pages/dashboard/AnalyticsPage';
 import NotificationsPage from './pages/dashboard/NotificationsPage';
 
@@ -79,6 +80,7 @@ export default function App() {
             <Route path="staff" element={<StaffManagementPage />} />
             <Route path="analytics" element={<AnalyticsPage />} />
             <Route path="institutions" element={<InstitutionsPage />} />
+            <Route path="users" element={<UsersPage />} />
           </Route>
         </Route>
 

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { Lock, Paperclip, Image, Music, FileText, Pin, RefreshCw, UserCheck, ArrowRightLeft, MessageSquare, Eye } from 'lucide-react';
+import { Paperclip, Image, Music, FileText, Pin, RefreshCw, UserCheck, ArrowRightLeft, MessageSquare, Eye } from 'lucide-react';
 import api from '../../../lib/api';
 import { Card, Spinner, LightboxModal } from '../../ui';
 import ChatPanel from '../ChatPanel';
 import { useAuth } from '../../../hooks/useAuth';
+import type { CaseDetail } from '../../../pages/dashboard/CaseAssessmentPage';
 
 interface EvidenceFile {
   id: string;
@@ -44,7 +45,7 @@ type TabKey = 'details' | 'evidence' | 'messages' | 'activity';
 
 interface CaseTabsProps {
   caseId: string;
-  caseData: any; // Using any for brevity, ideally share CaseDetail type
+  caseData: CaseDetail;
 }
 
 export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
@@ -67,12 +68,14 @@ export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
     enabled: !!caseId,
   });
 
-  const tabs: { key: TabKey; label: string }[] = [
+  const allTabs: { key: TabKey; label: string }[] = [
     { key: 'details', label: t('assessment.tabs.details', { defaultValue: 'Details' }) },
     { key: 'evidence', label: t('assessment.tabs.evidence', { defaultValue: 'Evidence' }) },
     { key: 'messages', label: t('assessment.tabs.messages', { defaultValue: 'Messages' }) },
     { key: 'activity', label: t('assessment.tabs.activity', { defaultValue: 'Activity' }) },
   ];
+
+  const tabs = allTabs.filter(tab => !(user?.role === 'system_admin' && tab.key === 'messages'));
 
   return (
     <div className="animate-stagger-3">
@@ -97,22 +100,10 @@ export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
       {activeTab === 'details' && (
         <div className="space-y-5 animate-fade-in-up">
           <Card header={<h3 className="text-sm font-medium text-heading">Survivor Information</h3>}>
-            {caseData.is_anonymous ? (
-              <div className="flex items-center gap-2 text-sm text-muted">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-soft text-primary">
-                  <Lock className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="font-medium text-heading">{t('assessment.anonymous.title')}</p>
-                  <p className="text-xs text-muted">{t('assessment.anonymous.desc')}</p>
-                </div>
-              </div>
-            ) : (
-              <p className="text-sm text-muted">
-                {t('assessment.survivorId')}{' '}
-                <span className="font-mono text-xs text-heading">{caseData.survivor_id?.slice(0, 8)}...</span>
-              </p>
-            )}
+            <p className="text-sm text-muted">
+              {t('assessment.survivorId')}{' '}
+              <span className="font-mono text-xs text-heading">{caseData.survivor_id?.slice(0, 8)}...</span>
+            </p>
           </Card>
 
           <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.incident.title')}</h3>}>

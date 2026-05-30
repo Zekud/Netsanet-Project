@@ -9,7 +9,33 @@ import { AuthenticatedRequest } from '../types';
 
 const router = Router();
 
-// ─── GET /users/workers — List case workers for assignment dropdown ─
+// ─── GET / — List all users (system_admin only) ──────────────────
+router.get(
+  '/',
+  authenticate,
+  requireRole('system_admin'),
+  async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+    try {
+      const { data: users, error } = await supabase
+        .from('users')
+        .select('id, display_name, role, phone, is_active, anonymous_mode, preferred_language, created_at, institutions(name)')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error(error);
+        res.status(500).json({ success: false, error: { code: 'FETCH_FAILED', message: 'Failed to fetch users' } });
+        return;
+      }
+
+      res.status(200).json({ success: true, data: users });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: { code: 'INTERNAL_ERROR', message: 'An unexpected error occurred' } });
+    }
+  }
+);
+
+// ─── GET /workers — List case workers for assignment dropdown ─
 router.get(
   '/workers',
   authenticate,
