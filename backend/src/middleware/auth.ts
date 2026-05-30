@@ -48,7 +48,7 @@ export async function authenticate(
     // Fetch the user's profile from our users table
     let { data: profile, error: profileError } = await supabase
       .from('users')
-      .select('id, role, institution_id, display_name, phone')
+      .select('id, role, institution_id, display_name, phone, is_active')
       .eq('id', authUser.id)
       .single();
 
@@ -67,7 +67,7 @@ export async function authenticate(
             preferred_language: 'en',
             is_active: true,
           })
-          .select('id, role, institution_id, display_name, phone')
+          .select('id, role, institution_id, display_name, phone, is_active')
           .single();
 
         if (createError || !newProfile) {

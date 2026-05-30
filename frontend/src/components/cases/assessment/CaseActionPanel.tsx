@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import api from '../../../lib/api';
+import { useAuth } from '../../../hooks/useAuth';
 import { Card, Button } from '../../ui';
+import type { CaseDetail } from '../../../pages/dashboard/CaseAssessmentPage';
 
 interface Worker {
   id: string;
@@ -12,7 +14,7 @@ interface Worker {
 
 interface CaseActionPanelProps {
   caseId: string;
-  caseData: any; // Using any for brevity
+  caseData: CaseDetail;
   isAdmin: boolean;
   setReferModalOpen: (open: boolean) => void;
 }
@@ -24,6 +26,7 @@ const statusOptions = [
 export default function CaseActionPanel({ caseId, caseData, isAdmin, setReferModalOpen }: CaseActionPanelProps) {
   const { t } = useTranslation('dashboard');
   const queryClient = useQueryClient();
+  const { user } = useAuth();
 
   const [selectedStatus, setSelectedStatus] = useState('');
   const [selectedWorkerId, setSelectedWorkerId] = useState('');
@@ -110,7 +113,7 @@ export default function CaseActionPanel({ caseId, caseData, isAdmin, setReferMod
       )}
 
       {/* Refer Case */}
-      {isAdmin && (
+      {(user?.role === 'case_worker' || user?.role === 'institution_admin') && (
         <div className="animate-stagger-6">
           <Card header={<h3 className="text-sm font-medium text-heading">{t('assessment.referCase.title')}</h3>}>
             <p className="text-xs text-muted mb-3">{t('assessment.referCase.desc')}</p>

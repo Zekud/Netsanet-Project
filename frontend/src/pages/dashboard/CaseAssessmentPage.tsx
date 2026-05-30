@@ -166,13 +166,15 @@ export default function CaseAssessmentPage() {
           </div>
         )}
 
-        {/* ─── TWO-COLUMN: Tabs + Actions ─── */}
-        <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
+        {/* TWO-COLUMN: Tabs + Actions (if not system_admin) */}
+        <div className={`grid gap-6 ${user?.role !== 'system_admin' ? 'lg:grid-cols-[1fr_320px]' : ''}`}>
           {/* LEFT: Tabbed content */}
           <CaseTabs caseId={id!} caseData={caseData} />
 
           {/* RIGHT: Action panel */}
-          <CaseActionPanel caseId={id!} caseData={caseData} isAdmin={isAdmin} setReferModalOpen={setReferModalOpen} />
+          {user?.role !== 'system_admin' && (
+            <CaseActionPanel caseId={id!} caseData={caseData} isAdmin={isAdmin} setReferModalOpen={setReferModalOpen} />
+          )}
         </div>
       </div>
 

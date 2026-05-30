@@ -25,6 +25,7 @@ const ICONS: Record<string, React.ElementType> = {
   staff: Users,
   analytics: BarChart3,
   institutions: Building2,
+  users: Users,
 };
 
 export default function DashboardLayout() {
@@ -55,6 +56,7 @@ export default function DashboardLayout() {
 
   if (user?.role === 'system_admin') {
     navItems.push({ to: '/dashboard/institutions', label: t('layout.nav.institutions'), key: 'institutions' });
+    navItems.push({ to: '/dashboard/users', label: 'Users', key: 'users' });
   }
 
   const sidebarWidth = sidebarCollapsed ? 'w-[72px]' : 'w-60';

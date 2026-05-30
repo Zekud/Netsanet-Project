@@ -6,6 +6,7 @@ import api from '../../../lib/api';
 import { Card, Spinner, LightboxModal } from '../../ui';
 import ChatPanel from '../ChatPanel';
 import { useAuth } from '../../../hooks/useAuth';
+import type { CaseDetail } from '../../../pages/dashboard/CaseAssessmentPage';
 
 interface EvidenceFile {
   id: string;
@@ -44,7 +45,7 @@ type TabKey = 'details' | 'evidence' | 'messages' | 'activity';
 
 interface CaseTabsProps {
   caseId: string;
-  caseData: any; // Using any for brevity, ideally share CaseDetail type
+  caseData: CaseDetail;
 }
 
 export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
@@ -67,12 +68,14 @@ export default function CaseTabs({ caseId, caseData }: CaseTabsProps) {
     enabled: !!caseId,
   });
 
-  const tabs: { key: TabKey; label: string }[] = [
+  const allTabs: { key: TabKey; label: string }[] = [
     { key: 'details', label: t('assessment.tabs.details', { defaultValue: 'Details' }) },
     { key: 'evidence', label: t('assessment.tabs.evidence', { defaultValue: 'Evidence' }) },
     { key: 'messages', label: t('assessment.tabs.messages', { defaultValue: 'Messages' }) },
     { key: 'activity', label: t('assessment.tabs.activity', { defaultValue: 'Activity' }) },
   ];
+
+  const tabs = allTabs.filter(tab => !(user?.role === 'system_admin' && tab.key === 'messages'));
 
   return (
     <div className="animate-stagger-3">

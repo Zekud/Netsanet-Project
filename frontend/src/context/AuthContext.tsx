@@ -95,9 +95,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // ─── Auth Methods ───────────────────────────────────────────
 
   const requestOtp = useCallback(async (email: string) => {
-    const { data } = await api.post('/auth/request-otp', { email });
-    if (!data.success) {
-      throw new Error(data.error?.message || 'Failed to send OTP');
+    try {
+      const { data } = await api.post('/auth/request-otp', { email });
+      if (!data.success) {
+        throw new Error(data.error?.message || 'Failed to send OTP');
+      }
+    } catch (err: any) {
+      if (err.response?.data?.error?.message) {
+        throw new Error(err.response.data.error.message);
+      }
+      throw err;
     }
   }, []);
 
