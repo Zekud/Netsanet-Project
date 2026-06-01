@@ -37,7 +37,7 @@ export default function Logo({
 
       {/* Brand Logotype */}
       {variant === 'full' && (
-        <div className="flex flex-col items-start leading-none">
+        <div className="hidden md:flex flex-col items-start leading-none">
           <span className={`font-serif font-bold text-heading tracking-tight leading-none ${currentSize.text}`}>
             Netsanet
           </span>
