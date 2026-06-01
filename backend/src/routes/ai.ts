@@ -21,24 +21,24 @@ const RAG_SERVICE_URL = process.env.RAG_SERVICE_URL || 'http://localhost:8000';
 
 const suggestedQuestions: Record<string, string[]> = {
   legal: [
-    'How do I file a protection order?',
-    'What documents do I need to start a case?',
-    'Can I get free legal aid in Ethiopia?',
+    'What are women\'s rights in Ethiopia?',
+    'What is the legal age of marriage in Ethiopia?',
+    'How does Ethiopian law protect against domestic violence?',
   ],
   family: [
-    'What are my rights regarding child custody?',
+    'What are the penalties for rape in Ethiopia?',
     'How is property divided after divorce?',
-    'Can I divorce without a lawyer?',
+    'What are the grounds for divorce in Ethiopia?',
   ],
   violence: [
     'What counts as domestic violence under Ethiopian law?',
-    'Can I report without going to the police station?',
+    'What is female genital mutilation (FGM) under Ethiopian law?',
     'What protection can a court give me?',
   ],
   default: [
     'What are my legal rights as a woman in Ethiopia?',
-    'How can I get a restraining order?',
-    'Where can I find free legal help?',
+    'What are the penalties for rape in Ethiopia?',
+    'What is the legal age of marriage in Ethiopia?',
   ],
 };
 
