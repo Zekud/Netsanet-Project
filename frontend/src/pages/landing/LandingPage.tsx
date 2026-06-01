@@ -63,22 +63,24 @@ export default function LandingPage() {
         </div>
 
         {/* ── Liquid glass navbar (!overflow-visible resolves LanguageSwitcher dropdown clipping) ── */}
-        <nav className="relative z-20 px-4 pt-5 md:px-8 !overflow-visible">
-          <div className="liquid-glass rounded-2xl px-5 py-3 flex items-center justify-between max-w-7xl mx-auto !overflow-visible">
+        <nav className="relative z-20 px-3 pt-4 sm:px-4 sm:pt-5 md:px-8 !overflow-visible">
+          <div className="liquid-glass rounded-2xl px-3 py-2.5 sm:px-5 sm:py-3 flex items-center justify-between max-w-7xl mx-auto !overflow-visible gap-1 sm:gap-2">
             {/* Logo */}
-            <button onClick={() => navigate('/')} className="focus:outline-none">
-              <Logo size="md" />
+            <button onClick={() => navigate('/')} className="focus:outline-none shrink-0">
+              <Logo size="md" className="scale-[0.85] sm:scale-100 origin-left" />
             </button>
 
             {/* Centre links — REMOVED per user request */}
 
             {/* Right controls */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <ThemeToggle />
-              <LanguageSwitcher />
+            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+              <div className="scale-[0.85] sm:scale-100 origin-right flex items-center gap-1 sm:gap-2">
+                <ThemeToggle />
+                <LanguageSwitcher />
+              </div>
               <button
                 onClick={() => navigate('/login')}
-                className="ml-1 bg-primary hover:bg-primary-hover text-primary-fg px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm shrink-0 whitespace-nowrap"
+                className="bg-primary hover:bg-primary-hover text-primary-fg px-3 py-1.5 sm:px-5 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold transition-all shadow-sm shrink-0 whitespace-nowrap"
               >
                 {t('hero.cta')}
               </button>

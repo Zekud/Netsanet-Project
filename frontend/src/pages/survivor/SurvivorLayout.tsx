@@ -53,11 +53,11 @@ export default function SurvivorLayout() {
       <QuickExitButton />
 
       {/* ─── Floating Liquid Glass Navbar ─── */}
-      <header className="relative z-30 px-4 pt-5 md:px-6 w-full max-w-5xl mx-auto !overflow-visible">
-        <div className="liquid-glass rounded-2xl px-5 py-3 border border-border flex items-center justify-between !overflow-visible">
+      <header className="relative z-30 px-3 pt-4 sm:px-4 sm:pt-5 md:px-6 w-full max-w-5xl mx-auto !overflow-visible">
+        <div className="liquid-glass rounded-2xl px-3 py-2.5 sm:px-5 sm:py-3 border border-border flex items-center justify-between !overflow-visible gap-1 sm:gap-2">
           {/* Logo */}
           <NavLink to="/safe-space/home" className="focus:outline-none shrink-0">
-            <Logo size="md" />
+            <Logo size="md" className="scale-[0.85] sm:scale-100 origin-left" />
           </NavLink>
 
           {/* Desktop nav links */}
@@ -81,25 +81,27 @@ export default function SurvivorLayout() {
           </nav>
 
           {/* Right actions */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <ThemeToggle />
-            <LanguageSwitcher />
-            {user?.id && <NotificationBell basePath="/safe-space" />}
-            <button
-              onClick={handleLogout}
-              className="hidden items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-sm font-semibold text-muted transition-all duration-150 hover:bg-red-500/10 hover:text-danger md:flex"
-            >
-              <LogOut className="h-4 w-4 shrink-0" />
-              <span>{t('signOut')}</span>
-            </button>
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="flex h-8 w-8 items-center justify-center rounded-xl border border-border text-muted transition-colors hover:bg-white/10 dark:hover:bg-white/5 md:hidden focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            </button>
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            <div className="scale-[0.85] sm:scale-100 origin-right flex items-center gap-1 sm:gap-2">
+              <ThemeToggle />
+              <LanguageSwitcher />
+              {user?.id && <NotificationBell basePath="/safe-space" />}
+              <button
+                onClick={handleLogout}
+                className="hidden items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-sm font-semibold text-muted transition-all duration-150 hover:bg-red-500/10 hover:text-danger md:flex"
+              >
+                <LogOut className="h-4 w-4 shrink-0" />
+                <span>{t('signOut')}</span>
+              </button>
+              {/* Mobile hamburger */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="flex h-8 w-8 items-center justify-center rounded-xl border border-border text-muted transition-colors hover:bg-white/10 dark:hover:bg-white/5 md:hidden focus:outline-none"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </button>
+            </div>
           </div>
         </div>
       </header>
