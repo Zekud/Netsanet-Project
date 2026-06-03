@@ -20,8 +20,8 @@ router.post(
   authenticate,
   requireRole('case_worker', 'institution_admin'),
   [
-    param('id').isUUID().withMessage('Invalid case ID'),
-    body('to_institution_id').isUUID().withMessage('Target institution ID is required'),
+    param('id').isString().notEmpty().withMessage('Invalid case ID'),
+    body('to_institution_id').isString().notEmpty().withMessage('Target institution ID is required'),
     body('note').optional().isString().trim().isLength({ max: 1000 }),
   ],
   async (req: AuthenticatedRequest, res: Response): Promise<void> => {
